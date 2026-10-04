@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-04T10:07:15+00:00",
- "pass": 42,
+ "generated_at": "2026-10-04T01:35:33+00:00",
+ "pass": 39,
  "warn": 0,
  "fail": 0,
  "checks": [
@@ -37,7 +37,7 @@
   {
    "status": "PASS",
    "section": "1. rules.json",
-   "check": "every quoted span is found in its source document (89 checked)"
+   "check": "every quoted span is found in its source document"
   },
   {
    "status": "PASS",
@@ -196,22 +196,7 @@
   },
   {
    "status": "PASS",
-   "section": "5. Spanish view (optional)",
-   "check": "Spanish text keeps every number of the English (56 rules)"
-  },
-  {
-   "status": "PASS",
-   "section": "5. Spanish view (optional)",
-   "check": "every rule has a Spanish translation"
-  },
-  {
-   "status": "PASS",
-   "section": "5. Spanish view (optional)",
-   "check": "Spanish text carries its 'automatic translation, not reviewed' label"
-  },
-  {
-   "status": "PASS",
-   "section": "5. Spanish view (optional)",
+   "section": "4. coverage of the rule set",
    "check": "app labels itself 'not legal advice'"
   }
  ]

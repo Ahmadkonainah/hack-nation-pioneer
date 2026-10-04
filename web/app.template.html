@@ -136,6 +136,15 @@ input[type="date"] { padding: 6px 9px; border: 1px solid var(--line); border-rad
 select { padding: 6px 9px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); max-width: 100%; }
 .qbtn { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 5px 9px; cursor: pointer; font-size: 12.5px; font-family: var(--font-mono); }
 .qbtn:hover { border-color: var(--accent); color: var(--accent); }
+/* Time scrubber: a slider over 2024 to 2027 with a tick wherever a rule for this address starts. */
+.scrub { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; margin-top: 12px; }
+.scrub .track { position: relative; padding-top: 12px; }
+.scrub .ticks { position: absolute; left: 8px; right: 8px; top: 0; height: 12px; pointer-events: none; }
+.scrub .tick { position: absolute; top: 0; width: 8px; height: 12px; margin-left: -4px; pointer-events: auto; }
+.scrub .tick::after { content: ""; position: absolute; left: 3px; top: 2px; width: 2px; height: 9px; border-radius: 1px; background: var(--accent); opacity: .85; }
+.scrub input[type="range"] { width: 100%; margin: 0; height: 26px; cursor: pointer; accent-color: var(--accent); }
+.scrub .when { font-family: var(--font-mono); font-weight: 600; font-size: 13px; min-width: 7.4em; text-align: right; font-variant-numeric: tabular-nums; }
+.scrub .hint { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; font-size: 12.5px; color: var(--muted); }
 .sumbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 6px; }
 .sumchip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 6px 11px; cursor: pointer; font-weight: 600; font-size: 13.5px; }
 .sumchip[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
@@ -319,7 +328,7 @@ footer .fl { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 8px; }
 @media print {
   :root { --bg: #fff; --surface: #fff; --surface2: #f2f2f2; }
   .top { position: static; border: 0; }
-  .tabs, .icon-btn, .langs, .side, .pick-toggle, .ctrl, details.whatif, details.guide, .sumbar, .actions, .linkbtn, .notice .linkbtn, .skip { display: none !important; }
+  .tabs, .icon-btn, .langs, .side, .pick-toggle, .ctrl, .scrub, details.whatif, details.guide, .sumbar, .actions, .linkbtn, .notice .linkbtn, .skip { display: none !important; }
   .notice { border: 1px solid #999; }
   .bench { display: block; }
   .panel, .bottom, .card { break-inside: avoid; box-shadow: none; }
@@ -445,6 +454,16 @@ window.NAV_ES = {
   "Matched as": "Encontrada como",
   "Answer as of": "Respuesta para la fecha",
   "Jump to": "Ir a",
+  "Move through time": "Moverse en el tiempo",
+  "Answer date, 2024 to 2027": "Fecha de la respuesta, de 2024 a 2027",
+  "Play": "Reproducir",
+  "Pause": "Pausa",
+  "Previous change": "Cambio anterior",
+  "Next change": "Cambio siguiente",
+  "Next change: {date}. {what}": "Próximo cambio: {date}. {what}",
+  "{n} rule starts": "Empieza {n} regla",
+  "{n} rules start": "Empiezan {n} reglas",
+  "No later change in the rules for this address.": "No hay más cambios posteriores en las reglas de esta dirección.",
   "Describe your building": "Describa su edificio",
   "What if you know more about this building?": "¿Y si sabe más sobre este edificio?",
   "The parcel data has no {what}.": "Los datos de la parcela no incluyen {what}.",
@@ -840,6 +859,8 @@ const ICONS = {
   print: '<path d="M4.5 6V2.5h7V6"/><path d="M4.5 11.5h-2V6h11v5.5h-2"/><path d="M4.5 9.5h7v4h-7z"/>',
   link: '<path d="M7 9a2.5 2.5 0 0 0 3.5 0l2-2a2.5 2.5 0 0 0-3.5-3.5l-.7.7"/><path d="M9 7a2.5 2.5 0 0 0-3.5 0l-2 2A2.5 2.5 0 0 0 7 12.5l.7-.7"/>',
   code: '<path d="M6 4.5L2.5 8 6 11.5M10 4.5L13.5 8 10 11.5"/>',
+  play: '<path d="M5 3.2v9.6L12.6 8z"/>',
+  pause: '<path d="M5.2 3.5v9M10.8 3.5v9"/>',
 };
 /* An icon as an inline SVG string. cls "" means "no class" (the size then comes from the parent's CSS). aria-hidden: the words next to it carry the meaning. */
 const ic = (k, cls) => `<svg class="${cls || "ico"}" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[k]}</svg>`;
@@ -966,6 +987,7 @@ function render() {
 }
 /* Switch tab, redraw, put the tab in the URL, and (unless told not to) scroll to the top. */
 function go(tab, scrollTop) {
+  stopPlay();
   S.tab = tab;
   render();
   syncHash();
@@ -1103,10 +1125,102 @@ const orJoin = (xs) => (xs.length === 2 ? t("{a} or {b}", { a: xs[0], b: xs[1] }
 /* The message under the year field when the typed year is not four digits; "" when fine. */
 const badYearMsg = (x) => (x.year && !/^\d{4}$/.test(x.year.trim()) ? t("Year built needs four digits, for example 1975.") : "");
 
+/* ------------------------------------------------------------------ time scrubber */
+/* A slider over 2024 to 2027. Dragging it, pressing Play or stepping to the next change moves the answer date; the same engine
+   answers for every date, so nothing here knows any law. Ticks mark the days a rule for this address starts. */
+const DAY_MS = 86400000;
+const SC_START = NE.parseDate("2024-01-01"), SC_END = NE.parseDate("2028-01-01");
+const SC_DAYS = Math.round((SC_END - SC_START) / DAY_MS);
+const SC_SPEED = 150;                           // days per second while playing: the whole range in about 10 seconds
+const dayIndex = (iso) => { const ms = NE.parseDate(iso); return ms === null ? 0 : Math.min(SC_DAYS, Math.max(0, Math.round((ms - SC_START) / DAY_MS))); };
+const isoOfDay = (i) => new Date(SC_START + i * DAY_MS).toISOString().slice(0, 10);
+let seen = { addr: null, date: null, res: {}, sig: "" }; // the answers drawn last time (and their fingerprint), to find what moved
+let playHandle = 0, playReduced = false;
+/* The answers for an address on a date, with any typed-in facts applied (the same rule renderBody uses). */
+function entriesAt(a, iso) { const w = wiOf(a); return (w ? NE.lookupAddress(addrInput(a), RULES, iso, w) : lookupOne(a, iso)).entries; }
+/* The days inside the slider's range on which rules for this address start: [{ day, titles }], earliest first. */
+function changeDays(a) {
+  const by = new Map();
+  for (const e of lookupOne(a, DEFAULT_DATE).entries) {
+    const r = byRule[e.team_rule_id], ms = r.effective_date ? NE.parseDate(r.effective_date) : null;
+    if (ms === null || ms < SC_START || ms > SC_END) continue;
+    const day = Math.round((ms - SC_START) / DAY_MS);
+    if (!by.has(day)) by.set(day, []);
+    by.get(day).push(titleOf(r));
+  }
+  return [...by].sort((x, y) => x[0] - y[0]).map(([day, titles]) => ({ day, titles }));
+}
+/* The cheap parts of a date change: the date itself, the slider, the date box, the quick buttons. No answers are redrawn here. */
+function paintDate(iso) {
+  S.date = iso;
+  const sl = $("#scrub"); if (sl) { sl.value = String(dayIndex(iso)); sl.setAttribute("aria-valuetext", fmtDate(iso, true)); }
+  const wh = $("#scrubWhen"); if (wh) wh.textContent = fmtDate(iso);
+  const dt = $("#asof"); if (dt) dt.value = iso;
+  for (const b of document.querySelectorAll('.qbtn[data-act="setdate"]')) b.setAttribute("aria-pressed", String(b.dataset.date === iso));
+  renderScrubHint();
+}
+/* While dragging or playing: redraw the answers only when some answer actually changed on the way. */
+function scrubTo(iso) {
+  paintDate(iso);
+  const a = byAddr[S.addr];
+  if (seen.addr !== a.id || entriesAt(a, iso).map((e) => e.result).join() !== seen.sig) renderBody(true);
+}
+/* A finished move (slider released, step button): redraw everything, announce it and write the URL. */
+function setAnswerDate(iso) { paintDate(iso); renderBody(false); }
+/* One line under the slider: the next day a rule for this address starts after the chosen date. */
+function renderScrubHint() {
+  const el = $("#scrubNext"); if (!el) return;
+  const next = changeDays(byAddr[S.addr]).find((c) => c.day > dayIndex(S.date));
+  el.textContent = next
+    ? t("Next change: {date}. {what}", { date: fmtDate(isoOfDay(next.day), true), what: next.titles.length === 1 ? next.titles[0] : tn(next.titles.length, "{n} rule starts", "{n} rules start") })
+    : t("No later change in the rules for this address.");
+}
+function stepChange(dir) {
+  stopPlay();
+  const cur = dayIndex(S.date), cs = changeDays(byAddr[S.addr]);
+  const hit = dir > 0 ? cs.find((c) => c.day > cur) : cs.slice().reverse().find((c) => c.day < cur);
+  if (hit) setAnswerDate(isoOfDay(hit.day));
+}
+/* Stop playing and put the Play button back. Does not redraw the answers (pausePlay does). */
+function stopPlay() {
+  if (playHandle) { if (playReduced) clearInterval(playHandle); else cancelAnimationFrame(playHandle); }
+  playHandle = 0; S.playing = false;
+  const b = $("#playBtn");
+  if (b) { b.setAttribute("aria-pressed", "false"); b.innerHTML = `${ic("play")} ${te("Play")}`; }
+}
+function pausePlay() { stopPlay(); renderBody(false); }
+/* Play: sweep forward from the chosen date at SC_SPEED days a second. With "reduce motion" on, no sweep: jump from change to change every 1.6 s. */
+function startPlay() {
+  stopPlay();
+  S.playing = true;
+  const b = $("#playBtn"); b.setAttribute("aria-pressed", "true"); b.innerHTML = `${ic("pause")} ${te("Pause")}`;
+  playReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let day = dayIndex(S.date);
+  if (day >= SC_DAYS - 1) { day = 0; scrubTo(isoOfDay(0)); }
+  if (playReduced) {
+    playHandle = setInterval(() => {
+      const next = changeDays(byAddr[S.addr]).find((c) => c.day > dayIndex(S.date));
+      if (!next) { pausePlay(); return; }
+      scrubTo(isoOfDay(next.day));
+    }, 1600);
+    return;
+  }
+  let last = null;
+  const frame = (now) => {
+    if (!S.playing || !$("#scrub")) { stopPlay(); return; }
+    if (last !== null) day += (now - last) / 1000 * SC_SPEED;
+    last = now;
+    if (day >= SC_DAYS) { scrubTo(isoOfDay(SC_DAYS)); pausePlay(); return; }
+    scrubTo(isoOfDay(Math.floor(day)));
+    playHandle = requestAnimationFrame(frame);
+  };
+  playHandle = requestAnimationFrame(frame);
+}
 /* The right column. Two layers on purpose: renderAnswer draws the panel (title, facts, date, the what-if FIELDS) and an empty #ansBody;
    renderBody draws everything below the panel. Typing a fact calls renderFacts and renderBody only, so the input fields are never
    replaced while the person types and keep their focus and caret. */
 function renderAnswer() {
+  stopPlay();                                  // the panel (and the slider in it) is about to be replaced
   const a = byAddr[S.addr], own = !!a.own;
   const f0 = a.facts;
   const base = lookupOne(a, S.date).entries;
@@ -1148,6 +1262,15 @@ function renderAnswer() {
       <span class="muted jump">${te("Jump to")}</span>
       ${quick.map(([d, tip]) => `<button class="qbtn" data-act="setdate" data-date="${d}" title="${esc(tip)}" aria-pressed="${S.date === d}">${esc(fmtDate(d))}</button>`).join("")}
     </div>
+    <div class="scrub" role="group" aria-label="${te("Move through time")}">
+      <button class="btn sm" id="playBtn" data-act="play" aria-pressed="false">${ic("play")} ${te("Play")}</button>
+      <div class="track">
+        <div class="ticks" aria-hidden="true">${changeDays(a).map((c) => `<span class="tick" style="left:${(c.day / SC_DAYS * 100).toFixed(2)}%" title="${esc(fmtDate(isoOfDay(c.day), true))}: ${esc(c.titles.slice(0, 2).join("; "))}${c.titles.length > 2 ? "..." : ""}"></span>`).join("")}</div>
+        <input type="range" id="scrub" min="0" max="${SC_DAYS}" step="1" value="${dayIndex(S.date)}" aria-label="${te("Answer date, 2024 to 2027")}" aria-valuetext="${esc(fmtDate(S.date, true))}">
+      </div>
+      <output class="when" id="scrubWhen" for="scrub">${esc(fmtDate(S.date))}</output>
+      <div class="hint"><button class="linkbtn" data-act="evprev">&lsaquo; ${te("Previous change")}</button><button class="linkbtn" data-act="evnext">${te("Next change")} &rsaquo;</button><span id="scrubNext"></span></div>
+    </div>
     <details class="whatif" id="wiBox" ${own || S.wiOpen || wiOf(a) ? "open" : ""}>
       <summary>${own ? te("Describe your building") : te("What if you know more about this building?")}<span class="muted"> ${own ? "" : (unkNow ? esc(tn(unkNow, "{n} answer is unknown now.", "{n} answers are unknown now.")) : "")}${miss.length ? ` ${te("The parcel data has no {what}.", { what: orJoin(miss) })}` : ""}</span></summary>
       <p class="muted wi-help">${own ? te("Type what you know about the building. Anything you leave blank stays unknown, and the answers below say so.") : te("Parcel data can be incomplete. Type what you know and every answer below is worked out again by the same engine.")} ${te("Your entries stay in this tab. They are not saved or sent anywhere.")}</p>
@@ -1163,6 +1286,7 @@ function renderAnswer() {
   <div id="ansBody"></div>`;
   renderFacts();
   renderBody();
+  renderScrubHint();
 }
 /* The four fact tiles (year built, units, parcel use, data source), with typed values merged in, plus the Clear button state and the year error. */
 function renderFacts() {
@@ -1183,8 +1307,9 @@ function renderFacts() {
   if (bad) bad.textContent = badYearMsg(x);
 }
 /* Everything under the panel: the what-if note, the bottom line, the result filter chips, and the rule cards grouped by topic.
-   Also announces the new totals to screen readers and writes the URL hash. */
-function renderBody() {
+   Also announces the new totals to screen readers and writes the URL hash. quiet = true while the date slider is dragged or playing:
+   the announcement and the URL are then left for the end, so a screen reader is not flooded and the browser history is not hammered. */
+function renderBody(quiet) {
   const a = byAddr[S.addr], w = wiOf(a);
   const baseEntries = lookupOne(a, S.date).entries;
   const entries = w ? NE.lookupAddress(addrInput(a), RULES, S.date, w).entries : baseEntries;
@@ -1228,6 +1353,17 @@ function renderBody() {
     html.push(`</section>`);
   }
   $("#ansBody").innerHTML = html.join("");
+  // After a date change on the same address, flash the cards whose answer moved so the eye finds them.
+  const now = Object.fromEntries(entries.map((e) => [e.team_rule_id, e.result]));
+  if (seen.addr === a.id && seen.date !== S.date) {
+    for (const id in now) {
+      if (seen.res[id] === now[id]) continue;
+      const c = document.getElementById("card-" + id);
+      if (c) { c.classList.add("flash"); setTimeout(() => c.classList.remove("flash"), 1300); }
+    }
+  }
+  seen = { addr: a.id, date: S.date, res: now, sig: entries.map((e) => e.result).join() };
+  if (quiet) return;
   // Announce the result of a change once, politely, instead of re-reading the whole page to a screen reader.
   $("#live").textContent = t("Answers for {name}: {list}.", {
     name: a.own ? t("your building") : a.street,
@@ -1667,6 +1803,9 @@ document.addEventListener("click", (ev) => {
     if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
   }
   else if (act === "setdate") { S.date = el.dataset.date; renderAnswer(); }
+  else if (act === "play") { if (S.playing) pausePlay(); else startPlay(); }
+  else if (act === "evprev") stepChange(-1);
+  else if (act === "evnext") stepChange(1);
   else if (act === "jump") { S.addr = el.dataset.id; S.lastSample = S.addr; S.mode = "sample"; S.date = el.dataset.date || S.date; S.res = "all"; S.city = "all"; S.q = ""; S.guide = false; go("lookup"); }
   else if (act === "card") {
     // Scroll to the card and flash it. If a result filter hides it, clear the filter and look again.
@@ -1689,6 +1828,7 @@ document.addEventListener("click", (ev) => {
 document.addEventListener("input", (ev) => {
   const el = ev.target;
   if (el.id === "q") { S.q = el.value; S.shown = 60; renderList(); }
+  else if (el.id === "scrub") { stopPlay(); scrubTo(isoOfDay(Number(el.value))); }
   // The rules tab is redrawn whole on each keystroke, so the caret position is saved and put back, or typing would jump to the start.
   else if (el.id === "rq") { S.rq = el.value; const pos = el.selectionStart; renderRulesTab($("#view")); const n = $("#rq"); n.focus(); n.setSelectionRange(pos, pos); }
 });
@@ -1697,6 +1837,7 @@ document.addEventListener("change", (ev) => {
   const el = ev.target;
   const ok = (d) => /^\d{4}-\d{2}-\d{2}$/.test(d) && NE.parseDate(d) !== null;
   if (el.id === "asof" && ok(el.value)) { S.date = el.value; renderAnswer(); }
+  else if (el.id === "scrub") setAnswerDate(isoOfDay(Number(el.value)));
   else if (el.id === "cmpA" && ok(el.value)) { S.cmpA = el.value; renderChanges($("#view")); }
   else if (el.id === "cmpB" && ok(el.value)) { S.cmpB = el.value; renderChanges($("#view")); }
   else if (el.id === "own-place") { S.ownPlace = el.value; syncOwn(); setPicker(false); renderAnswer(); }

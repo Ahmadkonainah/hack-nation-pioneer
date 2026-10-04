@@ -6,9 +6,9 @@
 Built for the Hack-Nation x RealPage challenge (Rental Housing Law Navigator). Not legal advice.
 
 - Live demo: https://hack-nation-pioneer-seven.vercel.app/ · backup copy: https://ahmadkonainah.github.io/hack-nation-pioneer/
-- Videos (60 seconds each): [demo](submission/Stackwise_Demo_Video.mp4) · [tech](submission/Stackwise_Tech_Video.mp4) · [team](submission/Stackwise_Team_Video.mp4)
-- One-page report: `submission/Stackwise_OnePager.pdf` · Dataset: [`dataset/`](dataset/README.txt)
-- Built solo by Ahmad Konainah, with Claude Sonnet 5.5 as the model inside the pipeline.
+- Videos (60 seconds each): [demo](submission/Pioneer_Demo_Video.mp4) · [tech](submission/Pioneer_Tech_Video.mp4) · [team](submission/Pioneer_Team_Video.mp4)
+- One-page report: `submission/Pioneer_OnePager.pdf` · Dataset: [`dataset/`](dataset/README.txt)
+- Team Pioneer: built solo by Ahmad Konainah (KU Leuven), with Claude Sonnet 5.5 as the model inside the pipeline.
 
 ## What it does
 
@@ -27,7 +27,7 @@ Stackwise reads public rental-housing law and answers, for any address and any d
 | Answers in `lookups.json` | 4,773 (applies 3,411 · superseded 265 · not yet effective 140 · pending 300 · unknown 657) |
 | Share of answers that are `unknown` | 14% (mostly missing year built or a special status that parcel data cannot show) |
 | Answers carrying a conflict flag | 180 |
-| Self-check | 42 checks pass once the Spanish view is generated (40 before), 0 fail (`python src/selfcheck.py`). On a fresh clone the 14 hand-saved pages are missing, so the quote check shows one note instead of a pass |
+| Self-check | 39 checks pass, 0 fail, 0 warnings in the recorded run (`python src/selfcheck.py` re-runs them and adds a few lines once the optional Spanish view exists) |
 
 The organizers' `score.py` and answer key were not shared, so we cannot report an official score. Our own self-check tests the output files against the schema and against the five change tests.
 
