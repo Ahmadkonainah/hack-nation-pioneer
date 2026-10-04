@@ -44,7 +44,7 @@
 
 ## Sources and licences
 
-- **Statutes are not copyrightable** in the US (government edicts doctrine; *Georgia v. Public.Resource.Org*, 2020), but some code publishers' sites forbid automated copying in their terms. We read those pages by hand, keep short excerpts, link the original, and skipped any page behind a login or robot check.
+- **Statutes are not copyrightable** in the US (government edicts doctrine; *Georgia v. Public.Resource.Org*, 2020), but some code publishers' sites forbid automated copying in their terms. We saved those pages by hand (the model reads them afterwards), keep short excerpts, link the original, and skipped any page behind a login or robot check.
 - **Parcel data** comes from public assessor datasets. Check each dataset's licence before a commercial launch.
 - **Fonts** are open source (SIL OFL), included with their licences in `web/fonts/`.
 

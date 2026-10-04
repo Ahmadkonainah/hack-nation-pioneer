@@ -5,7 +5,7 @@
 **Which rental laws apply at this address, on this date?**
 Built for the Hack-Nation x RealPage challenge (Rental Housing Law Navigator). Not legal advice.
 
-- Live demo: https://hack-nation-pioneer-seven.vercel.app/ · backup copy: https://ahmadkonainah.github.io/hack-nation-pioneer/
+- Live demo: https://hack-nation-pioneer-seven.vercel.app/ · backup copy: https://ahmadkonainah.github.io/hack-nation-pioneer/ (the same file, served from `docs/index.html`; GitHub Pages can take a few minutes to refresh after a push)
 - Videos (60 seconds each): [demo](submission/Pioneer_Demo_Video.mp4) · [tech](submission/Pioneer_Tech_Video.mp4) · [team](submission/Pioneer_Team_Video.mp4)
 - One-page report: `submission/Pioneer_OnePager.pdf` · Dataset: [`dataset/`](dataset/README.txt)
 - Team Pioneer: built solo by Ahmad Konainah (KU Leuven), with Claude Sonnet 5.5 as the model inside the pipeline.
@@ -64,6 +64,7 @@ flowchart LR
 - **Settle the unknowns.** Parcel data often has no year built, unit count or owner-occupancy. Instead of guessing, Stackwise says `unknown` and lets you type the missing fact. The same engine runs again in your browser and shows which answers changed. Example: for 1609 Addison St, Berkeley (year built missing), typing 1975 turns 4 of 5 unknown answers into real ones. 212 of the 500 addresses have no year built; giving each of them 1975 turns 657 unknown answers into 279. Typed facts stay in the tab and are never saved or sent. `python src/parity_test.py` checks that Python and JavaScript agree on these what-if answers too (4,000 comparisons).
 - **Your own building.** Not limited to the 500 samples. Pick a city, type the year built, units and whether the owner lives there, and the same engine answers. Nothing is looked up or sent anywhere; a production version would geocode on a server.
 - **Share and print.** The address, date and typed facts live in the link (`Copy link`), so an answer can be sent to a colleague; `Print` gives a clean one-page copy.
+- **Date slider with Play.** Drag it, press Play, or step to the next change to watch answers flip on the day a law starts. Ticks mark the days a rule for the chosen address starts. The slider runs from 2024 to the end of 2027 on purpose: some laws are already passed but start later (the New Jersey FAIR Act, 2027), and the organizers' own change test T3 compares 2026-10-01 with 2027-07-02. A date after today is labelled "future" and a note says it shows laws already passed that start later, so it cannot be mistaken for a current answer.
 - **Spanish plain-language view.** `python src/translate.py` (one call, about $0.10) writes Spanish titles and summaries. Code checks that every number in the Spanish text equals the English, and rejects a summary that is empty or left in English. The app then shows an ES button; all interface text is Spanish and the law itself stays English (it is the legal text), clearly labelled. Spanish text is machine-translated and not reviewed by a lawyer; the app says so.
 - **Built for people.** A guide explains the five result labels; icons plus words, never color alone; keyboard and screen-reader friendly (zero axe-core violations in English and Spanish, light and dark); works at phone width; light and dark themes; no cookies or tracking.
 
@@ -95,7 +96,7 @@ flowchart LR
 ## Responsible design
 
 - Every screen and file says this is not legal advice.
-- Public sources only. We hand-read pages and did not scrape any site against its terms. Parcel data is public assessor data. No personal data.
+- Public sources only. Pages we could not fetch automatically were saved by hand, and no site was scraped against its terms. Parcel data is public assessor data. No personal data.
 - Gaps are shown as gaps: a topic with no rule in our sources says so, and does not imply no law exists.
 - Conflicts are flagged for a person. Nothing is silently resolved.
 - Plain-English summary first, exact legal words one click away.
@@ -125,7 +126,7 @@ python src/run_all.py --from resolve   # resolve, lookup, changes, build_web, se
 python src/parity_test.py              # needs Node.js; compares the Python and JavaScript engines
 ```
 
-`lookups.json` and `changes.json` come out byte for byte the same as the ones in `outputs/`. The self-check will show one note: 14 hand-saved source pages are not stored in the repository (see Sources and data), so their quotes cannot be re-checked here. They were verified when the pages were read.
+`lookups.json` and `changes.json` come out byte for byte the same as the ones in `outputs/`. The self-check will show one note: 14 hand-saved source pages are not stored in the repository (see Sources and data), so their quotes cannot be re-checked here. Code checked each quote against its page when the page was first read.
 
 **Re-read the law from scratch (needs a key).** Copy `.env.example` to `.env`, paste your own Anthropic API key, then run `python src/run_all.py`. Cached answers are reused, so a re-run only pays for new or changed pages.
 
@@ -138,7 +139,7 @@ Open `docs/index.html` (or `web/index.html`) in a browser for the demo. It is on
 ```
 python -m pip install pyflakes
 python -m pyflakes src tests                       # unused imports, undefined names
-python -m unittest discover -s tests -t . -v       # 57 tests, about 6 seconds, no key and no network
+python -m unittest discover -s tests -t . -v       # 72 tests, about 6 seconds, no key and no network
 ```
 
 The tests cover the three-valued logic (true, false, unknown), the date and what-if rules, quote snapping, the saved-answer cache (with a fake model client), real answers on the 500 addresses (for example California's cap is superseded in Los Angeles; a missing year built stays unknown until you type one), the page's privacy promises (no outside requests, no cookies, a Content-Security-Policy) and that no API key is in the repository. The same checks run on every push in GitHub Actions (`.github/workflows/ci.yml`).

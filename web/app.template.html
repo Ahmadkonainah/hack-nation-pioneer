@@ -456,6 +456,8 @@ window.NAV_ES = {
   "Jump to": "Ir a",
   "Move through time": "Moverse en el tiempo",
   "Answer date, 2024 to 2027": "Fecha de la respuesta, de 2024 a 2027",
+  "future": "futuro",
+  "A future date shows laws already passed that start later.": "Una fecha futura muestra leyes ya aprobadas que empiezan más tarde.",
   "Play": "Reproducir",
   "Pause": "Pausa",
   "Previous change": "Cambio anterior",
@@ -1131,6 +1133,11 @@ const badYearMsg = (x) => (x.year && !/^\d{4}$/.test(x.year.trim()) ? t("Year bu
 const DAY_MS = 86400000;
 const SC_START = NE.parseDate("2024-01-01"), SC_END = NE.parseDate("2028-01-01");
 const SC_DAYS = Math.round((SC_END - SC_START) / DAY_MS);
+/* The slider reaches into 2027 on purpose: some laws are already passed but start later (for example the New Jersey FAIR Act), and the
+   organizers' own change test T3 compares 2026-10-01 with 2027-07-02. A date after today is labelled "future" so it is never mistaken for a current answer. */
+const TODAY_ISO = new Date().toISOString().slice(0, 10);
+const isFuture = (iso) => !!iso && iso > TODAY_ISO;
+const whenText = (iso) => fmtDate(iso) + (isFuture(iso) ? " \u00b7 " + t("future") : "");
 const SC_SPEED = 150;                           // days per second while playing: the whole range in about 10 seconds
 const dayIndex = (iso) => { const ms = NE.parseDate(iso); return ms === null ? 0 : Math.min(SC_DAYS, Math.max(0, Math.round((ms - SC_START) / DAY_MS))); };
 const isoOfDay = (i) => new Date(SC_START + i * DAY_MS).toISOString().slice(0, 10);
@@ -1154,7 +1161,7 @@ function changeDays(a) {
 function paintDate(iso) {
   S.date = iso;
   const sl = $("#scrub"); if (sl) { sl.value = String(dayIndex(iso)); sl.setAttribute("aria-valuetext", fmtDate(iso, true)); }
-  const wh = $("#scrubWhen"); if (wh) wh.textContent = fmtDate(iso);
+  const wh = $("#scrubWhen"); if (wh) wh.textContent = whenText(iso);
   const dt = $("#asof"); if (dt) dt.value = iso;
   for (const b of document.querySelectorAll('.qbtn[data-act="setdate"]')) b.setAttribute("aria-pressed", String(b.dataset.date === iso));
   renderScrubHint();
@@ -1174,6 +1181,7 @@ function renderScrubHint() {
   el.textContent = next
     ? t("Next change: {date}. {what}", { date: fmtDate(isoOfDay(next.day), true), what: next.titles.length === 1 ? next.titles[0] : tn(next.titles.length, "{n} rule starts", "{n} rules start") })
     : t("No later change in the rules for this address.");
+  if (isFuture(S.date)) el.textContent += " " + t("A future date shows laws already passed that start later.");
 }
 function stepChange(dir) {
   stopPlay();
@@ -1268,7 +1276,7 @@ function renderAnswer() {
         <div class="ticks" aria-hidden="true">${changeDays(a).map((c) => `<span class="tick" style="left:${(c.day / SC_DAYS * 100).toFixed(2)}%" title="${esc(fmtDate(isoOfDay(c.day), true))}: ${esc(c.titles.slice(0, 2).join("; "))}${c.titles.length > 2 ? "..." : ""}"></span>`).join("")}</div>
         <input type="range" id="scrub" min="0" max="${SC_DAYS}" step="1" value="${dayIndex(S.date)}" aria-label="${te("Answer date, 2024 to 2027")}" aria-valuetext="${esc(fmtDate(S.date, true))}">
       </div>
-      <output class="when" id="scrubWhen" for="scrub">${esc(fmtDate(S.date))}</output>
+      <output class="when" id="scrubWhen" for="scrub">${esc(whenText(S.date))}</output>
       <div class="hint"><button class="linkbtn" data-act="evprev">&lsaquo; ${te("Previous change")}</button><button class="linkbtn" data-act="evnext">${te("Next change")} &rsaquo;</button><span id="scrubNext"></span></div>
     </div>
     <details class="whatif" id="wiBox" ${own || S.wiOpen || wiOf(a) ? "open" : ""}>
