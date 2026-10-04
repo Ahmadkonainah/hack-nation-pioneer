@@ -12,6 +12,10 @@ and a city web page that explains it) and one law can be split into several reco
   4. writes outputs/rules.json (the submission file) and outputs/rules_consolidated.json (used by
      the address lookup).
 
+The model makes the judgement call (which records are the same law). Code then guarantees the result is
+safe, because a model answer can drop, repeat or mix records, and a lost rule would be a wrong answer for
+a real address.
+
 Run from the repo root with the virtual environment active:
     python src/consolidate.py
 One short API call; the answer is cached in cache/consolidate/.
@@ -20,7 +24,6 @@ from __future__ import annotations
 
 import argparse
 import copy
-import hashlib
 import json
 import re
 import sys
@@ -28,10 +31,16 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import extract as E  # noqa: E402
+from common import (CATEGORIES, DEFAULT_MODEL, JURISDICTIONS, OUT, ROOT, is_state_level, load_manifest,  # noqa: E402
+                    state_of, use_utf8_console)
+from dates import QUERY_DATE, status_at  # noqa: E402
+from extract import print_matrix  # noqa: E402
+from llm import THINKING, cached_structured_call, strictify  # noqa: E402
 
-CACHE_DIR = E.ROOT / "cache" / "consolidate"
+CACHE_DIR = ROOT / "cache" / "consolidate"
 
+# Do not edit SYSTEM, not even whitespace. It is part of the cache key (llm.cache_key), so any change throws
+# away the saved answer and costs a new API call. Its relation rules are re-checked by code (yield_ok, build).
 SYSTEM = """You consolidate rule records that were extracted one document at a time from a corpus of rental-housing law (three states and ten cities). The same legal rule often appears in several records, because several pages describe it, or because one law was split into several records.
 
 TASK 1 - GROUPS
@@ -56,7 +65,9 @@ Only record a relation when a record's own text supports it. Do not link two law
 
 Return one JSON object that follows the schema, and nothing else."""
 
-SCHEMA = E._strictify({
+# strictify makes every field required, so the model must always give the relation fields: [] means "no
+# relation" and "" means "no note". "reason" and "notes" are only written to the log; no code reads them.
+SCHEMA = strictify({
     "type": "object",
     "properties": {
         "groups": {
@@ -81,6 +92,8 @@ SCHEMA = E._strictify({
     },
 })
 
+# The organisers' rule-record fields plus retrieved_at and supporting_sources. rules.json carries only these;
+# internal fields (coverage, _conflicts_with, merged_from ...) stay in rules_consolidated.json.
 SUBMISSION_FIELDS = [
     "team_rule_id", "jurisdiction", "level", "category", "status", "title", "requirement", "key_value",
     "coverage_conditions", "exemptions", "overrides", "interaction", "effective_date", "citation",
@@ -90,11 +103,15 @@ SUBMISSION_FIELDS = [
 
 
 def clip(s, n):
+    """Collapse whitespace and cut `s` to at most `n` characters (the last one is an ellipsis). None becomes ""."""
     s = re.sub(r"\s+", " ", s or "").strip()
     return s if len(s) <= n else s[: n - 1] + "…"
 
 
 def compact(records: list[dict], source_types: dict) -> str:
+    """One JSON object per line for the prompt: the model's whole view of the corpus.
+    Long texts are clipped so every record fits one call; quotes and coverage are left out (grouping does not need them).
+    `source_types` maps doc id to source type so the model can prefer official text. `yields_to_text` is Module A's free-text guess, not ids."""
     lines = []
     for r in records:
         lines.append(json.dumps({
@@ -109,12 +126,18 @@ def compact(records: list[dict], source_types: dict) -> str:
 
 
 def repair_groups(groups: list[dict], records: list[dict]):
-    """Make the model's grouping safe. Returns (groups, repairs)."""
+    """Make the model's grouping safe to build from. Returns (groups, repairs).
+    Fixes: unknown or repeated ids are dropped; a group that mixes jurisdiction or category is split; a primary that is
+    not a member is replaced by the member with the highest confidence; a record the model forgot becomes its own group.
+    `repairs` holds one plain-English note per fix and is written to consolidation_log.json."""
+    # The model decides what belongs together; code enforces what the rest of the pipeline relies on:
+    # every record in exactly one group, and one jurisdiction and one category per group.
     by_id = {r["team_rule_id"]: r for r in records}
     repairs, used, fixed = [], set(), []
     for g in groups:
         members = []
         for m in g.get("member_ids", []):
+            # the first group that names an id keeps it
             if m in by_id and m not in used:
                 members.append(m)
                 used.add(m)
@@ -136,6 +159,7 @@ def repair_groups(groups: list[dict], records: list[dict]):
                     repairs.append(f"primary {gg.get('primary_id')!r} not in its group; used {best}")
                 gg["primary_id"] = best
             fixed.append(gg)
+    # A forgotten record stays as its own group. Never drop it: a missing rule is worse than an unmerged duplicate.
     for r in records:
         if r["team_rule_id"] not in used:
             repairs.append(f"{r['team_rule_id']} was missing from the grouping; kept as its own group")
@@ -146,34 +170,33 @@ def repair_groups(groups: list[dict], records: list[dict]):
     return fixed, repairs
 
 
-def _state_of(j: str) -> str:
-    """'Los Angeles, CA' -> 'CA'; 'CA' -> 'CA'"""
-    return j.rsplit(",", 1)[-1].strip() if "," in j else j.strip()
-
-
-def _state_level(j: str) -> bool:
-    return "," not in j
-
-
 def yield_ok(me: str, other: str) -> bool:
     """May a rule of jurisdiction `me` give way to a rule of jurisdiction `other`?
     Same state only. A state rule may give way to a local rule; a local rule only to a state rule
-    (or to another rule of its own city). Never across states, never from one city to another city."""
-    if _state_of(me) != _state_of(other):
+    (or to another rule of its own city). Never across states, never from one city to another city.
+    Used to drop links the model got wrong: a wrong link would mark a rule superseded where it still applies."""
+    if state_of(me) != state_of(other):
         return False
     if me == other:
         return True
-    return _state_level(me) or _state_level(other)
+    return is_state_level(me) or is_state_level(other)
 
 
 def empty_cov(c):
+    """True when a coverage dict says nothing usable: no tests (all_of) and no exemptions."""
     return not c or (not c.get("all_of") and not c.get("exemptions"))
 
 
 def build(records: list[dict], groups: list[dict]):
+    """Merge every group into one rule record and turn the model's relations into rule ids. Returns (rules, log).
+    The group's primary record is the base; the other members only fill gaps (effective date, coverage) and are kept as
+    supporting_sources. Rules are renumbered r-0001... in jurisdiction and category order. `log` explains each merge.
+    A relation is kept only if the two jurisdictions allow it (yield_ok for yields_to, same state for conflicts_with)."""
     by_id = {r["team_rule_id"]: r for r in records}
-    order = {j: i for i, j in enumerate(E.JURISDICTIONS)}
-    corder = {c: i for i, c in enumerate(E.CATEGORIES)}
+    order = {j: i for i, j in enumerate(JURISDICTIONS)}
+    corder = {c: i for i, c in enumerate(CATEGORIES)}
+    # Fixed order (jurisdiction, category, source doc) so an id like r-0007 is the same on every run. The ids feed
+    # enrich's cache key, so an unstable order would force new API calls and break byte-for-byte replays.
     groups = sorted(groups, key=lambda g: (order[by_id[g["primary_id"]]["jurisdiction"]], corder[by_id[g["primary_id"]]["category"]], by_id[g["primary_id"]]["source_doc_id"]))
     new_id = {g["primary_id"]: f"r-{i:04d}" for i, g in enumerate(groups, 1)}
     # the model may name a relation target by any member id, not just the primary: map every member to its group's new id
@@ -188,7 +211,7 @@ def build(records: list[dict], groups: list[dict]):
         rec["merged_from"] = [m["team_rule_id"] for m in members]
         rec["citation"] = (g.get("canonical_citation") or prim["citation"]).strip()
         rec["title"] = (g.get("canonical_title") or prim["title"]).strip()
-        # dates
+        # --- effective date: the primary wins; borrow one only if it has none, preferring a date a page states outright ---
         dates = {m["effective_date"] for m in members if m["effective_date"]}
         if not rec["effective_date"]:
             stated = [m for m in others if m["effective_date"] and m.get("date_basis") == "stated"] or [m for m in others if m["effective_date"]]
@@ -196,12 +219,15 @@ def build(records: list[dict], groups: list[dict]):
                 rec["effective_date"] = stated[0]["effective_date"]
                 rec["date_basis"] = stated[0].get("date_basis", "stated")
                 notes.append(f"effective date taken from {stated[0]['source_doc_id']}")
+        # Only the model's date_conflict flag raises a conflict. Members often carry different dates for different
+        # sub-provisions (see the prompt), so differing dates alone are just logged.
         if g.get("date_conflict"):
             rec["conflict_flag"] = True
             why = (g.get("date_conflict_note") or "").strip() or ("Sources give different dates: " + ", ".join(sorted(dates)) + ".")
             rec["conflict_note"] = ((rec["conflict_note"] + " ") if rec["conflict_note"] else "") + why
         elif len(dates) > 1:
             notes.append("members have different effective dates (" + ", ".join(sorted(dates)) + "); the model judged them separate provisions")
+        # --- legal state ---
         states = {m["legal_state"] for m in members}
         if states == {"pending", "enacted"}:
             # a measure only moves forward: a document written while it was proposed (a staff report, a first reading)
@@ -216,9 +242,11 @@ def build(records: list[dict], groups: list[dict]):
                     rec["effective_date"] = dated[0]["effective_date"]
                     rec["date_basis"] = dated[0].get("date_basis", "stated")
         elif len(states) > 1:
+            # any other mix (for example enacted and failed) is a real disagreement: flag it for a person
             rec["conflict_flag"] = True
             rec["conflict_note"] = ((rec["conflict_note"] + " ") if rec["conflict_note"] else "") + "Sources disagree on legal status: " + ", ".join(sorted(states)) + "."
-        # coverage: if the best source says nothing, borrow the fullest statement from another source
+        # --- coverage: if the best source says nothing, borrow the fullest statement from another source ---
+        # (the primary is chosen for its legal text, which may not say who is covered; a summary page may)
         if empty_cov(rec.get("coverage")):
             richer = [m for m in others if not empty_cov(m.get("coverage"))]
             if richer:
@@ -227,18 +255,22 @@ def build(records: list[dict], groups: list[dict]):
                 rec["coverage_conditions"] = best["coverage_conditions"]
                 rec["exemptions"] = best["exemptions"]
                 notes.append(f"coverage taken from {best['source_doc_id']}")
-        # evidence from the other sources
+        # --- evidence: every non-primary member stays as a supporting source, so no quote or link is lost in the merge ---
         rec["supporting_sources"] = [{
             "doc_id": m["source_doc_id"], "source_url": m["source_url"], "retrieved_at": m["retrieved_at"],
             "citation_as_extracted": m["citation"], "quoted_span": m["quoted_span"], "effective_date": m["effective_date"],
         } for m in others]
-        rec["status"] = E.status_at(rec["legal_state"], rec["effective_date"], E.QUERY_DATE)
+        # recomputed: the legal state and the date above may have changed since the primary was extracted
+        rec["status"] = status_at(rec["legal_state"], rec["effective_date"], QUERY_DATE)
+        # relations are resolved in the pass below, once every group has its new id
         rec["_relations"] = {"yields_to": g.get("yields_to", []), "conflicts_with": g.get("conflicts_with", []),
                              "note": (g.get("interaction_note") or "").strip(), "self": new_id[g["primary_id"]]}
         out.append(rec)
         log.append({"new_id": new_id[g["primary_id"]], "primary": g["primary_id"], "members": rec["merged_from"],
                     "citation": rec["citation"], "reason": g.get("reason", ""), "adjustments": notes})
-    # relations -> ids
+    # --- relations -> ids. A second pass, because a target may be a group that comes later in the list. ---
+    # Links that break the jurisdiction rules are dropped and logged: a wrong yields_to would mark a rule
+    # "superseded" at addresses where it still applies.
     for rec in out:
         rel = rec.pop("_relations")
         me = rel["self"]
@@ -252,11 +284,12 @@ def build(records: list[dict], groups: list[dict]):
                 keep_y.add(t)
             else:
                 dropped.append(f"{t} ({by_id[x]['jurisdiction']})")
+        # a conflict also needs the same state; links across states are dropped like bad yields_to links
         for x in rel["conflicts_with"]:
             t = to_new.get(x)
             if not t or t == me:
                 continue
-            if _state_of(mine) == _state_of(by_id[x]["jurisdiction"]):
+            if state_of(mine) == state_of(by_id[x]["jurisdiction"]):
                 keep_c.add(t)
             else:
                 dropped.append(f"conflict with {t} ({by_id[x]['jurisdiction']})")
@@ -268,7 +301,8 @@ def build(records: list[dict], groups: list[dict]):
                     lg["adjustments"].append("dropped links to rules of another state or city: " + ", ".join(dropped))
         if rel["note"] and rel["note"] not in (rec["interaction"] or ""):
             rec["interaction"] = ((rec["interaction"] + " ") if rec["interaction"] else "") + rel["note"]
-    # symmetric conflict flags
+    # --- symmetric conflict flags: a possible conflict is flagged on BOTH rules, so the warning shows whether a
+    # reader opens the state rule or the local one ---
     ids = {new_id[g["primary_id"]]: r for g, r in zip(groups, out)}
     for rid, rec in list(ids.items()):
         for other in rec["_conflicts_with"]:
@@ -278,6 +312,7 @@ def build(records: list[dict], groups: list[dict]):
                 note = f"Possible conflict with {ids[b]['citation']} ({b}); needs human review."
                 if note not in (t["conflict_note"] or ""):
                     t["conflict_note"] = ((t["conflict_note"] + " ") if t["conflict_note"] else "") + note
+    # `out` was built in the order of `groups`, so zip pairs each record with its group
     for rec, g in zip(out, groups):
         rec["team_rule_id"] = new_id[g["primary_id"]]
         rec.pop("merged_from_ids", None)
@@ -285,6 +320,8 @@ def build(records: list[dict], groups: list[dict]):
 
 
 def submission_view(rec: dict) -> dict:
+    """The fields of a rule that go into the submission file rules.json.
+    overrides and supporting_sources default to [] and conflict_flag to False, so they are never null."""
     d = {k: rec.get(k) for k in SUBMISSION_FIELDS}
     d["overrides"] = rec.get("overrides") or []
     d["supporting_sources"] = rec.get("supporting_sources") or []
@@ -293,57 +330,36 @@ def submission_view(rec: dict) -> dict:
 
 
 def main(argv=None) -> int:
-    try:
-        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-    except Exception:  # noqa: BLE001
-        pass
+    """CLI: ask the model for groups (cached), repair and merge them, write the three output files, print a summary. Returns 0."""
+    use_utf8_console()
     ap = argparse.ArgumentParser(description="Consolidate extracted rules into one record per legal instrument")
-    ap.add_argument("--model", default=E.DEFAULT_MODEL)
+    ap.add_argument("--model", default=DEFAULT_MODEL)
     ap.add_argument("--thinking", choices=["off", "adaptive"], default="off")
     ap.add_argument("--refresh", action="store_true", help="ignore the cached answer and ask again")
     args = ap.parse_args(argv)
-    E._THINKING["mode"] = args.thinking
+    THINKING["mode"] = args.thinking
 
-    src = E.OUT / "extracted.json"
+    src = OUT / "extracted.json"
     if not src.exists():
         sys.exit("outputs/extracted.json not found. Run  python src\\extract.py  first.")
     data = json.loads(src.read_text(encoding="utf-8"))
     records = data["rules"]
-    source_types = {r["doc_id"]: r.get("source_type", "") for r in E.load_manifest()}
+    source_types = {r["doc_id"]: r.get("source_type", "") for r in load_manifest()}
+    # Restating "every id exactly once" next to the data helps, but repair_groups does not trust it.
     user = ("Records to consolidate (one JSON object per line):\n" + compact(records, source_types) +
             f"\n\nThere are {len(records)} records. Every id must appear in exactly one group's member_ids.")
-    key = hashlib.sha256((SYSTEM + json.dumps(SCHEMA, sort_keys=True) + user + args.model).encode()).hexdigest()[:12]
-    cache = CACHE_DIR / f"{key}.json"
-    if cache.exists() and not args.refresh:
-        payload = json.loads(cache.read_text(encoding="utf-8"))
-        print(f"Using the saved answer from cache/consolidate/{cache.name} (no API call).")
-    else:
-        client = E.get_client()
-        print(f"Asking {args.model} to consolidate {len(records)} records ...")
-        resp = E.call_structured(client, args.model, SYSTEM, user, SCHEMA, max_tokens=32000)
-        text = "".join(getattr(b, "text", "") for b in resp.content if getattr(b, "type", None) == "text")
-        if resp.stop_reason in ("max_tokens", "refusal"):
-            sys.exit(f"The answer was not usable (stop_reason={resp.stop_reason}). Run again.")
-        try:
-            result = json.loads(text)
-            assert isinstance(result.get("groups"), list)
-        except Exception:  # noqa: BLE001
-            sys.exit("The answer was not valid JSON. Run the same command again.")
-        cin, cout = resp.usage.input_tokens, resp.usage.output_tokens
-        print(f"tokens in/out: {cin:,}/{cout:,}   cost: ${E.usd(cin, cout, args.model):.2f}")
-        payload = {"model": args.model, "called_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-                   "input_tokens": cin, "output_tokens": cout, "result": result}
-        CACHE_DIR.mkdir(parents=True, exist_ok=True)
-        cache.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
+    payload = cached_structured_call(cache_dir=CACHE_DIR, system=SYSTEM, schema=SCHEMA, user=user, model=args.model,
+                                     label=f"consolidate {len(records)} records", list_key="groups", refresh=args.refresh)
 
     groups, repairs = repair_groups(payload["result"]["groups"], records)
     merged, log = build(records, groups)
-    E.OUT.mkdir(exist_ok=True)
-    (E.OUT / "rules_consolidated.json").write_text(json.dumps({
-        "query_date": E.QUERY_DATE, "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+    OUT.mkdir(exist_ok=True)
+    # rules_consolidated.json keeps the internal fields the lookup needs; rules.json is the trimmed submission view.
+    (OUT / "rules_consolidated.json").write_text(json.dumps({
+        "query_date": QUERY_DATE, "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "source": "outputs/extracted.json", "rules": merged}, ensure_ascii=False, indent=1), encoding="utf-8")
-    (E.OUT / "rules.json").write_text(json.dumps({"rules": [submission_view(r) for r in merged]}, ensure_ascii=False, indent=1), encoding="utf-8")
-    (E.OUT / "consolidation_log.json").write_text(json.dumps({"model_notes": payload["result"].get("notes", ""), "repairs": repairs, "groups": log},
+    (OUT / "rules.json").write_text(json.dumps({"rules": [submission_view(r) for r in merged]}, ensure_ascii=False, indent=1), encoding="utf-8")
+    (OUT / "consolidation_log.json").write_text(json.dumps({"model_notes": payload["result"].get("notes", ""), "repairs": repairs, "groups": log},
                                                             ensure_ascii=False, indent=1), encoding="utf-8")
     merged_away = len(records) - len(merged)
     print(f"\n{len(records)} extracted records -> {len(merged)} consolidated rules ({merged_away} repeats merged)")
@@ -354,7 +370,7 @@ def main(argv=None) -> int:
     for l in log:
         if len(l["members"]) > 1:
             print(f"  {l['new_id']}  {l['citation'][:60]:60s}  <- {', '.join(l['members'])}")
-    E.print_matrix(merged)
+    print_matrix(merged)
     print("\nWrote outputs/rules.json (submission), outputs/rules_consolidated.json, outputs/consolidation_log.json")
     return 0
 

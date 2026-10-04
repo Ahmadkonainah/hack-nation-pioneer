@@ -6,6 +6,11 @@ The postal city on an address is not always the legal city (Van Nuys is inside t
 Dorchester is inside Boston, some "Los Angeles" addresses are in unincorporated county land, and
 "Berkeley" can mean Kensington). We ask the public US Census Geocoder (free, no key) for the
 incorporated place and county of each address, and keep every answer in a cache so reruns are free.
+The cache also lets the rest of the pipeline replay offline and gives the same answers every time.
+
+Only an incorporated place counts as a legal city. When the Census cannot place an address, the result
+carries a fallback city for information only. The lookup engine trusts it only if it came from a
+city-specific dataset.
 
 Run from the repo root with the virtual environment active:
     python src\\resolve.py                (about 500 addresses, a few minutes)
@@ -40,9 +45,10 @@ API = os.environ.get("CENSUS_API_URL") or "https://geocoding.geo.census.gov/geoc
 BENCHMARK = "Public_AR_Current"
 VINTAGE = "Current_Current"
 SLEEP = 0.15          # seconds between requests per worker, to be polite to a free public service
-TIMEOUT = 40
+TIMEOUT = 40          # seconds to wait for one answer before it counts as a failed attempt and is retried
 
 # Legal cities in scope: (state, Census place name without the " city" ending) -> label used in rules.json
+# The label must match the jurisdiction names in the rules exactly, or city rules would never be found.
 IN_SCOPE = {
     ("CA", "los angeles"): "Los Angeles, CA", ("CA", "san francisco"): "San Francisco, CA",
     ("CA", "san diego"): "San Diego, CA", ("CA", "berkeley"): "Berkeley, CA", ("CA", "santa ana"): "Santa Ana, CA",
@@ -50,9 +56,12 @@ IN_SCOPE = {
     ("MA", "boston"): "Boston, MA", ("MA", "cambridge"): "Cambridge, MA",
 }
 # City-specific datasets: every parcel in them is in that city by construction (a second, independent signal).
+# Matched by prefix of the row's source_dataset. Used to retry a query with the right city name, and as a
+# fallback when the geocoder finds nothing.
 DATASET_CITY = {"Boston Property Assessment": "Boston, MA", "Cambridge Property Database": "Cambridge, MA",
                 "DataSF": "San Francisco, CA"}
-FIPS = {"06": "CA", "34": "NJ", "25": "MA"}
+FIPS = {"06": "CA", "34": "NJ", "25": "MA"}      # state FIPS code -> postal abbreviation, for a missing STUSAB
+# Census place names end in a type word ("Hoboken city"). It is stripped so the name matches IN_SCOPE.
 PLACE_SUFFIX = re.compile(r"\s+(city|town|village|borough|municipality|cdp|city and county)$", re.I)
 
 
@@ -65,6 +74,7 @@ def street_variants(street: str) -> list[str]:
     Ranges ("1031-1035 CLINTON ST") use their first number; "600 JACKSON/601 HARRISON" tries both halves;
     zero-padded ordinals ("397 05TH AV") lose the zero."""
     s = re.sub(r"\s+", " ", (street or "").strip())
+    # Cut unit designators and anything after them: the geocoder places a street number, not an apartment.
     s = re.sub(r"\s*(#|\bAPT\b|\bUNIT\b|\bSTE\b|\bSUITE\b|\bLOT\b)\s*\S*.*$", "", s, flags=re.I).strip()
     parts = [p.strip() for p in s.split("/") if p.strip()] or [s]
     out = []
@@ -75,10 +85,11 @@ def street_variants(street: str) -> list[str]:
             out.append(f"{m.group(1)} {m.group(2)}")
         if part and part not in out:
             out.append(part)
-    return [x for i, x in enumerate(out) if x and x not in out[:i]]
+    return [x for i, x in enumerate(out) if x and x not in out[:i]]     # drop empties and repeats, keep order
 
 
 def dataset_city(source_dataset: str) -> str | None:
+    """The city label implied by a city-specific source dataset name (prefix match), or None."""
     for k, v in DATASET_CITY.items():
         if (source_dataset or "").startswith(k):
             return v
@@ -86,16 +97,20 @@ def dataset_city(source_dataset: str) -> str | None:
 
 
 def attempts_for(row: dict) -> list[dict]:
-    """Ordered list of query parameter sets to try for one address (most precise first)."""
+    """Ordered list of query parameter sets to try for one address (most precise first).
+    Returns [] when the address has no house number, so nothing is sent for it."""
     streets = street_variants(row["street_address"])
     if not streets or not re.match(r"^\d", streets[-1]):
         return []                       # no house number: the geocoder cannot place it
     cities = [row["postal_city"].strip()]
     hint = dataset_city(row.get("source_dataset", ""))
+    # Retry under the dataset's own city name: a postal name such as "Dorchester" may not match, "Boston" will.
     if hint:
         h = hint.split(",")[0]
         if h.lower() != cities[0].lower():
             cities.append(h)
+    # Try the given zip first, then no zip at all: some rows carry a zip from another state, and a wrong
+    # zip must not stop a match.
     zips = [row["zip"].strip(), ""] if row.get("zip", "").strip() else [""]
     out = []
     for st in streets:
@@ -113,11 +128,15 @@ def attempts_for(row: dict) -> list[dict]:
 # --------------------------------------------------------------------------------------
 
 def _key(params: dict) -> str:
+    """Cache file name for a query: a hash of its parameters in a fixed key order, so the same query
+    always maps to the same file. BENCHMARK and VINTAGE are added later and are not part of the key,
+    so after changing them, run with --refresh."""
     return hashlib.sha256(json.dumps(params, sort_keys=True).encode()).hexdigest()[:20]
 
 
 def fetch_json(params: dict, retries: int = 4) -> dict:
-    """GET one geocoder query. Retries on timeouts, 5xx and non-JSON answers (the service is flaky)."""
+    """GET one geocoder query. Retries on timeouts, 5xx and non-JSON answers (the service is flaky).
+    The wait doubles after each failure (1.5 s, 3 s, 6 s ...). Raises RuntimeError with the last reason."""
     q = dict(params, benchmark=BENCHMARK, vintage=VINTAGE, layers="all", format="json")
     url = API + "?" + urllib.parse.urlencode(q)
     last = "unknown error"
@@ -132,6 +151,7 @@ def fetch_json(params: dict, retries: int = 4) -> dict:
             last = "answer had no 'result'"
         except urllib.error.HTTPError as e:
             last = f"HTTP {e.code}"
+            # A 4xx means our request is bad, and repeating it cannot help. 429 (slow down) is the exception.
             if 400 <= e.code < 500 and e.code != 429:
                 raise RuntimeError(last) from e          # our request is wrong: do not retry
         except Exception as e:  # noqa: BLE001 - timeouts, resets, bad JSON
@@ -141,18 +161,25 @@ def fetch_json(params: dict, retries: int = 4) -> dict:
 
 
 def cached_query(params: dict, refresh: bool = False) -> tuple[dict, bool]:
-    """Return (json, from_cache)."""
+    """Return (json, from_cache). Answers are cached on disk, including "no match" answers, so a rerun
+    sends nothing and the same addresses always resolve the same way, even though the Census "current"
+    data can change. A failed request raises and is not cached, so it is tried again next run.
+    ``refresh=True`` ignores the cache."""
     p = CACHE / f"{_key(params)}.json"
     if p.exists() and not refresh:
         return json.loads(p.read_text(encoding="utf-8")), True
-    time.sleep(SLEEP)
+    time.sleep(SLEEP)                   # only before a real request, so replaying from the cache is fast
     js = fetch_json(params)
     CACHE.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(js), encoding="utf-8")
     return js, False
 
 
+# ---- reading the geocoder answer ----
+
 def _layer(geo: dict, *names: str) -> dict:
+    """First record of the geography layer called one of ``names``; {} if there is none.
+    Looks for an exact layer name, then for a name that contains it, so a slightly different layer name still works."""
     for n in names:                                     # exact name first, then a loose match
         v = geo.get(n)
         if v:
@@ -164,6 +191,8 @@ def _layer(geo: dict, *names: str) -> dict:
 
 
 def parse_match(js: dict) -> dict | None:
+    """Pick the useful fields out of a geocoder answer, or None if it found no address match.
+    Takes the first match (the best one the service returns)."""
     res = js.get("result") or {}
     ms = res.get("addressMatches") or []
     if not ms:
@@ -171,11 +200,14 @@ def parse_match(js: dict) -> dict | None:
     m = ms[0]
     geo = m.get("geographies") or {}
     place = _layer(geo, "Incorporated Places")
+    # A census-designated place is an unincorporated area (for example Kensington). It has no city
+    # government, so it is kept only to explain a result, never used as the legal city.
     cdp = _layer(geo, "Census Designated Places")
     county = _layer(geo, "Counties")
     state = _layer(geo, "States")
     sub = _layer(geo, "County Subdivisions")
     xy = m.get("coordinates") or res.get("coordinates") or {}
+    # Prefer the state's own abbreviation. If it is missing, map the FIPS code from any layer that has one.
     st = state.get("STUSAB") or FIPS.get(str(state.get("STATE") or county.get("STATE") or place.get("STATE") or ""))
     return {
         "matched_address": m.get("matchedAddress") or res.get("matchedAddress"),
@@ -188,6 +220,8 @@ def parse_match(js: dict) -> dict | None:
 
 
 def legal_city(state: str | None, place: str | None) -> str | None:
+    """Rules label (for example "Boston, MA") for a Census incorporated place, or None if the place
+    is missing or is not one of the 10 cities in scope. State rules still apply when this is None."""
     if not state or not place:
         return None
     return IN_SCOPE.get((state, PLACE_SUFFIX.sub("", place.strip()).lower()))
@@ -198,6 +232,13 @@ def legal_city(state: str | None, place: str | None) -> str | None:
 # --------------------------------------------------------------------------------------
 
 def resolve_one(row: dict, refresh: bool = False) -> dict:
+    """Resolve one sample-address row to a record with its legal city, county and how it was found.
+
+    ``status`` is "matched", "unmatched" (the service answered but found nothing), "error" (every attempt
+    failed, for example the service was down) or "no_house_number". ``postal_matches_legal`` is
+    three-valued: None if the address was not placed, else True or False (False also when the Census place
+    is outside the 10 cities). It tries the query variants in order and stops at the first match.
+    """
     postal_city_label = IN_SCOPE.get((row["state"].strip(), row["postal_city"].strip().lower()))
     hint = dataset_city(row.get("source_dataset", ""))
     rec = {
@@ -221,6 +262,8 @@ def resolve_one(row: dict, refresh: bool = False) -> dict:
                 rec.update(parsed, matched=True, query_used=params, status="matched")
                 break
         if not rec["matched"]:
+            # Keep "error" and "unmatched" apart: an outage says nothing about the address, so a
+            # rerun should fix it. An unmatched address will stay unmatched.
             rec["status"] = "error" if len(rec["errors"]) == len(tries) else "unmatched"
     # the legal city, as far as the Census says
     if rec["matched"]:
@@ -233,6 +276,8 @@ def resolve_one(row: dict, refresh: bool = False) -> dict:
         rec["legal_city"] = None
         rec["jurisdiction_basis"] = "unresolved"
         # fallback is information only; the lookup decides how far to trust it
+        # (engine.city_for trusts a city-specific dataset; a postal-city fallback stays unverified, so a
+        # city rule that would apply is answered "unknown", not "applies").
         rec["fallback_city"] = hint or postal_city_label
         rec["fallback_reason"] = ("city-specific dataset" if hint else "postal city name") if rec["fallback_city"] else None
     rec["postal_matches_legal"] = (rec["legal_city"] is not None and rec["legal_city"] == postal_city_label) if rec["matched"] else None
@@ -244,6 +289,8 @@ def resolve_one(row: dict, refresh: bool = False) -> dict:
 # --------------------------------------------------------------------------------------
 
 def report(recs: list[dict]) -> None:
+    """Print a plain-text summary of the run: counts by status, postal city versus legal city, and
+    the addresses that need a look (outside the 10 cities, not resolved). Prints only; changes nothing."""
     n = len(recs)
     c = Counter(r["status"] for r in recs)
     print(f"\n{n} addresses.  matched: {c['matched']}   unmatched: {c['unmatched']}   "
@@ -273,8 +320,10 @@ def report(recs: list[dict]) -> None:
 
 
 def main(argv=None) -> int:
+    """Command-line entry point: read the sample addresses, resolve each one (several in parallel),
+    write outputs/resolved_addresses.json and print the report. Returns the process exit code."""
     try:
-        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")     # printing must not crash on legacy Windows consoles
     except Exception:  # noqa: BLE001
         pass
     ap = argparse.ArgumentParser(description="Resolve each address to its legal city and county (US Census Geocoder)")
@@ -285,12 +334,13 @@ def main(argv=None) -> int:
     ap.add_argument("--dry-run", action="store_true", help="show what would be asked, send nothing")
     args = ap.parse_args(argv)
 
-    rows = list(csv.DictReader(open(DATA, newline="", encoding="utf-8-sig")))
+    rows = list(csv.DictReader(open(DATA, newline="", encoding="utf-8-sig")))     # utf-8-sig tolerates a leading BOM
     if args.only:
         want = {x.strip() for x in args.only.split(",")}
         rows = [r for r in rows if r["address_id"] in want]
     if args.limit:
         rows = rows[: args.limit]
+    # Counts only each address's first query, so this is a quick progress hint and not the exact request count.
     cached = sum(1 for r in rows for p in attempts_for(r)[:1] if (CACHE / f"{_key(p)}.json").exists())
     print(f"{len(rows)} addresses to resolve ({cached} first queries already cached). Service: {API}")
     if args.dry_run:
@@ -306,6 +356,7 @@ def main(argv=None) -> int:
             recs.append(f.result())
             if k % 25 == 0 or k == len(rows):
                 print(f"  {k}/{len(rows)} done ({time.time() - t0:.0f}s)")
+    # Worker threads finish in any order. Sorting puts the records in the same order on every run.
     recs.sort(key=lambda r: r["address_id"])
     OUT.mkdir(exist_ok=True)
     (OUT / "resolved_addresses.json").write_text(json.dumps({

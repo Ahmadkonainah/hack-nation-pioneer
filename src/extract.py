@@ -4,10 +4,14 @@ Module A - automated rule extraction (Rental Housing Law Navigator).
 
 For every document in corpus/text this script:
   1. splits long documents into chunks,
-  2. asks Claude to extract structured rule records (forced tool call = valid JSON),
+  2. asks Claude to extract structured rule records (structured outputs against a JSON schema, so the
+     reply is valid JSON),
   3. snaps every quoted span onto the exact source text, or rejects the rule,
   4. derives the legal status in code (not by the model),
   5. writes outputs/extracted.json, outputs/rejected.json, outputs/extraction_log.json.
+
+The model reads; the code decides. The model only reports what a page says. Code checks every quote
+against the page and computes whether a rule is in force from its dates.
 
 Run from the repo root with the virtual environment active:
     python src/extract.py --dry-run                 # token + cost estimate, no API call
@@ -16,56 +20,32 @@ Run from the repo root with the virtual environment active:
 
 Every model call is saved in cache/extract/, so re-running never pays twice.
 The cache files are also the audit trail: raw model output for every document.
+The cache key includes a hash of the prompt and schema, so editing either one makes every page
+be read (and paid for) again.
 """
 from __future__ import annotations
 
 import argparse
-import csv
 import difflib
 import hashlib
 import json
-import os
 import re
 import sys
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import date, datetime, timezone
-from pathlib import Path
+from datetime import datetime, timezone
 
-ROOT = Path(os.environ.get("NAVIGATOR_ROOT") or Path(__file__).resolve().parent.parent)
-CORPUS = ROOT / "corpus"
-OUT = ROOT / "outputs"
+from common import (CATEGORIES, CITIES, CORPUS, DEFAULT_MODEL, JURISDICTIONS, OUT, ROOT, STATES,  # noqa: F401
+                    fold_typography, load_manifest)
+from dates import QUERY_DATE, status_at  # noqa: F401
+from llm import THINKING, call_structured, get_client, strictify, usd  # noqa: F401
+
 CACHE = ROOT / "cache" / "extract"
-
-QUERY_DATE = "2026-10-01"
-DEFAULT_MODEL = "claude-sonnet-5-5"
-MAX_CHUNK_CHARS = 45_000
+MAX_CHUNK_CHARS = 45_000     # characters per model call (about 15,000 tokens by est_tokens)
+# Consecutive chunks share this many characters, so a rule that sits across a cut still appears whole in
+# one of them. The same rule can then be returned twice; finalize() drops the duplicate.
 CHUNK_OVERLAP = 1_500
-MAX_OUT_TOKENS = 16_000
-
-# USD per million tokens (input, output). Source: Anthropic pricing page, checked 2026-10-03.
-PRICES = {
-    "claude-sonnet-5-5": (2.0, 10.0),
-    "claude-haiku-4-5-20251001": (1.0, 5.0),
-    "claude-opus-5-5": (4.0, 20.0),
-    "claude-fable-5-1": (10.0, 50.0),
-}
-
-CATEGORIES = [
-    "rent_increase_limits",
-    "just_cause_eviction",
-    "security_deposits",
-    "application_screening_fees",
-    "screening_restrictions",
-    "algorithmic_rent_setting",
-]
-STATES = ["CA", "NJ", "MA"]
-CITIES = [
-    "Los Angeles, CA", "San Francisco, CA", "San Diego, CA", "Berkeley, CA", "Santa Ana, CA",
-    "Jersey City, NJ", "Hoboken, NJ", "Newark, NJ", "Boston, MA", "Cambridge, MA",
-]
-JURISDICTIONS = STATES + CITIES
 
 # --------------------------------------------------------------------------------------
 # Prompt and tool schema
@@ -73,6 +53,9 @@ JURISDICTIONS = STATES + CITIES
 
 _CITY_LIST = " | ".join(CITIES)
 
+# The prompt tells the model to report what the page says (legal_state, effective_date) and never to decide
+# whether a rule is in force today. Code does that in finalize() via status_at().
+# Do not edit this text casually: it feeds PROMPT_HASH, so any change makes every cached answer miss.
 SYSTEM_PROMPT = f"""You are the rule-extraction engine of a prototype "Rental Housing Law Navigator".
 You read ONE source document (or one part of a long document) and output structured records for residential rental rules. The query date for the project is {QUERY_DATE}.
 
@@ -114,6 +97,8 @@ coverage_text is one plain-language sentence summarising who is covered. exempti
 
 Reply with one JSON object that follows the required schema, and nothing else."""
 
+# One coverage condition (a building fact tested with an operator). The enums are closed so the lookup
+# engine only ever sees facts and operators it knows how to test. Facts it cannot test give "unknown".
 _COND = {
     "type": "object",
     "properties": {
@@ -126,21 +111,7 @@ _COND = {
     "required": ["fact", "op", "value", "text"],
 }
 
-def _strictify(node):
-    """Structured outputs need every object closed (additionalProperties false); we also make
-    every property required, so the schema has no optional fields."""
-    if isinstance(node, dict):
-        if node.get("type") == "object" and "properties" in node:
-            node["additionalProperties"] = False
-            node["required"] = list(node["properties"].keys())
-        for v in node.values():
-            _strictify(v)
-    elif isinstance(node, list):
-        for v in node:
-            _strictify(v)
-    return node
-
-
+# One extracted rule record. The model fills these fields; the status and rule id are added later by code.
 _RULE = {
     "type": "object",
     "properties": {
@@ -178,7 +149,9 @@ _RULE = {
     },
 }
 
-SCHEMA = _strictify({
+# strictify() closes every object and makes every field required, as structured outputs demand. The model
+# cannot add stray keys or silently leave a field out.
+SCHEMA = strictify({
     "type": "object",
     "properties": {
         "document_summary": {"type": "string", "description": "One sentence: what this document is."},
@@ -187,6 +160,8 @@ SCHEMA = _strictify({
     },
 })
 
+# Short fingerprint of prompt + schema. It goes into every cache file name (see Task), so a changed prompt
+# or schema can never be answered from an older, different cached reply.
 PROMPT_HASH = hashlib.sha256((SYSTEM_PROMPT + json.dumps(SCHEMA, sort_keys=True)).encode()).hexdigest()[:8]
 
 # --------------------------------------------------------------------------------------
@@ -194,46 +169,17 @@ PROMPT_HASH = hashlib.sha256((SYSTEM_PROMPT + json.dumps(SCHEMA, sort_keys=True)
 # --------------------------------------------------------------------------------------
 
 
-def load_env() -> None:
-    """Minimal .env reader (no extra dependency)."""
-    p = ROOT / ".env"
-    if not p.exists():
-        return
-    for line in p.read_text(encoding="utf-8-sig").splitlines():
-        line = line.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        k, v = line.split("=", 1)
-        k, v = k.strip(), v.strip().strip('"').strip("'")
-        if k and v and not os.environ.get(k):
-            os.environ[k] = v
-
-
-def load_manifest() -> list[dict]:
-    """Manifest rows that have a text file. A row with no supplied text is still used when the team
-    saved the page it read by hand as corpus/text/<doc_id>.txt (marked team-added)."""
-    rows = []
-    with open(CORPUS / "corpus_manifest.csv", newline="", encoding="utf-8-sig") as f:
-        for r in csv.DictReader(f):
-            tf = (r.get("text_file") or "").strip()
-            if not tf:
-                guess = f"text/{r['doc_id']}.txt"
-                if (CORPUS / guess).exists():
-                    r = dict(r, text_file=guess, source_type="team-added (page read by hand): " + (r.get("source_type") or ""),
-                             retrieved_at=r.get("retrieved_at") or "2026-10-03")
-                    tf = guess
-            if tf and (CORPUS / tf).exists() and (CORPUS / tf).stat().st_size > 0:
-                rows.append(r)
-    return rows
-
-
 def chunk_text(text: str, max_chars: int = MAX_CHUNK_CHARS, overlap: int = CHUNK_OVERLAP) -> list[str]:
+    """Split a long document into chunks of at most ``max_chars``, each starting ``overlap`` characters
+    before the previous one ended. Short documents come back as a single chunk."""
     if len(text) <= max_chars:
         return [text]
     chunks, start = [], 0
     while start < len(text):
         end = min(len(text), start + max_chars)
         if end < len(text):
+            # Prefer to cut at a paragraph break (then a line break) in the last 3000 characters,
+            # so a chunk rarely ends in the middle of a sentence or a clause.
             lo = max(start + 1, start + max_chars - 3000)
             cut = text.rfind("\n\n", lo, end)
             if cut == -1:
@@ -243,40 +189,42 @@ def chunk_text(text: str, max_chars: int = MAX_CHUNK_CHARS, overlap: int = CHUNK
         chunks.append(text[start:end])
         if end >= len(text):
             break
+        # max(..., start + 1) guarantees forward progress even if overlap is as large as the chunk.
         start = max(end - overlap, start + 1)
     return chunks
 
 
 def est_tokens(chars: int) -> int:
+    """Rough token count for ``chars`` characters. Used only for the cost estimate, never for billing."""
     # Newer tokenizer produces ~30% more tokens than the old 4-chars rule; stay conservative.
     return int(chars / 3.0)
 
 
-def usd(in_tok: int, out_tok: int, model: str) -> float:
-    pin, pout = PRICES.get(model, (10.0, 50.0))
-    return in_tok / 1e6 * pin + out_tok / 1e6 * pout
-
-
 # ---- quote snapping ------------------------------------------------------------------
-
-_TRANS = str.maketrans({
-    "‘": "'", "’": "'", "‚": "'", "“": '"', "”": '"',
-    "–": "-", "—": "-", "−": "-", " ": " ", "­": "",
-})
-
+# Why quotes are snapped: the model retypes the passage and may change a curly quote, a line break or a
+# word. We never store what the model typed. We find where the quote sits in the page and store the
+# page's own words. Every stored quote is then a true substring of the source, and a quote that cannot
+# be found rejects the rule (it may be an invention).
 
 def _norm(tok: str) -> str:
-    return tok.translate(_TRANS).lower()
+    """Lower-case a token and fold curly quotes and long dashes to ASCII, so typography cannot break a match."""
+    return fold_typography(tok).lower()
 
 
 def tokenize(text: str) -> list[tuple[str, int, int]]:
+    """Split ``text`` on whitespace into (normalised token, start offset, end offset).
+    The offsets let a match be cut back out of the original text, with its real spacing."""
     return [(_norm(m.group()), m.start(), m.end()) for m in re.finditer(r"\S+", text)]
 
 
+# Characters stripped from the edges of a word in tiers 2 and 3. Includes markdown marks (* _ `) that
+# saved pages contain and a model may drop.
 _PUNCT = ".,;:!?()[]{}\"'*_`"
 
 
 def _core(w: str) -> str:
+    """The word without edge punctuation. A token made only of punctuation is kept as it is,
+    so it does not turn into an empty string that matches any other empty string."""
     c = w.strip(_PUNCT)
     return c or w
 
@@ -287,11 +235,14 @@ def snap_quote(quote: str, toks: list[tuple[str, int, int]], text: str, min_rati
     Matching ignores whitespace, line breaks, curly quotes, case and punctuation stuck to the
     ends of words. The returned slice is copied from the source text itself, so it is an
     exact substring of the document, whatever the model typed.
+
+    ``toks`` is ``tokenize(text)``. ``match_ratio`` is 1.0 (exact), 0.99 (exact apart from edge
+    punctuation) or the similarity of a near match, which must reach ``min_ratio``.
     """
     q = [_norm(t) for t in quote.split()]
     n = len(q)
     if n < 3:
-        return None
+        return None                     # two words match almost anywhere, so they prove nothing
     words = [t[0] for t in toks]
     N = len(words)
 
@@ -300,7 +251,7 @@ def snap_quote(quote: str, toks: list[tuple[str, int, int]], text: str, min_rati
 
     # tier 1: exact token match
     for i in range(N - n + 1):
-        if words[i] == q[0] and words[i:i + n] == q:
+        if words[i] == q[0] and words[i:i + n] == q:   # cheap first-word test before comparing the slice
             return sl(i, i + n - 1), 1.0
 
     # tier 2: exact match once punctuation at word edges is ignored
@@ -311,6 +262,8 @@ def snap_quote(quote: str, toks: list[tuple[str, int, int]], text: str, min_rati
             return sl(i, i + n - 1), 0.99
 
     # tier 3: near match (a word or two differs); candidates must start or end on the same two words
+    # Anchoring on two words keeps the search small and stops a loose match drifting to a different passage.
+    # Window lengths n-3 .. n+3 allow for a few words dropped or added by the model.
     best_ratio, best = 0.0, None
     cands = []
     for i in range(N - 1):
@@ -321,10 +274,10 @@ def snap_quote(quote: str, toks: list[tuple[str, int, int]], text: str, min_rati
             for L in range(max(3, n - 3), n + 4):
                 cands.append((i - L + 1, i))
         if len(cands) > 3000:
-            break
+            break                       # cost guard: a quote opening with common words must not trigger endless diffs
     for s, e in cands:
         if s < 0 or e >= N:
-            continue
+            continue                    # a window that runs off either end of the document
         r = difflib.SequenceMatcher(None, qc, wc[s:e + 1], autojunk=False).ratio()
         if r > best_ratio:
             best_ratio, best = r, (s, e)
@@ -333,47 +286,26 @@ def snap_quote(quote: str, toks: list[tuple[str, int, int]], text: str, min_rati
     return None
 
 
-# ---- status (derived in code) --------------------------------------------------------
-
-
-def _start_date(s: str | None):
-    if not s:
-        return None
-    m = re.fullmatch(r"(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?", s.strip())
-    if not m:
-        return None
-    y, mo, d = int(m.group(1)), int(m.group(2) or 1), int(m.group(3) or 1)
-    try:
-        return date(y, mo, d)
-    except ValueError:
-        return None
-
-
-def status_at(legal_state: str, effective_date: str | None, as_of: str) -> str:
-    if legal_state == "failed":
-        return "failed"
-    if legal_state == "pending":
-        return "pending"
-    eff = _start_date(effective_date)
-    asof = _start_date(as_of)
-    if eff and asof and asof < eff:
-        return "not_yet_effective"
-    return "in_force"
-
-
 # --------------------------------------------------------------------------------------
 # Planning, API call, finalising
 # --------------------------------------------------------------------------------------
 
 
 class Task:
+    """One model call: part ``idx`` (0-based) of ``total`` parts of one manifest document."""
+
     def __init__(self, row: dict, idx: int, total: int, text: str, model: str):
+        """``row`` is the document's manifest row; ``text`` is this part's text only."""
         self.row, self.idx, self.total, self.text = row, idx, total, text
         self.doc_id = row["doc_id"]
+        # The file name holds the doc, part, model and a hash of (prompt + schema + this text). Any change to
+        # one of them gives a new name, so a stale reply is never reused and a re-run pays only for what changed.
         h = hashlib.sha256((PROMPT_HASH + text).encode()).hexdigest()[:8]
         self.cache_path = CACHE / f"{self.doc_id}__c{idx + 1}of{total}__{model}__{h}.json"
 
     def user_message(self) -> str:
+        """Build the user turn: metadata block, then the page text, wrapped in tags.
+        The tags mark the page as data. The system prompt tells the model to ignore instructions inside it."""
         r = self.row
         return (
             "<document_metadata>\n"
@@ -391,13 +323,19 @@ class Task:
         )
 
 
+# Size guard. A real legal page is a few parts at most. A document with more parts than this is almost
+# always a whole website saved with its menus and scripts. Reading it would spend the budget on noise,
+# so it is skipped unless --allow-long is given.
 MAX_PARTS = 12            # a legal page is a few parts at most; more means a whole site was saved
+# (doc_id, part count) of the documents skipped by the guard. build_tasks() refills it on every call and
+# main() prints it, so the list always describes the most recent selection.
 LONG_SKIPPED: list[tuple[str, int]] = []
 
 
 def build_tasks(rows: list[dict], model: str, allow_long: bool = False) -> list[Task]:
     """One task per part of every document. A document that splits into more than MAX_PARTS parts is
-    left out (it is almost always a web page saved together with its menus and code, and would burn the budget)."""
+    left out (it is almost always a web page saved together with its menus and code, and would burn the budget).
+    Pass ``allow_long=True`` to keep such documents. Skipped ones are recorded in LONG_SKIPPED."""
     tasks = []
     LONG_SKIPPED.clear()
     for r in rows:
@@ -411,56 +349,19 @@ def build_tasks(rows: list[dict], model: str, allow_long: bool = False) -> list[
     return tasks
 
 
-_THINKING = {"mode": "off"}   # "off" = {"type": "between_tools"}; "adaptive"; "omit" (set automatically if the API rejects it)
-
-
-def call_structured(client, model: str, system: str, user_msg: str, schema: dict, max_tokens: int = MAX_OUT_TOKENS):
-    """One Messages API call using structured outputs (the JSON comes back as a text block).
-
-    Sonnet 5.5 rejects forced tool use and sampling parameters, so we send neither.
-    Up-front thinking is switched off by default to keep cost predictable.
-    """
-    kwargs = dict(
-        model=model,
-        max_tokens=max_tokens,
-        system=system,
-        output_config={"format": {"type": "json_schema", "schema": schema}},
-        messages=[{"role": "user", "content": user_msg}],
-    )
-    if max_tokens > 16_000:
-        kwargs["timeout"] = 900.0     # the SDK refuses long non-streaming requests unless a timeout is given
-    mode = _THINKING["mode"]
-    if mode == "off":
-        kwargs["thinking"] = {"type": "between_tools"}
-    elif mode == "adaptive":
-        kwargs["thinking"] = {"type": "adaptive"}
-    try:
-        return client.messages.create(**kwargs)
-    except Exception as e:  # noqa: BLE001
-        if e.__class__.__name__ == "BadRequestError" and "thinking" in str(e).lower() and "thinking" in kwargs:
-            _THINKING["mode"] = "omit"          # API does not like the thinking setting: run with its default
-            kwargs.pop("thinking")
-            return client.messages.create(**kwargs)
-        raise
-
-
 def call_api(client, model: str, user_msg: str):
+    """One extraction call: the extraction prompt and schema, applied to one chunk of one document."""
     return call_structured(client, model, SYSTEM_PROMPT, user_msg, SCHEMA)
 
 
-def get_client():
-    load_env()
-    key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
-    if not key:
-        sys.exit("No API key found. Run:  notepad .env   and paste your key after ANTHROPIC_API_KEY=")
-    try:
-        import anthropic
-    except ImportError:
-        sys.exit("The 'anthropic' package is missing. Run:  pip install -r requirements.txt")
-    return anthropic.Anthropic(api_key=key, max_retries=6)
-
-
 class Budget:
+    """Running token count and spend for one run, shared by all worker threads (hence the lock).
+
+    This is the cost cap: once ``spent`` reaches ``max_usd``, no new call starts. Calls already in
+    flight still finish, so the final spend can pass the cap by a few calls. ``fatal`` is set on a
+    key or permission error to stop all remaining work, because every later call would fail the same way.
+    """
+
     def __init__(self, max_usd: float, model: str):
         self.max_usd, self.model = max_usd, model
         self.in_tok = self.out_tok = 0
@@ -470,14 +371,19 @@ class Budget:
 
     @property
     def spent(self) -> float:
+        """Dollars spent so far, priced from the token counts."""
         return usd(self.in_tok, self.out_tok, self.model)
 
     def can_go(self) -> bool:
+        """True while no fatal error is set and the cap is not yet reached. Checked before each new call."""
         with self.lock:
             return self.fatal is None and self.spent < self.max_usd
 
 
 def run_task(client, task: Task, model: str, budget: Budget, progress: dict):
+    """Run one task and return a status string: "cached", "skipped" (budget stopped), "ok (N rules)"
+    or "error: ...". Only a complete, valid reply is written to the cache, so a failed task is retried
+    by simply running again. ``progress`` is not used."""
     if task.cache_path.exists():
         return "cached"
     if not budget.can_go():
@@ -493,15 +399,17 @@ def run_task(client, task: Task, model: str, budget: Budget, progress: dict):
     text = "".join(getattr(blk, "text", "") for blk in resp.content if getattr(blk, "type", None) == "text")
     in_tok = getattr(resp.usage, "input_tokens", 0) or 0
     out_tok = getattr(resp.usage, "output_tokens", 0) or 0
+    # Count the spend before any early return below: a cut-off or refused reply is still billed.
     with budget.lock:
         budget.in_tok += in_tok
         budget.out_tok += out_tok
         budget.calls += 1
+    # A reply cut off by the token limit may be truncated JSON; a refusal has no rules. Neither is cached.
     if resp.stop_reason in ("max_tokens", "refusal"):
         return f"error: stop_reason={resp.stop_reason}; not cached"
     try:
         result = json.loads(text)
-        assert isinstance(result.get("rules"), list)
+        assert isinstance(result.get("rules"), list)   # an empty list is fine: "no rule in scope" is an answer
     except Exception:  # noqa: BLE001
         return "error: reply was not valid JSON; not cached"
     payload = {
@@ -511,6 +419,8 @@ def run_task(client, task: Task, model: str, budget: Budget, progress: dict):
         "result": result,
     }
     CACHE.mkdir(parents=True, exist_ok=True)
+    # Write to a temp file, then rename. A crash mid-write then never leaves a half-written file
+    # that a later run would trust as a finished answer.
     tmp = task.cache_path.with_suffix(".tmp")
     tmp.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
     tmp.replace(task.cache_path)
@@ -519,18 +429,27 @@ def run_task(client, task: Task, model: str, budget: Budget, progress: dict):
 
 # ---- turning cached model output into verified records --------------------------------
 
+# A date the model may give: YYYY, YYYY-MM or YYYY-MM-DD. This checks the shape only; whether the date
+# is a real calendar date is decided later by dates.parse_date.
 ISO_RE = re.compile(r"^\d{4}(-\d{2}(-\d{2})?)?$")
 
 
 def clean(s):
+    """Trim a string. An empty or missing value becomes None, so the JSON holds null instead of ""."""
     s = (s or "").strip() if isinstance(s, str) else s
     return s or None
 
 
 def finalize(tasks: list[Task]):
-    """Load every cached chunk for these tasks and build verified records."""
+    """Load every cached chunk for these tasks and build verified records.
+
+    Returns (records, rejected, log). A rule from the model becomes a record only if it passes, in order:
+    jurisdiction in scope, valid category, quote found in the source, sane quote length. Failures go to
+    ``rejected`` with a reason, so nothing is dropped silently. Exact repeats (from chunk overlap) are
+    dropped without a reason. Uncached tasks are skipped, so this reads only what has been paid for.
+    """
     records, rejected, log = [], [], []
-    toks_cache: dict[str, tuple] = {}
+    toks_cache: dict[str, tuple] = {}   # tokenise each document once, not once per chunk
     seen = set()
     for t in tasks:
         if not t.cache_path.exists():
@@ -550,8 +469,11 @@ def finalize(tasks: list[Task]):
         })
         for k, r in enumerate(res.get("rules", [])):
             def rej(reason, r=r):
+                """Log a rejected rule with its reason (``r=r`` pins the current rule inside the loop)."""
                 rejected.append({"doc_id": t.doc_id, "chunk": t.idx + 1, "reason": reason, "rule": r})
 
+            # Gate 1: the model must use one of our exact jurisdiction labels. Anything else (a county,
+            # another city, federal law) is out of scope and is rejected, not mapped by guesswork.
             j = (r.get("jurisdiction") or "").strip()
             if j not in JURISDICTIONS:
                 rej(f"jurisdiction not in scope: {j!r}")
@@ -559,44 +481,53 @@ def finalize(tasks: list[Task]):
             if r.get("category") not in CATEGORIES:
                 rej(f"bad category: {r.get('category')!r}")
                 continue
+            # Gate 2: the quote must be findable in the FULL document (not just this chunk). If it is not,
+            # the model may have invented the rule, so the whole rule is rejected.
             snapped = snap_quote(r.get("quoted_span", ""), toks, full)
             if not snapped:
                 rej("quoted_span not found in source text")
                 continue
             span, ratio = snapped
+            # The prompt asks for 20 to 400 characters. This check is looser on purpose (snapping can
+            # widen a slice a little) but still rejects a tiny or a runaway span.
             if len(span) < 20 or len(span) > 1500:
                 rej(f"quoted_span length {len(span)} outside 20-1500")
                 continue
+            # Chunks overlap, so one rule can come back twice. Same jurisdiction, category, citation and
+            # quote means the same rule: keep the first. Whitespace and case are ignored in the key.
             key = (j, r["category"], _norm(r.get("citation", "")), re.sub(r"\s+", " ", span.lower()))
             if key in seen:
                 continue
             seen.add(key)
             eff = clean(r.get("effective_date"))
             warn = []
+            # A malformed date is dropped, not repaired. The rule is kept and the problem is shown in _warnings.
             if eff and not ISO_RE.match(eff):
                 warn.append(f"effective_date {eff!r} not ISO; dropped")
                 eff = None
             legal_state = r.get("legal_state", "enacted")
             conf = r.get("confidence")
-            conf = max(0.0, min(1.0, float(conf))) if isinstance(conf, (int, float)) else None
+            conf = max(0.0, min(1.0, float(conf))) if isinstance(conf, (int, float)) else None   # clamp to 0..1
             records.append({
-                "team_rule_id": None,
+                "team_rule_id": None,               # assigned below, once the records are in a stable order
                 "jurisdiction": j,
                 "level": "state" if j in STATES else "city",
                 "category": r["category"],
+                # Status is computed by code from legal_state and the dates, never taken from the model:
+                # a date comparison is exact and repeatable, and "today" is a project setting (QUERY_DATE).
                 "status": status_at(legal_state, eff, QUERY_DATE),
                 "title": (r.get("title") or "").strip(),
                 "requirement": (r.get("requirement") or "").strip(),
                 "key_value": clean(r.get("key_value")),
                 "coverage_conditions": clean(r.get("coverage_text")),
                 "exemptions": clean(r.get("exemptions_text")),
-                "overrides": [],
+                "overrides": [],                    # filled in later by consolidate.py (yields-to links)
                 "interaction": clean(r.get("interaction")),
                 "effective_date": eff,
                 "citation": (r.get("citation") or "").strip(),
                 "source_doc_id": t.doc_id,
                 "source_url": row.get("url", ""),
-                "quoted_span": span,
+                "quoted_span": span,                # the source's own words (snapped), not the model's copy
                 "confidence": conf,
                 "conflict_flag": bool(r.get("conflict_flag")),
                 "conflict_note": clean(r.get("conflict_note")),
@@ -607,9 +538,11 @@ def finalize(tasks: list[Task]):
                 "retrieved_at": row.get("retrieved_at", ""),
                 "date_basis": r.get("date_basis") or "none",
                 "_chunk": t.idx + 1,
-                "_quote_match": ratio,
+                "_quote_match": ratio,              # 1.0 exact, 0.99 edge punctuation differed, lower = near match
                 "_warnings": warn,
             })
+    # Sort first, then number, so an id depends only on the document id and chunk number and not on
+    # manifest row order. The same cached answers always give the same ids.
     records.sort(key=lambda x: (x["source_doc_id"], x["_chunk"]))
     for i, rec in enumerate(records, 1):
         rec["team_rule_id"] = f"r-{i:04d}"
@@ -617,6 +550,8 @@ def finalize(tasks: list[Task]):
 
 
 def print_matrix(records: list[dict]) -> None:
+    """Print a jurisdiction x category count table. A dot means no rule was found in our sources.
+    That is a gap to check by hand, not proof that no such law exists."""
     abbr = ["rent", "just", "depo", "fees", "scrn", "algo"]
     print("\nRules per jurisdiction x category (. = none found; check each gap):")
     print(f"{'':20s}" + "".join(f"{a:>6s}" for a in abbr))
@@ -631,8 +566,10 @@ def print_matrix(records: list[dict]) -> None:
 
 
 def main(argv=None) -> int:
+    """Command-line entry point: select documents, estimate cost, call the model for uncached chunks,
+    then rebuild the three output files from the whole cache. Returns the process exit code."""
     try:
-        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")     # printing must not crash on legacy Windows consoles
     except Exception:  # noqa: BLE001
         pass
     ap = argparse.ArgumentParser(description="Module A: extract rule records from the corpus")
@@ -646,7 +583,8 @@ def main(argv=None) -> int:
     ap.add_argument("--allow-long", action="store_true", help=f"also read documents longer than {MAX_PARTS} parts (can be expensive)")
     args = ap.parse_args(argv)
 
-    _THINKING["mode"] = args.thinking
+    # ---- 1. choose the documents ---------------------------------------------------------
+    THINKING["mode"] = args.thinking          # a shared dict: llm.call_structured reads the same setting
     all_rows = load_manifest()
     if not all_rows:
         sys.exit("No text documents found. Run this from the repo root (the folder that contains 'corpus').")
@@ -667,7 +605,10 @@ def main(argv=None) -> int:
             print(f"  {d}: {n} parts. This looks like a whole web page saved with its menus and code.")
             print(f"       Open corpus\\text\\{d}.txt, keep only the law text, save it, and run again.")
         print()
+    # ---- 2. estimate the cost (no API call) ------------------------------------------------
     todo = [t for t in sel if not t.cache_path.exists()]
+    # Rough numbers: the page, the system prompt at 3 characters per token, and a flat 1800 tokens
+    # for the schema and metadata. Output is a guessed range of 1200 to 3500 tokens per call.
     in_est = sum(est_tokens(len(t.text)) + len(SYSTEM_PROMPT) // 3 + 1800 for t in todo)
     out_lo, out_hi = len(todo) * 1200, len(todo) * 3500
     print(f"Model: {args.model}   prompt version: {PROMPT_HASH}")
@@ -681,13 +622,14 @@ def main(argv=None) -> int:
         print("\nDry run only. Nothing was sent.")
         return 0
 
+    # ---- 3. call the model for chunks that are not cached ----------------------------------
     if todo:
         client = get_client()
         budget = Budget(args.max_usd, args.model)
         done = 0
         errors = []
         t0 = time.time()
-        with ThreadPoolExecutor(max_workers=max(1, args.workers)) as pool:
+        with ThreadPoolExecutor(max_workers=max(1, args.workers)) as pool:     # max(1, ...) guards --workers 0
             futs = {pool.submit(run_task, client, t, args.model, budget, {}): t for t in todo}
             for f in as_completed(futs):
                 t = futs[f]
@@ -704,7 +646,9 @@ def main(argv=None) -> int:
             for d, c, m in errors:
                 print(f"  {d} part {c}: {m}")
 
-    # Build outputs from everything cached so far (not only this run's selection).
+    # ---- 4. build the outputs ----------------------------------------------------------------
+    # Build outputs from everything cached so far (not only this run's selection), so a small --docs
+    # test run never shrinks extracted.json down to just those documents.
     all_tasks = build_tasks(all_rows, args.model, args.allow_long)
     records, rejected, log = finalize(all_tasks)
     OUT.mkdir(exist_ok=True)

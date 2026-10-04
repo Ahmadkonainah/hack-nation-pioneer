@@ -1,6 +1,7 @@
 .env
 .venv/
 outputs_for_claude.zip
+__pycache__/
 corpus/text/D002.txt
 corpus/text/D032.txt
 corpus/text/D033.txt
@@ -15,3 +16,7 @@ corpus/text/D074.txt
 corpus/text/D077.txt
 corpus/text/D086.txt
 corpus/text/D087.txt
+*.pyc
+review_bundle.zip
+.DS_Store
+Thumbs.db

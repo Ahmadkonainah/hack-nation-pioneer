@@ -1,11 +1,14 @@
 # Stackwise: Rental Housing Law Navigator
 
+[![CI](https://github.com/Ahmadkonainah/hack-nation-pioneer/actions/workflows/ci.yml/badge.svg)](https://github.com/Ahmadkonainah/hack-nation-pioneer/actions/workflows/ci.yml)
+
 **Which rental laws apply at this address, on this date?**
 Built for the Hack-Nation x RealPage challenge (Rental Housing Law Navigator). Not legal advice.
 
 - Live demo: https://hack-nation-pioneer-seven.vercel.app/ · backup copy: https://ahmadkonainah.github.io/hack-nation-pioneer/
 - Videos (60 seconds each): [demo](submission/Stackwise_Demo_Video.mp4) · [tech](submission/Stackwise_Tech_Video.mp4) · [team](submission/Stackwise_Team_Video.mp4)
-- One-page report: `submission/Stackwise_OnePager.pdf`
+- One-page report: `submission/Stackwise_OnePager.pdf` · Dataset: [`dataset/`](dataset/README.txt)
+- Built solo by Ahmad Konainah, with Claude Sonnet 5.5 as the model inside the pipeline.
 
 ## What it does
 
@@ -19,12 +22,12 @@ Stackwise reads public rental-housing law and answers, for any address and any d
 
 | | |
 |---|---|
-| Rules extracted | **56** from 67 source pages (50 in force, 1 not yet effective, 3 pending bills, 2 failed measures) |
+| Rules extracted | **56** rules; 67 source pages were read and 61 of them are cited by at least one rule (50 in force, 1 not yet effective, 3 pending bills, 2 failed measures) |
 | Addresses placed by the Census geocoder | 493 of 500 (the rest use the city named by their parcel dataset, or are `unknown`) |
 | Answers in `lookups.json` | 4,773 (applies 3,411 · superseded 265 · not yet effective 140 · pending 300 · unknown 657) |
 | Share of answers that are `unknown` | 14% (mostly missing year built or a special status that parcel data cannot show) |
 | Answers carrying a conflict flag | 180 |
-| Self-check | 39 checks pass, 0 warning, 0 fail (`python src/selfcheck.py`) |
+| Self-check | 42 checks pass once the Spanish view is generated (40 before), 0 fail (`python src/selfcheck.py`). On a fresh clone the 14 hand-saved pages are missing, so the quote check shows one note instead of a pass |
 
 The organizers' `score.py` and answer key were not shared, so we cannot report an official score. Our own self-check tests the output files against the schema and against the five change tests.
 
@@ -45,13 +48,24 @@ flowchart LR
   A[Public law pages\nstatutes, city codes,\nagency pages, news] --> B[Extract\nClaude, JSON schema\nquote must match source]
   B --> C[Consolidate\nmerge repeats, find\nyields-to and conflicts]
   C --> D[Enrich\nplain-English summary,\ntestable coverage conditions]
+  D --> T[Translate\nplain Spanish summaries,\nnumbers checked by code]
   D --> G[Lookup engine\nthree-valued logic]
+  T --> J
   E[Parcel facts\nyear built, units] --> G
   F[Census geocoder\nstate, county, city] --> G
   G --> H[lookups.json]
   G --> I[changes.json T1-T5]
   G --> J[Demo app\nsame engine in JavaScript]
 ```
+
+## What the demo adds beyond a lookup
+
+- **Bottom line first.** Each address opens with one block per topic (rent, eviction, deposits, fees, screening, algorithmic pricing) saying what applies, what is superseded and what is unknown. The detail cards and the exact legal words sit below.
+- **Settle the unknowns.** Parcel data often has no year built, unit count or owner-occupancy. Instead of guessing, Stackwise says `unknown` and lets you type the missing fact. The same engine runs again in your browser and shows which answers changed. Example: for 1609 Addison St, Berkeley (year built missing), typing 1975 turns 4 of 5 unknown answers into real ones. 212 of the 500 addresses have no year built; giving each of them 1975 turns 657 unknown answers into 279. Typed facts stay in the tab and are never saved or sent. `python src/parity_test.py` checks that Python and JavaScript agree on these what-if answers too (4,000 comparisons).
+- **Your own building.** Not limited to the 500 samples. Pick a city, type the year built, units and whether the owner lives there, and the same engine answers. Nothing is looked up or sent anywhere; a production version would geocode on a server.
+- **Share and print.** The address, date and typed facts live in the link (`Copy link`), so an answer can be sent to a colleague; `Print` gives a clean one-page copy.
+- **Spanish plain-language view.** `python src/translate.py` (one call, about $0.10) writes Spanish titles and summaries. Code checks that every number in the Spanish text equals the English, and rejects a summary that is empty or left in English. The app then shows an ES button; all interface text is Spanish and the law itself stays English (it is the legal text), clearly labelled. Spanish text is machine-translated and not reviewed by a lawyer; the app says so.
+- **Built for people.** A guide explains the five result labels; icons plus words, never color alone; keyboard and screen-reader friendly (zero axe-core violations in English and Spanish, light and dark); works at phone width; light and dark themes; no cookies or tracking.
 
 **The model reads, the code decides.**
 - Every quote must appear word for word in the source page, or the record is rejected.
@@ -99,34 +113,67 @@ Adding a city means adding its source pages to `corpus/` and re-running `python 
 
 ## Run it yourself
 
-Python 3.10+ and an Anthropic API key in a file named `.env` (never commit it; `.gitignore` excludes it).
+Python 3.10+. Node.js is only needed for the parity test.
+
+**Replay without an API key (what a reviewer needs).** The model's answers are saved in `cache/`, and the geocoder answers too, so everything after reading the law runs offline:
 
 ```
 python -m venv .venv
 .venv\Scripts\activate          # Windows. On Mac/Linux: source .venv/bin/activate
 pip install -r requirements.txt
-python src/run_all.py            # extract, consolidate, enrich, resolve, lookup, changes, build_web, selfcheck
-python src/lookup.py --as-of 2026-10-01
-python src/selfcheck.py
-python src/parity_test.py        # needs Node.js; compares Python and JavaScript engines
+python src/run_all.py --from resolve   # resolve, lookup, changes, build_web, selfcheck. No key, no network
+python src/parity_test.py              # needs Node.js; compares the Python and JavaScript engines
 ```
 
-Open `web/index.html` (or `docs/index.html`) in a browser for the demo. It is one self-contained file.
+`lookups.json` and `changes.json` come out byte for byte the same as the ones in `outputs/`. The self-check will show one note: 14 hand-saved source pages are not stored in the repository (see Sources and data), so their quotes cannot be re-checked here. They were verified when the pages were read.
+
+**Re-read the law from scratch (needs a key).** Copy `.env.example` to `.env`, paste your own Anthropic API key, then run `python src/run_all.py`. Cached answers are reused, so a re-run only pays for new or changed pages.
+
+**Add the Spanish view (needs a key, about $0.10).** `python src/translate.py`, then `python src/run_all.py --from build_web`. Without it the app simply has no Spanish button.
+
+Open `docs/index.html` (or `web/index.html`) in a browser for the demo. It is one self-contained file.
+
+## Tests and code structure
+
+```
+python -m pip install pyflakes
+python -m pyflakes src tests                       # unused imports, undefined names
+python -m unittest discover -s tests -t . -v       # 57 tests, about 6 seconds, no key and no network
+```
+
+The tests cover the three-valued logic (true, false, unknown), the date and what-if rules, quote snapping, the saved-answer cache (with a fake model client), real answers on the 500 addresses (for example California's cap is superseded in Los Angeles; a missing year built stays unknown until you type one), the page's privacy promises (no outside requests, no cookies, a Content-Security-Policy) and that no API key is in the repository. The same checks run on every push in GitHub Actions (`.github/workflows/ci.yml`).
+
+Each fact lives in one place. `common.py` holds the paths, the jurisdictions and categories in scope, and the JSON helpers. `dates.py` holds the date rules (what "in force" means on a given day). `llm.py` holds the model call and the saved-answer cache that all three AI steps share. The engine is the only code that decides which rule applies; it exists twice (Python and JavaScript) and `parity_test.py` proves the two agree on 7,000 address-date answers and 4,000 what-if answers.
 
 ## Repository layout
 
 ```
-src/        extract.py consolidate.py enrich.py resolve.py engine.py lookup.py changes.py selfcheck.py build_web.py build_site.py run_all.py parity_test.py
-web/        app.template.html, engine.js, data.js, index.html (generated)
-docs/       index.html (generated copy for GitHub Pages)
+src/        common.py dates.py llm.py (shared)  extract.py consolidate.py enrich.py translate.py resolve.py engine.py lookup.py changes.py selfcheck.py build_web.py build_site.py run_all.py parity_test.py
+tests/      unit tests (standard library only)
+.github/    workflows/ci.yml
+web/        app.template.html, engine.js, data.js, fonts/ (embedded, SIL OFL), index.html (generated)
+docs/       index.html (generated copy for GitHub Pages and Vercel), vercel.json (security headers)
 outputs/    rules.json lookups.json changes.json (the submission files) plus logs
+cache/      saved model and geocoder answers, so results can be replayed without a key
 corpus/     source page text and manifest
 data/       sample_addresses.csv
-submission/ one-page report, video scripts, post draft
+dataset/    the input and output data with a README describing every column
+submission/ videos, one-page report, short description
+.env.example  the only environment file; copy to .env and add your own key
 ```
+
+## Privacy, security and EU rules
+
+- **No personal data.** Public law pages and public parcel records (property address, year built, units). No names, no residents, no customer or pricing data.
+- **Nothing leaves your browser.** The demo is one static file. No cookies, no analytics, no accounts. Facts you type into "What if you know more" are used in memory only. Fonts are embedded, so the page makes no request to Google or any other site. A Content-Security-Policy blocks all outside connections, and `docs/vercel.json` adds `nosniff`, `no-referrer` and a restrictive permissions policy on Vercel.
+- **Secrets.** The API key lives only in a local `.env` that is git-ignored and was never committed. Reviewers do not need it (see Run it yourself).
+- **Safe rendering.** Every string from the data is HTML-escaped before it is shown; links open with `rel="noopener"`.
+- **EU AI Act.** The tool is not a chatbot and does not decide anything about a person; it is a reference lookup, not a system used by courts or authorities. The AI-written parts are labelled: the banner on every screen says the plain-English summaries are written by AI and that no lawyer has reviewed them, and quotes come from the source and are checked by code. Transparency rules for AI-generated text (Article 50) apply from 2 August 2026, so we label rather than rely on an exemption. This is our reading, not legal advice.
+- **GDPR.** Stackwise collects and processes no personal data: no accounts, cookies, analytics or third-party requests. The web host (Vercel, or GitHub Pages for the backup copy) serves the page and keeps ordinary server logs, as any website does; a production deployment would name the host in a privacy notice.
+- **US and global rules.** See [COMPLIANCE.md](COMPLIANCE.md): what applies to a tool like this (privacy, consumer protection, unauthorized practice of law, accessibility, AI rules, source licences), what Stackwise does about each, and what to do before a real launch. It is our reading, not legal advice.
 
 ## Sources and data
 
-Rules come from the public pages listed in `corpus/corpus_manifest.csv`. Pages the team saved by hand (news, law-firm and code-publisher pages whose terms do not clearly allow copying) are not stored in this repository; their URLs are in the manifest. Each rule links to its source and gives the retrieval date. Data licensing for the parcel datasets is set by their publishers; this repository stores only the 500 sample rows supplied by the organizers.
+Rules come from the public pages listed in `corpus/corpus_manifest.csv`. Pages the team saved by hand (news, law-firm and code-publisher pages whose terms do not clearly allow copying) are not stored in this repository; their URLs are in the manifest. Each rule links to its source and gives the retrieval date. Fonts (Schibsted Grotesk, Source Serif 4, IBM Plex Mono) are embedded under the SIL Open Font License; see `web/fonts/LICENSES.txt`. Data licensing for the parcel datasets is set by their publishers; this repository stores only the 500 sample rows supplied by the organizers.
 
 Not legal advice. Built on a public corpus that no lawyer has reviewed.

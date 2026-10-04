@@ -1,0 +1,287 @@
+{
+ "model": "claude-sonnet-5-5",
+ "generated_at": "2026-10-04T10:07:03+00:00",
+ "label": "Traducción automática (IA). No revisada por un abogado. El texto legal oficial está en inglés.",
+ "translations": {
+  "r-0001": {
+   "title_es": "Límite de aumento de renta de la Tenant Protection Act de California",
+   "key_value_es": "5% + CPI, máximo 10%",
+   "plain_es": "Los aumentos de renta tienen un límite de 5% más la inflación local, hasta 10%, para viviendas de más de 15 años, a menos que se aplique una exención, como un dúplex ocupado por el propietario."
+  },
+  "r-0002": {
+   "title_es": "Causa justificada de la Tenant Protection Act de California",
+   "key_value_es": "Causa justificada después de 12 meses de ocupación; pago de reubicación por desalojo sin culpa del inquilino = la renta de un mes",
+   "plain_es": "Después de que un inquilino ha vivido 12 meses en una unidad, el propietario necesita una razón legal declarada para terminar el arrendamiento y debe pagar la renta de un mes en los desalojos sin culpa del inquilino."
+  },
+  "r-0003": {
+   "title_es": "Límite del depósito de seguridad y reglas de devolución en California",
+   "key_value_es": "Límite de la renta de un mes (dos meses para propietarios pequeños); plazo de devolución de 21 días",
+   "plain_es": "Por lo general, los propietarios no pueden cobrar más de la renta de un mes como depósito (dos para propietarios pequeños) y deben devolverlo con una lista detallada dentro de 21 días."
+  },
+  "r-0004": {
+   "title_es": "Límites de la cuota de evaluación del solicitante en California",
+   "key_value_es": "$30 por solicitante, ajustados según el CPI; se requiere recibo detallado",
+   "plain_es": "Los propietarios solo pueden cobrar los costos reales de evaluación, nunca más de $30 (ajustados por inflación), y deben dar un recibo detallado."
+  },
+  "r-0005": {
+   "title_es": "Límites de evaluación de vivienda de la FEHA de California",
+   "key_value_es": "La fuente de ingresos está protegida; la prueba de ingresos con subsidio usa la parte de la renta que paga el inquilino",
+   "plain_es": "Los propietarios no pueden discriminar a solicitantes ni inquilinos por su fuente de ingresos, incluidos los vales de vivienda."
+  },
+  "r-0006": {
+   "title_es": "Prohibición de algoritmos de precios comunes en California",
+   "key_value_es": "",
+   "plain_es": "Es ilegal usar o vender programas de precios compartidos, basados en datos de competidores, para coordinar precios u obligar a otros a seguir sus precios."
+  },
+  "r-0007": {
+   "title_es": "Nueva Jersey no tiene control de rentas estatal; los municipios pueden adoptarlo",
+   "key_value_es": "Sin límite estatal; se permite el control de rentas local; los edificios nuevos de múltiples viviendas quedan exentos por 30 años",
+   "plain_es": "Nueva Jersey no tiene control de rentas a nivel estatal, pero los pueblos pueden adoptar el suyo, y los aumentos de renta requieren aviso escrito adecuado y no pueden ser abusivos."
+  },
+  "r-0008": {
+   "title_es": "Ley contra el Desalojo (Anti-Eviction Act) de Nueva Jersey",
+   "key_value_es": "Se requiere causa justificada; los plazos del aviso de desocupación van de 3 días hasta 3 años según la causa; asistencia de reubicación de 6 veces la renta mensual en desalojos por ocupación ilegal",
+   "plain_es": "Los propietarios pueden desalojar o negarse a renovar un contrato solo por razones legales específicas y con una orden judicial, después de dar el aviso escrito requerido."
+  },
+  "r-0009": {
+   "title_es": "Ley del Depósito de Seguridad de Nueva Jersey",
+   "key_value_es": "1.5 x la renta mensual; el aumento anual máximo es 10% del depósito actual",
+   "plain_es": "Los propietarios no pueden cobrar un depósito de seguridad superior a un mes y medio de renta, y los aumentos anuales del depósito tienen un límite de 10%."
+  },
+  "r-0010": {
+   "title_es": "Límite de la cuota de solicitud de renta en Nueva Jersey",
+   "key_value_es": "Límite de $50 (ajustado anualmente según el CPI)",
+   "plain_es": "Los propietarios no pueden cobrar más de $50 (ajustados por inflación) por solicitar una renta, excepto en casas de una o dos familias."
+  },
+  "r-0011": {
+   "title_es": "Ley de Oportunidad Justa en la Vivienda (Fair Chance in Housing Act) de Nueva Jersey",
+   "key_value_es": "No se puede preguntar por antecedentes penales antes de una oferta condicional; período de revisión de 6 años (1.er grado), 4 años (2.º/3.er grado), 1 año (4.º grado); los delitos graves listados y el registro de por vida como delincuente sexual no tienen límite de período",
+   "plain_es": "Los propietarios no pueden preguntar por los antecedentes penales de un solicitante ni usarlos hasta después de una oferta condicional, y entonces solo ciertas condenas limitadas con una revisión individual."
+  },
+  "r-0012": {
+   "title_es": "Prohibición de discriminar por fuente de ingresos de la Ley contra la Discriminación de Nueva Jersey",
+   "key_value_es": "La fuente de ingresos legales es una clase protegida",
+   "plain_es": "Los propietarios no pueden negarse a rentar por la fuente legal de ingresos de un solicitante, pero sí pueden rechazar solicitantes por ingresos insuficientes o mal crédito."
+  },
+  "r-0013": {
+   "title_es": "Prohibición de fijar rentas con algoritmos de la FAIR Act de Nueva Jersey",
+   "key_value_es": "Prohíbe usar u operar algoritmos de fijación de rentas que reúnan información competitiva sensible o fijen precios paralelos",
+   "plain_es": "Los dueños de viviendas en renta y los coordinadores de programas no pueden usar algoritmos que reúnan datos de competidores para coordinar precios de renta, y violar esta regla cuenta como infracción antimonopolio."
+  },
+  "r-0014": {
+   "title_es": "Prohibición del control de rentas local en Massachusetts",
+   "key_value_es": "Se prohíbe el control de rentas local; excepción voluntaria limitada",
+   "plain_es": "Las ciudades y pueblos de Massachusetts no pueden adoptar el control de rentas, salvo una forma limitada, voluntaria y con compensación."
+  },
+  "r-0015": {
+   "title_es": "Iniciativa electoral de control de rentas a nivel estatal",
+   "key_value_es": "",
+   "plain_es": "Una pregunta electoral que fue anulada y nunca se convirtió en ley, y que habría limitado los aumentos anuales de renta en todo el estado."
+  },
+  "r-0016": {
+   "title_es": "Ley del depósito de seguridad de Massachusetts",
+   "key_value_es": "Depósito de seguridad limitado a la renta de un mes; devolución dentro de 30 días",
+   "plain_es": "Los propietarios pueden pedir solo la renta del primer y último mes, un depósito de un mes y el costo de una llave y cerradura, y deben devolver el depósito dentro de 30 días."
+  },
+  "r-0017": {
+   "title_es": "Regla de la comisión del corredor en Massachusetts",
+   "key_value_es": "La comisión la paga solo la parte que contrató al corredor",
+   "plain_es": "Un corredor de rentas puede trabajar para el inquilino o para el propietario, pero no para ambos, y solo la parte que contrató al corredor paga la comisión."
+  },
+  "r-0018": {
+   "title_es": "Prohibición de discriminar por fuente de ingresos en Massachusetts",
+   "key_value_es": "No se puede discriminar a quienes reciben asistencia pública o subsidios de vivienda (incluida la asistencia para la renta)",
+   "plain_es": "Los propietarios no pueden discriminar a inquilinos que reciben asistencia pública o subsidios de vivienda, como la asistencia para la renta."
+  },
+  "r-0019": {
+   "title_es": "Proyecto de ley H.5222 sobre fijación de rentas con algoritmos",
+   "key_value_es": "",
+   "plain_es": "Un proyecto de ley propuesto sobre la fijación de rentas con algoritmos; sus detalles no se indican y no es ley."
+  },
+  "r-0020": {
+   "title_es": "Proyecto de ley S.2983 sobre fijación de rentas con algoritmos",
+   "key_value_es": "",
+   "plain_es": "Un proyecto de ley propuesto que prohibiría la fijación de rentas con algoritmos; todavía no es ley."
+  },
+  "r-0021": {
+   "title_es": "Aumentos de renta bajo la Ordenanza de Estabilización de Rentas de Los Ángeles",
+   "key_value_es": "Una vez cada 12 meses, según el porcentaje permitido que publica LAHD",
+   "plain_es": "Los propietarios de unidades antiguas con estabilización de rentas en Los Ángeles solo pueden aumentar la renta una vez cada 12 meses, según el porcentaje que publica la ciudad."
+  },
+  "r-0022": {
+   "title_es": "Ordenanza de Causa Justificada para el Desalojo de Los Ángeles",
+   "key_value_es": "Asistencia de reubicación en desalojos sin culpa del inquilino; no se puede desalojar por renta adeudada inferior a la Renta de Mercado Justa (Fair Market Rent)",
+   "plain_es": "En Los Ángeles, los propietarios de unidades fuera de la estabilización de rentas necesitan una razón legal para desalojar y deben pagar ayuda de reubicación en los desalojos sin culpa del inquilino."
+  },
+  "r-0023": {
+   "title_es": "Desalojo y asistencia de reubicación bajo RSO/JCO de Los Ángeles",
+   "key_value_es": "Los desalojos sin culpa del inquilino requieren asistencia de reubicación y una Declaración de Intención de Desalojo del propietario presentada ante la ciudad",
+   "plain_es": "Los propietarios de unidades con estabilización de rentas en Los Ángeles solo pueden desalojar por razones listadas, y los desalojos sin culpa del inquilino requieren trámites ante la ciudad, avisos y pagos de reubicación."
+  },
+  "r-0024": {
+   "title_es": "Ordenanza de Protección de Residentes de Los Ángeles",
+   "key_value_es": "Pago estandarizado (Tabla B): $115,480 ingresos extremadamente bajos / $96,750 ingresos muy bajos / $87,450 ingresos bajos",
+   "plain_es": "Cuando se demuelen unidades con estabilización de rentas o de bajos ingresos en Los Ángeles para nueva construcción, los propietarios deben pagar una reubicación mayor y dar derecho a regresar."
+  },
+  "r-0025": {
+   "title_es": "Informe propuesto en Los Ángeles sobre programas de fijación de rentas con algoritmos",
+   "key_value_es": "",
+   "plain_es": "Una solicitud pendiente del Concejo Municipal para un informe sobre programas que fijan rentas y si deben prohibirse; no se ha adoptado ninguna prohibición."
+  },
+  "r-0026": {
+   "title_es": "Aumento anual permitido de renta en San Francisco",
+   "key_value_es": "Aumento anual permitido de 1.6%",
+   "plain_es": "Las unidades con control de rentas en San Francisco pueden aumentar la renta 1.6% de la renta base de marzo de 2026 a febrero de 2027."
+  },
+  "r-0027": {
+   "title_es": "Causa justificada y reubicación bajo la Ordenanza de Rentas de San Francisco",
+   "key_value_es": "17 causas justificadas (Ordenanza § 37.9(a))",
+   "plain_es": "Los propietarios de San Francisco solo pueden desalojar a inquilinos de unidades cubiertas por una de 17 razones listadas, y terminar un contrato o vender el edificio no es suficiente."
+  },
+  "r-0028": {
+   "title_es": "Ordenanza de Oportunidad Justa (Fair Chance Ordinance) de San Francisco",
+   "key_value_es": "",
+   "plain_es": "San Francisco protege a los residentes con antecedentes de arresto o condena en las decisiones de vivienda asequible."
+  },
+  "r-0029": {
+   "title_es": "Prohibición de dispositivos algorítmicos de fijación de rentas en San Francisco",
+   "key_value_es": "Prohibición de la venta o el uso de dispositivos algorítmicos de fijación de rentas",
+   "plain_es": "En San Francisco es ilegal vender o usar programas que utilizan datos privados de competidores para fijar rentas de unidades residenciales."
+  },
+  "r-0030": {
+   "title_es": "Ordenanza de Protección de Inquilinos Residenciales de San Diego",
+   "key_value_es": "Reubicación por desalojo sin culpa del inquilino: la renta de 2 meses (3 meses si el inquilino es mayor de edad o tiene una discapacidad)",
+   "plain_es": "Los propietarios de San Diego necesitan una razón legal para terminar la mayoría de los arrendamientos y deben pagar la renta de dos meses (tres para inquilinos mayores o con discapacidad) en los desalojos sin culpa del inquilino."
+  },
+  "r-0031": {
+   "title_es": "Prohibición de dispositivos algorítmicos de fijación de rentas en San Diego",
+   "key_value_es": "Prohibición de la venta o el uso de dispositivos algorítmicos de fijación de rentas; hasta $1,000 por infracción",
+   "plain_es": "En San Diego, los propietarios no pueden usar programas que utilizan datos privados de competidores para fijar rentas, con demandas de inquilinos y hasta $1,000 por infracción."
+  },
+  "r-0032": {
+   "title_es": "Estabilización de rentas y ajuste general anual en Berkeley",
+   "key_value_es": "Ajuste general anual (AGA) basado en el CPI, máximo 5%",
+   "plain_es": "Los propietarios de unidades antiguas cubiertas en Berkeley solo pueden aumentar la renta cada año según el ajuste por inflación de la Rent Board, con un límite de 5%."
+  },
+  "r-0033": {
+   "title_es": "Asistencia de reubicación en Berkeley por desalojos para mudanza del propietario y bajo la Ellis Act",
+   "key_value_es": "Pago estándar $19,413; pago adicional para hogares que califican $6,471 (vigente desde 2026-01-01; ajuste de 1.5% según el CPI)",
+   "plain_es": "Los propietarios de Berkeley deben pagar dinero de reubicación a los inquilinos al desalojar para que el propietario se mude o para retirar una unidad del mercado de rentas; los montos se actualizan cada año."
+  },
+  "r-0034": {
+   "title_es": "Causa justificada para el desalojo en Berkeley",
+   "key_value_es": "Desalojo por falta de pago solo si la deuda es igual o mayor a la Renta de Mercado Justa (Fair Market Rent) de un mes",
+   "plain_es": "Los inquilinos de unidades cubiertas en Berkeley solo pueden ser desalojados con causa justificada, y los propietarios no pueden desalojar por deudas de renta pequeñas ni por rechazar un nuevo contrato de plazo fijo."
+  },
+  "r-0035": {
+   "title_es": "Requisito de intereses sobre el depósito de seguridad en Berkeley",
+   "key_value_es": "Intereses anuales sobre el depósito, prorrateados al mudarse",
+   "plain_es": "Los propietarios de unidades cubiertas en Berkeley deben pagar a los inquilinos intereses sobre los depósitos de seguridad cada año, prorrateados si el inquilino se muda antes."
+  },
+  "r-0036": {
+   "title_es": "Ordenanza de divulgación de cuotas de evaluación en Berkeley",
+   "key_value_es": "Divulgación del límite de cuota del Cal. Civ. Code 1950.6(b); sin cuotas no reembolsables por renovación ni por compañeros de cuarto",
+   "plain_es": "Los propietarios de Berkeley deben informar los derechos sobre las cuotas de evaluación del solicitante y el límite estatal de cuotas, y no pueden cobrar cuotas no reembolsables por renovación ni por cambio de compañeros de cuarto."
+  },
+  "r-0037": {
+   "title_es": "Ordenanza de Acceso Justo a la Vivienda (Fair Chance Access to Housing Ordinance) de Berkeley",
+   "key_value_es": "Se prohíbe preguntar por antecedentes penales y usarlos; multas de $1,000 a $10,000 por infracción",
+   "plain_es": "Los propietarios de Berkeley no pueden preguntar por los antecedentes penales ni usarlos al elegir o administrar inquilinos, y deben dar antes un aviso escrito y la oportunidad de responder."
+  },
+  "r-0038": {
+   "title_es": "Prohibición de algoritmos coordinados de precios de renta en Berkeley",
+   "key_value_es": "Prohibición de algoritmos de precios coordinados; sanciones civiles de hasta $1,000 por infracción",
+   "plain_es": "En Berkeley, los propietarios no pueden usar programas de precios que dependen de datos privados de competidores para fijar rentas, con multas de hasta $1,000 por infracción."
+  },
+  "r-0039": {
+   "title_es": "Límite anual de estabilización de rentas en Santa Ana",
+   "key_value_es": "El menor entre 3% o 80% del cambio del CPI por año; sin aumento si el CPI es negativo",
+   "plain_es": "En Santa Ana, la renta en edificios antiguos puede aumentar cada año el menor porcentaje entre 3% o 80% de la inflación."
+  },
+  "r-0040": {
+   "title_es": "Desalojo con causa justificada en Santa Ana",
+   "key_value_es": "3 meses de asistencia de reubicación o 3 meses de renta condonada por terminación sin culpa del inquilino",
+   "plain_es": "En Santa Ana, después de 30 días de arrendamiento, los propietarios necesitan una causa justificada declarada para terminar un arrendamiento y deben dar tres meses de ayuda de reubicación cuando termina sin culpa del inquilino."
+  },
+  "r-0041": {
+   "title_es": "Prohibición de fijar rentas con algoritmos en Santa Ana",
+   "key_value_es": "Hasta $1,000 por infracción por mes",
+   "plain_es": "Santa Ana prohíbe la fijación automatizada y anticompetitiva de precios de renta, con demandas de inquilinos y sanciones de hasta $1,000 por infracción por mes."
+  },
+  "r-0042": {
+   "title_es": "Ordenanza de Control de Rentas de Jersey City",
+   "key_value_es": "",
+   "plain_es": "Jersey City regula los aumentos de renta en edificios de cinco o más unidades; los edificios de una a cuatro unidades están exentos."
+  },
+  "r-0043": {
+   "title_es": "Prohibición de coordinación algorítmica de rentas en Jersey City",
+   "key_value_es": "Multas de hasta $2,000 por día",
+   "plain_es": "Jersey City prohíbe a los propietarios usar servicios algorítmicos de coordinación de rentas, con multas de hasta $2,000 por día."
+  },
+  "r-0044": {
+   "title_es": "Control de rentas de Hoboken",
+   "key_value_es": "El menor entre 5% o el cambio del CPI; un aumento cada 12 meses",
+   "plain_es": "El control de rentas de Hoboken limita los aumentos al menor entre 5% o la inflación, un aumento cada 12 meses, con aviso escrito de 30 días."
+  },
+  "r-0045": {
+   "title_es": "Divulgaciones por aumentos grandes de renta en Hoboken",
+   "key_value_es": "Se requieren divulgaciones para aumentos de más de 10%; multa de hasta $1,000 por incidente",
+   "plain_es": "Los propietarios de Hoboken que aumenten la renta más de 10% en una renovación deben dar una lista detallada de costos, indicar si se usó un algoritmo de rentas y dar información sobre los derechos del inquilino."
+  },
+  "r-0046": {
+   "title_es": "Prohibición de fijar rentas con algoritmos en Hoboken",
+   "key_value_es": "Prohibición de precios algorítmicos que usen datos no públicos de competidores; multa de hasta $2,000 o hasta 90 días de servicio comunitario",
+   "plain_es": "Los propietarios de Hoboken no pueden usar programas que analizan datos privados de competidores para coordinar rentas; las infracciones pueden causar multas de hasta $2,000 o servicio comunitario."
+  },
+  "r-0047": {
+   "title_es": "Ordenanza de Control de Rentas de Newark",
+   "key_value_es": "Cambio del CPI-U, máximo 4%",
+   "plain_es": "En Newark, los aumentos de renta al renovar el contrato se limitan al cambio por inflación y nunca más de 4%, con aviso escrito de 30 días."
+  },
+  "r-0048": {
+   "title_es": "Rentas máximas de unidades con asistencia HOME en Newark",
+   "key_value_es": "El menor entre la renta de mercado justa de HUD o 30% del ingreso ajustado al 65% del ingreso medio del área; aviso escrito de aumento con 30 días",
+   "plain_es": "Las rentas de unidades con asistencia HOME en Newark no pueden exceder ciertos límites basados en HUD, y los propietarios deben dar aviso escrito de aumentos con 30 días."
+  },
+  "r-0049": {
+   "title_es": "Ordenanza sobre aumentos de renta abusivos en Newark",
+   "key_value_es": "Una renta superior al pro forma aprobado es abusiva por sí misma",
+   "plain_es": "Newark define un aumento de renta abusivo como uno excesivamente duro, superior al aumento de costos del propietario y fuera de proporción con rentas similares."
+  },
+  "r-0050": {
+   "title_es": "Prohibición de desalojo por represalia en Newark",
+   "key_value_es": "",
+   "plain_es": "Los propietarios de Newark no pueden intentar desalojar a un inquilino como castigo por usar sus derechos bajo la ley de control de rentas."
+  },
+  "r-0051": {
+   "title_es": "Evaluación de solicitantes de renta bajo Ban the Box en Newark",
+   "key_value_es": "Período de revisión: 8 años (delitos mayores), 5 años (infracciones menores/ordenanzas); solo después de la solicitud formal",
+   "plain_es": "Los propietarios de Newark solo pueden revisar los antecedentes penales después de una solicitud formal y con consentimiento, con períodos de revisión limitados, y deben dar razones por escrito si rechazan al solicitante."
+  },
+  "r-0052": {
+   "title_es": "Petición de autonomía local H.3744 para estabilización de rentas en Boston",
+   "key_value_es": "",
+   "plain_es": "Un proyecto de ley propuesto que habría permitido a Boston adoptar estabilización de rentas y protecciones contra el desalojo; fue enviado a estudio y nunca se convirtió en ley."
+  },
+  "r-0053": {
+   "title_es": "Ley de Notificación de Estabilidad de Vivienda (Housing Stability Notification Act) de Boston",
+   "key_value_es": "Aviso de Derechos y Recursos del Inquilino entregado junto con el aviso de desocupación; copia a la Office of Housing Stability",
+   "plain_es": "Los propietarios de Boston que terminan un arrendamiento deben dar al inquilino un aviso de derechos y recursos junto con el aviso de desalojo y enviar una copia a la ciudad."
+  },
+  "r-0054": {
+   "title_es": "Política de Selección Justa de Inquilinos (Fair Chance Tenant Selection Policy) de Boston",
+   "key_value_es": "Sin prohibiciones generales; no se consideran arrestos sin condena, registros sellados/eliminados o de menores, ni condenas de más de 5 años; no se usa el puntaje de crédito",
+   "plain_es": "Los proveedores de vivienda de Boston con fondos de la ciudad o unidades con restricción de ingresos no pueden imponer prohibiciones generales por antecedentes penales, usar registros antiguos o sin condena, ni usar puntajes de crédito para negar a solicitantes."
+  },
+  "r-0055": {
+   "title_es": "Prohibición de discriminar por asistencia para la renta en Boston",
+   "key_value_es": "La asistencia para la renta es una clase protegida",
+   "plain_es": "Los propietarios de Boston no pueden discriminar a inquilinos o solicitantes que usan asistencia para la renta, como los vales de la Sección 8."
+  },
+  "r-0056": {
+   "title_es": "Ordenanza de Vivienda Justa de Cambridge",
+   "key_value_es": "La fuente de ingresos (incluida la Sección 8 y los beneficios públicos) es una categoría protegida",
+   "plain_es": "Los propietarios de Cambridge no pueden discriminar por la fuente de ingresos, incluida la Sección 8, y deben aplicar los criterios de selección de inquilinos por igual a todos."
+  }
+ }
+}

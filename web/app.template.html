@@ -1,10 +1,10 @@
-<title>Stackwise</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap">
+<title>Stackwise: which rental laws apply here?</title>
+<!--INLINE:fonts-->
 <style>
 /* Layout: sticky header with a permanent legal-notice strip; Lookup is a two-column workbench (address list | answer),
    the other tabs are single-column readouts. Palette is cool paper and ink with one teal accent; result colors are semantic. */
+/* ---- design tokens: light theme. Result colors (--applies, --superseded ...) are semantic; each has a text color and a tint
+   background. The axe contrast check is run on both themes after any change to these values. ---- */
 :root {
   --bg: #F3F5F7; --surface: #FFFFFF; --surface2: #E9EDF1; --ink: #14202B; --muted: #566471; --line: #D5DDE4;
   --accent: #0B6A78; --accent-weak: #DCEFF2; --on-accent: #FFFFFF;
@@ -19,6 +19,8 @@
   --font-law: "Source Serif 4", Georgia, "Times New Roman", serif;
   --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
 }
+/* ---- dark theme. The same tokens are written twice on purpose: once for people whose system is dark (unless they picked light
+   with the button), once for people who picked dark with the button. CSS cannot share one block between a media query and an attribute selector. ---- */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0D141B; --surface: #151E27; --surface2: #1C2733; --ink: #E6EDF3; --muted: #9DABB8; --line: #2A3846;
@@ -37,6 +39,7 @@
   --pending: #A9B6C3; --pending-bg: #222E3A; --none: #4A5968; --flag: #FF8A80; --flag-bg: #3D1613;
   color-scheme: dark;
 }
+/* ---- base ---- */
 * { box-sizing: border-box; }
 html, body { margin: 0; }
 body { background: var(--bg); color: var(--ink); font: 15px/1.5 var(--font-ui); -webkit-font-smoothing: antialiased; }
@@ -47,22 +50,39 @@ a { color: var(--accent); }
 .muted { color: var(--muted); }
 .wrap { max-width: 1240px; margin: 0 auto; padding-inline: 16px; }
 
-/* header */
+/* ---- header: brand, tabs, language toggle, theme button, legal notice ---- */
 .top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--surface); border-bottom: 1px solid var(--line); }
 .bar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding-block: 10px; }
 .brand { display: flex; align-items: center; gap: 10px; margin-right: auto; min-width: 0; }
+.brandtext { display: flex; align-items: baseline; gap: 4px 10px; flex-wrap: wrap; }
 .mark { width: 28px; height: 28px; flex: none; }
-.brand b { font-size: 19px; letter-spacing: -0.01em; }
+.brand h1 { font-size: 19px; letter-spacing: -0.01em; margin: 0; line-height: 1.1; }
 .brand span { color: var(--muted); font-size: 13px; }
+.skip { position: absolute; left: 8px; top: -48px; background: var(--ink); color: var(--bg); padding: 8px 12px; border-radius: 8px; z-index: 50; text-decoration: none; font-weight: 600; }
+.skip:focus { top: 8px; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .tabs { display: flex; gap: 2px; flex-wrap: wrap; }
+.tab .short { display: none; }
+@media (max-width: 720px) { .tab .full { display: none; } .tab .short { display: inline; } }
 .tab { border: 0; background: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; color: var(--muted); font-weight: 500; }
 .tab:hover { background: var(--surface2); color: var(--ink); }
 .tab[aria-current="page"] { background: var(--accent-weak); color: var(--accent); font-weight: 600; }
-.icon-btn { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 6px 10px; cursor: pointer; color: var(--muted); }
-.notice { background: var(--unknown-bg); color: var(--ink); border-top: 1px solid var(--line); font-size: 13px; }
-.notice .wrap { padding-block: 6px; display: flex; gap: 6px 16px; flex-wrap: wrap; }
-.notice b { color: var(--unknown); }
+.icon-btn { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; width: 36px; height: 36px; display: inline-grid; place-items: center; cursor: pointer; color: var(--muted); padding: 0; }
+.icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+.icon-btn svg { width: 18px; height: 18px; }
+.langs[hidden] { display: none; }
+.langs { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.langs button { border: 0; background: var(--surface); padding: 0 10px; height: 34px; cursor: pointer; color: var(--muted); font-weight: 600; font-size: 13px; }
+.langs button[aria-pressed="true"] { background: var(--accent-weak); color: var(--accent); }
+/* The legal notice is permanent but calm: a neutral strip with an icon, not an alarm. */
+.notice { background: var(--surface2); color: var(--ink); border-top: 1px solid var(--line); font-size: 13px; }
+.notice .wrap { padding-block: 7px; display: flex; gap: 4px 14px; align-items: center; }
+.notice svg { width: 16px; height: 16px; flex: none; color: var(--accent); }
+.notice b { font-weight: 700; }
+.notice .linkbtn { white-space: nowrap; margin-left: auto; font-size: 13px; }
+.ico { width: 1em; height: 1em; flex: none; vertical-align: -0.12em; }
 
+/* ---- page frame and shared type ---- */
 main { padding-block: 20px 56px; }
 h1, h2, h3, h4 { line-height: 1.2; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
 h2 { font-size: 22px; }
@@ -71,7 +91,7 @@ h3 { font-size: 17px; }
 .section-head { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
 .eyebrow { font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
 
-/* lookup layout */
+/* ---- lookup layout: address picker (left) and answer (right) ---- */
 .bench { display: grid; grid-template-columns: 330px minmax(0, 1fr); gap: 20px; align-items: start; }
 @media (max-width: 900px) { .bench { grid-template-columns: minmax(0, 1fr); } }
 .side { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px; position: sticky; top: calc(var(--topbar, 112px) + 8px); max-height: calc(100vh - var(--topbar, 112px) - 24px); display: flex; flex-direction: column; gap: 10px; min-height: 0; }
@@ -88,15 +108,22 @@ h3 { font-size: 17px; }
 .aitem .s { font-weight: 600; font-size: 13.5px; overflow-wrap: anywhere; }
 .aitem .m { font-size: 12px; color: var(--muted); }
 
+/* ---- answer panel: title, jurisdiction stack, building facts, date controls, summary chips ---- */
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
-.addr-title { font-size: 26px; font-weight: 700; letter-spacing: -0.015em; overflow-wrap: anywhere; }
+/* The address is the answer's h2 (so the topic h3 headings below it are not a jump from h1). line-height and text-wrap are reset to what the plain div had. */
+.addr-title { font-size: 26px; font-weight: 700; letter-spacing: -0.015em; overflow-wrap: anywhere; line-height: 1.5; text-wrap: wrap; }
 .stack { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; margin-top: 14px; }
 .layer { border: 1px solid var(--line); background: var(--bg); border-radius: 10px; padding: 8px 12px; min-width: 150px; flex: 1 1 150px; }
 .layer .k { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
 .layer .v { font-weight: 600; }
 .layer .n { font-size: 12.5px; color: var(--muted); }
 .arrow { align-self: center; color: var(--muted); }
-@media (max-width: 640px) { .arrow { display: none; } }
+@media (max-width: 640px) {
+  .arrow { display: none; }
+  .stack { flex-direction: column; gap: 6px; }
+  .layer { flex: none; min-width: 0; display: grid; grid-template-columns: 62px minmax(0, 1fr); column-gap: 8px; align-items: baseline; padding: 7px 10px; }
+  .layer .n { grid-column: 2; }
+}
 .basis { margin-top: 10px; font-size: 13px; color: var(--muted); }
 .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 14px; }
 .fact { border-top: 2px solid var(--line); padding-top: 6px; min-width: 0; }
@@ -113,16 +140,91 @@ select { padding: 6px 9px; border: 1px solid var(--line); border-radius: 8px; ba
 .sumchip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 6px 11px; cursor: pointer; font-weight: 600; font-size: 13.5px; }
 .sumchip[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
 .sumchip .num { font-variant-numeric: tabular-nums; }
+/* A result with no answers here is greyed by color, not by opacity, so its text keeps readable contrast. */
+.sumchip[data-zero] .chip { background: var(--surface2); color: var(--muted); }
 
-/* chips for results */
+/* ---- first-visit guide and legend ---- */
+details.guide { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 16px; }
+details.guide > summary { cursor: pointer; padding: 11px 16px; font-weight: 600; color: var(--accent); list-style-position: inside; }
+details.guide > summary .muted { font-weight: 400; font-size: 13.5px; margin-left: 6px; }
+@media (max-width: 720px) { details.guide > summary .muted { display: none; } }
+.guide-body h2 { font-size: 16px; }
+.guide-body { padding: 0 16px 16px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 20px; }
+@media (max-width: 900px) { .guide-body { grid-template-columns: minmax(0, 1fr); } }
+.steps { margin: 8px 0 0; padding: 0; list-style: none; counter-reset: step; display: flex; flex-direction: column; gap: 10px; }
+.steps li { counter-increment: step; display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 10px; align-items: start; }
+.steps li::before { content: counter(step); width: 24px; height: 24px; border-radius: 50%; background: var(--accent-weak); color: var(--accent); font-weight: 700; font-size: 13px; display: grid; place-items: center; }
+.legend-list { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.legend-list { margin-top: 8px; }
+.legend-list li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 4px 12px; align-items: center; font-size: 13.5px; }
+.legend-list .chip { justify-self: start; }
+@media (max-width: 560px) { .legend-list li { grid-template-columns: minmax(0, 1fr); } }
+.guide-note { grid-column: 1 / -1; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; margin: 0; }
+
+/* ---- address picker modes (sample / own building) and the phone picker toggle ---- */
+.seg { flex: none; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
+.seg button { border: 0; background: var(--surface); padding: 8px 6px; cursor: pointer; font-weight: 600; font-size: 13px; color: var(--muted); }
+.seg button[aria-pressed="true"] { background: var(--accent-weak); color: var(--accent); }
+.own { display: flex; flex-direction: column; gap: 10px; }
+.own label { display: flex; flex-direction: column; gap: 4px; font-size: 12.5px; font-weight: 600; color: var(--muted); }
+.own select { width: 100%; }
+.own p { margin: 0; font-size: 13px; }
+.pick-toggle { display: none; }
+.pickbody { display: flex; flex-direction: column; gap: 10px; min-height: 0; flex: 1 1 auto; }
+.panel-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px 16px; flex-wrap: wrap; }
+.ph-title { min-width: 0; flex: 1 1 260px; }
+.panel-head .tools { margin: 0; gap: 6px; }
+.btn.sm { padding: 5px 9px; font-size: 12.5px; display: inline-flex; align-items: center; gap: 6px; }
+.btn.sm svg { width: 14px; height: 14px; }
+.copied { min-height: 0; font-size: 12.5px; }
+.copied:not(:empty) { margin-top: 6px; }
+.jump { font-size: 12.5px; }
+.qbtn { font-family: var(--font-ui); }
+.qbtn[aria-pressed="true"] { background: var(--accent-weak); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+@media (max-width: 900px) {
+  .pick-toggle { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 10px 14px; cursor: pointer; margin-bottom: 12px; }
+  .pick-toggle .t { min-width: 0; }
+  .pick-toggle .s { font-weight: 600; overflow-wrap: anywhere; }
+  .pick-toggle .a { color: var(--accent); font-weight: 600; white-space: nowrap; }
+  .side.collapsed { display: none; }
+}
+
+/* ---- bottom line and the what-if form ---- */
+.bottom { margin-top: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.bottom .eyebrow { padding: 12px 16px 8px; }
+.bl-row { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 4px 16px; width: 100%; text-align: left; border: 0; border-top: 1px solid var(--line); background: none; padding: 10px 16px; cursor: pointer; border-radius: 0; }
+.bl-row:hover { background: var(--surface2); }
+.bl-cat { font-weight: 600; }
+.bl-body { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.bl-line { display: flex; gap: 4px 10px; align-items: baseline; flex-wrap: wrap; }
+.bl-line > span:last-child { overflow-wrap: anywhere; min-width: 0; }
+.bl-minor { color: var(--muted); font-size: 13.5px; }
+.bl-gap { color: var(--muted); font-size: 13.5px; }
+@media (max-width: 640px) { .bl-row { grid-template-columns: minmax(0, 1fr); } }
+details.whatif { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+details.whatif > summary { cursor: pointer; font-weight: 600; font-size: 13.5px; color: var(--accent); }
+details.whatif > summary .muted { font-weight: 400; }
+.wi-help { margin: 8px 0 0; font-size: 13px; max-width: 72ch; }
+.wi-grid { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-end; margin-top: 10px; }
+.wi-grid label { display: flex; flex-direction: column; gap: 4px; font-size: 12.5px; font-weight: 600; color: var(--muted); }
+.wi-grid input[type="text"] { width: 150px; padding: 7px 9px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.wi-grid .btn[disabled] { opacity: .5; cursor: default; }
+.wi-bad { margin: 8px 0 0; font-size: 13px; color: var(--flag); }
+.wi-note { margin-top: 14px; border: 1px solid var(--accent); background: var(--accent-weak); border-radius: 10px; padding: 9px 12px; font-size: 13.5px; }
+.pill.changed { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.fact .n.entered { color: var(--accent); font-size: 12px; }
+.cat { scroll-margin-top: calc(var(--topbar, 112px) + 12px); }
+
+/* ---- result chips: always icon + word, never color alone ---- */
 .chip { display: inline-flex; align-items: center; gap: 5px; border-radius: 999px; padding: 2px 10px 2px 8px; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
-.chip i { font-style: normal; font-weight: 800; }
+.chip svg { width: 14px; height: 14px; flex: none; }
 .r-applies { color: var(--applies); background: var(--applies-bg); }
 .r-superseded { color: var(--superseded); background: var(--superseded-bg); }
 .r-unknown { color: var(--unknown); background: var(--unknown-bg); }
 .r-not_yet_effective { color: var(--not_yet_effective); background: var(--not_yet_effective-bg); }
 .r-pending { color: var(--pending); background: var(--pending-bg); }
 
+/* ---- topic sections and rule cards ---- */
 .cat { margin-top: 22px; }
 .cat h3 { display: flex; align-items: baseline; gap: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); margin-bottom: 10px; }
 .cat h3 small { color: var(--muted); font-weight: 500; font-size: 12.5px; }
@@ -150,8 +252,8 @@ blockquote.q { margin: 0; font-family: var(--font-law); font-size: 15px; line-he
 .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .btn.primary:hover { color: var(--on-accent); filter: brightness(1.08); }
 
-/* changes */
-.tgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
+/* ---- changes tab: five test cards and the compare-dates table ---- */
+.tgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 14px; }
 .tcard { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 .tid { font-family: var(--font-mono); font-weight: 500; background: var(--ink); color: var(--bg); border-radius: 6px; padding: 1px 8px; font-size: 12.5px; }
 .tnum { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
@@ -169,7 +271,7 @@ tr:last-child td { border-bottom: 0; }
 .addrlinks .qbtn { font-size: 11.5px; padding: 2px 6px; }
 .block { margin-top: 28px; }
 
-/* map */
+/* ---- coverage map: one small scatter per city ---- */
 .mapgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 14px; }
 .mapcard { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px; min-width: 0; }
 .mapcard svg { width: 100%; height: auto; display: block; background: var(--bg); border-radius: 8px; }
@@ -178,7 +280,7 @@ tr:last-child td { border-bottom: 0; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
 
-/* rules tab */
+/* ---- rules and method tab: coverage matrix, timeline, rule list, method notes ---- */
 .matrix td, .matrix th { text-align: center; }
 .matrix td:first-child, .matrix th:first-child { text-align: left; white-space: nowrap; }
 .cell0 { color: var(--flag); background: var(--flag-bg); }
@@ -195,8 +297,11 @@ tr:last-child td { border-bottom: 0; }
 .note h3 { margin-bottom: 6px; }
 .note ul { margin: 6px 0 0; padding-left: 18px; }
 .note li { margin: 4px 0; }
+/* ---- footer and empty states ---- */
 footer { border-top: 1px solid var(--line); padding-block: 18px 40px; color: var(--muted); font-size: 13px; }
+footer .fl { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 8px; }
 .empty { color: var(--muted); padding: 24px; text-align: center; }
+/* ---- phone layout: header is not sticky (it would eat the screen), tabs get their own row ---- */
 @media (max-width: 720px) {
   .top { position: static; }
   .brand span { display: none; }
@@ -204,13 +309,36 @@ footer { border-top: 1px solid var(--line); padding-block: 18px 40px; color: var
   .tabs { order: 3; width: 100%; }
   .tab { padding: 7px 9px; font-size: 14px; }
   .notice { font-size: 12.5px; }
-  .notice .wrap span:nth-child(2) { display: none; }
+  .notice .wrap { align-items: flex-start; }
+  .notice svg { margin-top: 2px; }
+  .notice .linkbtn { display: none; }
   main { padding-block-start: 14px; }
   .addr-title { font-size: 22px; }
 }
+/* ---- print: answer only. Controls, the picker and the guide are hidden; every law disclosure shows its content. ---- */
+@media print {
+  :root { --bg: #fff; --surface: #fff; --surface2: #f2f2f2; }
+  .top { position: static; border: 0; }
+  .tabs, .icon-btn, .langs, .side, .pick-toggle, .ctrl, details.whatif, details.guide, .sumbar, .actions, .linkbtn, .notice .linkbtn, .skip { display: none !important; }
+  .notice { border: 1px solid #999; }
+  .bench { display: block; }
+  .panel, .bottom, .card { break-inside: avoid; box-shadow: none; }
+  details.law > :not(summary) { display: block; }
+  a { color: inherit; text-decoration: none; }
+  main { padding: 8px 0; }
+}
+/* ---- motion: no smooth scrolling or transitions for people who ask for less motion ---- */
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+/* ---- language-dependent pieces (used in both languages; the Spanish view only adds more of them) ---- */
+.srcnote { margin: 6px 0 0; font-size: 12px; color: var(--muted); }            /* "automatic translation, not reviewed" line under a Spanish summary */
+.answer + .answer { margin-top: 4px; }                                          /* the Spanish result sentence sits right under the summary */
+.entag { color: var(--muted); font-size: 12.5px; }                              /* "(en inglés)" label before a whole English paragraph */
+.lawnote { margin: 8px 0 0; font-size: 13px; color: var(--muted); }            /* one-line note: the legal text is in English */
+@media (min-width: 561px) { html[lang="es"] .dl { grid-template-columns: 190px minmax(0, 1fr); } }  /* Spanish labels are longer */
+@media (max-width: 640px) { html[lang="es"] .layer { grid-template-columns: 78px minmax(0, 1fr); } }  /* "CONDADO" needs more room than "County" */
 </style>
 
+<a class="skip" id="skip" href="#view" data-act="skip">Skip to the content</a>
 <header class="top" id="top">
   <div class="wrap">
     <div class="bar">
@@ -220,34 +348,379 @@ footer { border-top: 1px solid var(--line); padding-block: 18px 40px; color: var
           <rect x="3" y="11" width="22" height="6" rx="2" fill="var(--accent)" opacity=".62"/>
           <rect x="3" y="19" width="22" height="6" rx="2" fill="var(--accent)" opacity=".32"/>
         </svg>
-        <div><b>Stackwise</b> <span>Which rental laws apply here, on this date?</span></div>
+        <div class="brandtext"><h1>Stackwise</h1> <span id="tagline">Which rental laws apply here, on this date?</span></div>
       </div>
       <nav class="tabs" id="tabs" aria-label="Sections"></nav>
-      <button class="icon-btn" id="themeBtn" data-act="theme" title="Switch light or dark">Theme</button>
+      <div class="langs" id="langs" role="group" aria-label="Language" hidden></div>
+      <button class="icon-btn" id="themeBtn" data-act="theme"></button>
     </div>
   </div>
-  <div class="notice"><div class="wrap">
-    <span><b>Not legal advice.</b> Built from a public corpus that no lawyer has reviewed.</span>
-    <span>Public sources only. Every rule links to its source.</span>
-    <span><b>Unknown</b> means the data cannot say. We do not guess.</span>
-  </div></div>
+  <div class="notice"><div class="wrap" id="notice"></div></div>
 </header>
 
 <main class="wrap" id="view" tabindex="-1"></main>
+<div class="vh" id="live" role="status" aria-live="polite"></div>
 
 <footer><div class="wrap" id="foot"></div></footer>
 
 <!--INLINE:engine.js-->
 <!--INLINE:data.js-->
+<!-- Spanish interface dictionary. Key = the English source string used in the script below, value = the Spanish text.
+     This is trusted text written by the team, never data from the rules or addresses. It is a separate script so the
+     app code stays readable. If the script is removed the page works in English only. One entry per line, in JSON style. -->
 <script>
+window.NAV_ES = {
+  "(in English)": "(en inglés)",
+  "{name} County": "Condado de {name}",
+  "Not listed": "No figura",
+  "date not stated": "fecha no indicada",
+  "Not placed": "Sin ubicar",
+  "Elsewhere in {state} (statewide rules only)": "Otras zonas de {state} (solo normas estatales)",
+  "Language": "Idioma",
+  "Skip to the content": "Saltar al contenido",
+  "Which rental laws apply here, on this date?": "¿Qué leyes de alquiler se aplican aquí, en esta fecha?",
+  "Sections": "Secciones",
+  "Switch to light mode": "Cambiar a modo claro",
+  "Switch to dark mode": "Cambiar a modo oscuro",
+  "Not legal advice. Public sources only, not reviewed by a lawyer. Plain-English summaries are written by AI.": "No es asesoría legal. Solo fuentes públicas, sin revisión de un abogado. Los resúmenes en lenguaje sencillo los escribe una IA.",
+  "How to read an answer": "Cómo leer una respuesta",
+  "{rules} rules from {docs} source documents. {addrs} sample addresses. {answers} answers as of {date}.": "{rules} normas de {docs} documentos fuente. {addrs} direcciones de muestra. {answers} respuestas al {date}.",
+  "Not legal advice. Rules were read from public web pages and statutes on the dates shown on each rule. Parcel facts come from public assessor datasets. Check the source before you rely on any answer.": "No es asesoría legal. Las normas se leyeron en páginas web públicas y en leyes, en las fechas que aparecen en cada norma. Los datos de las parcelas vienen de bases de datos públicas de las oficinas de tasación. Revise la fuente antes de confiar en cualquier respuesta.",
+  "Data built {date}": "Datos generados el {date}",
+  "Source code": "Código fuente",
+  "Report a mistake or a missing rule": "Informar de un error o de una norma que falta",
+  "No cookies. No tracking. Nothing you type leaves this page.": "Sin cookies. Sin seguimiento. Nada de lo que escriba sale de esta página.",
+  "Stackwise: which rental laws apply here?": "Stackwise: ¿qué leyes de alquiler se aplican aquí?",
+  "Language: English.": "Idioma: español.",
+  "Pick a building, choose a date, read the bottom line. Five labels explain every result.": "Elija un edificio, escoja una fecha y lea el resumen. Cinco etiquetas explican cada resultado.",
+  "Three steps": "Tres pasos",
+  "Pick a sample address, or describe your own building.": "Elija una dirección de muestra o describa su propio edificio.",
+  "Choose the date. Every answer is worked out for that day.": "Escoja la fecha. Cada respuesta se calcula para ese día.",
+  "Read the bottom line. Open any rule to see the exact words of the law and its source.": "Lea el resumen. Abra cualquier norma para ver las palabras exactas de la ley y su fuente.",
+  "What the labels mean": "Qué significan las etiquetas",
+  "Unknown is an answer, not an error.": "Sin determinar es una respuesta, no un error.",
+  "When the data cannot say, we say so instead of guessing. Every rule links to its source.": "Significa que los datos no lo permiten. No adivinamos. Cada norma enlaza con su fuente.",
+  "Choose another address or describe your own building": "Elegir otra dirección o describir su propio edificio",
+  "Close": "Cerrar",
+  "Open": "Abrir",
+  "Choose a building": "Elegir un edificio",
+  "Which building": "Qué edificio",
+  "Sample addresses": "Direcciones de muestra",
+  "Your own building": "Su propio edificio",
+  "Describe a building that is not in the sample. Pick where it is, then type what you know in the box called \"Describe your building\".": "Describa un edificio que no está en la muestra. Elija dónde está y escriba lo que sepa en el cuadro llamado “Describa su edificio”.",
+  "Where is the building?": "¿Dónde está el edificio?",
+  "Only these places have rules in this prototype. Nothing is looked up, and nothing you type is sent anywhere.": "Solo estos lugares tienen normas en este prototipo. No se busca nada y nada de lo que escriba se envía a ningún lado.",
+  "Search street, city, zip or ID": "Calle, ciudad, código postal o ID",
+  "Search the sample addresses": "Buscar en las direcciones de muestra",
+  "All {n}": "Todas {n}",
+  "built {year}": "construido en {year}",
+  "year not in data": "año no incluido en los datos",
+  "Show {n} more of {m}": "Mostrar {n} más de {m}",
+  "No address matches.": "Ninguna dirección coincide.",
+  "{lo} or more": "{lo} o más",
+  "{lo} to {hi}": "{lo} a {hi}",
+  "{a} or {b}": "{a} o {b}",
+  "Year built needs four digits, for example 1975.": "El año de construcción necesita cuatro dígitos, por ejemplo 1975.",
+  "year built": "año de construcción",
+  "unit count": "número de unidades",
+  "{state} (statewide rules only)": "{state} (solo normas estatales)",
+  "legal city is {city}": "la ciudad legal es {city}",
+  "The day before California AB 325 starts": "El día antes de que empiece la ley AB 325 de California",
+  "California AB 325 is in effect": "La ley AB 325 de California ya está vigente",
+  "The default date": "La fecha predeterminada",
+  "After the New Jersey FAIR Act starts": "Después de que empiece la ley FAIR de Nueva Jersey",
+  "Address {id}": "Dirección {id}",
+  "Your building": "Su edificio",
+  "Copy link": "Copiar enlace",
+  "Print": "Imprimir",
+  "JSON": "JSON",
+  "Jurisdiction stack": "Niveles de jurisdicción",
+  "State": "Estado",
+  "County": "Condado",
+  "Not looked up": "No se buscó",
+  "Not found": "No se encontró",
+  "no county rules in scope": "sin normas de condado en el alcance",
+  "City": "Ciudad",
+  "None chosen": "Ninguna elegida",
+  "Matched as": "Encontrada como",
+  "Answer as of": "Respuesta para la fecha",
+  "Jump to": "Ir a",
+  "Describe your building": "Describa su edificio",
+  "What if you know more about this building?": "¿Y si sabe más sobre este edificio?",
+  "The parcel data has no {what}.": "Los datos de la parcela no incluyen {what}.",
+  "Type what you know about the building. Anything you leave blank stays unknown, and the answers below say so.": "Escriba lo que sepa del edificio. Lo que deje en blanco queda sin determinar, y las respuestas de abajo lo indican.",
+  "Parcel data can be incomplete. Type what you know and every answer below is worked out again by the same engine.": "Los datos de la parcela pueden estar incompletos. Escriba lo que sepa y el mismo motor vuelve a calcular cada respuesta de abajo.",
+  "Your entries stay in this tab. They are not saved or sent anywhere.": "Lo que escriba se queda en esta pestaña. No se guarda ni se envía a ningún lado.",
+  "Year built": "Año de construcción",
+  "for example 1975": "por ejemplo 1975",
+  "Units": "Unidades",
+  "for example 6": "por ejemplo 6",
+  "Owner lives in the building": "El propietario vive en el edificio",
+  "Not sure": "No lo sé",
+  "Yes": "Sí",
+  "No": "No",
+  "Clear": "Borrar",
+  "Not entered": "No indicado",
+  "Not in data": "No está en los datos",
+  "entered by you": "indicado por usted",
+  "Parcel use": "Uso de la parcela",
+  "Data source": "Fuente de los datos",
+  "retrieved {date}": "consultado el {date}",
+  "an owner lives there": "el propietario vive allí",
+  "no owner lives there": "el propietario no vive allí",
+  "{c} {from} to {to}": "{c} de «{from}» a «{to}»",
+  "No answer changes with these facts.": "Ninguna respuesta cambia con estos datos.",
+  "Using your facts:": "Con sus datos:",
+  "Nothing is entered yet.": "Todavía no hay datos escritos.",
+  "Answers that depend on the year built or the number of units show Unknown. Type them in the box above and the answers update at once.": "Las respuestas que dependen del año de construcción o del número de unidades salen como «Sin determinar». Escríbalos en el cuadro de arriba y las respuestas se actualizan al instante.",
+  "All": "Todos",
+  "No rule found for this topic in our sources for {place} or {state}. This is a gap in the sources, not proof that no law exists.": "No se encontró ninguna norma sobre este tema en nuestras fuentes para {place} ni para {state}. Es un vacío en las fuentes, no una prueba de que no exista ninguna ley.",
+  "Answers for {name}: {list}.": "Respuestas para {name}: {list}.",
+  "your building": "su edificio",
+  "No rule found in our sources": "No se encontró ninguna norma en nuestras fuentes",
+  "and {n} more": "y {n} más",
+  "Bottom line for this address": "Resumen para esta dirección",
+  "According to the available data, this rule applies to this building.": "Según los datos disponibles, esta norma se aplica a este edificio.",
+  "A stricter local rule governs here: {title}.": "Aquí gobierna una norma local más estricta: {title}.",
+  "A stricter local rule governs here.": "Aquí gobierna una norma local más estricta.",
+  "It is not in force yet. It takes effect on {date}.": "Todavía no está vigente. Entra en vigor el {date}.",
+  "It is not in force yet. Its start date is not stated.": "Todavía no está vigente. La fecha de inicio no está indicada.",
+  "It is a bill. It is not law yet.": "Es un proyecto de ley. Todavía no es ley.",
+  "Cannot be determined: building data is missing (for example, the year built). Type it above to resolve it.": "No se puede determinar: faltan datos del edificio (por ejemplo, el año de construcción). Escríbalos arriba para resolverlo.",
+  "Statewide": "Estatal",
+  "Effective {date}": "Entra en vigor: {date}",
+  "Effective date not stated": "Fecha de entrada en vigor no indicada",
+  "Flagged for human review.": "Marcada para revisión humana.",
+  "Possible conflict with": "Posible conflicto con",
+  "Governing rule here": "Norma que gobierna aquí",
+  "Might be overridden by": "Podría ser desplazada por",
+  "Could be overridden by:": "Podría ser desplazada por:",
+  "Confidence {level}": "Confianza {level}",
+  "Changed by your facts: was {was}": "Cambió con sus datos: antes era «{was}»",
+  "The law and its source (official text in English)": "La ley y su fuente (texto oficial en inglés)",
+  "Show the law and its source": "Mostrar la ley y su fuente",
+  "The law's own words, citations and links stay in English, because the English is the legal text.": "Las palabras de la ley, las citas y los enlaces siguen en inglés, porque el inglés es el texto legal oficial.",
+  "Technical reasoning (in English)": "Razonamiento técnico (en inglés)",
+  "What it requires": "Qué exige",
+  "Who is covered": "A quién cubre",
+  "Exemptions": "Excepciones",
+  "How it fits with other laws": "Cómo se relaciona con otras leyes",
+  "Exact words from the source": "Palabras exactas de la fuente",
+  "Citation": "Cita legal",
+  "Source": "Fuente",
+  "Also supported by": "También respaldada por",
+  "Rule ID": "ID de la norma",
+  "extraction confidence {x}": "confianza de la extracción {x}",
+  "n/a": "n/d",
+  "Answer copied as JSON.": "Respuesta copiada como JSON.",
+  "Copy was blocked here. Select the text on the page instead.": "Aquí se bloqueó la copia. Seleccione el texto de la página.",
+  "Change tracking": "Seguimiento de cambios",
+  "What changed, and who is affected": "Qué cambió y a quién afecta",
+  "Laws start, stop and collide. These five tests are run live by the same engine as the lookup. Each one lists the addresses it changes for. Open any example to see the full answer.": "Las leyes empiezan, terminan y chocan entre sí. Estas cinco pruebas las ejecuta en vivo el mismo motor de la consulta. Cada una lista las direcciones a las que les cambia la respuesta. Abra cualquier ejemplo para ver la respuesta completa.",
+  "of {total} addresses affected": "de {total} direcciones afectadas",
+  "{n} flagged for human review": "{n} marcadas para revisión humana",
+  "No address is affected. That is the correct answer for this test.": "Ninguna dirección resulta afectada. Esa es la respuesta correcta para esta prueba.",
+  "Compare any two dates": "Comparar dos fechas cualesquiera",
+  "Pick two dates. The table shows every rule whose answer changes for at least one address.": "Elija dos fechas. La tabla muestra cada norma cuya respuesta cambia en al menos una dirección.",
+  "From": "Desde",
+  "To": "Hasta",
+  "California AB 325": "California AB 325",
+  "NJ FAIR Act": "Ley FAIR de NJ",
+  "Mid-2026": "Mediados de 2026",
+  "{changed} of {total} answers change. {same} stay the same.": "Cambian {changed} de {total} respuestas. {same} siguen igual.",
+  "Rule": "Norma",
+  "Before": "Antes",
+  "After": "Después",
+  "Addresses": "Direcciones",
+  "+{n} more": "+{n} más",
+  "No answer changes between these dates.": "Ninguna respuesta cambia entre estas fechas.",
+  "rule not listed here": "norma no incluida aquí",
+  "not listed": "no figura",
+  "{n} addresses": "{n} direcciones",
+  "Addresses in {city} colored by answer": "Direcciones en {city} coloreadas según la respuesta",
+  "Coverage map": "Mapa de cobertura",
+  "Where does one rule apply?": "¿Dónde se aplica una norma?",
+  "Each dot is a sample address, placed by its Census coordinates. Color shows the answer for the rule you pick, on the date you pick. Select a dot to open that address.": "Cada punto es una dirección de muestra, ubicada con sus coordenadas del Censo. El color muestra la respuesta para la norma que elija, en la fecha que elija. Seleccione un punto para abrir esa dirección.",
+  "As of": "A la fecha",
+  "Rule not listed here ({n})": "Norma no incluida aquí ({n})",
+  "No geocoded address is in scope for this rule.": "Ninguna dirección con coordenadas entra en el alcance de esta norma.",
+  "Panels are drawn to scale inside each city, not to a shared map.": "Los paneles se dibujan a escala dentro de cada ciudad, no en un mapa común.",
+  "failed, never law": "anulada, nunca fue ley",
+  "bill, not enacted": "proyecto, no aprobado",
+  "in force, start date not stated": "vigente, fecha de inicio no indicada",
+  "as of {date}": "al {date}",
+  "Timeline of when each rule takes effect": "Línea de tiempo de cuándo entra en vigor cada norma",
+  "Self-check": "Autoverificación",
+  "{pass} checks pass, {warn} warning, {fail} fail. They run on every build: schema, quotes found in sources, one answer per address, and the five change tests.": "{pass} verificaciones correctas, {warn} aviso, {fail} fallos. Se ejecutan en cada generación: esquema, citas encontradas en las fuentes, una respuesta por dirección y las cinco pruebas de cambio.",
+  "{pass} checks pass, {warn} warnings, {fail} fail. They run on every build: schema, quotes found in sources, one answer per address, and the five change tests.": "{pass} verificaciones correctas, {warn} avisos, {fail} fallos. Se ejecutan en cada generación: esquema, citas encontradas en las fuentes, una respuesta por dirección y las cinco pruebas de cambio.",
+  "Show every check": "Mostrar todas las verificaciones",
+  "The names of the checks are written in English.": "Los nombres de las verificaciones están en inglés.",
+  "What the rule set covers": "Qué cubre el conjunto de normas",
+  "Jurisdiction": "Jurisdicción",
+  "none found": "ninguna",
+  "In plain language": "En lenguaje sencillo",
+  "Effective": "Vigencia",
+  "Yields to": "Cede ante",
+  "Flag": "Marca",
+  "Exact words": "Palabras exactas",
+  "Audit": "Auditoría",
+  "Rules and method": "Normas y método",
+  "Everything the lookup says comes from the {n} rules below. Each rule carries its citation, its source link and the exact words it was read from.": "Todo lo que dice la consulta viene de las {n} normas de abajo. Cada norma incluye su cita legal, el enlace a su fuente y las palabras exactas de las que se leyó.",
+  "Red cells are topics where our sources had no rule. They are shown, not hidden.": "Las celdas rojas son temas en los que nuestras fuentes no tenían ninguna norma. Se muestran, no se ocultan.",
+  "When each rule starts": "Cuándo empieza cada norma",
+  "Dates come from the sources. The red line is the date used on the other tabs.": "Las fechas vienen de las fuentes. La línea roja es la fecha que se usa en las otras pestañas.",
+  "All rules": "Todas las normas",
+  "Search": "Buscar",
+  "Title, citation or text": "Título, cita legal o texto",
+  "Place": "Lugar",
+  "Status": "Situación",
+  "No rule matches.": "Ninguna norma coincide.",
+  "How it works": "Cómo funciona",
+  "1. Read the law once": "1. Leer la ley una vez",
+  "A language model reads each source page and writes one record per rule. The schema is fixed, so every record has a citation, a source link and a quote.": "Un modelo de lenguaje lee cada página fuente y escribe un registro por norma. El esquema es fijo, así que cada registro tiene una cita legal, un enlace a la fuente y una cita textual.",
+  "Code checks that every quote appears word for word in the page. A record that fails is thrown out.": "El código comprueba que cada cita textual aparezca palabra por palabra en la página. Un registro que no lo cumple se descarta.",
+  "Code, not the model, decides whether a rule is in force, not yet effective, pending or failed, from its dates.": "El código, no el modelo, decide si una norma está vigente, aún no vigente, pendiente o anulada, según sus fechas.",
+  "2. Answer for any address": "2. Responder para cualquier dirección",
+  "The Census geocoder places the address in a city. Then the lookup stacks state, county and city rules.": "El geocodificador del Censo ubica la dirección en una ciudad. Luego la consulta reúne las normas del estado, del condado y de la ciudad.",
+  "Each rule is checked against year built and unit count. A missing fact gives <b>unknown</b>, never a guess.": "Cada norma se compara con el año de construcción y el número de unidades. Si falta un dato, el resultado es <b>sin determinar</b>; nunca adivinamos.",
+  "When a stricter local law governs, the state rule shows as <b>superseded</b> and links to the one that governs.": "Cuando gobierna una ley local más estricta, la norma estatal aparece como <b>desplazada</b> y enlaza con la que gobierna.",
+  "3. Track change": "3. Seguir los cambios",
+  "The same engine runs in this page for any date, so a change is just two answers side by side.": "El mismo motor funciona en esta página para cualquier fecha, así que un cambio son solo dos respuestas lado a lado.",
+  "Where a law may displace another, as with the New Jersey FAIR Act and city bans, the rule is flagged for a person to review. We do not decide it.": "Cuando una ley puede desplazar a otra, como la ley FAIR de Nueva Jersey y las prohibiciones de las ciudades, la norma se marca para que una persona la revise. Nosotros no lo decidimos.",
+  "Built to be safe to use": "Hecho para usarse con seguridad",
+  "Every screen says this is not legal advice.": "Cada pantalla dice que esto no es asesoría legal.",
+  "Gaps in the sources are shown as gaps.": "Los vacíos en las fuentes se muestran como vacíos.",
+  "Public sources and public parcel data only. No personal data, no cookies, no tracking. This page loads nothing from other sites.": "Solo fuentes públicas y datos públicos de parcelas. Sin datos personales, sin cookies, sin seguimiento. Esta página no carga nada de otros sitios.",
+  "Plain-English summaries are written by AI from the source text. The quoted words come from the source and are checked by code.": "Los resúmenes en lenguaje sencillo los escribe una IA a partir del texto fuente. Las palabras citadas vienen de la fuente y el código las verifica.",
+  "Adding a city means adding its pages and re-running. No code changes. The whole run costs a few dollars.": "Agregar una ciudad significa agregar sus páginas y volver a ejecutar. No hay que cambiar el código. Toda la ejecución cuesta unos pocos dólares.",
+  "Link to this answer copied.": "Enlace a esta respuesta copiado.",
+  "{n} statewide rule": "{n} norma estatal",
+  "{n} statewide rules": "{n} normas estatales",
+  "{n} city rule": "{n} norma de la ciudad",
+  "{n} city rules": "{n} normas de la ciudad",
+  "{n} answer is unknown now.": "{n} respuesta está sin determinar ahora.",
+  "{n} answers are unknown now.": "{n} respuestas están sin determinar ahora.",
+  "{n} unit": "{n} unidad",
+  "{n} units": "{n} unidades",
+  "{n} answer changed": "{n} respuesta cambió",
+  "{n} answers changed": "{n} respuestas cambiaron",
+  "{n} rule no longer applies": "{n} norma ya no se aplica",
+  "{n} rules no longer apply": "{n} normas ya no se aplican",
+  "{n} rule": "{n} norma",
+  "{n} rules": "{n} normas",
+  "{n} address is not shown because the geocoder could not place them.": "No se muestra {n} dirección porque el geocodificador no pudo ubicarla.",
+  "{n} addresses are not shown because the geocoder could not place them.": "No se muestran {n} direcciones porque el geocodificador no pudo ubicarlas.",
+  "Rent increase limits": "Límites al aumento de renta",
+  "Just-cause eviction": "Desalojo con causa justificada",
+  "Security deposits": "Depósitos de seguridad",
+  "Application and screening fees": "Cuotas de solicitud y evaluación",
+  "Tenant screening limits": "Límites a la evaluación de inquilinos",
+  "Algorithmic rent-setting": "Fijación algorítmica de rentas",
+  "Applies": "Se aplica",
+  "The rule covers this building on this date.": "La norma cubre este edificio en esta fecha.",
+  "Superseded": "Desplazada",
+  "A stricter local law governs here instead. The card names it.": "Aquí gobierna en su lugar una ley local más estricta. La tarjeta la nombra.",
+  "Unknown": "Sin determinar",
+  "The data cannot settle it, for example the year built is missing. Type what you know to resolve it. We never guess.": "Los datos no lo permiten; por ejemplo, falta el año de construcción. Escriba lo que sepa para resolverlo. Nunca adivinamos.",
+  "Not yet effective": "Aún no vigente",
+  "The law has passed but starts on a later date.": "La ley ya fue aprobada, pero empieza en una fecha posterior.",
+  "Pending bill": "Proyecto de ley",
+  "A proposal. It is not law.": "Es una propuesta. No es ley.",
+  "{n} applies": "se aplica: {n}",
+  "{n} superseded": "desplazada: {n}",
+  "{n} unknown": "sin determinar: {n}",
+  "{n} not yet effective": "aún no vigente: {n}",
+  "{n} pending bill": "proyecto de ley: {n}",
+  "California": "California",
+  "New Jersey": "Nueva Jersey",
+  "Massachusetts": "Massachusetts",
+  "Date change": "Cambio de fecha",
+  "City boundary": "Límite de ciudad",
+  "Bills pending": "Proyectos de ley pendientes",
+  "Must not appear": "No debe aparecer",
+  "Placed in its city by the U.S. Census geocoder": "Ubicada en su ciudad por el geocodificador del Censo de los Estados Unidos",
+  "City taken from the parcel dataset. The geocoder could not match this address": "Ciudad tomada del conjunto de datos de parcelas. El geocodificador no pudo encontrar esta dirección",
+  "Place chosen by you. No address is looked up or sent anywhere": "Lugar elegido por usted. No se busca ninguna dirección ni se envía a ningún lado",
+  "Could not be placed in a city. City rules are unknown": "No se pudo ubicar en una ciudad. Las normas de la ciudad quedan sin determinar",
+  "Lookup": "Consulta",
+  "What changed": "Qué cambió",
+  "Changes": "Cambios",
+  "Map": "Mapa",
+  "Rules": "Normas",
+  "Before {date}": "Antes del {date}",
+  "After {date}": "Después del {date}",
+  "{city} address": "Dirección en {city}",
+  "Newark address (no ban)": "Dirección en Newark (sin prohibición)",
+  "A Massachusetts address": "Una dirección en Massachusetts",
+  "A Boston address": "Una dirección en Boston",
+  "high": "alta",
+  "medium": "media",
+  "low": "baja",
+  "PASS": "OK",
+  "WARN": "AVISO",
+  "FAIL": "FALLO",
+  "in force": "vigente",
+  "not yet effective": "aún no vigente",
+  "pending": "proyecto de ley",
+  "failed": "anulada",
+  "Entered by you": "Indicado por usted",
+  "California AB 325 / SB 763 takes effect": "Entran en vigor las leyes AB 325 y SB 763 de California",
+  "Hoboken vs Jersey City local algorithmic bans": "Prohibiciones locales de fijación algorítmica de rentas: Hoboken y Jersey City",
+  "NJ FAIR Act: enacted, not yet effective; possible preemption": "Ley FAIR de Nueva Jersey: aprobada, aún no vigente; posible desplazamiento de normas locales",
+  "Massachusetts pending bills S.2983 and H.5222": "Proyectos de ley pendientes en Massachusetts: S.2983 y H.5222",
+  "Massachusetts rent-control ballot question struck": "Anulada la iniciativa de control de rentas de Massachusetts",
+};
+</script>
+<script>
+/* ==========================================================================================================
+   STACKWISE front end
+   One page, one script. It answers: for this building, on this date, which rental-housing rules apply, which
+   have been displaced by a stricter local rule, which have not started yet, which are only bills, and what
+   the data cannot say.
+
+   ARCHITECTURE
+   - Data. window.NAV_DATA (data.js) holds the rules, the 500 sample addresses and the five change tests.
+     window.NavEngine (engine.js) is the answer engine, a port of src/engine.py. It runs in this tab for any
+     date, so nothing is pre-computed for one date only.
+   - State. One object, S (see "state" below). What is on screen is a function of S and the data.
+   - Rendering. Plain functions that build an HTML string and assign it to a fixed container:
+       render() -> renderChrome (header) + one of renderLookup / renderChanges / renderMap / renderRulesTab.
+       renderLookup -> renderPicker, renderAnswer -> renderFacts, renderBody (bottomLine, cardHtml).
+     Small updates call the smallest function that is enough (for example renderBody, not renderLookup).
+   - Events. Event delegation: one click, input, change and toggle listener on document at the bottom. A
+     clickable element carries data-act="..." and the listener dispatches on it. Re-rendering never has to
+     re-attach listeners.
+   - Language. English is the source text in the code. t(the English string) returns the Spanish text when the
+     Spanish view is on and the dictionary (window.NAV_ES) has it, else the English. The Spanish view exists
+     only when data.js carries translations (NAV_DATA.i18n.es); without them the page is English only.
+   - Safety. Every string that comes from the data goes through esc() before it enters HTML. Dictionary
+     strings are trusted text; the values substituted into them are escaped.
+
+   WHY ONE FILE
+   The page must open from a double-click, work offline and cannot break because a sibling file is missing.
+   build_site.py inlines engine.js, data.js and the fonts into this template. A strict Content-Security-Policy
+   (see build_site.py) blocks every outside request.
+
+   WHY NO BROWSER STORAGE
+   Facts a person types (year built, units) describe a building and are private. They live in memory only (S.wi),
+   so closing the tab erases them. The same goes for the language choice. The one thing that can travel is the
+   address, date, typed facts and language in the URL hash, and only when the person copies the link.
+
+   PRIVACY PROMISES (checked by tests/test_web_and_repo.py)
+   No cookies, no analytics, no accounts, no network requests of any kind, no outside fonts or scripts, and
+   every outside link opens with rel="noopener".
+   ========================================================================================================== */
 (function () {
 "use strict";
+
+/* ------------------------------------------------------------------ data and lookups */
 const D = window.NAV_DATA, NE = window.NavEngine;
 const RULES = D.rules, ADDR = D.addresses;
 const byRule = Object.fromEntries(RULES.map((r) => [r.team_rule_id, r]));
 const byAddr = Object.fromEntries(ADDR.map((a) => [a.id, a]));
 const DEFAULT_DATE = D.meta.query_date || "2026-10-01";
 
+/* The six topics in scope, in the order the answer shows them. [key, English name]. */
 const CATS = [
   ["rent_increase_limits", "Rent increase limits"],
   ["just_cause_eviction", "Just-cause eviction"],
@@ -257,44 +730,157 @@ const CATS = [
   ["algorithmic_rent_setting", "Algorithmic rent-setting"],
 ];
 const CAT_LABEL = Object.fromEntries(CATS);
+/* The five possible answers for a rule. label = the chip word, help = the one-line meaning (tooltip, guide). English source text. */
 const RES = {
-  applies: { label: "Applies", glyph: "✓" },
-  superseded: { label: "Superseded", glyph: "↳" },
-  unknown: { label: "Unknown", glyph: "?" },
-  not_yet_effective: { label: "Not yet effective", glyph: "◔" },
-  pending: { label: "Pending bill", glyph: "…" },
+  applies: { label: "Applies", help: "The rule covers this building on this date." },
+  superseded: { label: "Superseded", help: "A stricter local law governs here instead. The card names it." },
+  unknown: { label: "Unknown", help: "The data cannot settle it, for example the year built is missing. Type what you know to resolve it. We never guess." },
+  not_yet_effective: { label: "Not yet effective", help: "The law has passed but starts on a later date." },
+  pending: { label: "Pending bill", help: "A proposal. It is not law." },
 };
 const RES_ORDER = ["applies", "superseded", "unknown", "not_yet_effective", "pending"];
+/* "N <result>" for the screen-reader announcement; one source string per result so each language can word it its own way. */
+const RES_COUNT = { applies: "{n} applies", superseded: "{n} superseded", unknown: "{n} unknown", not_yet_effective: "{n} not yet effective", pending: "{n} pending bill" };
 const STATE_NAME = { CA: "California", NJ: "New Jersey", MA: "Massachusetts" };
 const TEST_KIND = { as_of: "Date change", boundary: "City boundary", pending: "Bills pending", negative: "Must not appear" };
+/* How a city was found for an address. Shown under the jurisdiction stack. */
 const BASIS = {
   census_geocoder: "Placed in its city by the U.S. Census geocoder",
   city_dataset: "City taken from the parcel dataset. The geocoder could not match this address",
+  chosen_by_you: "Place chosen by you. No address is looked up or sent anywhere",
   unresolved: "Could not be placed in a city. City rules are unknown",
 };
 
+/* ------------------------------------------------------------------ small helpers */
+/* Escape a value for HTML text or a quoted attribute. Used on EVERY string that comes from data or from the person. */
 const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+/* Shorthand for querySelector: the first element matching a CSS selector, in the whole page or inside el. */
 const $ = (s, el) => (el || document).querySelector(s);
-const fmtDate = (iso) => {
-  if (!iso) return "date not stated";
+
+/* ------------------------------------------------------------------ language (ES / EN) */
+/* The Spanish view exists only when data.js carries translations: NAV_DATA.i18n.es = { label, model, rules: { <rule id>: { title_es, key_value_es, plain_es } } }.
+   With none (or an empty rules map) there is no toggle and nothing below changes the page. */
+const ES = window.NAV_ES || {};
+const ES_PACK = (D.i18n && D.i18n.es) || {};
+const ES_RULES = ES_PACK.rules || {};
+const HAS_ES = Object.keys(ES_RULES).length > 0;
+/* True when object o has its own key k (so a dictionary lookup never finds an inherited name such as "constructor"). */
+const hasOwn = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+/* Replace {name} placeholders in a string with vars[name], passing each value through enc (String for text, esc for HTML). */
+function fill(str, vars, enc) {
+  if (!vars) return str;
+  return str.replace(/\{(\w+)\}/g, (m, k) => (hasOwn(vars, k) ? enc(vars[k] == null ? "" : vars[k]) : m));
+}
+/* The text for an English source string: the dictionary entry in the Spanish view, else the English itself. */
+const pick = (s) => { s = String(s == null ? "" : s); return S.lang === "es" && hasOwn(ES, s) ? ES[s] : s; };
+/* t: plain text (vars inserted as they are). Use it for attributes that are escaped afterwards, textContent and comparisons. */
+const t = (s, vars) => fill(pick(s), vars, String);
+/* te: text made safe for HTML (the whole result is escaped, vars included). The usual choice inside a template literal. */
+const te = (s, vars) => esc(t(s, vars));
+/* th: for the few dictionary strings that carry trusted markup such as <b>. The markup is kept, the vars are escaped. */
+const th = (s, vars) => fill(pick(s), vars, esc);
+/* tn: plain text with a plural. one and many are two separate source strings (word order and endings differ by language); {n} is the count. */
+const tn = (n, one, many, vars) => t(n === 1 ? one : many, Object.assign({ n }, vars));
+/* A whole English paragraph shown in the Spanish view gets this muted label in front; lang="en" marks English text for screen readers. */
+const EN_TAG = () => (S.lang === "es" ? `<span class="entag">${te("(in English)")}</span> ` : "");
+/* The attribute for a block of English text inside the Spanish page (" lang=\"en\""), or nothing in the English view. */
+const LE = () => (S.lang === "es" ? ' lang="en"' : "");
+/* A number with the thousands separator of the current language. */
+const num = (n) => n.toLocaleString(S.lang === "es" ? "es-US" : "en-US");
+/* A rule's Spanish text { title_es, key_value_es, plain_es }: only in the Spanish view, and only when that rule was translated; else null. */
+const esRule = (r) => (S.lang === "es" && ES_RULES[r.team_rule_id]) || null;
+/* The title to show for a rule: the Spanish one when there is one, else the English title. */
+const titleOf = (r) => { const x = esRule(r); return (x && x.title_es) || r.title; };
+/* The key value ("5% + CPI, max 10%") to show for a rule: Spanish when there is one, else English (or null). */
+const kvOf = (r) => { const x = esRule(r); return (x && x.key_value_es) || r.key_value; };
+/* A state's name from its two-letter code ("NJ" -> "New Jersey" / "Nueva Jersey"). An unknown code is shown as it is. */
+const stName = (c) => t(STATE_NAME[c] || c);
+/* A topic's display name from its key ("security_deposits" -> "Security deposits" / "Depósitos de seguridad"). */
+const catName = (ck) => t(CAT_LABEL[ck]);
+/* "Los Angeles County" -> "Condado de Los Angeles" in the Spanish view. Any other value is shown as it is. */
+const countyName = (c) => { const m = /^(.+) County$/.exec(c); return m ? t("{name} County", { name: m[1] }) : c; };
+
+/* The chip word for a result key ("applies" -> "Applies" / "Se aplica"); "not_listed" is the compare table's extra value. */
+const resLabel = (k) => (k === "not_listed" ? t("Not listed") : t(RES[k].label));
+/* The one-line meaning of a result key, in the current language. */
+const resHelp = (k) => t(RES[k].help);
+/* The colored label for a result: icon + word, so meaning never depends on color alone. */
+const chipHtml = (k) => `<span class="chip r-${k}" title="${esc(resHelp(k))}">${ic(k)}${esc(resLabel(k))}</span>`;
+
+/* Dates come as "YYYY", "YYYY-MM" or "YYYY-MM-DD". Spanish uses its own month names; full = long month, for use inside a sentence. */
+const fmtDate = (iso, full) => {
+  if (!iso) return t("date not stated");
   const m = /^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?$/.exec(iso);
   if (!m) return iso;
   const d = new Date(Date.UTC(+m[1], m[2] ? +m[2] - 1 : 0, m[3] ? +m[3] : 1));
+  const es = S.lang === "es";
   const o = { timeZone: "UTC", year: "numeric" };
-  if (m[2]) o.month = "short";
+  if (m[2]) o.month = es && full ? "long" : "short";
   if (m[3]) o.day = "numeric";
-  return d.toLocaleDateString("en-GB", o);
+  return d.toLocaleDateString(es ? "es-US" : "en-GB", o);
 };
+/* What the engine reads about an address. facts may carry what-if values. */
 const addrInput = (a) => ({ address_id: a.id, state: a.state, facts: a.facts, city: a.city, basis: a.basis, unverified: a.unverified });
+/* cityOf: the grouping KEY for an address's city ("Not placed" when neither the geocoder nor the parcel data named one). It stays in English
+   so filters and counts match in both languages. cityShort: the label shown to people (state suffix removed, "Not placed" translated). */
 const cityOf = (a) => a.city || "Not placed";
+const cityShort = (c) => (c === "Not placed" ? t("Not placed") : c.replace(/, [A-Z]{2}$/, ""));
 const CITIES = [...new Set(ADDR.map(cityOf))].sort();
 
+/* Icons are inline SVG (no icon font, no request). One 16-unit grid, one stroke width, so they read as a family. */
+const ICONS = {
+  applies: '<circle cx="8" cy="8" r="6.2"/><path d="M5.2 8.3l2 2 3.6-4"/>',
+  superseded: '<path d="M4 3v5a2 2 0 0 0 2 2h6"/><path d="M9.5 7.5L12 10l-2.5 2.5"/>',
+  unknown: '<circle cx="8" cy="8" r="6.2"/><path d="M6.3 6.4a1.8 1.8 0 1 1 2.6 1.6c-.6.3-.9.7-.9 1.3"/><path d="M8 11.4v.1"/>',
+  not_yet_effective: '<circle cx="8" cy="8" r="6.2"/><path d="M8 4.6V8l2.2 1.4"/>',
+  pending: '<path d="M4.5 2.5h5l2.5 2.5v8.5h-7.5z"/><path d="M9.5 2.5V5H12"/><path d="M6.3 8.5h3.4M6.3 10.8h3.4"/>',
+  info: '<circle cx="8" cy="8" r="6.2"/><path d="M8 7.4V11"/><path d="M8 5.1v.1"/>',
+  moon: '<path d="M13 9.3A5.2 5.2 0 0 1 6.7 3 5.3 5.3 0 1 0 13 9.3z"/>',
+  sun: '<circle cx="8" cy="8" r="2.6"/><path d="M8 1.6v1.6M8 12.8v1.6M1.6 8h1.6M12.8 8h1.6M3.5 3.5l1.1 1.1M11.4 11.4l1.1 1.1M3.5 12.5l1.1-1.1M11.4 4.6l1.1-1.1"/>',
+  print: '<path d="M4.5 6V2.5h7V6"/><path d="M4.5 11.5h-2V6h11v5.5h-2"/><path d="M4.5 9.5h7v4h-7z"/>',
+  link: '<path d="M7 9a2.5 2.5 0 0 0 3.5 0l2-2a2.5 2.5 0 0 0-3.5-3.5l-.7.7"/><path d="M9 7a2.5 2.5 0 0 0-3.5 0l-2 2A2.5 2.5 0 0 0 7 12.5l.7-.7"/>',
+  code: '<path d="M6 4.5L2.5 8 6 11.5M10 4.5L13.5 8 10 11.5"/>',
+};
+/* An icon as an inline SVG string. cls "" means "no class" (the size then comes from the parent's CSS). aria-hidden: the words next to it carry the meaning. */
+const ic = (k, cls) => `<svg class="${cls || "ico"}" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[k]}</svg>`;
+
 /* ------------------------------------------------------------------ state */
+const OWN_ID = "YOURS";                      // the pseudo-address used for "Your own building"
+/* S is the whole UI state. Nothing is saved anywhere; a reload starts from the URL hash (see readHash). */
 const S = {
   tab: "lookup", addr: (byAddr.A0001 || ADDR[0]).id, date: DEFAULT_DATE, q: "", city: "all", res: "all", shown: 60,
-  cmpA: "2025-12-31", cmpB: "2026-01-02", open: null, mapRule: null,
+  cmpA: "2025-12-31", cmpB: "2026-01-02", open: null, mapRule: null, wi: {}, wiOpen: false,
+  mode: "sample",                             // "sample" (500 parcels) or "own" (a building the person describes)
+  lastSample: (byAddr.A0001 || ADDR[0]).id, ownPlace: "city:Los Angeles, CA", guide: false, pickerOpen: false,
+  lang: "en",                                 // "en" or "es"; "es" only when HAS_ES
+  rq: "", rj: "", rs: "",                     // rules tab: search text, place filter, status filter
 };
+/* wi = what-if facts typed by the person, per address: { [address id]: { year, units, owner } } (raw text; parsed by wiOf). */
+
+/* ---- "Your own building": a pseudo-address with no parcel facts, so everything the engine knows comes from the person. ---- */
+/* The places a person can pick for their own building: each state (statewide rules only) and each city that has rules. */
+function ownPlaces() {
+  const out = [];
+  for (const j of JURS()) {
+    if (!/, [A-Z]{2}$/.test(j)) out.push({ key: "state:" + j, label: t("Elsewhere in {state} (statewide rules only)", { state: stName(j) }), state: j, city: null, group: stName(j) });
+    else out.push({ key: "city:" + j, label: j.replace(/, [A-Z]{2}$/, ""), state: j.slice(-2), city: j, group: stName(j.slice(-2)) });
+  }
+  return out;
+}
+/* Build (or rebuild) the pseudo-address for the chosen place. Its facts are empty, so unit and year tests are unknown until the person types them. */
+function syncOwn() {
+  const pl = ownPlaces().find((x) => x.key === S.ownPlace) || ownPlaces()[0];
+  byAddr[OWN_ID] = {
+    id: OWN_ID, street: "Your building", postal_city: pl.city ? pl.city.replace(/, [A-Z]{2}$/, "") : STATE_NAME[pl.state], zip: "", state: pl.state,
+    county: null, matched_address: null, lat: null, lon: null, city: pl.city, basis: "chosen_by_you", unverified: null,
+    facts: { year_built: null, units_lo: null, units_hi: null, units_basis: "no unit count entered yet", year_basis: "no year built entered yet", use_code: "", use_description: "" },
+    dataset: "Entered by you", retrieved_at: "", geocoded: false, note: null, own: true,
+  };
+  return byAddr[OWN_ID];
+}
+/* Answers for all 500 addresses on one date, cached by date. Used by the footer, the map and the compare table (not by the lookup, which runs one address). */
 const cache = new Map();
+/* The engine's entries for every sample address on one date, as { [address id]: entries[] }. Computed once per date, then reused. */
 function allAt(date) {
   if (!cache.has(date)) {
     const m = {};
@@ -303,25 +889,74 @@ function allAt(date) {
   }
   return cache.get(date);
 }
+/* The engine's answer for one address on one date: { entries: [...] } (no what-if facts). */
 const lookupOne = (a, date) => NE.lookupAddress(addrInput(a), RULES, date);
 
 /* ------------------------------------------------------------------ shell */
-const TABS = [["lookup", "Lookup"], ["changes", "What changed"], ["map", "Coverage map"], ["rules", "Rules and method"]];
-function renderTabs() {
-  $("#tabs").innerHTML = TABS.map(([k, l]) => `<button class="tab" data-act="tab" data-tab="${k}" ${S.tab === k ? 'aria-current="page"' : ""}>${l}</button>`).join("");
+/* [key, full label, short label]. The short label replaces the full one on phones (CSS .tab .short). */
+const TABS = [["lookup", "Lookup", "Lookup"], ["changes", "What changed", "Changes"], ["map", "Coverage map", "Map"], ["rules", "Rules and method", "Rules"]];
+/* True when the dark theme is showing: the person's button choice wins, else the system setting. */
+const isDark = () => document.documentElement.dataset.theme === "dark" || (!document.documentElement.dataset.theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
+/* Bold the first sentence of a notice. Works for both languages because both put the headline in the first sentence. */
+function boldFirst(text) {
+  const i = text.indexOf(". ");
+  return i < 0 ? esc(text) : `<b>${esc(text.slice(0, i + 1))}</b> ${esc(text.slice(i + 2))}`;
 }
+/* The EN | ES toggle in the header. Built once (so keyboard focus stays on it when the language changes), then only its pressed state is updated.
+   The button names are the languages' own names ("English", "Español"), so they are not translated. Hidden when there are no translations. */
+function renderLangs() {
+  const box = $("#langs");
+  box.hidden = !HAS_ES;
+  if (!HAS_ES) return;
+  box.setAttribute("aria-label", t("Language"));
+  if (!box.firstElementChild) {
+    box.innerHTML = [["en", "EN", "English"], ["es", "ES", "Español"]]
+      .map(([k, short, name]) => `<button type="button" data-act="lang" data-lang="${k}" lang="${k}" aria-label="${name}" aria-pressed="false">${short}</button>`).join("");
+  }
+  for (const b of box.querySelectorAll("button")) b.setAttribute("aria-pressed", String(b.dataset.lang === S.lang));
+}
+/* Header pieces that change with state or language: skip link, tagline, tabs, language toggle, theme icon, the permanent legal notice. */
+function renderChrome() {
+  $("#skip").textContent = t("Skip to the content");
+  $("#tagline").textContent = t("Which rental laws apply here, on this date?");
+  $("#tabs").setAttribute("aria-label", t("Sections"));
+  $("#tabs").innerHTML = TABS.map(([k, l, sh]) => `<button class="tab" data-act="tab" data-tab="${k}" ${S.tab === k ? 'aria-current="page"' : ""}><span class="full">${esc(t(l))}</span><span class="short">${esc(t(sh))}</span></button>`).join("");
+  renderLangs();
+  const tb = $("#themeBtn"), dark = isDark();
+  tb.innerHTML = ic(dark ? "sun" : "moon", "");
+  const lab = dark ? t("Switch to light mode") : t("Switch to dark mode");
+  tb.setAttribute("aria-label", lab); tb.title = lab;
+  $("#notice").innerHTML = `${ic("info", "")}<span>${boldFirst(t("Not legal advice. Public sources only, not reviewed by a lawyer. Plain-English summaries are written by AI."))}</span>
+    <button class="linkbtn" data-act="guide">${te("How to read an answer")}</button>`;
+}
+/* Footer: totals (rules, source documents, addresses, answers on the default date), the standing disclaimer and the links. */
 function renderFoot() {
   const answers = Object.values(allAt(DEFAULT_DATE)).reduce((n, e) => n + e.length, 0);
-  $("#foot").innerHTML = `<div>${RULES.length} rules from ${new Set(RULES.map((r) => r.source_doc_id)).size} source documents. ${ADDR.length} sample addresses. ${answers.toLocaleString("en-US")} answers as of ${fmtDate(DEFAULT_DATE)}.</div>
-  <div style="margin-top:6px">Not legal advice. Rules were read from public web pages and statutes on the dates shown on each rule. Parcel facts come from public assessor datasets. Check the source before you rely on any answer.</div>`;
+  const docs = new Set(); for (const r of RULES) { docs.add(r.source_doc_id); for (const s of r.supporting_sources || []) docs.add(s.doc_id); }
+  $("#foot").innerHTML = `<div>${te("{rules} rules from {docs} source documents. {addrs} sample addresses. {answers} answers as of {date}.", { rules: RULES.length, docs: docs.size, addrs: ADDR.length, answers: num(answers), date: fmtDate(DEFAULT_DATE) })}</div>
+  <div style="margin-top:6px">${te("Not legal advice. Rules were read from public web pages and statutes on the dates shown on each rule. Parcel facts come from public assessor datasets. Check the source before you rely on any answer.")}</div>
+  <div class="fl"><span>${te("Data built {date}", { date: ((D.meta && D.meta.generated_at) || "").slice(0, 10) })}</span>
+    <a href="https://github.com/Ahmadkonainah/hack-nation-pioneer" target="_blank" rel="noopener">${te("Source code")}</a>
+    <a href="https://github.com/Ahmadkonainah/hack-nation-pioneer/issues" target="_blank" rel="noopener">${te("Report a mistake or a missing rule")}</a>
+    <span>${te("No cookies. No tracking. Nothing you type leaves this page.")}</span></div>`;
 }
+/* The sticky header's height goes into a CSS variable so "scroll into view" and the sticky picker leave room for it. 0 when the header is not sticky (phones). */
 function setTopbar() {
   const top = $("#top");
   const h = getComputedStyle(top).position === "sticky" ? top.getBoundingClientRect().height : 0;
   document.documentElement.style.setProperty("--topbar", Math.ceil(h) + "px");
 }
+/* A box that scrolls sideways (the wide tables and the timeline on a phone) must be reachable by keyboard, or a keyboard user cannot read the hidden part.
+   So when a box really overflows it gets tabindex, a region role and a name (from its data-label); when it fits, none of that, so wide screens get no extra tab stops. */
+function markScrollers() {
+  for (const el of document.querySelectorAll(".tablewrap[data-label], .gantt[data-label]")) {
+    if (el.scrollWidth > el.clientWidth + 1) { el.tabIndex = 0; el.setAttribute("role", "region"); el.setAttribute("aria-label", el.dataset.label); }
+    else { el.removeAttribute("tabindex"); el.removeAttribute("role"); el.removeAttribute("aria-label"); }
+  }
+}
+/* Draw the whole current view from S. */
 function render() {
-  renderTabs();
+  renderChrome();
   const v = $("#view");
   if (S.tab === "lookup") renderLookup(v);
   else if (S.tab === "changes") renderChanges(v);
@@ -329,187 +964,440 @@ function render() {
   else renderRulesTab(v);
   setTopbar();
 }
+/* Switch tab, redraw, put the tab in the URL, and (unless told not to) scroll to the top. */
 function go(tab, scrollTop) {
   S.tab = tab;
-  try { history.replaceState(null, "", "#" + tab); } catch (e) { /* sandboxed */ }
   render();
+  syncHash();
   if (scrollTop !== false) window.scrollTo({ top: 0 });
+}
+/* Apply the language to the page itself: the document language (for screen readers, hyphenation and the browser) and the tab title. */
+function applyLang() {
+  document.documentElement.lang = S.lang;
+  document.title = t("Stackwise: which rental laws apply here?");
+}
+/* Copy typed-in fact fields into S.wi. The change event normally does this, but a language switch can arrive first
+   (some browsers do not move focus when a button is clicked), and the typed text must survive the redraw. */
+function flushWi() {
+  const y = $("#wi-year"), u = $("#wi-units"), o = $("#wi-owner");
+  if (!y || !u || !o) return;
+  if (y.value || u.value || o.value || S.wi[S.addr]) S.wi[S.addr] = { year: y.value, units: u.value, owner: o.value };
+}
+/* Change language and redraw the current view. Address, date, typed facts, tab and filters all live in S, so none is lost. */
+function setLang(l) {
+  if (!HAS_ES || (l !== "en" && l !== "es") || l === S.lang) return;
+  flushWi();
+  S.lang = l;
+  applyLang();
+  const y = window.scrollY;
+  renderFoot();
+  render();
+  syncHash();
+  window.scrollTo(0, y);
+  $("#live").textContent = t("Language: English.");
+  const b = $('#langs button[data-lang="' + l + '"]');
+  if (b) b.focus({ preventScroll: true });
 }
 
 /* ------------------------------------------------------------------ lookup */
+/* The guide opens on the first visit and can be closed; it holds the three steps and what each result label means. */
+function guideHtml() {
+  return `<details class="guide" id="guide" ${S.guide ? "open" : ""}><summary>${te("How to read an answer")} <span class="muted">${te("Pick a building, choose a date, read the bottom line. Five labels explain every result.")}</span></summary><div class="guide-body">
+    <div><h2>${te("Three steps")}</h2><ol class="steps">
+      <li>${te("Pick a sample address, or describe your own building.")}</li>
+      <li>${te("Choose the date. Every answer is worked out for that day.")}</li>
+      <li>${te("Read the bottom line. Open any rule to see the exact words of the law and its source.")}</li></ol></div>
+    <div><h2>${te("What the labels mean")}</h2><ul class="legend-list">${RES_ORDER.map((k) => `<li>${chipHtml(k)}<span>${esc(resHelp(k))}</span></li>`).join("")}</ul></div>
+    <p class="guide-note"><b>${te("Unknown is an answer, not an error.")}</b> ${te("When the data cannot say, we say so instead of guessing. Every rule links to its source.")}</p>
+  </div></details>`;
+}
+/* The lookup tab: guide, phone picker button, then the two columns (picker | answer). Redrawn when the mode or language changes. */
 function renderLookup(v) {
-  v.innerHTML = `<div class="bench">
-    <aside class="side" aria-label="Addresses">
-      <div><div class="eyebrow">Sample addresses</div>
-      <input class="search" id="q" type="search" placeholder="Search street, city, zip or ID" autocomplete="off" value="${esc(S.q)}"></div>
-      <div class="chips" id="cityChips"></div>
-      <div class="alist" id="alist"></div>
-    </aside>
-    <section id="answer" aria-live="polite"></section></div>`;
-  renderCityChips();
-  renderList();
+  v.innerHTML = `${guideHtml()}
+    <button class="pick-toggle" data-act="picker" aria-expanded="${S.pickerOpen}" aria-controls="side"><span class="t"><span class="s">${te("Choose another address or describe your own building")}</span></span><span class="a" aria-hidden="true">${S.pickerOpen ? te("Close") : te("Open")}</span></button>
+    <div class="bench">
+      <aside class="side ${S.pickerOpen ? "" : "collapsed"}" id="side" aria-label="${te("Choose a building")}">
+        <div class="seg" role="group" aria-label="${te("Which building")}">
+          <button data-act="mode" data-mode="sample" aria-pressed="${S.mode === "sample"}">${te("Sample addresses")}</button>
+          <button data-act="mode" data-mode="own" aria-pressed="${S.mode === "own"}">${te("Your own building")}</button>
+        </div>
+        <div class="pickbody" id="pickBody"></div>
+      </aside>
+      <section id="answer"></section></div>`;
+  renderPicker();
   renderAnswer();
 }
+/* Left column: the 500 sample addresses, or the one-field form for a building the person describes. */
+function renderPicker() {
+  const b = $("#pickBody");
+  if (S.mode === "own") {
+    const groups = {};
+    for (const x of ownPlaces()) (groups[x.group] = groups[x.group] || []).push(x);
+    b.innerHTML = `<div class="own"><p class="muted">${te("Describe a building that is not in the sample. Pick where it is, then type what you know in the box called \"Describe your building\".")}</p>
+      <label>${te("Where is the building?")}<select id="own-place">${Object.entries(groups).map(([g, xs]) => `<optgroup label="${esc(g)}">${xs.map((x) => `<option value="${esc(x.key)}" ${x.key === S.ownPlace ? "selected" : ""}>${esc(x.label)}</option>`).join("")}</optgroup>`).join("")}</select></label>
+      <p class="muted">${te("Only these places have rules in this prototype. Nothing is looked up, and nothing you type is sent anywhere.")}</p></div>`;
+  } else {
+    b.innerHTML = `<div><div class="eyebrow">${te("Sample addresses")}</div>
+      <input class="search" id="q" type="search" placeholder="${te("Search street, city, zip or ID")}" autocomplete="off" aria-label="${te("Search the sample addresses")}" value="${esc(S.q)}"></div>
+      <div class="chips" id="cityChips"></div><div class="alist" id="alist"></div>`;
+    renderCityChips();
+    renderList();
+  }
+}
+/* Open or close the address picker on phones (it is collapsed by default there). aria-expanded carries the state for assistive
+   technology. The visible Open/Close word on the toggle is drawn by renderLookup, so it updates on the next redraw. */
+function setPicker(open) {
+  S.pickerOpen = open;
+  const side = $("#side"), tg = $(".pick-toggle");
+  if (side) side.classList.toggle("collapsed", !open);
+  if (tg) tg.setAttribute("aria-expanded", String(open));
+}
+/* City filter chips, one per city with its address count, plus "All". */
 function renderCityChips() {
   const counts = {};
   for (const a of ADDR) counts[cityOf(a)] = (counts[cityOf(a)] || 0) + 1;
-  const items = [["all", `All ${ADDR.length}`]].concat(CITIES.map((c) => [c, `${c.replace(/, [A-Z]{2}$/, "")} ${counts[c]}`]));
+  const items = [["all", t("All {n}", { n: ADDR.length })]].concat(CITIES.map((c) => [c, `${cityShort(c)} ${counts[c]}`]));
   $("#cityChips").innerHTML = items.map(([k, l]) => `<button class="fchip" data-act="city" data-city="${esc(k)}" aria-pressed="${S.city === k}">${esc(l)}</button>`).join("");
 }
+/* The sample addresses that match the city chip and the search box (street, postal city, zip or ID). */
 function filteredAddrs() {
   const q = S.q.trim().toLowerCase();
   return ADDR.filter((a) => (S.city === "all" || cityOf(a) === S.city) &&
     (!q || `${a.street} ${a.postal_city} ${a.zip} ${a.id}`.toLowerCase().includes(q)));
 }
+/* The address list, 60 at a time (S.shown) so the page stays light. Redrawn on every keystroke in the search box. */
 function renderList() {
   const list = filteredAddrs();
   const part = list.slice(0, S.shown);
   const el = $("#alist");
   el.innerHTML = part.map((a) => `<button class="aitem" data-act="pick" data-id="${a.id}" aria-current="${a.id === S.addr}">
     <div class="s">${esc(a.street)}</div>
-    <div class="m">${esc(a.postal_city)}, ${esc(a.state)} ${esc(a.zip)} · ${a.facts.year_built ? "built " + a.facts.year_built : "year not in data"}</div></button>`).join("") +
-    (list.length > part.length ? `<button class="btn" data-act="more">Show ${Math.min(60, list.length - part.length)} more of ${list.length - part.length}</button>` : "") +
-    (!list.length ? `<div class="empty">No address matches.</div>` : "");
+    <div class="m">${esc(a.postal_city)}, ${esc(a.state)} ${esc(a.zip)} · ${a.facts.year_built ? te("built {year}", { year: a.facts.year_built }) : te("year not in data")}</div></button>`).join("") +
+    (list.length > part.length ? `<button class="btn" data-act="more">${te("Show {n} more of {m}", { n: Math.min(60, list.length - part.length), m: list.length - part.length })}</button>` : "") +
+    (!list.length ? `<div class="empty">${te("No address matches.")}</div>` : "");
 }
+/* How many entries have each result: { applies: n, superseded: n, ... }. */
 function resultCounts(entries) {
   const c = Object.fromEntries(RES_ORDER.map((k) => [k, 0]));
   for (const e of entries) c[e.result]++;
   return c;
 }
+/* Facts a person types in. Parsed here, applied by the engine (NE.applyWhatIf), never stored anywhere.
+   Returns { year_built?, units?, owner_occupied? } from the raw text in S.wi[address], or null when nothing valid is typed. */
+function wiOf(a) {
+  const x = S.wi[a.id];
+  if (!x) return null;
+  const w = {};
+  const y = /^\d{4}$/.test((x.year || "").trim()) ? +x.year.trim() : null;
+  if (y !== null && y >= 1700 && y <= 2100) w.year_built = y;
+  const n = /^\d{1,5}$/.test((x.units || "").trim()) ? +x.units.trim() : null;
+  if (n !== null && n > 0) w.units = n;
+  if (x.owner === "yes") w.owner_occupied = true;
+  if (x.owner === "no") w.owner_occupied = false;
+  return Object.keys(w).length ? w : null;
+}
+/* Unit count as text from facts ({units_lo, units_hi}): "6", "5 or more", "2 to 4", or null when unknown. */
+const unitsText = (f) => (f.units_lo == null ? null : f.units_lo === f.units_hi ? `${f.units_lo}` : f.units_hi == null ? t("{lo} or more", { lo: f.units_lo }) : t("{lo} to {hi}", { lo: f.units_lo, hi: f.units_hi }));
+/* "a or b" for a list of at most two short phrases (the missing parcel facts). */
+const orJoin = (xs) => (xs.length === 2 ? t("{a} or {b}", { a: xs[0], b: xs[1] }) : xs.join(""));
+/* The message under the year field when the typed year is not four digits; "" when fine. */
+const badYearMsg = (x) => (x.year && !/^\d{4}$/.test(x.year.trim()) ? t("Year built needs four digits, for example 1975.") : "");
+
+/* The right column. Two layers on purpose: renderAnswer draws the panel (title, facts, date, the what-if FIELDS) and an empty #ansBody;
+   renderBody draws everything below the panel. Typing a fact calls renderFacts and renderBody only, so the input fields are never
+   replaced while the person types and keep their focus and caret. */
 function renderAnswer() {
-  const a = byAddr[S.addr];
-  const out = lookupOne(a, S.date);
-  const entries = out.entries;
-  const counts = resultCounts(entries);
-  const nState = entries.filter((e) => byRule[e.team_rule_id].level === "state").length;
-  const nCity = entries.length - nState;
-  const f = a.facts;
-  const units = f.units_lo == null ? null : f.units_lo === f.units_hi ? `${f.units_lo}` : f.units_hi == null ? `${f.units_lo} or more` : `${f.units_lo} to ${f.units_hi}`;
+  const a = byAddr[S.addr], own = !!a.own;
+  const f0 = a.facts;
+  const base = lookupOne(a, S.date).entries;
+  const nState = base.filter((e) => byRule[e.team_rule_id].level === "state").length;
+  const nCity = base.length - nState;
+  const unkNow = base.filter((e) => e.result === "unknown").length;
   const cityName = a.city ? a.city.replace(/, [A-Z]{2}$/, "") : null;
-  const mism = a.city && a.postal_city && a.city.replace(/, [A-Z]{2}$/, "").toLowerCase() !== a.postal_city.toLowerCase();
-  const html = [];
-  html.push(`<div class="panel">
-    <div class="eyebrow">Address ${esc(a.id)}</div>
-    <div class="addr-title">${esc(a.street)}</div>
-    <div class="muted">${esc(a.postal_city)}, ${esc(a.state)} ${esc(a.zip)}${mism ? ` · legal city is ${esc(cityName)}` : ""}</div>
-    <div class="stack" aria-label="Jurisdiction stack">
-      <div class="layer"><div class="k">State</div><div class="v">${esc(STATE_NAME[a.state] || a.state)}</div><div class="n">${nState} statewide rule${nState === 1 ? "" : "s"}</div></div>
-      <div class="arrow">›</div>
-      <div class="layer"><div class="k">County</div><div class="v">${esc(a.county || "Not found")}</div><div class="n">no county rules in scope</div></div>
-      <div class="arrow">›</div>
-      <div class="layer"><div class="k">City</div><div class="v">${esc(cityName || "Not placed")}</div><div class="n">${nCity} city rule${nCity === 1 ? "" : "s"}</div></div>
+  // The postal city (what the mail says) can differ from the legal city (what decides the rules); say so when it does.
+  const mism = !own && a.city && a.postal_city && a.city.replace(/, [A-Z]{2}$/, "").toLowerCase() !== a.postal_city.toLowerCase();
+  const miss = own ? [] : [f0.year_built ? null : t("year built"), unitsText(f0) ? null : t("unit count")].filter(Boolean);
+  const x = S.wi[a.id] || {};
+  const badYear = badYearMsg(x);
+  const where = own ? (cityName ? `${cityName}, ${a.state}` : t("{state} (statewide rules only)", { state: stName(a.state) })) : `${a.postal_city}, ${a.state} ${a.zip}${mism ? ` · ${t("legal city is {city}", { city: cityName })}` : ""}`;
+  const quick = [["2025-12-31", t("The day before California AB 325 starts")], ["2026-01-02", t("California AB 325 is in effect")], [DEFAULT_DATE, t("The default date")], ["2027-07-02", t("After the New Jersey FAIR Act starts")]];
+  $("#answer").innerHTML = `<div class="panel">
+    <div class="panel-head">
+      <div class="ph-title"><div class="eyebrow">${own ? te("Your own building") : te("Address {id}", { id: a.id })}</div>
+        <h2 class="addr-title">${own ? te("Your building") : esc(a.street)}</h2>
+        <div class="muted">${esc(where)}</div></div>
+      <div class="actions tools">
+        <button class="btn sm" data-act="copylink">${ic("link")} ${te("Copy link")}</button>
+        <button class="btn sm" data-act="print">${ic("print")} ${te("Print")}</button>
+        <button class="btn sm" data-act="copyjson">${ic("code")} ${te("JSON")}</button>
+      </div>
     </div>
-    <div class="basis">${esc(BASIS[a.basis] || "")}.${a.matched_address ? ` Matched as <span class="mono">${esc(a.matched_address)}</span>.` : ""}</div>
-    <div class="facts">
-      <div class="fact"><div class="k">Year built</div><div class="v ${f.year_built ? "" : "missing"}">${f.year_built || "Not in data"}</div></div>
-      <div class="fact"><div class="k">Units</div><div class="v ${units ? "" : "missing"}">${units ? esc(units) : "Not in data"}</div></div>
-      <div class="fact"><div class="k">Parcel use</div><div class="v ${f.use_description ? "" : "missing"}">${esc(f.use_description || "Not in data")}</div></div>
-      <div class="fact"><div class="k">Data source</div><div class="v">${esc(a.dataset)}</div><div class="n muted" style="font-size:12px">retrieved ${esc((a.retrieved_at || "").slice(0, 10))}</div></div>
+    <div class="muted copied" id="copied" role="status"></div>
+    <div class="stack" aria-label="${te("Jurisdiction stack")}">
+      <div class="layer"><div class="k">${te("State")}</div><div class="v">${esc(stName(a.state))}</div><div class="n">${esc(tn(nState, "{n} statewide rule", "{n} statewide rules"))}</div></div>
+      <div class="arrow" aria-hidden="true">›</div>
+      <div class="layer"><div class="k">${te("County")}</div><div class="v">${esc(a.county ? countyName(a.county) : (own ? t("Not looked up") : t("Not found")))}</div><div class="n">${te("no county rules in scope")}</div></div>
+      <div class="arrow" aria-hidden="true">›</div>
+      <div class="layer"><div class="k">${te("City")}</div><div class="v">${esc(cityName || (own ? t("None chosen") : t("Not placed")))}</div><div class="n">${esc(tn(nCity, "{n} city rule", "{n} city rules"))}</div></div>
     </div>
+    <div class="basis">${te(BASIS[a.basis] || "")}.${a.matched_address ? ` ${te("Matched as")} <span class="mono">${esc(a.matched_address)}</span>.` : ""}</div>
+    <div class="facts" id="factsGrid"></div>
     <div class="ctrl">
-      <label for="asof">Answer as of</label>
+      <label for="asof">${te("Answer as of")}</label>
       <input type="date" id="asof" value="${esc(S.date)}">
-      <button class="qbtn" data-act="setdate" data-date="2025-12-31">2025-12-31</button>
-      <button class="qbtn" data-act="setdate" data-date="2026-01-02">2026-01-02</button>
-      <button class="qbtn" data-act="setdate" data-date="${esc(DEFAULT_DATE)}">${esc(DEFAULT_DATE)}</button>
-      <button class="qbtn" data-act="setdate" data-date="2027-07-02">2027-07-02</button>
+      <span class="muted jump">${te("Jump to")}</span>
+      ${quick.map(([d, tip]) => `<button class="qbtn" data-act="setdate" data-date="${d}" title="${esc(tip)}" aria-pressed="${S.date === d}">${esc(fmtDate(d))}</button>`).join("")}
     </div>
-  </div>`);
+    <details class="whatif" id="wiBox" ${own || S.wiOpen || wiOf(a) ? "open" : ""}>
+      <summary>${own ? te("Describe your building") : te("What if you know more about this building?")}<span class="muted"> ${own ? "" : (unkNow ? esc(tn(unkNow, "{n} answer is unknown now.", "{n} answers are unknown now.")) : "")}${miss.length ? ` ${te("The parcel data has no {what}.", { what: orJoin(miss) })}` : ""}</span></summary>
+      <p class="muted wi-help">${own ? te("Type what you know about the building. Anything you leave blank stays unknown, and the answers below say so.") : te("Parcel data can be incomplete. Type what you know and every answer below is worked out again by the same engine.")} ${te("Your entries stay in this tab. They are not saved or sent anywhere.")}</p>
+      <div class="wi-grid">
+        <label>${te("Year built")}<input id="wi-year" type="text" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="${f0.year_built ? esc(f0.year_built) : te("for example 1975")}" value="${esc(x.year || "")}"></label>
+        <label>${te("Units")}<input id="wi-units" type="text" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="${unitsText(f0) ? esc(unitsText(f0)) : te("for example 6")}" value="${esc(x.units || "")}"></label>
+        <label>${te("Owner lives in the building")}<select id="wi-owner"><option value="">${te("Not sure")}</option><option value="yes" ${x.owner === "yes" ? "selected" : ""}>${te("Yes")}</option><option value="no" ${x.owner === "no" ? "selected" : ""}>${te("No")}</option></select></label>
+        <button class="btn" id="wiClear" data-act="wiclear">${te("Clear")}</button>
+      </div>
+      <div class="wi-bad" id="wiBad" role="alert">${esc(badYear)}</div>
+    </details>
+  </div>
+  <div id="ansBody"></div>`;
+  renderFacts();
+  renderBody();
+}
+/* The four fact tiles (year built, units, parcel use, data source), with typed values merged in, plus the Clear button state and the year error. */
+function renderFacts() {
+  const a = byAddr[S.addr], w = wiOf(a), own = !!a.own;
+  const f = NE.applyWhatIf(a.facts, w);
+  const un = unitsText(f);
+  const none = own ? t("Not entered") : t("Not in data");
+  const ent = (on) => (on ? `<div class="n entered">${te("entered by you")}</div>` : "");
+  $("#factsGrid").innerHTML = `
+      <div class="fact"><div class="k">${te("Year built")}</div><div class="v ${f.year_built ? "" : "missing"}">${f.year_built ? esc(f.year_built) : esc(none)}</div>${ent(w && w.year_built)}</div>
+      <div class="fact"><div class="k">${te("Units")}</div><div class="v ${un ? "" : "missing"}">${un ? esc(un) : esc(none)}</div>${ent(w && w.units)}</div>
+      ${own ? "" : `<div class="fact"><div class="k">${te("Parcel use")}</div><div class="v ${f.use_description ? "" : "missing"}">${esc(f.use_description || t("Not in data"))}</div></div>`}
+      <div class="fact"><div class="k">${te("Data source")}</div><div class="v">${esc(t(a.dataset))}</div>${own ? "" : `<div class="n muted" style="font-size:12px">${te("retrieved {date}", { date: (a.retrieved_at || "").slice(0, 10) })}</div>`}</div>`;
+  const bad = $("#wiBad"); const x = S.wi[a.id] || {};
+  // Clear stays enabled whenever ANY field has text, even text that is not valid yet (for example "19"), so a typo can always be wiped.
+  // w is only set for valid values, so testing w alone would leave the button dead while an invalid entry sits in the box.
+  const clr = $("#wiClear"); if (clr) clr.disabled = !(w || x.year || x.units || x.owner);
+  if (bad) bad.textContent = badYearMsg(x);
+}
+/* Everything under the panel: the what-if note, the bottom line, the result filter chips, and the rule cards grouped by topic.
+   Also announces the new totals to screen readers and writes the URL hash. */
+function renderBody() {
+  const a = byAddr[S.addr], w = wiOf(a);
+  const baseEntries = lookupOne(a, S.date).entries;
+  const entries = w ? NE.lookupAddress(addrInput(a), RULES, S.date, w).entries : baseEntries;
+  const was = Object.fromEntries(baseEntries.map((e) => [e.team_rule_id, e.result]));
+  const counts = resultCounts(entries);
+  const cityName = a.city ? a.city.replace(/, [A-Z]{2}$/, "") : null;
+  const html = [];
+  if (w) {
+    // Compare the answers with and without the typed facts: which results moved, from what to what.
+    const moved = {}; let n = 0;
+    for (const e of entries) { const p = was[e.team_rule_id]; if (p && p !== e.result) { const k = `${p}>${e.result}`; moved[k] = (moved[k] || 0) + 1; n++; } }
+    const gone = baseEntries.filter((e) => !entries.some((x) => x.team_rule_id === e.team_rule_id)).length;
+    const bits = [];
+    if (w.year_built) bits.push(t("built {year}", { year: w.year_built }));
+    if (w.units) bits.push(tn(w.units, "{n} unit", "{n} units"));
+    if (w.owner_occupied === true) bits.push(t("an owner lives there"));
+    if (w.owner_occupied === false) bits.push(t("no owner lives there"));
+    const moves = Object.entries(moved).map(([k, c]) => { const [p, q] = k.split(">"); return t("{c} {from} to {to}", { c, from: resLabel(p).toLowerCase(), to: resLabel(q).toLowerCase() }); });
+    const what = n || gone
+      ? `${tn(n, "{n} answer changed", "{n} answers changed")}${moves.length ? ` (${moves.join("; ")})` : ""}${gone ? `; ${tn(gone, "{n} rule no longer applies", "{n} rules no longer apply")}` : ""}.`
+      : t("No answer changes with these facts.");
+    html.push(`<div class="wi-note" role="status"><b>${te("Using your facts:")}</b> ${esc(bits.join(", "))}. ${esc(what)} <button class="linkbtn" data-act="wiclear">${te("Clear")}</button></div>`);
+  }
+  if (a.own && !w) html.push(`<div class="wi-note" role="status"><b>${te("Nothing is entered yet.")}</b> ${te("Answers that depend on the year built or the number of units show Unknown. Type them in the box above and the answers update at once.")}</div>`);
+  html.push(bottomLine(entries));
+  // The filter chips use data-zero (a CSS color change) for results with no answers here, not opacity: faded text would fail the contrast check.
   html.push(`<div class="sumbar">` +
-    `<button class="sumchip" data-act="resf" data-res="all" aria-pressed="${S.res === "all"}">All <span class="num">${entries.length}</span></button>` +
-    RES_ORDER.map((k) => `<button class="sumchip" data-act="resf" data-res="${k}" aria-pressed="${S.res === k}" ${counts[k] ? "" : 'style="opacity:.55"'}><span class="chip r-${k}"><i>${RES[k].glyph}</i>${RES[k].label}</span><span class="num">${counts[k]}</span></button>`).join("") +
+    `<button class="sumchip" data-act="resf" data-res="all" aria-pressed="${S.res === "all"}">${te("All")} <span class="num">${entries.length}</span></button>` +
+    RES_ORDER.map((k) => `<button class="sumchip" data-act="resf" data-res="${k}" aria-pressed="${S.res === k}" ${counts[k] ? "" : 'data-zero="1"'}>${chipHtml(k)}<span class="num">${counts[k]}</span></button>`).join("") +
     `</div>`);
-  for (const [ck, cl] of CATS) {
+  for (const [ck] of CATS) {
     const list = entries.filter((e) => byRule[e.team_rule_id].category === ck);
+    // Within a topic: the result order first (applies ... pending), then statewide before city.
     const shown = list.filter((e) => S.res === "all" || e.result === S.res)
       .sort((x, y) => RES_ORDER.indexOf(x.result) - RES_ORDER.indexOf(y.result) || (byRule[x.team_rule_id].level === "state" ? -1 : 1) - (byRule[y.team_rule_id].level === "state" ? -1 : 1));
     if (S.res !== "all" && !shown.length) continue;
-    html.push(`<section class="cat"><h3>${esc(cl)} <small>${list.length ? list.length + (list.length === 1 ? " rule" : " rules") : ""}</small></h3>`);
-    if (!list.length) html.push(`<div class="gap">No rule found for this topic in our sources for ${esc(cityName || a.state)} or ${esc(STATE_NAME[a.state] || a.state)}. This is a gap in the sources, not proof that no law exists.</div>`);
-    for (const e of shown) html.push(cardHtml(e, a));
+    html.push(`<section class="cat" id="cat-${ck}"><h3>${esc(catName(ck))} <small>${list.length ? esc(tn(list.length, "{n} rule", "{n} rules")) : ""}</small></h3>`);
+    // A topic with no rule says so. Silence would read as "no law exists", which the sources cannot prove.
+    if (!list.length) html.push(`<div class="gap">${te("No rule found for this topic in our sources for {place} or {state}. This is a gap in the sources, not proof that no law exists.", { place: cityName || a.state, state: stName(a.state) })}</div>`);
+    for (const e of shown) html.push(cardHtml(e, a, w ? was[e.team_rule_id] : null));
     html.push(`</section>`);
   }
-  html.push(`<div class="actions"><button class="btn" data-act="copyjson">Copy this answer as JSON</button><span class="muted" id="copied" style="font-size:13px"></span></div>`);
-  $("#answer").innerHTML = html.join("");
+  $("#ansBody").innerHTML = html.join("");
+  // Announce the result of a change once, politely, instead of re-reading the whole page to a screen reader.
+  $("#live").textContent = t("Answers for {name}: {list}.", {
+    name: a.own ? t("your building") : a.street,
+    list: RES_ORDER.filter((k) => counts[k]).map((k) => t(RES_COUNT[k], { n: counts[k] })).join(", "),
+  });
+  syncHash();
 }
-function cardHtml(e, a) {
-  const r = byRule[e.team_rule_id];
-  const lvl = r.level === "state" ? "Statewide" : r.jurisdiction.replace(/, [A-Z]{2}$/, "");
+/* The answer first: one block per topic, before the detail cards. Each row lists, per result, up to two rule names and "and N more". Click jumps to the topic. */
+function bottomLine(entries) {
+  const rows = CATS.map(([ck]) => {
+    const list = entries.filter((e) => byRule[e.team_rule_id].category === ck);
+    let body;
+    if (!list.length) body = `<span class="bl-line bl-gap">${te("No rule found in our sources")}</span>`;
+    else {
+      body = RES_ORDER.map((k) => {
+        const g = list.filter((e) => e.result === k);
+        if (!g.length) return "";
+        const names = g.slice(0, 2).map((e) => esc(titleOf(byRule[e.team_rule_id]))).join("; ") + (g.length > 2 ? ` ${te("and {n} more", { n: g.length - 2 })}` : "");
+        return `<span class="bl-line ${k === "applies" ? "" : "bl-minor"}">${chipHtml(k)}<span>${names}</span></span>`;
+      }).join("");
+    }
+    return `<button class="bl-row" data-act="gocat" data-cat="${ck}"><span class="bl-cat">${esc(catName(ck))}</span><span class="bl-body">${body}</span></button>`;
+  });
+  return `<section class="bottom" aria-label="${te("Bottom line for this address")}"><div class="eyebrow">${te("Bottom line for this address")}</div>${rows.join("")}</section>`;
+}
+/* The one Spanish sentence about a result. Built from fixed templates (not from the English engine text) and the card's own data. Plain text. */
+function resultSentence(e, r, by) {
+  if (e.result === "applies") return t("According to the available data, this rule applies to this building.");
+  if (e.result === "superseded") return by ? t("A stricter local rule governs here: {title}.", { title: titleOf(by) }) : t("A stricter local rule governs here.");
+  if (e.result === "not_yet_effective") return r.effective_date ? t("It is not in force yet. It takes effect on {date}.", { date: fmtDate(r.effective_date, true) }) : t("It is not in force yet. Its start date is not stated.");
+  if (e.result === "pending") return t("It is a bill. It is not law yet.");
+  return t("Cannot be determined: building data is missing (for example, the year built). Type it above to resolve it.");
+}
+/* Main text of a card in the Spanish view: the plain-language summary (if this rule has one), the one result sentence, and the
+   "automatic translation" note. A rule without a translation shows its English summary under the "(in English)" label instead. */
+function spanishSummary(e, r, by) {
+  const x = esRule(r);
+  let h = "";
+  if (x && x.plain_es) h += `<p class="answer">${esc(x.plain_es)}</p>`;
+  h += `<p class="answer">${esc(resultSentence(e, r, by))}</p>`;
+  if (x && x.plain_es && ES_PACK.label) h += `<p class="srcnote">${esc(ES_PACK.label)}</p>`;
+  if (!(x && x.plain_es) && r.plain_en) h += `<p class="answer muted">${EN_TAG()}<span lang="en">${esc(r.plain_en)}</span></p>`;
+  return h;
+}
+/* One rule card: result chip and facts line, title, key value, the answer text, flags, and the "show the law" disclosure with the exact words and source.
+   e = the engine entry, a = the address, was = the result before the person's typed facts (or null). */
+function cardHtml(e, a, was) {
+  const r = byRule[e.team_rule_id], es = S.lang === "es";
+  const lvl = r.level === "state" ? t("Statewide") : r.jurisdiction.replace(/, [A-Z]{2}$/, "");
   const partners = (e.partners || []).map((p) => byRule[p]).filter(Boolean);
   const by = e.superseded_by ? byRule[e.superseded_by] : null;
   const eff = r.legal_state === "enacted" || r.status === "in_force" || r.status === "not_yet_effective"
-    ? (r.effective_date ? "Effective " + fmtDate(r.effective_date) : "Effective date not stated") : "";
+    ? (r.effective_date ? t("Effective {date}", { date: fmtDate(r.effective_date) }) : t("Effective date not stated")) : "";
   let flag = "";
   if (e.conflict_flag) {
-    flag = `<div class="flagbox"><b>Flagged for human review.</b> ${partners.length ? "Possible conflict with " + partners.map((p) => `<button class="linkbtn" data-act="card" data-rule="${p.team_rule_id}">${esc(p.title)}</button>`).join(", ") + "." : ""} ${esc(r.conflict_note || "")}</div>`;
+    flag = `<div class="flagbox"><b>${te("Flagged for human review.")}</b> ${partners.length ? te("Possible conflict with") + " " + partners.map((p) => `<button class="linkbtn" data-act="card" data-rule="${p.team_rule_id}">${esc(titleOf(p))}</button>`).join(", ") + "." : ""} ${r.conflict_note ? EN_TAG() + `<span${LE()}>${esc(r.conflict_note)}</span>` : ""}</div>`;
   }
   let yieldNote = "";
   if (by && (e.result === "superseded" || e.result === "unknown")) {
-    yieldNote = `<div class="muted" style="margin-top:8px;font-size:13.5px">${e.result === "superseded" ? "Governing rule here" : "Might be overridden by"}: <button class="linkbtn" data-act="card" data-rule="${by.team_rule_id}">${esc(by.title)}</button></div>`;
+    yieldNote = `<div class="muted" style="margin-top:8px;font-size:13.5px">${e.result === "superseded" ? te("Governing rule here") : te("Might be overridden by")}: <button class="linkbtn" data-act="card" data-rule="${by.team_rule_id}">${esc(titleOf(by))}</button></div>`;
   }
   if (e.may_yield && e.may_yield.length && e.result === "applies") {
-    yieldNote = e.may_yield.map((id) => byRule[id]).filter(Boolean).map((o) => `<div class="muted" style="margin-top:8px;font-size:13.5px">Could be overridden by: <button class="linkbtn" data-act="card" data-rule="${o.team_rule_id}">${esc(o.title)}</button></div>`).join("");
+    yieldNote = e.may_yield.map((id) => byRule[id]).filter(Boolean).map((o) => `<div class="muted" style="margin-top:8px;font-size:13.5px">${te("Could be overridden by:")} <button class="linkbtn" data-act="card" data-rule="${o.team_rule_id}">${esc(titleOf(o))}</button></div>`).join("");
   }
   const sup = (r.supporting_sources || []).map((s) => `<a href="${esc(s.source_url)}" target="_blank" rel="noopener">${esc(s.doc_id)}</a>`).join(", ");
+  // English: the engine's sentence IS the answer. Spanish: a translated summary is the answer, and the English reasoning moves inside the disclosure.
+  const main = es ? spanishSummary(e, r, by) : `<p class="answer">${esc(e.explanation.replace(/^(Applies|Superseded|Unknown|Not yet effective|Pending)\.\s*/, ""))}</p>`;
+  const kv = kvOf(r);
   return `<article class="card" id="card-${r.team_rule_id}">
-    <div class="row1"><span class="chip r-${e.result}"><i>${RES[e.result].glyph}</i>${RES[e.result].label}</span>
-      <span class="pill">${esc(lvl)}</span>${eff ? `<span>${esc(eff)}</span>` : ""}<span>Confidence ${esc(e.confidence)}</span></div>
-    <h4>${esc(r.title)}</h4>
-    ${r.key_value ? `<span class="kv">${esc(r.key_value)}</span>` : ""}
-    <p class="answer">${esc(e.explanation.replace(/^(Applies|Superseded|Unknown|Not yet effective|Pending)\.\s*/, ""))}</p>
+    <div class="row1">${chipHtml(e.result)}
+      <span class="pill">${esc(lvl)}</span>${eff ? `<span>${esc(eff)}</span>` : ""}<span>${te("Confidence {level}", { level: t(e.confidence) })}</span>${was && was !== e.result ? `<span class="pill changed">${te("Changed by your facts: was {was}", { was: resLabel(was).toLowerCase() })}</span>` : ""}</div>
+    <h4>${esc(titleOf(r))}</h4>
+    ${kv ? `<span class="kv">${esc(kv)}</span>` : ""}
+    ${main}
     ${flag}${yieldNote}
-    <details class="law"><summary>Show the law and its source</summary>
+    <details class="law"><summary>${es ? te("The law and its source (official text in English)") : te("Show the law and its source")}</summary>
+      ${es ? `<p class="lawnote">${te("The law's own words, citations and links stay in English, because the English is the legal text.")}</p>` : ""}
       <dl class="dl">
-        <dt>What it requires</dt><dd>${esc(r.requirement)}</dd>
-        ${r.coverage_conditions ? `<dt>Who is covered</dt><dd>${esc(r.coverage_conditions)}</dd>` : ""}
-        ${r.exemptions ? `<dt>Exemptions</dt><dd>${esc(r.exemptions)}</dd>` : ""}
-        ${r.interaction ? `<dt>How it fits with other laws</dt><dd>${esc(r.interaction)}</dd>` : ""}
-        <dt>Exact words from the source</dt><dd><blockquote class="q">${esc(r.quoted_span)}</blockquote></dd>
-        <dt>Citation</dt><dd class="mono">${esc(r.citation)}</dd>
-        <dt>Source</dt><dd><a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.source_url)}</a> <span class="muted">(${esc(r.source_doc_id)}, retrieved ${esc((r.retrieved_at || "").slice(0, 10))})</span></dd>
-        ${sup ? `<dt>Also supported by</dt><dd>${sup}</dd>` : ""}
-        <dt>Rule ID</dt><dd class="mono">${esc(r.team_rule_id)} · extraction confidence ${r.confidence == null ? "n/a" : r.confidence}</dd>
+        ${es ? `<dt>${te("Technical reasoning (in English)")}</dt><dd${LE()}>${esc(e.explanation)}</dd>` : ""}
+        <dt>${te("What it requires")}</dt><dd${LE()}>${esc(r.requirement)}</dd>
+        ${r.coverage_conditions ? `<dt>${te("Who is covered")}</dt><dd${LE()}>${esc(r.coverage_conditions)}</dd>` : ""}
+        ${r.exemptions ? `<dt>${te("Exemptions")}</dt><dd${LE()}>${esc(r.exemptions)}</dd>` : ""}
+        ${r.interaction ? `<dt>${te("How it fits with other laws")}</dt><dd${LE()}>${esc(r.interaction)}</dd>` : ""}
+        <dt>${te("Exact words from the source")}</dt><dd><blockquote class="q" lang="en">${esc(r.quoted_span)}</blockquote></dd>
+        <dt>${te("Citation")}</dt><dd class="mono" lang="en">${esc(r.citation)}</dd>
+        <dt>${te("Source")}</dt><dd><a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.source_url)}</a> <span class="muted">(${esc(r.source_doc_id)}, ${te("retrieved {date}", { date: (r.retrieved_at || "").slice(0, 10) })})</span></dd>
+        ${sup ? `<dt>${te("Also supported by")}</dt><dd>${sup}</dd>` : ""}
+        <dt>${te("Rule ID")}</dt><dd class="mono">${esc(r.team_rule_id)} · ${te("extraction confidence {x}", { x: r.confidence == null ? t("n/a") : r.confidence })}</dd>
       </dl></details></article>`;
 }
+/* Copy the current answer (with typed facts, if any) as JSON. The keys are machine names, so the JSON is the same in both languages. */
 function copyJson() {
   const a = byAddr[S.addr];
-  const out = lookupOne(a, S.date);
-  const payload = { address_id: a.id, as_of: S.date, lookups: out.entries.map((e) => ({ team_rule_id: e.team_rule_id, result: e.result, explanation: e.explanation, conflict_flag: e.conflict_flag })) };
+  const w = wiOf(a);
+  const out = w ? NE.lookupAddress(addrInput(a), RULES, S.date, w) : lookupOne(a, S.date);
+  const payload = { address_id: a.id, as_of: S.date, ...(a.own ? { place: a.city || a.state } : {}), ...(w ? { facts_entered_by_user: w } : {}), lookups: out.entries.map((e) => ({ team_rule_id: e.team_rule_id, result: e.result, explanation: e.explanation, conflict_flag: e.conflict_flag })) };
   const text = JSON.stringify(payload, null, 2);
-  const done = (ok) => { const c = $("#copied"); if (c) c.textContent = ok ? "Copied." : "Copy was blocked here. Select the text on the page instead."; };
+  copyText(text, t("Answer copied as JSON."));
+}
+/* Clipboard access can be refused (older browsers, embedded frames); say so instead of failing silently. */
+function copyText(text, okMsg) {
+  const done = (ok) => { const c = $("#copied"); if (c) c.textContent = ok ? okMsg : t("Copy was blocked here. Select the text on the page instead."); };
   try { navigator.clipboard.writeText(text).then(() => done(true), () => done(false)); } catch (e) { done(false); }
+}
+/* ---- deep links: the address (or own building), date, typed facts and language live in the URL hash, so an answer can be shared by copying the link. ----
+   A hash, not a query string: the browser never sends it to a server, it works when the page is opened from a file, and changing it does not reload the page. */
+/* Write S into the hash with replaceState (no new history entry per keystroke). Format: #tab?a=ID&d=DATE&y=YEAR&u=UNITS&o=yes|no&lang=es */
+function syncHash() {
+  const q = new URLSearchParams();
+  if (S.tab === "lookup") {
+    if (S.mode === "own") q.set("own", S.ownPlace); else q.set("a", S.addr);
+    if (S.date !== DEFAULT_DATE) q.set("d", S.date);
+    const x = S.wi[S.addr];
+    if (x) { if (x.year) q.set("y", x.year); if (x.units) q.set("u", x.units); if (x.owner) q.set("o", x.owner); }
+  }
+  if (S.lang === "es") q.set("lang", "es");
+  const qs = q.toString();
+  const h = "#" + S.tab + (S.tab === "lookup" || qs ? "?" + qs : "");
+  try { history.replaceState(null, "", h); } catch (e) { /* sandboxed frame: sharing a link is then not possible, nothing else breaks */ }
+}
+/* Read the hash once at start-up into S. Every value is checked (known tab, known address, real date, short typed text), so a bad link falls back to the defaults. */
+function readHash() {
+  const [tab, qs] = (location.hash || "").replace(/^#/, "").split("?");
+  if (TABS.some(([k]) => k === tab)) S.tab = tab;
+  const q = new URLSearchParams(qs || "");
+  const own = q.get("own"), id = q.get("a"), d = q.get("d");
+  if (own && ownPlaces().some((x) => x.key === own)) { S.ownPlace = own; S.mode = "own"; syncOwn(); S.addr = OWN_ID; S.wiOpen = true; S.guide = false; }
+  else if (id && byAddr[id]) { S.addr = id; S.lastSample = id; S.guide = false; }
+  if (d && /^\d{4}-\d{2}-\d{2}$/.test(d) && NE.parseDate(d) !== null) S.date = d;
+  const y = (q.get("y") || "").slice(0, 4), u = (q.get("u") || "").slice(0, 5), o = q.get("o");
+  if (y || u || o === "yes" || o === "no") S.wi[S.addr] = { year: y, units: u, owner: o === "yes" || o === "no" ? o : "" };
+  if (q.get("lang") === "es" && HAS_ES) S.lang = "es";
 }
 
 /* ------------------------------------------------------------------ changes */
+/* How many of the given addresses are in each city, biggest first: [[city, count], ...]. */
 function cityBreakdown(ids) {
   const c = {};
   for (const id of ids) { const k = cityOf(byAddr[id]); c[k] = (c[k] || 0) + 1; }
   return Object.entries(c).sort((x, y) => y[1] - x[1]);
 }
-function cleanNote(t) {
-  let n = String(t.notes || "").replace(/not_yet_effective/g, "not yet effective");
-  const ti = String(t.title || "");
+/* A test's note from changes.json, with the machine word "not_yet_effective" spelled out and the repeated title cut off.
+   This is English text written by the pipeline; the Spanish view shows it under the "(in English)" label, not translated. */
+function cleanNote(tc) {
+  let n = String(tc.notes || "").replace(/not_yet_effective/g, "not yet effective");
+  const ti = String(tc.title || "");
   if (ti && n.startsWith(ti)) n = n.slice(ti.length).replace(/^[.:]\s*/, "");
   return n;
 }
-function testExamples(t) {
-  const ids = t.affected_address_ids || [];
+/* The example buttons on a test card: each opens one address on one date. label is a source string with {placeholders} filled from vars at draw time. */
+function testExamples(tc) {
+  const ids = tc.affected_address_ids || [];
   const firstIn = (city) => ADDR.find((a) => a.city === city);
-  if (t.type === "as_of" && t.dates) {
+  if (tc.type === "as_of" && tc.dates) {
     let id = ids[0];
-    if (t.team_rule_ids.some((x) => byRule[x] && byRule[x].jurisdiction === "NJ")) id = (ADDR.find((a) => a.city === "Jersey City, NJ" && ids.includes(a.id)) || byAddr[id]).id;
-    return [{ label: "Before " + t.dates.before, id, date: t.dates.before }, { label: "After " + t.dates.after, id, date: t.dates.after }];
+    if (tc.team_rule_ids.some((x) => byRule[x] && byRule[x].jurisdiction === "NJ")) id = (ADDR.find((a) => a.city === "Jersey City, NJ" && ids.includes(a.id)) || byAddr[id]).id;
+    return [{ label: "Before {date}", vars: { date: tc.dates.before }, id, date: tc.dates.before }, { label: "After {date}", vars: { date: tc.dates.after }, id, date: tc.dates.after }];
   }
-  if (t.type === "boundary") {
+  if (tc.type === "boundary") {
     const ex = [];
-    for (const rid of t.team_rule_ids) { const r = byRule[rid]; const a = r && firstIn(r.jurisdiction); if (a) ex.push({ label: r.jurisdiction.replace(/, [A-Z]{2}$/, "") + " address", id: a.id, date: DEFAULT_DATE }); }
+    for (const rid of tc.team_rule_ids) { const r = byRule[rid]; const a = r && firstIn(r.jurisdiction); if (a) ex.push({ label: "{city} address", vars: { city: r.jurisdiction.replace(/, [A-Z]{2}$/, "") }, id: a.id, date: DEFAULT_DATE }); }
     const n = firstIn("Newark, NJ"); if (n) ex.push({ label: "Newark address (no ban)", id: n.id, date: DEFAULT_DATE });
     return ex;
   }
-  if (t.type === "pending") return ids.length ? [{ label: "A Massachusetts address", id: ids[0], date: DEFAULT_DATE }] : [];
+  if (tc.type === "pending") return ids.length ? [{ label: "A Massachusetts address", id: ids[0], date: DEFAULT_DATE }] : [];
   const b = firstIn("Boston, MA");
   return b ? [{ label: "A Boston address", id: b.id, date: DEFAULT_DATE }] : [];
 }
+/* Compare every rule's answer at every address on two dates. Returns the rows that differ (rule, result before, result after, which addresses),
+   biggest first, plus how many answers were compared and how many stayed the same. A rule missing on one date counts as "not_listed". */
 function diffDates(A, B) {
   const ra = allAt(A), rb = allAt(B), map = new Map();
   let same = 0, total = 0;
@@ -517,61 +1405,64 @@ function diffDates(A, B) {
     const ea = new Map(ra[a.id].map((e) => [e.team_rule_id, e.result]));
     const eb = new Map(rb[a.id].map((e) => [e.team_rule_id, e.result]));
     for (const id of new Set([...ea.keys(), ...eb.keys()])) {
-      const f = ea.get(id) || "not_listed", t = eb.get(id) || "not_listed";
+      const from = ea.get(id) || "not_listed", to = eb.get(id) || "not_listed";
       total++;
-      if (f === t) { same++; continue; }
-      const k = `${id}|${f}|${t}`;
-      if (!map.has(k)) map.set(k, { id, f, t, addrs: [] });
+      if (from === to) { same++; continue; }
+      const k = `${id}|${from}|${to}`;
+      if (!map.has(k)) map.set(k, { id, f: from, t: to, addrs: [] });
       map.get(k).addrs.push(a.id);
     }
   }
   return { rows: [...map.values()].sort((x, y) => y.addrs.length - x.addrs.length), same, total };
 }
-const resLabel = (k) => (k === "not_listed" ? "Not listed" : RES[k].label);
-const resChip = (k) => (k === "not_listed" ? `<span class="chip" style="background:var(--surface2);color:var(--muted)">Not listed</span>` : `<span class="chip r-${k}"><i>${RES[k].glyph}</i>${RES[k].label}</span>`);
+/* A chip for a result in the compare table; "not_listed" means the rule did not reach that address on that date. */
+const resChip = (k) => (k === "not_listed" ? `<span class="chip" style="background:var(--surface2);color:var(--muted)">${te("Not listed")}</span>` : chipHtml(k));
+/* The changes tab: the five test cards (live results of the same engine), then the compare-any-two-dates table. */
 function renderChanges(v) {
   const tests = Object.entries(D.tests || {});
   const parts = [];
-  parts.push(`<div class="section-head"><div class="eyebrow">Change tracking</div><h2>What changed, and who is affected</h2>
-    <p class="lede">Laws start, stop and collide. These five tests are run live by the same engine as the lookup. Each one lists the addresses it changes for. Open any example to see the full answer.</p></div>`);
-  parts.push(`<div class="tgrid">` + tests.map(([id, t]) => {
-    const bd = cityBreakdown(t.affected_address_ids || []);
+  parts.push(`<div class="section-head"><div class="eyebrow">${te("Change tracking")}</div><h2>${te("What changed, and who is affected")}</h2>
+    <p class="lede">${te("Laws start, stop and collide. These five tests are run live by the same engine as the lookup. Each one lists the addresses it changes for. Open any example to see the full answer.")}</p></div>`);
+  parts.push(`<div class="tgrid">` + tests.map(([id, tc]) => {
+    const bd = cityBreakdown(tc.affected_address_ids || []);
     const max = Math.max(1, ...bd.map((x) => x[1]));
-    const ex = testExamples(t);
+    const ex = testExamples(tc);
     return `<article class="tcard">
-      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="tid">${esc(id)}</span><span class="pill">${esc(TEST_KIND[t.type] || t.type || "")}</span></div>
-      <h3>${esc(t.title || id)}</h3>
-      <div><span class="tnum">${(t.affected_address_ids || []).length}</span> <span class="muted">of ${ADDR.length} addresses affected</span>${(t.conflict_flag_address_ids || []).length ? `<div style="color:var(--flag);font-weight:600;font-size:13.5px">${t.conflict_flag_address_ids.length} flagged for human review</div>` : ""}</div>
-      <div class="bars">${bd.length ? bd.map(([c, n]) => `<div class="bar-row"><span>${esc(c.replace(/, [A-Z]{2}$/, ""))}</span><div class="bar-track"><div class="bar-fill" style="width:${(100 * n / max).toFixed(0)}%"></div></div><span class="num" style="text-align:right">${n}</span></div>`).join("") : `<div class="muted" style="font-size:13.5px">No address is affected. That is the correct answer for this test.</div>`}</div>
-      <p class="muted" style="font-size:13.5px;margin:0">${esc(cleanNote(t))}</p>
-      <div class="actions" style="margin-top:4px">${ex.map((x) => `<button class="btn" data-act="jump" data-id="${x.id}" data-date="${x.date}">${esc(x.label)}</button>`).join("")}</div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="tid">${esc(id)}</span><span class="pill">${esc(t(TEST_KIND[tc.type] || tc.type || ""))}</span></div>
+      <h3>${esc(t(tc.title || id))}</h3>
+      <div><span class="tnum">${(tc.affected_address_ids || []).length}</span> <span class="muted">${te("of {total} addresses affected", { total: ADDR.length })}</span>${(tc.conflict_flag_address_ids || []).length ? `<div style="color:var(--flag);font-weight:600;font-size:13.5px">${te("{n} flagged for human review", { n: tc.conflict_flag_address_ids.length })}</div>` : ""}</div>
+      <div class="bars">${bd.length ? bd.map(([c, n]) => `<div class="bar-row"><span>${esc(cityShort(c))}</span><div class="bar-track"><div class="bar-fill" style="width:${(100 * n / max).toFixed(0)}%"></div></div><span class="num" style="text-align:right">${n}</span></div>`).join("") : `<div class="muted" style="font-size:13.5px">${te("No address is affected. That is the correct answer for this test.")}</div>`}</div>
+      <p class="muted" style="font-size:13.5px;margin:0">${EN_TAG()}<span${LE()}>${esc(cleanNote(tc))}</span></p>
+      <div class="actions" style="margin-top:4px">${ex.map((x) => `<button class="btn" data-act="jump" data-id="${x.id}" data-date="${x.date}">${esc(t(x.label, x.vars))}</button>`).join("")}</div>
     </article>`;
   }).join("") + `</div>`);
 
   const diff = diffDates(S.cmpA, S.cmpB);
-  parts.push(`<section class="block"><div class="section-head"><h2>Compare any two dates</h2>
-    <p class="lede">Pick two dates. The table shows every rule whose answer changes for at least one address.</p></div>
+  parts.push(`<section class="block"><div class="section-head"><h2>${te("Compare any two dates")}</h2>
+    <p class="lede">${te("Pick two dates. The table shows every rule whose answer changes for at least one address.")}</p></div>
     <div class="ctrl" style="margin-top:0;border-top:0;padding-top:0">
-      <label for="cmpA">From</label><input type="date" id="cmpA" value="${esc(S.cmpA)}">
-      <label for="cmpB">To</label><input type="date" id="cmpB" value="${esc(S.cmpB)}">
-      <button class="qbtn" data-act="cmp" data-a="2025-12-31" data-b="2026-01-02">California AB 325</button>
-      <button class="qbtn" data-act="cmp" data-a="2026-10-01" data-b="2027-07-02">NJ FAIR Act</button>
-      <button class="qbtn" data-act="cmp" data-a="2026-06-30" data-b="2026-07-02">Mid-2026</button>
+      <label for="cmpA">${te("From")}</label><input type="date" id="cmpA" value="${esc(S.cmpA)}">
+      <label for="cmpB">${te("To")}</label><input type="date" id="cmpB" value="${esc(S.cmpB)}">
+      <button class="qbtn" data-act="cmp" data-a="2025-12-31" data-b="2026-01-02">${te("California AB 325")}</button>
+      <button class="qbtn" data-act="cmp" data-a="2026-10-01" data-b="2027-07-02">${te("NJ FAIR Act")}</button>
+      <button class="qbtn" data-act="cmp" data-a="2026-06-30" data-b="2026-07-02">${te("Mid-2026")}</button>
     </div>
-    <p class="muted" style="font-size:13.5px">${diff.rows.reduce((n, r) => n + r.addrs.length, 0).toLocaleString("en-US")} of ${diff.total.toLocaleString("en-US")} answers change. ${diff.same.toLocaleString("en-US")} stay the same.</p>
-    ${diff.rows.length ? `<div class="tablewrap"><table><thead><tr><th>Rule</th><th>Before</th><th>After</th><th>Addresses</th></tr></thead><tbody>` +
-      diff.rows.map((r, i) => {
+    <p class="muted" style="font-size:13.5px">${te("{changed} of {total} answers change. {same} stay the same.", { changed: num(diff.rows.reduce((n, r) => n + r.addrs.length, 0)), total: num(diff.total), same: num(diff.same) })}</p>
+    ${diff.rows.length ? `<div class="tablewrap" data-label="${te("Compare any two dates")}"><table><thead><tr><th>${te("Rule")}</th><th>${te("Before")}</th><th>${te("After")}</th><th>${te("Addresses")}</th></tr></thead><tbody>` +
+      diff.rows.map((r) => {
         const rule = byRule[r.id];
         const key = `${r.id}|${r.f}|${r.t}`;
         const open = S.open === key;
-        return `<tr><td><b>${esc(rule.title)}</b><div class="muted mono">${esc(r.id)} · ${esc(rule.jurisdiction)}</div></td><td>${resChip(r.f)}</td><td>${resChip(r.t)}</td>
+        return `<tr><td><b>${esc(titleOf(rule))}</b><div class="muted mono">${esc(r.id)} · ${esc(rule.jurisdiction)}</div></td><td>${resChip(r.f)}</td><td>${resChip(r.t)}</td>
           <td><button class="linkbtn num" data-act="cmprow" data-key="${esc(key)}">${r.addrs.length}</button>
-          ${open ? `<div class="addrlinks">${r.addrs.slice(0, 40).map((id) => `<button class="qbtn" data-act="jump" data-id="${id}" data-date="${esc(S.cmpB)}">${esc(id)}</button>`).join("")}${r.addrs.length > 40 ? `<span class="muted">+${r.addrs.length - 40} more</span>` : ""}</div>` : ""}</td></tr>`;
-      }).join("") + `</tbody></table></div>` : `<div class="note">No answer changes between these dates.</div>`}</section>`);
+          ${open ? `<div class="addrlinks">${r.addrs.slice(0, 40).map((id) => `<button class="qbtn" data-act="jump" data-id="${id}" data-date="${esc(S.cmpB)}">${esc(id)}</button>`).join("")}${r.addrs.length > 40 ? `<span class="muted">${te("+{n} more", { n: r.addrs.length - 40 })}</span>` : ""}</div>` : ""}</td></tr>`;
+      }).join("") + `</tbody></table></div>` : `<div class="note">${te("No answer changes between these dates.")}</div>`}</section>`);
   v.innerHTML = parts.join("");
+  markScrollers();
 }
 
 /* ------------------------------------------------------------------ map */
+/* The rule whose answers differ most across the sample addresses on a date (most distinct results, then most addresses). Fallback when r-0001 is absent. */
 function varied(date) {
   const all = allAt(date);
   let best = null, bestScore = -1;
@@ -583,12 +1474,14 @@ function varied(date) {
   }
   return best;
 }
+/* The coverage map tab: one small scatter per city for the chosen rule and date, each dot colored by its answer. Scale is per city, not shared, and the page says so. */
 function renderMap(v) {
   if (!S.mapRule || !byRule[S.mapRule]) S.mapRule = byRule["r-0001"] ? "r-0001" : varied(S.date);
   const r = byRule[S.mapRule];
   const all = allAt(S.date);
   const opts = RULES.slice().sort((x, y) => x.jurisdiction.localeCompare(y.jurisdiction) || x.team_rule_id.localeCompare(y.team_rule_id))
-    .map((x) => `<option value="${x.team_rule_id}" ${x.team_rule_id === S.mapRule ? "selected" : ""}>${esc(x.jurisdiction)} · ${esc(x.title)} (${x.team_rule_id})</option>`).join("");
+    .map((x) => `<option value="${x.team_rule_id}" ${x.team_rule_id === S.mapRule ? "selected" : ""}>${esc(x.jurisdiction)} · ${esc(titleOf(x))} (${x.team_rule_id})</option>`).join("");
+  // A statewide rule is in scope for every address in the state; a city rule only for addresses the geocoder placed in that city.
   const inScope = (a) => r.level === "state" ? a.state === r.jurisdiction : a.city === r.jurisdiction;
   const groups = {};
   let missingGeo = 0;
@@ -600,6 +1493,7 @@ function renderMap(v) {
   const tally = Object.fromEntries(RES_ORDER.concat(["none"]).map((k) => [k, 0]));
   const panels = Object.keys(groups).sort().map((city) => {
     const pts = groups[city];
+    // Equirectangular projection around the city's mean latitude, then fit the points into the 320 x 220 box.
     const lat0 = pts.reduce((s, p) => s + p.lat, 0) / pts.length;
     const kx = Math.cos(lat0 * Math.PI / 180);
     const xs = pts.map((p) => p.lon * kx), ys = pts.map((p) => -p.lat);
@@ -613,25 +1507,27 @@ function renderMap(v) {
       const e = all[p.id].find((x) => x.team_rule_id === r.team_rule_id);
       const k = e ? e.result : "none";
       counts[k]++; tally[k]++;
-      return `<circle cx="${(ox + sc * (xs[i] - minx)).toFixed(1)}" cy="${(oy + sc * (ys[i] - miny)).toFixed(1)}" r="4.6" style="fill:var(--${k})" data-act="jump" data-id="${p.id}" data-date="${esc(S.date)}"><title>${esc(p.street)}: ${k === "none" ? "rule not listed here" : RES[k].label}</title></circle>`;
+      return `<circle cx="${(ox + sc * (xs[i] - minx)).toFixed(1)}" cy="${(oy + sc * (ys[i] - miny)).toFixed(1)}" r="4.6" style="fill:var(--${k})" data-act="jump" data-id="${p.id}" data-date="${esc(S.date)}"><title>${esc(p.street)}: ${esc(k === "none" ? t("rule not listed here") : resLabel(k))}</title></circle>`;
     }).join("");
-    const line = RES_ORDER.concat(["none"]).filter((k) => counts[k]).map((k) => `${counts[k]} ${k === "none" ? "not listed" : RES[k].label.toLowerCase()}`).join(", ");
-    return `<div class="mapcard"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(city.replace(/, [A-Z]{2}$/, ""))}</b><span class="muted" style="font-size:12.5px">${pts.length} addresses</span></div>
-      <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Addresses in ${esc(city)} colored by answer">${dots}</svg>
+    // The per-panel count line is the text equivalent of the colors: the map never carries meaning by color alone.
+    const line = RES_ORDER.concat(["none"]).filter((k) => counts[k]).map((k) => `${counts[k]} ${k === "none" ? t("not listed") : resLabel(k).toLowerCase()}`).join(", ");
+    return `<div class="mapcard"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(cityShort(city))}</b><span class="muted" style="font-size:12.5px">${te("{n} addresses", { n: pts.length })}</span></div>
+      <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${te("Addresses in {city} colored by answer", { city })}">${dots}</svg>
       <div class="muted" style="font-size:12.5px;margin-top:6px">${esc(line)}</div></div>`;
   }).join("");
-  v.innerHTML = `<div class="section-head"><div class="eyebrow">Coverage map</div><h2>Where does one rule apply?</h2>
-    <p class="lede">Each dot is a sample address, placed by its Census coordinates. Color shows the answer for the rule you pick, on the date you pick. Select a dot to open that address.</p></div>
+  v.innerHTML = `<div class="section-head"><div class="eyebrow">${te("Coverage map")}</div><h2>${te("Where does one rule apply?")}</h2>
+    <p class="lede">${te("Each dot is a sample address, placed by its Census coordinates. Color shows the answer for the rule you pick, on the date you pick. Select a dot to open that address.")}</p></div>
     <div class="ctrl" style="margin-top:0;border-top:0;padding-top:0">
-      <label for="mapRule">Rule</label><select id="mapRule">${opts}</select>
-      <label for="mapDate">As of</label><input type="date" id="mapDate" value="${esc(S.date)}">
+      <label for="mapRule">${te("Rule")}</label><select id="mapRule">${opts}</select>
+      <label for="mapDate">${te("As of")}</label><input type="date" id="mapDate" value="${esc(S.date)}">
     </div>
-    <div class="legend">${RES_ORDER.map((k) => `<span><i class="dot" style="background:var(--${k})"></i>${RES[k].label} (${tally[k]})</span>`).join("")}<span><i class="dot" style="background:var(--none)"></i>Rule not listed here (${tally.none})</span></div>
-    <div class="mapgrid">${panels || `<div class="note">No geocoded address is in scope for this rule.</div>`}</div>
-    <p class="muted" style="font-size:13px;margin-top:10px">${missingGeo ? missingGeo + " address" + (missingGeo === 1 ? " is" : "es are") + " not shown because the geocoder could not place them. " : ""}Panels are drawn to scale inside each city, not to a shared map.</p>`;
+    <div class="legend">${RES_ORDER.map((k) => `<span><i class="dot" style="background:var(--${k})"></i>${esc(resLabel(k))} (${tally[k]})</span>`).join("")}<span><i class="dot" style="background:var(--none)"></i>${te("Rule not listed here ({n})", { n: tally.none })}</span></div>
+    <div class="mapgrid">${panels || `<div class="note">${te("No geocoded address is in scope for this rule.")}</div>`}</div>
+    <p class="muted" style="font-size:13px;margin-top:10px">${missingGeo ? esc(tn(missingGeo, "{n} address is not shown because the geocoder could not place them.", "{n} addresses are not shown because the geocoder could not place them.")) + " " : ""}${te("Panels are drawn to scale inside each city, not to a shared map.")}</p>`;
 }
 
 /* ------------------------------------------------------------------ rules + method */
+/* The places that have rules, in display order: each state, then its cities. Used by the own-building picker, the coverage matrix and the rules filter. */
 const JURS = () => {
   const order = ["CA", "NJ", "MA"];
   const cities = [...new Set(ADDR.map((a) => a.city).filter(Boolean).concat(RULES.map((r) => r.jurisdiction).filter((j) => /, [A-Z]{2}$/.test(j))))];
@@ -639,6 +1535,7 @@ const JURS = () => {
   for (const st of order) { out.push(st); for (const c of cities.filter((c) => c.endsWith(", " + st)).sort()) out.push(c); }
   return out;
 };
+/* Timeline (SVG) of when each rule takes effect, 2020 to 2028, with a red line at the as-of date. Drawn by hand: no chart library, no request. */
 function ganttSvg() {
   const x0 = new Date("2020-01-01T00:00:00Z").getTime(), x1 = new Date("2028-12-31T00:00:00Z").getTime();
   const LBL = 300, W = 900, rowH = 18, top = 26;
@@ -653,128 +1550,179 @@ function ganttSvg() {
   }
   rules.forEach((r, i) => {
     const y = top + i * rowH + rowH / 2;
-    const label = `${r.team_rule_id} ${r.jurisdiction.replace(/, [A-Z]{2}$/, "")}: ${r.title}`;
+    const label = `${r.team_rule_id} ${r.jurisdiction.replace(/, [A-Z]{2}$/, "")}: ${titleOf(r)}`;
     g += `<text x="4" y="${y + 3.5}" font-size="10.5" fill="var(--ink)">${esc(label.length > 54 ? label.slice(0, 53) + "…" : label)}</text>`;
     const col = r.status === "in_force" ? "applies" : r.status === "not_yet_effective" ? "not_yet_effective" : r.status === "pending" ? "pending" : "unknown";
-    if (r.status === "failed") { g += `<text x="${LBL}" y="${y + 3.5}" font-size="10.5" fill="var(--muted)">failed, never law</text>`; return; }
-    if (r.status === "pending") { g += `<line x1="${LBL}" y1="${y}" x2="${W - 14}" y2="${y}" stroke="var(--pending)" stroke-dasharray="3 4"/><text x="${LBL + 6}" y="${y - 4}" font-size="9.5" fill="var(--muted)">bill, not enacted</text>`; return; }
-    if (!r.effective_date) { g += `<line x1="${LBL}" y1="${y}" x2="${W - 14}" y2="${y}" stroke="var(--${col})" stroke-opacity=".45" stroke-width="4"/><text x="${LBL + 6}" y="${y - 5}" font-size="9.5" fill="var(--muted)">in force, start date not stated</text>`; return; }
+    if (r.status === "failed") { g += `<text x="${LBL}" y="${y + 3.5}" font-size="10.5" fill="var(--muted)">${te("failed, never law")}</text>`; return; }
+    if (r.status === "pending") { g += `<line x1="${LBL}" y1="${y}" x2="${W - 14}" y2="${y}" stroke="var(--pending)" stroke-dasharray="3 4"/><text x="${LBL + 6}" y="${y - 4}" font-size="9.5" fill="var(--muted)">${te("bill, not enacted")}</text>`; return; }
+    if (!r.effective_date) { g += `<line x1="${LBL}" y1="${y}" x2="${W - 14}" y2="${y}" stroke="var(--${col})" stroke-opacity=".45" stroke-width="4"/><text x="${LBL + 6}" y="${y - 5}" font-size="9.5" fill="var(--muted)">${te("in force, start date not stated")}</text>`; return; }
     const ed = NE.parseDate(r.effective_date);
     const ms = ed === null ? x0 : ed;
     g += `<line x1="${X(ms)}" y1="${y}" x2="${W - 14}" y2="${y}" stroke="var(--${col})" stroke-width="4" stroke-opacity=".85"/><circle cx="${X(ms)}" cy="${y}" r="5" fill="var(--${col})"/>`;
   });
-  g += `<line x1="${X(asOf)}" y1="${top - 6}" x2="${X(asOf)}" y2="${H - 6}" stroke="var(--flag)" stroke-width="1.5"/><text x="${Math.min(X(asOf) + 4, W - 70)}" y="${H - 1}" font-size="10" fill="var(--flag)">as of ${esc(S.date)}</text>`;
-  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Timeline of when each rule takes effect">${g}</svg>`;
+  g += `<line x1="${X(asOf)}" y1="${top - 6}" x2="${X(asOf)}" y2="${H - 6}" stroke="var(--flag)" stroke-width="1.5"/><text x="${Math.min(X(asOf) + 4, W - 70)}" y="${H - 1}" font-size="10" fill="var(--flag)">${te("as of {date}", { date: S.date })}</text>`;
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${te("Timeline of when each rule takes effect")}">${g}</svg>`;
 }
+/* The build's self-check results (from data.js), grouped by section, inside a closed disclosure. "" when the build carried none. The check names are English log text. */
 function selfcheckHtml() {
   const sc = (D.meta && D.meta.selfcheck) || {};
   if (!sc.checks || !sc.checks.length) return "";
   const groups = {};
   for (const c of sc.checks) (groups[c.section] = groups[c.section] || []).push(c);
-  const chip = (st) => `<span class="chip r-${st === "PASS" ? "applies" : st === "WARN" ? "unknown" : "superseded"}" style="${st === "FAIL" ? "background:var(--flag-bg);color:var(--flag)" : ""}">${st}</span>`;
-  return `<section class="block"><h3>Self-check</h3>
-    <p class="muted" style="margin:4px 0 10px">${sc.pass} checks pass, ${sc.warn} warning${sc.warn === 1 ? "" : "s"}, ${sc.fail} fail. They run on every build: schema, quotes found in sources, one answer per address, and the five change tests.</p>
-    <details class="note"><summary style="cursor:pointer;font-weight:600;color:var(--accent)">Show every check</summary>
-    ${Object.entries(groups).map(([g, items]) => `<h4 style="margin:12px 0 4px">${esc(g.replace(/^\d+\.\s*/, ""))}</h4><ul style="list-style:none;padding:0;margin:0">${items.map((c) => `<li style="display:flex;gap:8px;align-items:baseline;margin:3px 0">${chip(c.status)}<span>${esc(c.check)}</span></li>`).join("")}</ul>`).join("")}
+  const sv = { pass: sc.pass, warn: sc.warn, fail: sc.fail };
+  const chip = (st) => `<span class="chip r-${st === "PASS" ? "applies" : st === "WARN" ? "unknown" : "superseded"}" style="${st === "FAIL" ? "background:var(--flag-bg);color:var(--flag)" : ""}">${esc(t(st))}</span>`;
+  return `<section class="block"><h3>${te("Self-check")}</h3>
+    <p class="muted" style="margin:4px 0 10px">${sc.warn === 1 ? te("{pass} checks pass, {warn} warning, {fail} fail. They run on every build: schema, quotes found in sources, one answer per address, and the five change tests.", sv) : te("{pass} checks pass, {warn} warnings, {fail} fail. They run on every build: schema, quotes found in sources, one answer per address, and the five change tests.", sv)}</p>
+    <details class="note"><summary style="cursor:pointer;font-weight:600;color:var(--accent)">${te("Show every check")}</summary>
+    ${S.lang === "es" ? `<p class="lawnote">${te("The names of the checks are written in English.")}</p>` : ""}
+    ${Object.entries(groups).map(([g, items]) => `<h4 style="margin:12px 0 4px"${LE()}>${esc(g.replace(/^\d+\.\s*/, ""))}</h4><ul style="list-style:none;padding:0;margin:0">${items.map((c) => `<li style="display:flex;gap:8px;align-items:baseline;margin:3px 0">${chip(c.status)}<span${LE()}>${esc(c.check)}</span></li>`).join("")}</ul>`).join("")}
     </details></section>`;
 }
+/* The rules and method tab: coverage matrix (where our sources had no rule), self-check, timeline, the searchable list of all rules, and how the system works. */
 function renderRulesTab(v) {
   const jurs = JURS();
   const cnt = (j, c) => RULES.filter((r) => r.jurisdiction === j && r.category === c).length;
-  const matrix = `<div class="tablewrap"><table class="matrix"><thead><tr><th>Jurisdiction</th>${CATS.map(([, l]) => `<th>${esc(l)}</th>`).join("")}</tr></thead><tbody>` +
-    jurs.map((j) => `<tr><td><b>${esc(j)}</b></td>${CATS.map(([c]) => { const n = cnt(j, c); return `<td class="${n ? "" : "cell0"}">${n || "none found"}</td>`; }).join("")}</tr>`).join("") + `</tbody></table></div>`;
+  const matrix = `<div class="tablewrap" data-label="${te("What the rule set covers")}"><table class="matrix"><thead><tr><th>${te("Jurisdiction")}</th>${CATS.map(([, l]) => `<th>${esc(t(l))}</th>`).join("")}</tr></thead><tbody>` +
+    jurs.map((j) => `<tr><td><b>${esc(j)}</b></td>${CATS.map(([c]) => { const n = cnt(j, c); return `<td class="${n ? "" : "cell0"}">${n || te("none found")}</td>`; }).join("")}</tr>`).join("") + `</tbody></table></div>`;
   const q = (S.rq || "").toLowerCase();
-  const list = RULES.filter((r) => (!S.rj || r.jurisdiction === S.rj) && (!S.rs || r.status === S.rs) && (!q || `${r.title} ${r.citation} ${r.team_rule_id} ${r.requirement}`.toLowerCase().includes(q)))
+  // In the Spanish view the search also matches the Spanish title and summary, so a person can search in Spanish.
+  const hay = (r) => { const x = esRule(r); return `${r.title} ${r.citation} ${r.team_rule_id} ${r.requirement}${x ? ` ${x.title_es || ""} ${x.plain_es || ""}` : ""}`.toLowerCase(); };
+  const list = RULES.filter((r) => (!S.rj || r.jurisdiction === S.rj) && (!S.rs || r.status === S.rs) && (!q || hay(r).includes(q)))
     .sort((a, b) => jurs.indexOf(a.jurisdiction) - jurs.indexOf(b.jurisdiction) || a.team_rule_id.localeCompare(b.team_rule_id));
-  const statusPill = (s) => `<span class="chip r-${s === "in_force" ? "applies" : s === "not_yet_effective" ? "not_yet_effective" : s === "pending" ? "pending" : "unknown"}">${esc(s.replace(/_/g, " "))}</span>`;
-  const rows = list.map((r) => `<details class="rrow"><summary><span class="mono">${esc(r.team_rule_id)}</span><span><b>${esc(r.title)}</b><div class="muted" style="font-size:12.5px">${esc(r.jurisdiction)} · ${esc(CAT_LABEL[r.category])}</div></span><span class="mono muted">${esc(r.citation)}</span><span>${statusPill(r.status)}</span></summary>
-    <div class="body"><dl class="dl">
-      <dt>What it requires</dt><dd>${esc(r.requirement)}</dd>
-      <dt>Effective</dt><dd>${esc(fmtDate(r.effective_date))}</dd>
-      ${r.overrides && r.overrides.length ? `<dt>Yields to</dt><dd>${r.overrides.map((o) => esc((byRule[o] || {}).title || o) + ` (${esc(o)})`).join("; ")}</dd>` : ""}
-      ${r.conflict_flag ? `<dt>Flag</dt><dd style="color:var(--flag)">${esc(r.conflict_note || "Flagged for human review.")}</dd>` : ""}
-      <dt>Exact words</dt><dd><blockquote class="q">${esc(r.quoted_span)}</blockquote></dd>
-      <dt>Source</dt><dd><a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.source_url)}</a></dd>
-    </dl></div></details>`).join("");
-  v.innerHTML = `<div class="section-head"><div class="eyebrow">Audit</div><h2>Rules and method</h2>
-    <p class="lede">Everything the lookup says comes from the ${RULES.length} rules below. Each rule carries its citation, its source link and the exact words it was read from.</p></div>
-    <section><h3>What the rule set covers</h3><p class="muted" style="margin:4px 0 10px">Red cells are topics where our sources had no rule. They are shown, not hidden.</p>${matrix}</section>
+  const statusPill = (s) => `<span class="chip r-${s === "in_force" ? "applies" : s === "not_yet_effective" ? "not_yet_effective" : s === "pending" ? "pending" : "unknown"}">${esc(t(s.replace(/_/g, " ")))}</span>`;
+  const es = S.lang === "es";
+  const rows = list.map((r) => {
+    const x = esRule(r);
+    return `<details class="rrow"><summary><span class="mono">${esc(r.team_rule_id)}</span><span><b>${esc(titleOf(r))}</b><div class="muted" style="font-size:12.5px">${esc(r.jurisdiction)} · ${esc(catName(r.category))}</div></span><span class="mono muted">${esc(r.citation)}</span><span>${statusPill(r.status)}</span></summary>
+    <div class="body">${es ? `<p class="lawnote">${te("The law's own words, citations and links stay in English, because the English is the legal text.")}</p>` : ""}<dl class="dl">
+      ${x && x.plain_es ? `<dt>${te("In plain language")}</dt><dd>${esc(x.plain_es)}${kvOf(r) ? ` <span class="kv">${esc(kvOf(r))}</span>` : ""}${ES_PACK.label ? `<p class="srcnote">${esc(ES_PACK.label)}</p>` : ""}</dd>` : ""}
+      <dt>${te("What it requires")}</dt><dd${LE()}>${esc(r.requirement)}</dd>
+      <dt>${te("Effective")}</dt><dd>${esc(fmtDate(r.effective_date))}</dd>
+      ${r.overrides && r.overrides.length ? `<dt>${te("Yields to")}</dt><dd>${r.overrides.map((o) => esc(byRule[o] ? titleOf(byRule[o]) : o) + ` (${esc(o)})`).join("; ")}</dd>` : ""}
+      ${r.conflict_flag ? `<dt>${te("Flag")}</dt><dd style="color:var(--flag)">${r.conflict_note ? EN_TAG() + `<span${LE()}>${esc(r.conflict_note)}</span>` : te("Flagged for human review.")}</dd>` : ""}
+      <dt>${te("Exact words")}</dt><dd><blockquote class="q" lang="en">${esc(r.quoted_span)}</blockquote></dd>
+      <dt>${te("Source")}</dt><dd><a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.source_url)}</a></dd>
+    </dl></div></details>`;
+  }).join("");
+  v.innerHTML = `<div class="section-head"><div class="eyebrow">${te("Audit")}</div><h2>${te("Rules and method")}</h2>
+    <p class="lede">${te("Everything the lookup says comes from the {n} rules below. Each rule carries its citation, its source link and the exact words it was read from.", { n: RULES.length })}</p></div>
+    <section><h3>${te("What the rule set covers")}</h3><p class="muted" style="margin:4px 0 10px">${te("Red cells are topics where our sources had no rule. They are shown, not hidden.")}</p>${matrix}</section>
     ${selfcheckHtml()}
-    <section class="block"><h3>When each rule starts</h3><p class="muted" style="margin:4px 0 10px">Dates come from the sources. The red line is the date used on the other tabs.</p><div class="gantt">${ganttSvg()}</div></section>
-    <section class="block"><h3>All rules</h3>
+    <section class="block"><h3>${te("When each rule starts")}</h3><p class="muted" style="margin:4px 0 10px">${te("Dates come from the sources. The red line is the date used on the other tabs.")}</p><div class="gantt" data-label="${te("When each rule starts")}">${ganttSvg()}</div></section>
+    <section class="block"><h3>${te("All rules")}</h3>
       <div class="ctrl" style="margin-top:8px;border-top:0;padding-top:0">
-        <label for="rq">Search</label><input class="search" id="rq" type="search" style="max-width:260px" value="${esc(S.rq || "")}" placeholder="Title, citation or text">
-        <label for="rj">Place</label><select id="rj"><option value="">All</option>${jurs.map((j) => `<option ${S.rj === j ? "selected" : ""}>${esc(j)}</option>`).join("")}</select>
-        <label for="rs">Status</label><select id="rs"><option value="">All</option>${["in_force", "not_yet_effective", "pending", "failed"].map((s) => `<option value="${s}" ${S.rs === s ? "selected" : ""}>${s.replace(/_/g, " ")}</option>`).join("")}</select>
+        <label for="rq">${te("Search")}</label><input class="search" id="rq" type="search" style="max-width:260px" value="${esc(S.rq || "")}" placeholder="${te("Title, citation or text")}">
+        <label for="rj">${te("Place")}</label><select id="rj"><option value="">${te("All")}</option>${jurs.map((j) => `<option ${S.rj === j ? "selected" : ""}>${esc(j)}</option>`).join("")}</select>
+        <label for="rs">${te("Status")}</label><select id="rs"><option value="">${te("All")}</option>${["in_force", "not_yet_effective", "pending", "failed"].map((s) => `<option value="${s}" ${S.rs === s ? "selected" : ""}>${esc(t(s.replace(/_/g, " ")))}</option>`).join("")}</select>
       </div>
-      <div class="tablewrap" id="rlist" style="margin-top:8px">${rows || `<div class="empty">No rule matches.</div>`}</div>
+      <div class="tablewrap" id="rlist" data-label="${te("All rules")}" style="margin-top:8px">${rows || `<div class="empty">${te("No rule matches.")}</div>`}</div>
     </section>
-    <section class="block"><h3>How it works</h3><div class="twocol" style="margin-top:10px">
-      <div class="note"><h3>1. Read the law once</h3><ul>
-        <li>A language model reads each source page and writes one record per rule. The schema is fixed, so every record has a citation, a source link and a quote.</li>
-        <li>Code checks that every quote appears word for word in the page. A record that fails is thrown out.</li>
-        <li>Code, not the model, decides whether a rule is in force, not yet effective, pending or failed, from its dates.</li></ul></div>
-      <div class="note"><h3>2. Answer for any address</h3><ul>
-        <li>The Census geocoder places the address in a city. Then the lookup stacks state, county and city rules.</li>
-        <li>Each rule is checked against year built and unit count. A missing fact gives <b>unknown</b>, never a guess.</li>
-        <li>When a stricter local law governs, the state rule shows as <b>superseded</b> and links to the one that governs.</li></ul></div>
-      <div class="note"><h3>3. Track change</h3><ul>
-        <li>The same engine runs in this page for any date, so a change is just two answers side by side.</li>
-        <li>Where a law may displace another, as with the New Jersey FAIR Act and city bans, the rule is flagged for a person to review. We do not decide it.</li></ul></div>
-      <div class="note"><h3>Built to be safe to use</h3><ul>
-        <li>Every screen says this is not legal advice.</li>
-        <li>Gaps in the sources are shown as gaps.</li>
-        <li>Public sources and public parcel data only. No personal data.</li>
-        <li>Adding a city means adding its pages and re-running. No code changes. The whole run costs a few dollars.</li></ul></div>
+    <section class="block"><h3>${te("How it works")}</h3><div class="twocol" style="margin-top:10px">
+      <div class="note"><h3>${te("1. Read the law once")}</h3><ul>
+        <li>${te("A language model reads each source page and writes one record per rule. The schema is fixed, so every record has a citation, a source link and a quote.")}</li>
+        <li>${te("Code checks that every quote appears word for word in the page. A record that fails is thrown out.")}</li>
+        <li>${te("Code, not the model, decides whether a rule is in force, not yet effective, pending or failed, from its dates.")}</li></ul></div>
+      <div class="note"><h3>${te("2. Answer for any address")}</h3><ul>
+        <li>${te("The Census geocoder places the address in a city. Then the lookup stacks state, county and city rules.")}</li>
+        <li>${th("Each rule is checked against year built and unit count. A missing fact gives <b>unknown</b>, never a guess.")}</li>
+        <li>${th("When a stricter local law governs, the state rule shows as <b>superseded</b> and links to the one that governs.")}</li></ul></div>
+      <div class="note"><h3>${te("3. Track change")}</h3><ul>
+        <li>${te("The same engine runs in this page for any date, so a change is just two answers side by side.")}</li>
+        <li>${te("Where a law may displace another, as with the New Jersey FAIR Act and city bans, the rule is flagged for a person to review. We do not decide it.")}</li></ul></div>
+      <div class="note"><h3>${te("Built to be safe to use")}</h3><ul>
+        <li>${te("Every screen says this is not legal advice.")}</li>
+        <li>${te("Gaps in the sources are shown as gaps.")}</li>
+        <li>${te("Public sources and public parcel data only. No personal data, no cookies, no tracking. This page loads nothing from other sites.")}</li>
+        <li>${te("Plain-English summaries are written by AI from the source text. The quoted words come from the source and are checked by code.")}</li>
+        <li>${te("Adding a city means adding its pages and re-running. No code changes. The whole run costs a few dollars.")}</li></ul></div>
     </div></section>`;
+  markScrollers();
 }
 
 /* ------------------------------------------------------------------ events */
+/* All clicks. The clicked element (or an ancestor) names its action in data-act; that is the whole routing table. */
 document.addEventListener("click", (ev) => {
-  const t = ev.target.closest("[data-act]");
-  if (!t) return;
-  const act = t.dataset.act;
-  if (act === "tab") go(t.dataset.tab);
-  else if (act === "pick") { S.addr = t.dataset.id; renderList(); renderAnswer(); if (window.innerWidth <= 900) $("#answer").scrollIntoView({ behavior: "smooth", block: "start" }); }
-  else if (act === "city") { S.city = t.dataset.city; S.shown = 60; renderCityChips(); renderList(); }
+  const el = ev.target.closest("[data-act]");
+  if (!el) return;
+  const act = el.dataset.act;
+  if (act === "skip") { ev.preventDefault(); $("#view").focus(); }
+  else if (act === "tab") { go(el.dataset.tab); $("#view").focus({ preventScroll: true }); }
+  else if (act === "lang") setLang(el.dataset.lang);
+  else if (act === "guide") { S.guide = true; S.tab = "lookup"; render(); syncHash(); window.scrollTo({ top: 0 }); }
+  else if (act === "picker") setPicker(!S.pickerOpen);
+  else if (act === "mode") {
+    S.mode = el.dataset.mode; S.res = "all";
+    if (S.mode === "own") { syncOwn(); S.addr = OWN_ID; S.wiOpen = true; } else S.addr = S.lastSample;
+    renderLookup($("#view"));
+    if (S.mode === "own" && window.innerWidth > 900) { const y = $("#wi-year"); if (y) y.focus({ preventScroll: true }); }
+  }
+  else if (act === "pick") { S.addr = el.dataset.id; S.lastSample = S.addr; setPicker(false); renderList(); renderAnswer(); if (window.innerWidth <= 900) $("#answer").scrollIntoView({ behavior: "smooth", block: "start" }); }
+  else if (act === "city") { S.city = el.dataset.city; S.shown = 60; renderCityChips(); renderList(); }
   else if (act === "more") { S.shown += 60; renderList(); }
-  else if (act === "resf") { S.res = t.dataset.res; renderAnswer(); }
-  else if (act === "setdate") { S.date = t.dataset.date; renderAnswer(); }
-  else if (act === "jump") { S.addr = t.dataset.id; S.date = t.dataset.date || S.date; S.res = "all"; S.city = "all"; S.q = ""; go("lookup"); }
+  else if (act === "resf") { S.res = el.dataset.res; renderBody(); }
+  else if (act === "wiclear") { delete S.wi[S.addr]; for (const id of ["wi-year", "wi-units"]) { const n = $("#" + id); if (n) n.value = ""; } const o = $("#wi-owner"); if (o) o.value = ""; renderFacts(); renderBody(); }
+  else if (act === "gocat") {
+    if (S.res !== "all") { S.res = "all"; renderBody(); }
+    const target = document.getElementById("cat-" + el.dataset.cat);
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  else if (act === "setdate") { S.date = el.dataset.date; renderAnswer(); }
+  else if (act === "jump") { S.addr = el.dataset.id; S.lastSample = S.addr; S.mode = "sample"; S.date = el.dataset.date || S.date; S.res = "all"; S.city = "all"; S.q = ""; S.guide = false; go("lookup"); }
   else if (act === "card") {
-    const el = document.getElementById("card-" + t.dataset.rule);
-    if (el) { el.scrollIntoView({ behavior: "smooth", block: "center" }); el.classList.add("flash"); setTimeout(() => el.classList.remove("flash"), 1600); }
-    else { S.res = "all"; renderAnswer(); const e2 = document.getElementById("card-" + t.dataset.rule); if (e2) e2.scrollIntoView({ block: "center" }); }
+    // Scroll to the card and flash it. If a result filter hides it, clear the filter and look again.
+    const card = document.getElementById("card-" + el.dataset.rule);
+    if (card) { card.scrollIntoView({ behavior: "smooth", block: "center" }); card.classList.add("flash"); setTimeout(() => card.classList.remove("flash"), 1600); }
+    else { S.res = "all"; renderAnswer(); const c2 = document.getElementById("card-" + el.dataset.rule); if (c2) c2.scrollIntoView({ block: "center" }); }
   }
   else if (act === "copyjson") copyJson();
-  else if (act === "cmp") { S.cmpA = t.dataset.a; S.cmpB = t.dataset.b; renderChanges($("#view")); }
-  else if (act === "cmprow") { S.open = S.open === t.dataset.key ? null : t.dataset.key; renderChanges($("#view")); }
+  else if (act === "copylink") { syncHash(); copyText(location.href, t("Link to this answer copied.")); }
+  else if (act === "print") window.print();
+  else if (act === "cmp") { S.cmpA = el.dataset.a; S.cmpB = el.dataset.b; renderChanges($("#view")); }
+  else if (act === "cmprow") { S.open = S.open === el.dataset.key ? null : el.dataset.key; renderChanges($("#view")); }
   else if (act === "theme") {
     const root = document.documentElement;
-    const dark = root.dataset.theme === "dark" || (!root.dataset.theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
-    root.dataset.theme = dark ? "light" : "dark";
+    root.dataset.theme = isDark() ? "light" : "dark";
+    renderChrome();
   }
 });
+/* Text fields that filter as you type: the address search and the rules search. */
 document.addEventListener("input", (ev) => {
-  const t = ev.target;
-  if (t.id === "q") { S.q = t.value; S.shown = 60; renderList(); }
-  else if (t.id === "rq") { S.rq = t.value; const pos = t.selectionStart; renderRulesTab($("#view")); const n = $("#rq"); n.focus(); n.setSelectionRange(pos, pos); }
+  const el = ev.target;
+  if (el.id === "q") { S.q = el.value; S.shown = 60; renderList(); }
+  // The rules tab is redrawn whole on each keystroke, so the caret position is saved and put back, or typing would jump to the start.
+  else if (el.id === "rq") { S.rq = el.value; const pos = el.selectionStart; renderRulesTab($("#view")); const n = $("#rq"); n.focus(); n.setSelectionRange(pos, pos); }
 });
+/* Date pickers, selects and the what-if fields. The what-if fields use "change" (when the field is left), not "input", so half-typed years such as "19" never flash an error. */
 document.addEventListener("change", (ev) => {
-  const t = ev.target;
+  const el = ev.target;
   const ok = (d) => /^\d{4}-\d{2}-\d{2}$/.test(d) && NE.parseDate(d) !== null;
-  if (t.id === "asof" && ok(t.value)) { S.date = t.value; renderAnswer(); }
-  else if (t.id === "cmpA" && ok(t.value)) { S.cmpA = t.value; renderChanges($("#view")); }
-  else if (t.id === "cmpB" && ok(t.value)) { S.cmpB = t.value; renderChanges($("#view")); }
-  else if (t.id === "mapRule") { S.mapRule = t.value; renderMap($("#view")); }
-  else if (t.id === "mapDate" && ok(t.value)) { S.date = t.value; renderMap($("#view")); }
-  else if (t.id === "rj") { S.rj = t.value; renderRulesTab($("#view")); }
-  else if (t.id === "rs") { S.rs = t.value; renderRulesTab($("#view")); }
+  if (el.id === "asof" && ok(el.value)) { S.date = el.value; renderAnswer(); }
+  else if (el.id === "cmpA" && ok(el.value)) { S.cmpA = el.value; renderChanges($("#view")); }
+  else if (el.id === "cmpB" && ok(el.value)) { S.cmpB = el.value; renderChanges($("#view")); }
+  else if (el.id === "own-place") { S.ownPlace = el.value; syncOwn(); setPicker(false); renderAnswer(); }
+  else if (el.id === "mapRule") { S.mapRule = el.value; renderMap($("#view")); }
+  else if (el.id === "mapDate" && ok(el.value)) { S.date = el.value; renderMap($("#view")); }
+  else if (el.id === "rj") { S.rj = el.value; renderRulesTab($("#view")); }
+  else if (el.id === "rs") { S.rs = el.value; renderRulesTab($("#view")); }
+  else if (el.id === "wi-year" || el.id === "wi-units" || el.id === "wi-owner") {
+    const cur = S.wi[S.addr] || {};
+    S.wi[S.addr] = { year: el.id === "wi-year" ? el.value : cur.year, units: el.id === "wi-units" ? el.value : cur.units, owner: el.id === "wi-owner" ? el.value : cur.owner };
+    // Only the facts tiles and the answers below are redrawn, never the fields themselves (see renderAnswer).
+    renderFacts(); renderBody();
+  }
 });
-window.addEventListener("resize", setTopbar);
-const h = (location.hash || "").replace("#", "");
-if (TABS.some(([k]) => k === h)) S.tab = h;
-renderFoot();
-render();
+/* Remember whether the what-if box and the guide are open, so a redraw keeps them as the person left them. Capture phase: "toggle" does not bubble. */
+document.addEventListener("toggle", (ev) => {
+  if (!ev.target) return;
+  if (ev.target.id === "wiBox") S.wiOpen = ev.target.open;
+  else if (ev.target.id === "guide") S.guide = ev.target.open;
+}, true);
+window.addEventListener("resize", () => { setTopbar(); markScrollers(); });
+
+/* ------------------------------------------------------------------ start */
+readHash();      // 1. state from the URL (address, date, facts, tab, language)
+applyLang();     // 2. document language and title
+renderFoot();    // 3. footer (needs the language)
+render();        // 4. the current view
 })();
 </script>

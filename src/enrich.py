@@ -16,6 +16,8 @@ and many conditions are filed under "other". One short model call reads all cons
     rule_coverage         "covered by / not subject to" another rule of ours (value = that rule's id)
 
 Rules whose answer is invalid are kept as they were (the lookup falls back to the Module A conditions).
+The same call also writes plain_en, a one-sentence summary for tenants. In-force rules that come back
+"undefined" or untestable get a second, narrower look (see main).
 
 Run from the repo root:   python src/enrich.py        (one API call, about $0.20, cached)
 Reads  outputs/rules_consolidated.json   Writes outputs/rules_enriched.json, outputs/rules.json,
@@ -25,7 +27,6 @@ from __future__ import annotations
 
 import argparse
 import copy
-import hashlib
 import json
 import re
 import sys
@@ -33,14 +34,20 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import extract as E  # noqa: E402
+from common import DEFAULT_MODEL, OUT, ROOT, use_utf8_console  # noqa: E402
+from dates import QUERY_DATE  # noqa: E402
+from llm import THINKING, cached_structured_call, strictify  # noqa: E402
 import consolidate as C  # noqa: E402
 
-CACHE_DIR = E.ROOT / "cache" / "enrich"
+CACHE_DIR = ROOT / "cache" / "enrich"
+# FACTS, OPS and SCOPES double as the enums in the JSON schema below, so the model cannot return a fact, operator
+# or scope the engine does not know. Which operator goes with which fact is checked in clean_cond.
 FACTS = ["first_occupancy_date", "units", "owner_occupied", "use_type", "status_not_in_data", "tenancy", "rule_coverage"]
 OPS = ["on_or_before", "before", "after", "on_or_after", "<=", "<", ">=", ">", "==", "!=", "is", "is_not"]
 SCOPES = ["universal", "conditional", "undefined"]
 
+# Do not edit SYSTEM, not even whitespace. It is part of the cache key, so any change throws away the saved
+# answer and costs a new call. The second-look prompt in main() is added to the user message, not to SYSTEM.
 SYSTEM = """You convert the coverage text of rental-housing rules into conditions a computer can test against one building. You get one JSON record per rule (many cities and states). Use ONLY what the records say. Never use outside legal knowledge. Do not guess.
 
 For each rule return:
@@ -74,6 +81,8 @@ support = the record ids and text you relied on (for example "own text" or "r-00
 plain_en = one sentence of at most 28 words in plain English for a tenant or a small landlord (about an 8th-grade reading level). Say what the rule requires, limits or bans, and who has to follow it. No section numbers, no Latin, no "pursuant to". Use only facts in the record (the requirement and key_value fields). For a bill that is not law say so ("A proposed bill that would ban ..."); for a measure that failed say so ("A ballot question that was struck down and never became law").
 Return one JSON object that follows the schema, and nothing else. Include every rule id you were given exactly once."""
 
+# One test on a building. Every value is text (a unit count or a date is written as a string) so the schema
+# needs only one type; clean_cond checks that the text really is a whole number or an ISO date.
 _COND = {
     "type": "object",
     "properties": {
@@ -84,7 +93,7 @@ _COND = {
         "text": {"type": "string"},
     },
 }
-SCHEMA = E._strictify({
+SCHEMA = strictify({
     "type": "object",
     "properties": {
         "rules": {
@@ -109,10 +118,13 @@ SCHEMA = E._strictify({
     },
 })
 
+# year, year-month or full date: the same shapes effective_date uses elsewhere in the pipeline
 ISO = re.compile(r"^\d{4}(-\d{2}(-\d{2})?)?$")
 
 
 def compact(rules: list[dict]) -> str:
+    """One JSON object per line for the prompt, text fields clipped.
+    Module A's own coverage is sent only when it holds a test or an exemption, so the model is not shown empty shells."""
     lines = []
     for r in rules:
         cov = r.get("coverage") or {}
@@ -128,11 +140,15 @@ def compact(rules: list[dict]) -> str:
 
 
 def clean_cond(c: dict, ids: set[str], problems: list[str], where: str):
+    """Check one condition the model wrote. Returns a clean dict, or None if it cannot be used.
+    `ids` = every valid rule id (for rule_coverage); `problems` gets one plain-English note per rejection;
+    `where` = the rule id shown in those notes. A bad test is rejected here so it never reaches the engine."""
     fact, op, val = c.get("fact"), c.get("op"), (c.get("value") or "").strip()
     yrs = c.get("years_before_as_of") or 0
     if fact not in FACTS or op not in OPS:
         problems.append(f"{where}: bad fact/op {fact!r}/{op!r}")
         return None
+    # The schema allows any operator with any fact (for example "<=" on a date), so the valid pairs are checked here.
     if fact == "first_occupancy_date":
         if op not in ("on_or_before", "before", "after", "on_or_after"):
             problems.append(f"{where}: bad op {op!r} for a date")
@@ -141,7 +157,7 @@ def clean_cond(c: dict, ids: set[str], problems: list[str], where: str):
             problems.append(f"{where}: date {val!r} is not ISO and no rolling years given")
             return None
         if yrs > 0:
-            val = ""
+            val = ""                       # a rolling test is stored by years alone, so a stray fixed date cannot contradict it
     elif fact == "units":
         if op not in ("<=", "<", ">=", ">", "==", "!=") or not re.fullmatch(r"\d+", val):
             problems.append(f"{where}: bad units test {op!r} {val!r}")
@@ -151,14 +167,18 @@ def clean_cond(c: dict, ids: set[str], problems: list[str], where: str):
             problems.append(f"{where}: rule_coverage points at unknown rule {val!r}")
             return None
     else:
+        # owner_occupied, use_type, status_not_in_data, tenancy: only "is" / "is_not" make sense, so a stray operator is fixed, not rejected
         if op not in ("is", "is_not"):
             op = "is"
+    # years only matter for the date test; every other fact stores 0
     return {"fact": fact, "op": op, "value": val, "years_before_as_of": int(yrs) if fact == "first_occupancy_date" else 0,
             "text": (c.get("text") or "").strip()}
 
 
 def validate(answer: dict, rules: list[dict]):
-    """Return ({rule_id: coverage_v2}, problems). Anything invalid is left out so the old conditions are used."""
+    """Check the model's answer. Returns (coverage_v2 by rule id, problems, plain_en by rule id).
+    A rule with any bad piece is left out whole, so the lookup uses its Module A conditions instead of a half-converted test.
+    plain_en is judged on its own (15 to 400 characters), so a bad coverage does not lose the summary."""
     ids = {r["team_rule_id"] for r in rules}
     out, problems, seen = {}, [], set()
     plains = {}
@@ -168,6 +188,7 @@ def validate(answer: dict, rules: list[dict]):
             problems.append(f"unknown or repeated rule id {rid!r}")
             continue
         seen.add(rid)
+        # kept even if this rule's conditions are dropped later; the length bounds reject empty or runaway text
         pl = re.sub(r"\s+", " ", str(a.get("plain_en") or "")).strip()
         if 15 <= len(pl) <= 400:
             plains[rid] = pl
@@ -178,13 +199,16 @@ def validate(answer: dict, rules: list[dict]):
                 notes.append(f"{rid}: test on unknown rule {str(c.get('value'))[:60]!r} left out")
                 return False
             return True
+        # notes are logged but do not count as a defect, so dropping one dangling rule_coverage test does not discard the rule
         notes = []
         conds = [clean_cond(c, ids, problems, rid) for c in a.get("conditions", []) if _keep(c)]
         exs = []
         for ex in a.get("exemptions", []):
             ec = [clean_cond(c, ids, problems, rid) for c in ex.get("conditions", []) if _keep(c)]
             if ex.get("conditions") and not ec:
-                continue                       # an exemption whose only test was unreadable is not usable
+                # An exemption whose only test was unreadable is not usable. Kept with no tests it would read as
+                # "exemption test not stated" in the engine and turn answers into unknown.
+                continue
             exs.append({"label": (ex.get("label") or "").strip(), "conditions": ec})
         if a.get("scope") not in SCOPES:
             problems.append(f"{rid}: bad scope")
@@ -192,9 +216,11 @@ def validate(answer: dict, rules: list[dict]):
             problems.append(f"{rid}: enrichment dropped, Module A conditions kept")
             continue
         problems.extend(notes)
+        # "universal" means no building test. If tests came with it, trust the tests: that is the cautious reading.
         if a["scope"] == "universal" and conds:
             problems.append(f"{rid}: universal scope with conditions; kept as conditional")
             a["scope"] = "conditional"
+        # a rule "covered by itself" would depend on its own answer
         if rid in {c["value"] for c in conds if c["fact"] == "rule_coverage"}:
             problems.append(f"{rid}: points at itself; enrichment dropped")
             continue
@@ -204,45 +230,23 @@ def validate(answer: dict, rules: list[dict]):
 
 
 def ask(args, user: str, label: str) -> dict:
-    """One enrichment call, saved under cache/enrich/ so the same question is never paid for twice."""
-    key = hashlib.sha256((SYSTEM + json.dumps(SCHEMA, sort_keys=True) + user + args.model).encode()).hexdigest()[:12]
-    cache = CACHE_DIR / f"{key}.json"
-    if cache.exists() and not args.refresh:
-        print(f"Using the saved answer from cache/enrich/{cache.name} (no API call).")
-        return json.loads(cache.read_text(encoding="utf-8"))
-    client = E.get_client()
-    print(f"Asking {args.model} to {label} ...")
-    resp = E.call_structured(client, args.model, SYSTEM, user, SCHEMA, max_tokens=32000)
-    text = "".join(getattr(b, "text", "") for b in resp.content if getattr(b, "type", None) == "text")
-    if resp.stop_reason in ("max_tokens", "refusal"):
-        sys.exit(f"The answer was not usable (stop_reason={resp.stop_reason}). Run again.")
-    try:
-        result = json.loads(text)
-        assert isinstance(result.get("rules"), list)
-    except Exception:  # noqa: BLE001
-        sys.exit("The answer was not valid JSON. Run the same command again.")
-    cin, cout = resp.usage.input_tokens, resp.usage.output_tokens
-    print(f"tokens in/out: {cin:,}/{cout:,}   cost: ${E.usd(cin, cout, args.model):.2f}")
-    payload = {"model": args.model, "called_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-               "input_tokens": cin, "output_tokens": cout, "result": result}
-    CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    cache.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
-    return payload
+    """One enrichment call, saved under cache/enrich/ so the same question is never paid for twice.
+    `args` supplies --model and --refresh; `label` is only the progress text."""
+    return cached_structured_call(cache_dir=CACHE_DIR, system=SYSTEM, schema=SCHEMA, user=user, model=args.model,
+                                  label=label, list_key="rules", refresh=args.refresh)
 
 
 def main(argv=None) -> int:
-    try:
-        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-    except Exception:  # noqa: BLE001
-        pass
+    """CLI: one call for all rules, a second look at the hard in-force ones, then validate and write the enriched files. Returns 0."""
+    use_utf8_console()
     ap = argparse.ArgumentParser(description="Convert coverage text into testable conditions")
-    ap.add_argument("--model", default=E.DEFAULT_MODEL)
+    ap.add_argument("--model", default=DEFAULT_MODEL)
     ap.add_argument("--thinking", choices=["off", "adaptive"], default="off")
     ap.add_argument("--refresh", action="store_true")
     args = ap.parse_args(argv)
-    E._THINKING["mode"] = args.thinking
+    THINKING["mode"] = args.thinking
 
-    src = E.OUT / "rules_consolidated.json"
+    src = OUT / "rules_consolidated.json"
     if not src.exists():
         sys.exit("outputs/rules_consolidated.json not found. Run  python src\\consolidate.py  first.")
     data = json.loads(src.read_text(encoding="utf-8"))
@@ -254,9 +258,13 @@ def main(argv=None) -> int:
     # Second look. A rule that is in force is read again, with the sibling records of its jurisdiction in front
     # of the model, when the first answer left it "undefined" or gave it only tests the parcel data cannot show
     # (a status or a tenancy): a sibling often states the cut-off date, or says the rule covers the whole ordinance.
+    # Why a second call: the first sees every jurisdiction at once and can miss that link; this one is narrow.
+    # Pending bills and failed measures are skipped on purpose: "undefined" is the right answer for them.
     first = {a.get("id"): a for a in payload["result"].get("rules", [])}
 
     def _untestable(a):
+        """True when the answer is "conditional" but every test is a status or tenancy the parcel data cannot show,
+        so the engine could never answer it."""
         cs = a.get("conditions") or []
         return a.get("scope") == "conditional" and bool(cs) and all(c.get("fact") in ("status_not_in_data", "tenancy") for c in cs)
 
@@ -267,6 +275,8 @@ def main(argv=None) -> int:
         sib = [r for r in rules if any(r["jurisdiction"] == x["jurisdiction"] for x in again)]
         prev = "\n".join(json.dumps({"id": i, "scope": first[i].get("scope"), "conditions": first[i].get("conditions"),
                                      "exemptions": first[i].get("exemptions")}, ensure_ascii=False) for i in ids2 if i in first)
+        # The prompt allows three reasons to change an answer (a, b, c) and says to repeat everything else,
+        # so the second call cannot churn results that were already stable.
         user2 = ("Records of the jurisdictions below (one JSON object per line):\n" + compact(sib) +
                  "\n\nSECOND LOOK. These rules are in force: " + ", ".join(ids2) + ". Your first answers for them were:\n" + prev +
                  "\n\nRead the records of the same jurisdiction again (coverage_text, exemptions_text, interaction of the sibling records). Change an answer ONLY when a record supplies a basis the first answer missed:\n"
@@ -278,6 +288,9 @@ def main(argv=None) -> int:
                  "Answer \"undefined\" only if no record says who is covered. Return ONLY these ids, each exactly once.")
         p2 = ask(args, user2, f"take a second look at {len(again)} rule(s): " + ", ".join(ids2))
         second = {a.get("id"): a for a in p2["result"].get("rules", [])}
+        # Accept a second answer only if it is no longer "undefined", passes validate on its own and really differs
+        # from the first. Otherwise the first answer stays, so this step can only improve a rule, never break one.
+        # plain_en stays from the first answer: the second look is about coverage only.
         merged, swapped = [], []
         for a in payload["result"].get("rules", []):
             b = second.get(a.get("id"))
@@ -293,7 +306,10 @@ def main(argv=None) -> int:
         payload = {**payload, "result": {**payload["result"], "rules": merged}}
         print(f"Second look changed {len(swapped)} of {len(again)}: {', '.join(swapped) or 'none'}")
 
+    # Final check of the merged answers: anything invalid is dropped here, whichever call it came from.
     cov2, problems, plains = validate(payload["result"], rules)
+    # --- write the results. plain_en and coverage_v2 are added only when valid; a rule without coverage_v2 is
+    # tested with its Module A conditions (engine.coverage_of). ---
     enriched = []
     for r in rules:
         r2 = copy.deepcopy(r)
@@ -302,15 +318,17 @@ def main(argv=None) -> int:
         if r["team_rule_id"] in cov2:
             r2["coverage_v2"] = cov2[r["team_rule_id"]]
         enriched.append(r2)
-    (E.OUT / "rules_enriched.json").write_text(json.dumps({
-        "query_date": E.QUERY_DATE, "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+    (OUT / "rules_enriched.json").write_text(json.dumps({
+        "query_date": QUERY_DATE, "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "source": "outputs/rules_consolidated.json", "rules": enriched}, ensure_ascii=False, indent=1), encoding="utf-8")
-    (E.OUT / "rules.json").write_text(json.dumps({"rules": [C.submission_view(r) for r in enriched]}, ensure_ascii=False, indent=1), encoding="utf-8")
-    (E.OUT / "enrichment_log.json").write_text(json.dumps({
+    # rules.json is rewritten so it always follows rules_enriched.json (its submission fields are the same as after consolidate)
+    (OUT / "rules.json").write_text(json.dumps({"rules": [C.submission_view(r) for r in enriched]}, ensure_ascii=False, indent=1), encoding="utf-8")
+    (OUT / "enrichment_log.json").write_text(json.dumps({
         "model_notes": payload["result"].get("notes", ""), "problems": problems,
         "per_rule": {rid: {"scope": v["scope"], "support": v["support"], "reasoning": v["reasoning"]} for rid, v in cov2.items()}},
         ensure_ascii=False, indent=1), encoding="utf-8")
 
+    # --- report: what the model decided for each rule, so a person can eyeball the date cut-offs (they decide who is covered) ---
     n = len(rules)
     print(f"\nPlain-language sentences written for {len(plains)}/{n} rules.")
     sc = {s: sum(1 for v in cov2.values() if v["scope"] == s) for s in SCOPES}
