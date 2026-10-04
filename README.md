@@ -1,128 +1,132 @@
-# Rental Housing Law Navigator — Participant Guide
+# Stackwise: Rental Housing Law Navigator
 
-MIT AI Hackathon · 24 hours · public data only · Realpage discussion draft, October 2026
+**Which rental laws apply at this address, on this date?**
+Built for the Hack-Nation x RealPage challenge (Rental Housing Law Navigator). Not legal advice.
 
-> This guide and the starter pack are everything you need to build. Read sections 1–4 before you start coding.
+- Live demo: https://hack-nation-pioneer-seven.vercel.app/ · backup copy: https://ahmadkonainah.github.io/hack-nation-pioneer/
+- Videos (60 seconds each): [demo](submission/Stackwise_Demo_Video.mp4) · [tech](submission/Stackwise_Tech_Video.mp4) · [team](submission/Stackwise_Team_Video.mp4)
+- One-page report: `submission/Stackwise_OnePager.pdf`
 
----
+## What it does
 
-## 1. The task in one paragraph
+Stackwise reads public rental-housing law and answers, for any address and any date, which rules apply, which have been displaced, which have not started, which are only bills, and what the data cannot say.
 
-For any apartment address in the sample, your system must answer: **which housing rules apply here on the query date, and how do the supplied change cases affect the answer?** It reads a corpus of real state and city law, turns each rule into a structured record (Module A), resolves each address to its state and city and tests each rule's coverage conditions (Module B), and reports which addresses each supplied law-change case affects (Module C). Every answer must cite the source text.
+1. **Module A, rules.** A language model (Claude Sonnet 5.5, structured outputs) reads each source page and writes one record per rule with a citation, a source link and the exact words it came from. Code checks that every quote is in the page and computes whether the rule is in force, not yet effective, pending or failed from its dates. Records for the same law are merged.
+2. **Module B, address lookup.** The U.S. Census geocoder places each address in a state, county and city. The engine tests each rule against year built and unit count. Answers: `applies`, `superseded`, `not_yet_effective`, `pending`, `unknown`. A missing fact gives `unknown`, never a guess. When a stricter local law governs, the state rule is `superseded` and points to the one that governs.
+3. **Module C, change tracking.** The same engine runs on any date. Two answers side by side show what changed and for whom. Possible preemption is flagged for a person, not decided.
 
-**Default query date: 2026-10-01.** Some tests ask for other dates.
+## Results on the 500 sample addresses (as of 2026-10-01)
 
-## 2. Minimum viable submission
-
-If you run short on time, this is what counts:
-
-1. **Modules A and B** on the supplied sample addresses. If you run short on time, prioritize accurate extraction, jurisdiction resolution and citations.
-2. Module C (change tracking) and the plain-language view come next.
-3. Stretch goals (Spanish view, confidence indicators, a new jurisdiction) only after that.
-
-## 3. Rules of the event
-
-- **Extraction must be automated.** Rules must come from your system reading the supplied corpus, not hand-coded. You should show the extraction pipeline in the demo.
-- **Use the starter pack.** You may consult the public sources in section 6, but do not bulk-scrape sites whose terms forbid it.
-- **No non-public data.** No customer, resident or pricing data.
-- **"Unknown" is a valid answer** when coverage depends on a fact the data doesn't have. Say unknown rather than guessing when the supplied data is insufficient.
-- **Not legal advice.** Every interface you build must say so.
-- **Logistics (TBD by organizers):** event dates and location · team size · model / API access and credits · submission method and deadline · code and data licensing · contact. These will be confirmed at registration.
-
-## 4. What's in the starter pack
-
-| Path | What it is |
+| | |
 |---|---|
-| `corpus/corpus_manifest.csv` | 87 source documents: `doc_id`, jurisdiction, URL, source type, capture status |
-| `corpus/text/` | Plain-text copies of official documents, each headed with its source URL and retrieval date |
-| `corpus/links_only.csv` | Sources without supplied text, including publisher pages awaiting terms review and official pages that blocked capture |
-| `data/sample_addresses.csv` | ~500 multifamily properties from public assessor data (see 4.1) |
-| `schema/rule_record.schema.json` | Required format for every rule record |
-| `schema/sample_rule_record.json` | One worked example |
-| `dev/change_tests.json` | The five deterministic change-tracking tests (T1-T5) |
-| `submission_templates/` | Example `rules.json`, `lookups.json`, `changes.json` |
+| Rules extracted | **56** from 67 source pages (50 in force, 1 not yet effective, 3 pending bills, 2 failed measures) |
+| Addresses placed by the Census geocoder | 493 of 500 (the rest use the city named by their parcel dataset, or are `unknown`) |
+| Answers in `lookups.json` | 4,773 (applies 3,411 · superseded 265 · not yet effective 140 · pending 300 · unknown 657) |
+| Share of answers that are `unknown` | 14% (mostly missing year built or a special status that parcel data cannot show) |
+| Answers carrying a conflict flag | 180 |
+| Self-check | 39 checks pass, 0 warning, 0 fail (`python src/selfcheck.py`) |
 
-### 4.1 Sample addresses
+The organizers' `score.py` and answer key were not shared, so we cannot report an official score. Our own self-check tests the output files against the schema and against the five change tests.
 
-Columns: `address_id, street_address, postal_city, state, zip, year_built, units, use_code, use_description, source_dataset, retrieved_at`.
+## The five change tests
 
-- **The jurisdiction is not given.** `postal_city` is the mailing city, which is not always the legal city. In Los Angeles, "Van Nuys" is inside the City of Los Angeles, and Boston rows may say "Dorchester". Resolving the real jurisdiction (e.g. with the Census Geocoder) is part of Module B.
-- **Coverage by city:** Los Angeles 80 · San Francisco 80 · San Diego 50 · Berkeley 40 · Jersey City 50 · Hoboken 40 · Newark 50 · Boston 60 · Cambridge 50.
-- **Known gaps in the public records (handle them explicitly):**
-  - San Diego and Berkeley have no year built; Berkeley also has no unit count.
-  - Boston apartment rows (`use_code` starting `A/`) have no unit count in this sample.
-  - Jersey City and Newark have no unit counts in this sample; 39 of 40 Hoboken rows also lack them. New Jersey construction years are often missing.
-- **Santa Ana** laws are in the corpus but there are **no Santa Ana addresses**: no open parcel data with addresses was found. Santa Ana rules count for extraction only.
-- **No owner names.** They are deliberately excluded, so owner-type tests (e.g. California's small-landlord deposit exception) can't be resolved from the data. Answer "unknown" or explain why the exception can't apply.
-- **Year built ≠ certificate of occupancy.** Several cutoffs use the certificate date (San Francisco: on or before 1979-06-13; Los Angeles: on or before 1978-10-01). A building in the cutoff year should be "unknown".
-
-## 5. Submission format
-
-Submit three JSON files (templates in `submission_templates/`):
-
-1. **`rules.json`**: a list of rule records matching `schema/rule_record.schema.json`.
-2. **`lookups.json`**: `{"as_of": "2026-10-01", "lookups": {address_id: [{team_rule_id, result, explanation, conflict_flag}]}}`, covering **all 500 addresses**.
-3. **`changes.json`**: `{test_id: {affected_address_ids: [...], conflict_flag_address_ids: [...], notes}}`, covering all 500 addresses.
-
-Use the supplied schemas and templates, keep every answer tied to a source document and retrieval date, and make the system reproducible for the live demo. Organizers will provide submission logistics separately.
-
-**`result` values**
-
-| Value | Meaning |
-|---|---|
-| `applies` | The rule is in force and covers this address |
-| `unknown` | Coverage depends on facts not in the data |
-| `superseded` | Covered, but a stricter rule at another level governs (e.g. California's statewide cap where local rent control applies) |
-| `not_yet_effective` | Enacted, but its effective date is after the query date |
-| `pending` | A bill or proposal, not law |
-
-Leave out rules that don't apply.
-
-## 6. Public sources you may use
-
-| Source | Use it for | Access |
+| Test | What it checks | Our result |
 |---|---|---|
-| Census Geocoder (`geocoding.geo.census.gov`) | Address → state, county, incorporated place | No key; batch up to 10,000 rows |
-| Census TIGER/Line | City boundaries | Free download |
-| LegiScan API | Bill status and text | Free key; 10,000 queries/month; CC BY 4.0 |
-| Open States API v3 | Bill status | Free key |
-| State code sites (CA, NJ, MA legislatures) | Statute text | Free; California's site blocks scripts, so use the corpus copy |
-| City code sites and publishers (ecode360, American Legal, Municode) | Ordinance text | Read freely; respect terms, no bulk scraping |
-| LSC Eviction Laws Database | Methods reference only | Laws as of 1/1/2021, out of date |
+| T1 California AB 325 / SB 763 | `not_yet_effective` on 2025-12-31, `applies` on 2026-01-02, every California address | 250 addresses affected |
+| T2 Hoboken vs Jersey City bans | each ban only in its own city, neither in Newark | 90 addresses affected, 0 in Newark |
+| T3 New Jersey FAIR Act | `not_yet_effective` on 2026-10-01, `applies` on 2027-07-02, every New Jersey address; Jersey City and Hoboken flagged for possible preemption | 140 affected, 90 flagged |
+| T4 Massachusetts bills S.2983 and H.5222 | `pending` for every Massachusetts address | 110 addresses |
+| T5 Massachusetts ballot question struck | no rent cap for Boston or Cambridge | 0 addresses (correct: the measure is recorded as failed) |
 
-## 7. Change-tracking tests
+## How it works
 
-| Test | What it checks |
-|---|---|
-| **T1** | California AB 325 / SB 763: as of 2025-12-31 vs 2026-01-02 |
-| **T2** | Hoboken vs Jersey City local algorithmic bans: get the boundary right |
-| **T3** | New Jersey FAIR Act: enacted 2026-07-20, effective 2027-07-01. Report `not_yet_effective` now, `applies` on 2027-07-02. Flag a possible conflict with the Jersey City and Hoboken ordinances. |
-| **T4** | Massachusetts S.2983 and H.5222: pending bills. Which addresses would be affected if they passed? |
-| **T5** | Massachusetts rent-control ballot question (struck 2026-06-23): affected set must be empty. Never report a rent cap in Boston or Cambridge. |
+```mermaid
+flowchart LR
+  A[Public law pages\nstatutes, city codes,\nagency pages, news] --> B[Extract\nClaude, JSON schema\nquote must match source]
+  B --> C[Consolidate\nmerge repeats, find\nyields-to and conflicts]
+  C --> D[Enrich\nplain-English summary,\ntestable coverage conditions]
+  D --> G[Lookup engine\nthree-valued logic]
+  E[Parcel facts\nyear built, units] --> G
+  F[Census geocoder\nstate, county, city] --> G
+  G --> H[lookups.json]
+  G --> I[changes.json T1-T5]
+  G --> J[Demo app\nsame engine in JavaScript]
+```
 
-## 8. Responsible design
+**The model reads, the code decides.**
+- Every quote must appear word for word in the source page, or the record is rejected.
+- Status (in force, not yet effective, pending, failed) is computed by code from dates, not written by the model.
+- The lookup engine uses three-valued logic (true, false, unknown). It is deterministic, so the same inputs always give the same answer.
+- The browser engine (`web/engine.js`) is a port of `src/engine.py`. `python src/parity_test.py` checks that both give identical answers for every address on 14 dates (7,000 comparisons).
 
-**Do**
+**Unknown beats a guess.** Parcel data has no deed-restriction, subsidy or owner-occupancy status, and often no year built or unit count. Tests that need those facts return `unknown` and say which fact is missing. Exemptions we cannot check are listed as "not checked from parcel data".
 
-- Cite the source text and retrieval date for every rule.
-- Show an "as of" date on every answer.
-- Separate enacted law from pending law.
-- Say "unknown" instead of guessing.
-- Flag conflicts for human review.
-- Keep an audit log.
+**Provenance on every rule.** Citation, source URL, document id, retrieval time, the exact words, and a confidence value.
 
-**Don't**
+## Open questions from the brief, and how Stackwise treats them
 
-- Present output as legal advice or a compliance certification.
-- Suggest ways to avoid a rule.
-- Invent rules or citations.
-- Use non-public data.
+1. **Berkeley algorithmic-pricing ban, two effective dates in circulation.** The date we extracted is 2026-01. We do not choose between the two dates in circulation; a person should confirm.
+2. **New Jersey FAIR Act and the Jersey City and Hoboken bans.** The Act (r-0013, effective 2027-07-01) says towns may not enact conflicting ordinances. Both city bans stay `applies` until then. All three rules carry a conflict flag for human review. We do not decide preemption.
+3. **Los Angeles RSO formula, two dates.** We record the date stated on the page we cited (r-0021: 2025-07-01) and do not pick between the two candidates. A person should compare them.
+4. **California screening fee for 2026.** The statute sets a cap that is adjusted each year and states no 2026 figure. Rule r-0004 shows "$30 per applicant, CPI-adjusted; itemized receipt required" with its source, a local government page. Treat the figure as secondary.
 
-## 9. Known open questions in the law (bonus if your system surfaces them)
+## Data quality notes
 
-- **Berkeley's algorithmic ban** (ch. 13.63) has two published effective dates: March 1, 2026 in the ordinance text, January 2026 per an August 2026 law-firm alert.
-- **New Jersey's FAIR Act** may preempt the Jersey City and Hoboken ordinances once it takes effect.
-- **Los Angeles's new RSO formula** has two published effective dates: 2026-02-02 per LAHD, 2026-01-24 per a landlord association.
-- **California's screening-fee cap** has no single official 2026 dollar figure.
+- 27 addresses carry a zip code that does not belong to their state (for example a New Jersey address with a New York zip). We place addresses with the geocoder, not by zip.
+- Postal city is not legal city. 33 addresses have a postal city different from the city that governs them (for example Dorchester and Roxbury are Boston). The legal city decides which rules apply.
+- Year built is not a certificate-of-occupancy date. When the year equals a cut-off year (for example 1978), the answer is `unknown`.
+- Unit counts are missing for most Berkeley, Jersey City, Newark, Hoboken and Boston rows. Where the parcel use text or class code states "five or more units", we use that as a lower bound. One Hoboken row says 2 units but class 4C (apartments); the conflict gives `unknown`.
+- 7 addresses could not be matched by the geocoder (no house number, or no match). City rules for them are answered from the parcel dataset's city when it names one, or `unknown`.
 
-*Not legal advice. Summaries of law in this pack are for building a prototype.*
+## Responsible design
+
+- Every screen and file says this is not legal advice.
+- Public sources only. We hand-read pages and did not scrape any site against its terms. Parcel data is public assessor data. No personal data.
+- Gaps are shown as gaps: a topic with no rule in our sources says so, and does not imply no law exists.
+- Conflicts are flagged for a person. Nothing is silently resolved.
+- Plain-English summary first, exact legal words one click away.
+
+## Scalability and cost
+
+Adding a city means adding its source pages to `corpus/` and re-running `python src/run_all.py`. No code changes. Model calls are cached, so a re-run only pays for new or changed pages. The whole corpus (67 pages, 13 jurisdictions) costs a few dollars and takes minutes. Lookups for 500 addresses on one date take about 50 milliseconds in the browser.
+
+## Limitations
+
+- Gaps are shown, not hidden. A city with no rule for a topic means none in our sources, not that none exists. For example, no local rent rule in force was found for Boston, Cambridge, San Diego, and no local just-cause rule for Cambridge, Hoboken, Jersey City; state rules still apply there where they exist. The Rules tab in the app lists every gap. One saved source page (D074 (173 parts)) was a whole website instead of the law text, so the size guard skipped it instead of spending the budget on menus and code. The same San Diego ordinance is covered by the city staff report and two law-firm summaries.
+- Source pages are a snapshot from the retrieval date shown on each rule. Law changes; re-run to refresh.
+- Some rules come from news articles or law-firm summaries because the code text was not available. They carry lower confidence.
+- Coverage tests use parcel data only. A building's real status (rent-controlled, deed-restricted, owner-occupied) needs a human check.
+
+## Run it yourself
+
+Python 3.10+ and an Anthropic API key in a file named `.env` (never commit it; `.gitignore` excludes it).
+
+```
+python -m venv .venv
+.venv\Scripts\activate          # Windows. On Mac/Linux: source .venv/bin/activate
+pip install -r requirements.txt
+python src/run_all.py            # extract, consolidate, enrich, resolve, lookup, changes, build_web, selfcheck
+python src/lookup.py --as-of 2026-10-01
+python src/selfcheck.py
+python src/parity_test.py        # needs Node.js; compares Python and JavaScript engines
+```
+
+Open `web/index.html` (or `docs/index.html`) in a browser for the demo. It is one self-contained file.
+
+## Repository layout
+
+```
+src/        extract.py consolidate.py enrich.py resolve.py engine.py lookup.py changes.py selfcheck.py build_web.py build_site.py run_all.py parity_test.py
+web/        app.template.html, engine.js, data.js, index.html (generated)
+docs/       index.html (generated copy for GitHub Pages)
+outputs/    rules.json lookups.json changes.json (the submission files) plus logs
+corpus/     source page text and manifest
+data/       sample_addresses.csv
+submission/ one-page report, video scripts, post draft
+```
+
+## Sources and data
+
+Rules come from the public pages listed in `corpus/corpus_manifest.csv`. Pages the team saved by hand (news, law-firm and code-publisher pages whose terms do not clearly allow copying) are not stored in this repository; their URLs are in the manifest. Each rule links to its source and gives the retrieval date. Data licensing for the parcel datasets is set by their publishers; this repository stores only the 500 sample rows supplied by the organizers.
+
+Not legal advice. Built on a public corpus that no lawyer has reviewed.
