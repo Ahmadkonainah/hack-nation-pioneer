@@ -1,0 +1,16 @@
+{
+ "doc_id": "D046",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 5190,
+ "output_tokens": 203,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:53:19+00:00",
+ "result": {
+  "document_summary": "A Massachusetts legislature web page for Senate Bill S.2983, 'An Act prohibiting algorithmic rent setting,' showing only its title, committee referral history and status, with no bill text.",
+  "notes": "The page is a bill-tracking page and does not include the bill's operative text, so no substantive rule (prohibition scope, penalties, coverage, effective date) is stated. The bill is pending (referred to Senate Ways and Means on 3/12/2026) and its content cannot be extracted without the text. Returning an empty list rather than inferring terms from the title alone.",
+  "rules": []
+ }
+}

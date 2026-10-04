@@ -1,0 +1,41 @@
+{
+ "doc_id": "D033",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 12482,
+ "output_tokens": 882,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:49:46+00:00",
+ "result": {
+  "document_summary": "Hoboken, NJ Code Chapter 155 (Rent Control), Article II general regulations, setting the base rent control level, the annual increase cap at lease expiration or termination, and surcharges and hardship increases.",
+  "notes": "The page excerpt contains only Article II general regulations of Chapter 155. The definitions and exemptions sections (including newly constructed dwellings and vacancy decontrol) are not included, so coverage and exemptions could not be extracted and are left empty. The ordinance adoption date is not stated, though the controlled base rent date is October 1, 1985 and amendment dates are listed (latest 10-22-2025, Ord. No. B-818). Surcharges, hardship increases and the disclosure statement are treated as details of the single rent control instrument. Just-cause eviction and other categories are not addressed in this excerpt.",
+  "rules": [
+   {
+    "jurisdiction": "Hoboken, NJ",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "Hoboken rent control: base rent control and annual increase cap",
+    "requirement": "Rents in covered dwellings are controlled at the base rent received by the landlord as of October 1, 1985, and any increase in excess of that authorized by the chapter is void. At lease expiration or termination, an increase may not exceed the lesser of 5% or the CPI percentage change, and only one such increase is allowed in any twelve-month period; landlords must give 30 days' written notice stating the reason for any increase, and capital improvement, tax, water/sewer and hardship surcharges require approval or application under the chapter.",
+    "key_value": "Lesser of 5% or CPI change; one increase per 12 months",
+    "legal_state": "enacted",
+    "effective_date": "1985-10-01",
+    "date_basis": "stated",
+    "citation": "Hoboken City Code ch. 155, §§ 155-3 to 155-5",
+    "quoted_span": "no landlord may request or receive a percentage increase in rent which is greater than 5% or the percentage difference between the consumer price index three months prior to the expiration or termination of the lease and three months prior to the commencement of the lease term, whichever is less.",
+    "coverage_text": "Applies to housing space in dwellings to which Chapter 155 is applicable; the applicability definitions and exemptions are not included in this excerpt.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "The excerpt refers to exemptions for newly constructed dwellings and buildings completely vacant since January 1, 1984, but does not set out their terms.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

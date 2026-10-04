@@ -1,0 +1,59 @@
+{
+ "doc_id": "D071",
+ "chunk": 1,
+ "chunks": 7,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 19339,
+ "output_tokens": 1279,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:05:53+00:00",
+ "result": {
+  "document_summary": "Part 1 of 7 of Newark, NJ Municipal Code Chapter 2:10 (Department of Economic and Housing Development), covering department organization, housing assistance programs and the Abandoned Property Rehabilitation Act, with only HOME-program rent and tenant-protection terms touching rental rules.",
+  "notes": "The part is mostly administrative (department structure, homeowner rehab loans, urban homestead, abandoned property lists), which is out of scope. The one in-scope item is the HOME-assisted unit rent limits and 30-day rent-increase notice in the Neighborhood Rehabilitation Program (§ 2:10-1.2 b.5), recorded as a program-specific rent_increase_limits rule that applies only to HOME-assisted units. The same section's bar on refusing Section 8 voucher holders (subsection b.5(a)(5)) is a source-of-income restriction limited to HOME-assisted units and is not recorded as a separate record, because only one record per category and instrument is allowed and rent limits and tenant protections are details of the same instrument. No effective date for the NRP provisions is given in this part (only ordinance amendment dates for the section as a whole), so effective_date is blank. No security deposit, screening fee, just-cause or algorithmic pricing rules appear in this part.",
+  "rules": [
+   {
+    "jurisdiction": "Newark, NJ",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "HOME-assisted unit maximum rents under Neighborhood Rehabilitation Program",
+    "requirement": "Rents for HOME-assisted units in Newark's Neighborhood Rehabilitation Program may not exceed the lesser of HUD fair market rent or the rent affordable to a family at 65% of area median income (30% of adjusted income), minus utility allowances where the tenant pays utilities. Owners must give tenants at least 30 days' prior written notice of any rent increase, and leases must be for at least one year unless mutually agreed otherwise.",
+    "key_value": "Lesser of HUD fair market rent or 30% of adjusted income at 65% of area median income; 30 days' written notice of increase",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Newark Municipal Code § 2:10-1.2(b)(5)",
+    "quoted_span": "Any increase in rents for HOME assisted units is subject to the provisions of outstanding leases, and in any event, the owner must provide tenants of those units not less than 30 days prior written notice before implementing any increase in rents.",
+    "coverage_text": "Applies only to rental units assisted with HOME funds through the City's Neighborhood Rehabilitation Program (owner-occupied structures of one to three dwelling units), for the applicable affordability period (5, 10 or 15 years depending on funds awarded).",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "other",
+       "op": "is",
+       "value": "HOME-assisted unit in Neighborhood Rehabilitation Program",
+       "years_before_as_of": 0,
+       "text": "Unit assisted with HOME Program funds under the Newark Neighborhood Rehabilitation Program and within the affordability period"
+      },
+      {
+       "fact": "units",
+       "op": "<=",
+       "value": "3",
+       "years_before_as_of": 0,
+       "text": "Residential owner-occupied structure consisting of one to three dwelling units"
+      }
+     ],
+     "exemptions": []
+    },
+    "exemptions_text": "Mixed use or nonresidential buildings are not eligible for the program.",
+    "interaction": "HOME rent limits are set by HUD and recalculated periodically; any rent increase remains subject to the terms of outstanding leases, and tax-credit units follow IRC section 42 rent rules.",
+    "yields_to": [
+     "24 CFR 888.111",
+     "26 U.S.C. 42"
+    ],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

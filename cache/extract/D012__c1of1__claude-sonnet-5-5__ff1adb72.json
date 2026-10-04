@@ -1,0 +1,40 @@
+{
+ "doc_id": "D012",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 5349,
+ "output_tokens": 591,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:52:28+00:00",
+ "result": {
+  "document_summary": "A Boston.gov Fair Housing Commission web page describing local fair housing enforcement and prohibited discrimination in renting, including against renters using rental assistance such as Section 8 vouchers.",
+  "notes": "The page states a source-of-income-type protection (rental assistance) as a prohibited basis of discrimination and gives an example that refusing vouchers is discrimination. It names no ordinance or statute, so the citation falls back to the page title, and it gives no effective date or coverage tests. Other content (general discrimination protections, complaint process) is out of scope.",
+  "rules": [
+   {
+    "jurisdiction": "Boston, MA",
+    "level": "city",
+    "category": "screening_restrictions",
+    "title": "Rental assistance (voucher) discrimination prohibited",
+    "requirement": "Landlords in Boston may not discriminate against tenants or applicants because they use rental assistance, including Section 8, social security disability, and veterans vouchers.",
+    "key_value": "",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "Boston Fair Housing Regulations (Boston.gov, Fair Housing and Equity)",
+    "quoted_span": "The landlord tells you they don't accept rental assistance. This includes Section\n8 vouchers, social security disability vouchers, and veterans vouchers.",
+    "coverage_text": "Applies to renting, buying, selling, or financing of housing in the City of Boston; the page states no further coverage tests.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "The Fair Housing Commission enforces local, state, and federal fair housing laws; discrimination outside Boston must be reported through the state.",
+    "yields_to": [],
+    "confidence": 0.6,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

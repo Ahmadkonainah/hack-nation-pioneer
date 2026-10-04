@@ -1,0 +1,73 @@
+{
+ "doc_id": "D007",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 6135,
+ "output_tokens": 1230,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:07:37+00:00",
+ "result": {
+  "document_summary": "Berkeley Rent Board web page summarizing California state security deposit limits, deduction and return requirements, and Berkeley's security deposit interest requirement under the Rent Ordinance.",
+  "notes": "The page describes state law (AB 12, Cal. Civ. Code § 1950.5) and the Berkeley Rent Ordinance interest requirement. Two records are output: the CA state deposit rule and the Berkeley interest rule. The Berkeley interest rule is cited by the name the page uses because no specific code section is given. The page gives no effective date for the Berkeley interest requirement. The page does not name Civ. Code § 1950.5 explicitly; it names only Assembly Bill 12, so the citation is the bill.",
+  "rules": [
+   {
+    "jurisdiction": "CA",
+    "level": "state",
+    "category": "security_deposits",
+    "title": "California security deposit cap (AB 12), return deadline and deduction rules",
+    "requirement": "Since July 1, 2024, most landlords may charge no more than one month's rent as a security deposit for furnished or unfurnished units; small landlords (two properties, no more than four units total, owned by a natural person, family trust or all-natural-person LLC) may charge up to two months. The deposit must be returned with an itemized statement within 21 days after the tenant vacates.",
+    "key_value": "One month's rent (two months for small landlords); return within 21 days",
+    "legal_state": "enacted",
+    "effective_date": "2024-07-01",
+    "date_basis": "stated",
+    "citation": "Cal. Assembly Bill 12 (2023)",
+    "quoted_span": "Starting July 1, 2024, many landlords may only charge one month's rent for unfurnished and furnished units",
+    "coverage_text": "Applies to residential rental tenancies in California; the higher two-month cap is available only to landlords who own no more than two rental properties with no more than four units total and who are natural persons, family trusts, or LLCs whose members are all natural persons.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "Small landlords (two properties, no more than four residential units total, owned by a natural person, family trust, or LLC with all natural-person members) may charge up to two months' rent.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "Berkeley, CA",
+    "level": "city",
+    "category": "security_deposits",
+    "title": "Berkeley security deposit interest requirement",
+    "requirement": "For tenancies in units fully or partially covered by the Berkeley Rent Ordinance, landlords must pay tenants interest on the security deposit at the end of each year, and a prorated amount if the tenant moves out before year end.",
+    "key_value": "Annual interest on deposit, prorated on move-out",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Berkeley Rent Stabilization Ordinance",
+    "quoted_span": "landlords must pay tenants interest on their security deposit at the end of each year and a prorated amount if the tenant moves out before the end of the year.",
+    "coverage_text": "Applies to tenancies in units fully or partially covered by Berkeley's Rent Ordinance.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "other",
+       "op": "is",
+       "value": "fully or partially covered by Berkeley Rent Ordinance",
+       "years_before_as_of": 0,
+       "text": "units fully or partially covered by Berkeley's Rent Ordinance"
+      }
+     ],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "Operates alongside the California state security deposit rules described on the same page.",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

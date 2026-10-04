@@ -1,0 +1,65 @@
+{
+ "doc_id": "D070",
+ "chunk": 2,
+ "chunks": 3,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 20562,
+ "output_tokens": 1877,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:05:50+00:00",
+ "result": {
+  "document_summary": "Part 2 of 3 of the Newark, NJ Rent Control Ordinance (Chapter 19:2) on ecode360, covering rent control board powers, rent decreases, utilities surcharges, new construction and rehabilitation exemptions, retaliatory eviction, and penalties.",
+  "notes": "Part 2 contains no security deposit, screening fee, screening restriction or algorithmic rent-setting provisions, and no standalone just-cause eviction regime (only a retaliatory-eviction ban and references to N.J.S.A. 2A:18-61.1 et seq. and protected tenancy for seniors/disabled in condo conversions). The base annual increase cap is in another part (the section 19:2-8 cross-referenced here and the Limitation on Increases heading at the end are not included). The rules extracted here are rent-control details of the Newark ordinance, consolidated into one record per instrument/regime per the one-record-per-(jurisdiction, category, instrument) rule: the rent-control provisions in this part, including the general rent freeze and exceptions, are captured in a single rent_increase_limits record for the Newark Rent Control Ordinance, and the retaliatory eviction ban as one just_cause_eviction record. The effective date of the ordinance as originally adopted is given as September 4, 1985, with continued force from October 19, 1988; the 2017 and 2024 amendments are re-adoptions of the chapter. Coverage is left mostly empty because the applicability definitions are in other parts of the chapter.",
+  "rules": [
+   {
+    "jurisdiction": "Newark, NJ",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "Newark Rent Control Ordinance: rent freeze at base level, utilities surcharge cap, and new-construction/rehabilitation exemptions",
+    "requirement": "Rents for covered dwellings are controlled at the level received by the landlord when the chapter was first adopted, and no landlord may charge more except for increases the chapter authorizes (including utilities surcharges capped by building size, a 10% cap for rehabilitated vacant units, and Board-approved adjustments). Newly constructed multiple dwellings are exempt from increase limits for the shorter of the initial mortgage amortization period or 30 years, and qualifying vacant substantially rehabilitated dwellings are exempt for five years.",
+    "key_value": "Rents frozen at base level except authorized increases; utilities surcharge capped at 15% (30 or fewer units), 5% (31-200 units), 3% (over 200 units) of monthly rent roll; vacant-unit rehab increase max 10%",
+    "legal_state": "enacted",
+    "effective_date": "1985-09-04",
+    "date_basis": "stated",
+    "citation": "Newark Rev. Gen. Ords. ch. 19:2 (Rent Control Ordinance), §§ 19:2-16, 19:2-17, 19:2-18, 19:2-21",
+    "quoted_span": "No landlord shall after the effective date of this chapter charge any rents in excess of what he/she was receiving from the effective date of this chapter except for increases authorized by this chapter.",
+    "coverage_text": "Applies to rents for housing space and services in dwellings to which the chapter is applicable; the definitions of covered dwellings are in other parts of the chapter and are not in this part.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "Newly constructed multiple dwellings exempt from increase limits for the shorter of the initial mortgage amortization period or 30 years (or 30 years if no mortgage financing); vacant dwellings vacant at least 18 months (or already vacant on the section's effective date) that are substantially rehabilitated (cost over 50% of fair market value) exempt for five years; substantially rehabilitated dwellings not restricted in initial rent if Board determinations are met.",
+    "interaction": "The chapter says it operates without infringing N.J.S.A. 46:8-28 on registration, and rulings are subject to judicial review in the Law Division of the Superior Court. Exemptions must be applied for and approved through the Rent Control Board.",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "Newark, NJ",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "Newark Rent Control Ordinance: retaliatory eviction prohibited",
+    "requirement": "A landlord may not bring an action to recover possession of a dwelling unit as a reprisal for the tenant's efforts to secure or enforce any right under the rent control chapter.",
+    "key_value": "",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Newark Rev. Gen. Ords. § 19:2-14",
+    "quoted_span": "No landlord shall bring any action to recover possession of a dwelling unit as a reprisal for the tenant's efforts to secure or enforce any right under this chapter.",
+    "coverage_text": "Applies to dwelling units subject to the Newark rent control chapter; no further coverage tests are stated in this part.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "The ordinance elsewhere references the state Anti-Eviction Act (N.J.S.A. 2A:18-61.1 et seq.) and the Senior Citizens and Disabled Protected Tenancy Act (N.J.S.A. 2A:18-61.22) in connection with unlawful entry and condominium conversion protections.",
+    "yields_to": [],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 43,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 21596,
+ "output_tokens": 239,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:56+00:00",
+ "result": {
+  "document_summary": "A middle portion of the San Diego Municipal Code, Chapter 3, Article 1 (Business Taxes), covering business tax payment, penalties, declarations, exceptions and tax rates, with no tenancy rules in this part.",
+  "notes": "This part contains only business tax provisions (SDMC §§ 31.0131-31.0305). Although the source URL slug refers to a prohibition on algorithmic rent-setting devices (§ 98.1103), none of that text appears in this part, and nothing here falls within the six rental categories. The § 31.0305 apartment-house business tax text is truncated and is a tax rule, not a rental-regulation rule, so no rules are extracted.",
+  "rules": []
+ }
+}

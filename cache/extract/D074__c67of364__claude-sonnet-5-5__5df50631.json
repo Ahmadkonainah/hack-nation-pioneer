@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 67,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22926,
+ "output_tokens": 241,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:26+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code (Chapter 3, Art. 3, Divisions 45-46) covering police permits for tobacco/e-cigarette retailers and pedicabs, which does not contain the page's titled rent-algorithm provision text.",
+  "notes": "Although the source URL refers to a rule on prohibiting algorithmic rent price-fixing (SDMC 98.1103), the text in this part contains only tobacco retailer and pedicab permit provisions, which are outside the six rental-housing categories. No rent increase, eviction, deposit, screening fee, screening restriction, or algorithmic rent-setting rule appears in this part, so no rules were extracted.",
+  "rules": []
+ }
+}

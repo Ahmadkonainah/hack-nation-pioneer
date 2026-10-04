@@ -1,0 +1,84 @@
+{
+ "doc_id": "D067",
+ "chunk": 3,
+ "chunks": 4,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 19617,
+ "output_tokens": 1267,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:53:56+00:00",
+ "result": {
+  "document_summary": "Part 3 of 4 of the New Jersey DCA Landlord-Tenant guide, covering habitability remedies, disclosures and the Anti-Eviction Act's good-cause eviction regime, coverage, exceptions and enumerated grounds.",
+  "notes": "Only the Anti-Eviction Act (just-cause eviction) falls within the six in-scope categories in this part. The habitability, lead paint, water testing, flood notice, receivership and insurance material is out of scope. Rent increases are mentioned only as an eviction ground (unpaid unconscionable increase), not as a cap. The part ends mid-ground N (drug offense), so later grounds are in other parts. No effective date is given in this part.",
+  "rules": [
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "just_cause_eviction",
+    "title": "New Jersey Anti-Eviction Act: good cause required for eviction or lease non-renewal",
+    "requirement": "A residential landlord may remove a tenant or refuse to renew a lease only for a statutory good cause ground, proven in court, after the required Notice to Quit (and Notice to Cease where applicable). Notice periods vary by ground, from three days up to three years, and some grounds require relocation assistance.",
+    "key_value": "Good cause required; Notice to Quit periods from 3 days to 3 years depending on ground",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "N.J.S.A. 2A:18-61.1 to 61.12",
+    "quoted_span": "No residential landlord may evict or fail to renew a lease, whether it is a written or an oral lease without good cause.",
+    "coverage_text": "Applies to most residential rental properties, including single-family homes, mobile homes and mobile home parks, apartment buildings and complexes, and rooming and boarding homes.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Owner-occupied premises with two or fewer rental units",
+       "all_of": [
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "owner-occupied premises"
+        },
+        {
+         "fact": "units",
+         "op": "<=",
+         "value": "3",
+         "years_before_as_of": 0,
+         "text": "two- or three-unit premises with two or fewer rental units"
+        }
+       ]
+      },
+      {
+       "label": "Hotel, motel or guest house rented to transient guest or seasonal tenant",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "transient or seasonal guest occupancy",
+         "years_before_as_of": 0,
+         "text": "hotel guests, motel guests, or guest houses rented to a transient guest or seasonal tenant (unless the occupant has no alternate residence and resides there continually)"
+        }
+       ]
+      },
+      {
+       "label": "Unit held in trust for a developmentally disabled immediate family member",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "unit held in trust for developmentally disabled family member who permanently occupies it",
+         "years_before_as_of": 0,
+         "text": "unit held in trust on behalf of a member of the immediate family who is developmentally disabled and permanently occupies the unit"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "May not apply to two- or three-unit owner-occupied premises with two or fewer rental units; hotel/motel/guest house transient or seasonal guests (except continual residents with no alternate residence); and a unit held in trust for a developmentally disabled immediate family member who permanently occupies it.",
+    "interaction": "A rent-increase eviction ground requires that the increase not be unconscionable and comply with all other laws or municipal ordinances, including rent control. Conversion-related grounds incorporate the Senior Citizens and Disabled Protected Tenancy Act and condominium/cooperative conversion regulations.",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

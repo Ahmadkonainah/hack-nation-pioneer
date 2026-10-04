@@ -1,0 +1,85 @@
+{
+ "doc_id": "D067",
+ "chunk": 3,
+ "chunks": 4,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 20138,
+ "output_tokens": 1323,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:09:15+00:00",
+ "result": {
+  "document_summary": "Part 3 of 4 of the New Jersey DCA landlord-tenant information publication, covering habitability remedies and the Anti-Eviction Act's good-cause eviction requirements, causes, notices and relocation assistance.",
+  "notes": "Only one in-scope rule extracted: the NJ Anti-Eviction Act (just cause eviction). The rest of this part (utilities, receivership, lead paint, drinking water, habitability remedies, flood notices, crime insurance, self-help eviction procedure) is outside the six categories. The text of this part cuts off mid-cause N; coverage and effective date are not stated in this part. Rent-increase, deposit and screening content, if any, would be in other parts.",
+  "rules": [
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "just_cause_eviction",
+    "title": "New Jersey Anti-Eviction Act (good cause required to evict)",
+    "requirement": "A residential landlord may remove a tenant or refuse to renew a lease only for a statutory good cause and through a court judgment for possession. Each cause except nonpayment requires a written Notice to Quit with a cause-specific period (3 days to 3 years), some causes need a prior Notice to Cease, and removal for substantial health and safety violations requires relocation assistance first.",
+    "key_value": "Good cause required; Notice to Quit periods from 3 days up to 3 years depending on cause; relocation assistance of 6 times monthly rent for illegal occupancy evictions",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "N.J.S.A. 2A:18-61.1 to 61.12",
+    "quoted_span": "No residential landlord may evict or fail to renew a lease, whether it is a written or an oral lease without good cause.",
+    "coverage_text": "Applies to most residential rental properties, including single-family homes, mobile homes and mobile home park land, apartment buildings and complexes, and rooming and boarding houses.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Owner-occupied premises with two or fewer rental units",
+       "all_of": [
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "two- or three-unit owner-occupied premises"
+        },
+        {
+         "fact": "units",
+         "op": "<=",
+         "value": "3",
+         "years_before_as_of": 0,
+         "text": "two- or three-unit premises with two or fewer rental units"
+        }
+       ]
+      },
+      {
+       "label": "Hotel, motel or guest house rented to transient or seasonal guest",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "transient or seasonal guest",
+         "years_before_as_of": 0,
+         "text": "hotel guests, motel guests, or guest houses rented to a transient guest or seasonal tenant"
+        }
+       ]
+      },
+      {
+       "label": "Unit held in trust for developmentally disabled family member who permanently occupies it",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "unit held in trust for immediate family member who is developmentally disabled and permanently occupies it",
+         "years_before_as_of": 0,
+         "text": "a unit held in trust on behalf of a member of the immediate family, if that family member is developmentally disabled, and permanently occupies the dwelling unit"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Not applicable to two- or three-unit owner-occupied premises with two or fewer rental units, hotel/motel/guest-house transient or seasonal guests (unless the occupant has no alternate residence and resides there continually), or a unit held in trust for a developmentally disabled immediate family member who permanently occupies it.",
+    "interaction": "Rent increases underlying a nonpayment-of-increase eviction must comply with other laws and municipal ordinances, including rent control. Condominium/cooperative conversion evictions must also comply with the conversion regulations and the Senior Citizens and Disabled Protected Tenancy Act.",
+    "yields_to": [],
+    "confidence": 0.9,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

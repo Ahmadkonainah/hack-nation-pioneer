@@ -1,0 +1,94 @@
+{
+ "doc_id": "D041",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 8315,
+ "output_tokens": 1659,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:34+00:00",
+ "result": {
+  "document_summary": "Los Angeles Housing Department web page giving an overview of the city's Rent Stabilization Ordinance (RSO), covering its scope, allowable rent increases, registration, and just-cause eviction and relocation rules.",
+  "notes": "The page names LAMC provisions (e.g., 151.09, 151.28) but not a single chapter citation for the whole RSO, so the citation uses the ordinance name as the page does. No effective date for the RSO itself is stated; the 1978 building cutoff is the coverage test. The page also mentions the Just Cause Ordinance for non-RSO properties but gives no details, so no separate record was created for it. Surcharges, registration fees, and relocation assistance amounts are treated as details of the RSO rather than separate rules. The page contains internally inconsistent surcharge figures ($1.61 vs $38.75) that do not affect the extracted rules.",
+  "rules": [
+   {
+    "jurisdiction": "Los Angeles, CA",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "Los Angeles Rent Stabilization Ordinance - allowable annual rent increase",
+    "requirement": "Landlords of RSO units may raise rent only once every 12 months by the allowable percentage published by LAHD. Rent may be reset to market only in listed circumstances, such as the tenant voluntarily moving out or being evicted for cause.",
+    "key_value": "Once per 12 months, by the LAHD-published allowable percentage",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Los Angeles Rent Stabilization Ordinance (LAMC ch. XV, art. 1)",
+    "quoted_span": "Rent may be increased once every 12 months by the allowable rent increase percentage",
+    "coverage_text": "Rental properties first built on or before October 1, 1978 (and replacement units under LAMC 151.28) of the listed types, such as apartments, duplexes, and two or more single-family units on one parcel.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "first_occupancy_date",
+       "op": "on_or_before",
+       "value": "1978-10-01",
+       "years_before_as_of": 0,
+       "text": "rental properties that were first built on or before October 1, 1978"
+      }
+     ],
+     "exemptions": [
+      {
+       "label": "Condominiums and townhomes with tenancies commenced after Dec 31, 1995 (rent not regulated)",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "condominium or townhome tenancy commenced after 1995-12-31",
+         "years_before_as_of": 0,
+         "text": "Condominium/Townhome (Rent amount is not regulated for tenancies that commenced after December 31, 1995)"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Rent is not regulated for condominium and townhome tenancies that commenced after December 31, 1995; landlords may apply for a Luxury Exemption if they can establish the monthly rent charged on or before May 31, 1978.",
+    "interaction": "Landlords may seek additional increases through LAHD-approved programs (capital improvement, primary renovation, seismic retrofit, rehabilitation, just and reasonable). Properties not covered by the RSO remain subject to the Just Cause Ordinance.",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "Los Angeles, CA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "Los Angeles RSO - just cause eviction and relocation assistance",
+    "requirement": "RSO tenants may be evicted only for listed at-fault reasons (e.g., nonpayment, nuisance, illegal use) or no-fault reasons (e.g., owner move-in, demolition, government order). No-fault evictions require a declaration filed with LAHD, 30- and 60-day written notices, and payment of tenant relocation assistance.",
+    "key_value": "No-fault evictions require relocation assistance and a filed Landlord Declaration of Intent to Evict",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Los Angeles Rent Stabilization Ordinance (LAMC 151.09)",
+    "quoted_span": "No-fault evictions require the payment of",
+    "coverage_text": "Rental units subject to the Los Angeles Rent Stabilization Ordinance (generally buildings first built on or before October 1, 1978).",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "first_occupancy_date",
+       "op": "on_or_before",
+       "value": "1978-10-01",
+       "years_before_as_of": 0,
+       "text": "rental properties that were first built on or before October 1, 1978"
+      }
+     ],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "Notices to terminate a tenancy for RSO units must be filed with LAHD within three business days of service. Properties not covered by the RSO remain subject to the city's Just Cause Ordinance.",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

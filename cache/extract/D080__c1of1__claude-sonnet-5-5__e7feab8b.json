@@ -1,0 +1,48 @@
+{
+ "doc_id": "D080",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 4413,
+ "output_tokens": 607,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:54:21+00:00",
+ "result": {
+  "document_summary": "A San Francisco Rent Board news notice announcing the 1.6% annual allowable rent increase for rent-controlled units for 3/1/2026 through 2/28/2027.",
+  "notes": "The page names no underlying ordinance, so the citation is the page title. It does not describe which buildings are rent-controlled, so coverage is expressed only as the 'rent-controlled units' condition. The prior-year 1.4% allowance is mentioned only as background and is not extracted as a separate rule.",
+  "rules": [
+   {
+    "jurisdiction": "San Francisco, CA",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "San Francisco annual allowable rent increase (3/1/2026 - 2/28/2027)",
+    "requirement": "For rent-controlled units, the annual allowable rent increase effective March 1, 2026 through February 28, 2027 is 1.6% of the tenant's base rent.",
+    "key_value": "1.6% of base rent",
+    "legal_state": "enacted",
+    "effective_date": "2026-03-01",
+    "citation": "Annual Rent Increase for 3/1/26 - 2/28/27 Announced, SF Rent Board (sf.gov)",
+    "quoted_span": "For rent-controlled units, the annual allowable increase amount effective March 1, 2026 through February 28, 2027 is 1.6%.",
+    "coverage_text": "Applies to rent-controlled units in San Francisco; the page does not define which buildings are rent-controlled.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "other",
+       "op": "is",
+       "value": "rent-controlled unit",
+       "years_before_as_of": 0,
+       "text": "rent-controlled units"
+      }
+     ],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

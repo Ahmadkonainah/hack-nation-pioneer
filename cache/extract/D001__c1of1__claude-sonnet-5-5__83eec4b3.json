@@ -1,0 +1,41 @@
+{
+ "doc_id": "D001",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 7458,
+ "output_tokens": 761,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:07:26+00:00",
+ "result": {
+  "document_summary": "Berkeley Ordinance No. 7,992-N.S. amending Berkeley Municipal Code chapter 13.63 to prohibit the sale and use of coordinated pricing algorithms to set rents or occupancy levels for residential dwelling units.",
+  "notes": "The ordinance was passed to print on November 18, 2025 and was on the December 2, 2025 council agenda (per the file name); the document states no effective date and no adoption date for the second reading, so effective_date is left blank. Penalties are up to $1,000 per violation, enforceable by the City Attorney or aggrieved tenants.",
+  "rules": [
+   {
+    "jurisdiction": "Berkeley, CA",
+    "level": "city",
+    "category": "algorithmic_rent_setting",
+    "title": "Prohibition on sale or use of coordinated pricing algorithms for residential rents",
+    "requirement": "It is unlawful to sell, license, or provide to Berkeley landlords, or for a landlord to use, a coordinated pricing algorithm that uses non-public competitor data to set or recommend rents or occupancy levels for residential units. Each month and each unit constitutes a separate violation, with civil penalties up to $1,000 per violation plus attorney's fees.",
+    "key_value": "Ban on coordinated pricing algorithms; civil penalties up to $1,000 per violation",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Berkeley Municipal Code ch. 13.63",
+    "quoted_span": "It shall be unlawful for a landlord to use a coordinated pricing algorithm described in subsection A when setting rents or occupancy levels for residential dwelling units in the City of Berkeley.",
+    "coverage_text": "All landlords of residential dwelling units in the City of Berkeley, and vendors who sell or license coordinated pricing algorithms to them.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "The definition of coordinated pricing algorithm excludes aggregated anonymous rental data reports, products used to set affordable housing rent or income limits, and products used for market research for project financing, appraisals, or software research, testing, and training.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

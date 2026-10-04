@@ -1,0 +1,141 @@
+{
+ "doc_id": "D073",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 17969,
+ "output_tokens": 2095,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:54:20+00:00",
+ "result": {
+  "document_summary": "San Diego Municipal Code Chapter 9, Article 8, Division 7 (Residential Tenant Protections), the city's just cause eviction ordinance with relocation assistance, buyout, notice and remedy provisions.",
+  "notes": "Only one in-scope rule: San Diego's just cause eviction regime (including relocation assistance and right of first refusal, treated as part of one regime). Buyout agreement, retaliation, remedies and notice provisions are components of the same ordinance and not separate categories. The document gives effective dates of 2023-06-24 (O-21647) with later amendments effective 2024-03-28.",
+  "rules": [
+   {
+    "jurisdiction": "San Diego, CA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "San Diego Residential Tenant Protections - just cause required for termination of tenancy",
+    "requirement": "A landlord may not terminate a tenancy without just cause, either at-fault (e.g., non-payment, lease breach, nuisance) or no-fault (owner move-in, withdrawal from market, government order, demolition/substantial remodel). For no-fault terminations the landlord must give written notice and pay relocation assistance of two months' rent (three for seniors or disabled tenants) or waive an equal amount of rent, and must offer to re-rent to the displaced tenant if the unit is re-offered within five years.",
+    "key_value": "No-fault relocation: 2 months' rent (3 months if senior/disabled)",
+    "legal_state": "enacted",
+    "effective_date": "2023-06-24",
+    "citation": "San Diego Municipal Code §§ 98.0701-98.0710 (Ch. 9, Art. 8, Div. 7)",
+    "quoted_span": "A landlord shall not terminate a tenancy without just cause. For purposes of this Division, just cause includes at-fault just cause and no-fault just cause.",
+    "coverage_text": "Covers residential rental tenancies of more than 30 days in the City of San Diego, except housing issued a certificate of occupancy within the previous 15 years and the other listed exempt housing types.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Housing issued a certificate of occupancy within the previous 15 years (other than mobilehomes)",
+       "all_of": [
+        {
+         "fact": "first_occupancy_date",
+         "op": "after",
+         "value": "",
+         "years_before_as_of": 15,
+         "text": "housing that has been issued a certificate of occupancy within the previous 15 years, unless the housing is a mobilehome"
+        }
+       ]
+      },
+      {
+       "label": "Owner-occupied single-family residence (renting no more than two bedrooms/ADUs/JADUs)",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "1",
+         "years_before_as_of": 0,
+         "text": "single-family residence"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "occupied by the landlord as the landlord's principal place of residence"
+        }
+       ]
+      },
+      {
+       "label": "Duplex where landlord occupies one unit as principal residence",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "2",
+         "years_before_as_of": 0,
+         "text": "two separate dwelling units within a single structure"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "landlord occupies one of the dwelling units as principal residence at the beginning of the tenancy and continues in occupancy"
+        }
+       ]
+      },
+      {
+       "label": "Separately alienable property with non-corporate/non-REIT landlord and written exemption notice",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "alienable separate from title to any other dwelling unit",
+         "years_before_as_of": 0,
+         "text": "residential rental property that is alienable separate from the title to any other dwelling unit"
+        },
+        {
+         "fact": "owner_type",
+         "op": "is",
+         "value": "not a REIT, corporation, LLC with a corporate member, or mobilehome park management",
+         "years_before_as_of": 0,
+         "text": "landlord is not a real estate investment trust, corporation, LLC with at least one corporate member, or mobilehome park management"
+        },
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "written exemption notice provided to tenants",
+         "years_before_as_of": 0,
+         "text": "tenants have been provided written notice that the property is exempt"
+        }
+       ]
+      },
+      {
+       "label": "Deed-restricted or subsidized affordable housing (not Section 8)",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "affordable housing restricted by deed/regulatory agreement or subject to housing subsidy agreement (excluding Section 8)",
+         "years_before_as_of": 0,
+         "text": "housing restricted as affordable for very low, low, or moderate income persons, or subject to an affordable housing subsidy agreement"
+        }
+       ]
+      },
+      {
+       "label": "Other exempt occupancies",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "hotel/short-term occupancy, mobilehome under MRL, nonprofit hospital/religious/care facility/transitional housing, dormitory, or shared bath/kitchen with live-in landlord",
+         "years_before_as_of": 0,
+         "text": "transient/tourist hotel occupancy, short-term residential occupancy, mobilehomes under the Mobilehome Residency Law, certain care facilities, dormitories, or units sharing bathroom/kitchen with a landlord who lives there"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Exempt: hotels and short-term occupancy; deed-restricted or subsidized affordable housing (not Section 8); mobilehomes under the Mobilehome Residency Law; care facilities, nonprofit hospitals, religious facilities and transitional housing; dormitories; shared kitchen/bath with a live-in landlord; owner-occupied single-family homes (up to two rented bedrooms/ADUs) and owner-occupied duplexes; housing with a certificate of occupancy within the previous 15 years; and separately alienable properties owned by non-corporate, non-REIT landlords who give written exemption notice.",
+    "interaction": "Implements and goes beyond California Civil Code section 1946.2; rights are in addition to state and federal tenant rights, and relocation assistance paid under this Division is credited against any other relocation assistance required by federal, state, or local law.",
+    "yields_to": [],
+    "confidence": 0.9,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

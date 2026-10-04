@@ -1,0 +1,16 @@
+{
+ "doc_id": "D071",
+ "chunk": 2,
+ "chunks": 7,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 19466,
+ "output_tokens": 180,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:05:53+00:00",
+ "result": {
+  "document_summary": "Part 2 of 7 of a Newark, NJ municipal code section on abandoned properties, covering tax sale certificates, remediation, rehabilitation and possession actions, and special tax sales.",
+  "notes": "This part concerns abandoned property, tax sale certificates, foreclosure, rehabilitation and eminent domain procedures. It contains no rent increase limits, just cause eviction, security deposit, application fee, screening restriction or algorithmic rent-setting rules, so no records are extracted.",
+  "rules": []
+ }
+}

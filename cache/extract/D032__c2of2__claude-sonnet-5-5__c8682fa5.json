@@ -1,0 +1,41 @@
+{
+ "doc_id": "D032",
+ "chunk": 2,
+ "chunks": 2,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 11689,
+ "output_tokens": 1078,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:49:47+00:00",
+ "result": {
+  "document_summary": "Part 2 of 2 of Hoboken, NJ Code Chapter 155 (rent control/Rent Leveling and Stabilization), covering enforcement, maintenance standards, the rent cap, compliance certificates, registration, vacancy decontrol, condo/co-op initial rental decontrol, and a COVID-19 rent-increase moratorium.",
+  "notes": "Extracted a single rent_increase_limits record for the Hoboken rent control ordinance (Chapter 155), since rules in the same category and instrument are merged; the vacancy decontrol 25% cap, certificate-of-compliance requirement, and condo/co-op decontrol are details of that instrument. The earlier part of the chapter (not in this part) presumably holds the CPI formula (§ 155-5), definitions, and coverage/exemptions, so coverage is left empty here and no effective date is stated in this part. The COVID-19 moratorium (April 1, 2020 to May 7, 2022) has expired and is not separately recorded. Violations, enforcement, appeals, and registration fee provisions are procedural and not in scope.",
+  "rules": [
+   {
+    "jurisdiction": "Hoboken, NJ",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "Hoboken rent control: base rent ceiling, vacancy decontrol cap, and compliance certificate requirement",
+    "requirement": "Landlords may not charge rent above the amounts permitted under Chapter 155, and a regular increase notice must include a certificate of substantial compliance with housing, building, fire and property maintenance codes or the notice is invalid. When a registered unit is voluntarily vacated, the next tenant's initial rent is limited to 25% over the last rent paid, after which the unit is again subject to the chapter.",
+    "key_value": "Vacancy decontrol: initial rent capped at 25% over prior tenant's rent; no unit decontrolled more than once in 3 years",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Hoboken Code ch. 155, §§ 155-25, 155-26, 155-31",
+    "quoted_span": "said rental shall be limited to an increase of 25% over the last rental paid by the tenant who voluntarily vacated the rental unit, exclusive of any capital improvement surcharge that is a component of said last rental.",
+    "coverage_text": "Dwelling units subject to Hoboken's Chapter 155 rent control ordinance; the coverage tests (such as unit counts or exemptions) are in the earlier part of the chapter and are not stated in this part.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "This part contains no general coverage exemptions; it only provides vacancy decontrol for registered units on voluntary vacancy or legal eviction, and a one-time initial-rent decontrol when a bona fide condo/co-op owner-occupant of two years vacates and rents the unit.",
+    "interaction": "The unit remains subject to Chapter 155 after the initial decontrolled rental, and failure to register annually can result in denial of CPI and vacancy decontrol increases.",
+    "yields_to": [],
+    "confidence": 0.6,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

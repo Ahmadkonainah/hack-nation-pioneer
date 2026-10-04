@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 3,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 23716,
+ "output_tokens": 249,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:10+00:00",
+ "result": {
+  "document_summary": "A web page snapshot of San Diego Municipal Code Chapter 1, Article 1, Division 1 (general provisions on short title, section numbering and jurisdictional scope), with a long navigation table of contents, from a page URL labeled for the algorithmic rent price-fixing section.",
+  "notes": "This part contains only general-provision sections of the San Diego Municipal Code (§§ 11.0101, 11.0103, 11.0104, covering short title, section numbering and territorial scope) plus navigation links. None of the text states a rule in the six in-scope categories, and the actual text of the algorithmic rent-setting prohibition (§ 98.1103 per the page URL) is not included in this part, so no records are output.",
+  "rules": []
+ }
+}

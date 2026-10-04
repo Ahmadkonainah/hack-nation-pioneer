@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 24,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22274,
+ "output_tokens": 272,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:36+00:00",
+ "result": {
+  "document_summary": "A portion of a code-publisher page (URL for San Diego's algorithmic rent-price-fixing division) that actually contains San Diego Municipal Code Chapter 2 Administrative Code provisions on city records management and city contractor equal employment opportunity.",
+  "notes": "This part contains only San Diego Municipal Code Chapter 2, Article 2 text (Division 25 claims responsibility, Division 26 records management, Division 27 Equal Employment Opportunity Outreach Program). None of it concerns rent increase limits, just-cause eviction, security deposits, screening fees, screening restrictions, or algorithmic rent setting. The text of the algorithmic rent-setting division named in the URL (§ 98.1103) does not appear in this part, so no rules are extracted.",
+  "rules": []
+ }
+}

@@ -1,0 +1,80 @@
+{
+ "doc_id": "D068",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 6849,
+ "output_tokens": 1114,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:09:22+00:00",
+ "result": {
+  "document_summary": "A New Jersey Division on Civil Rights brochure summarizing the NJ Law Against Discrimination's housing protections, including the ban on source-of-lawful-income discrimination, and its complaint process.",
+  "notes": "Only the source-of-lawful-income provision falls within the six in-scope categories (screening_restrictions). The rest of the brochure covers general anti-discrimination protections, service animal rules, disability modifications, and complaint procedures, which are out of scope. The brochure (rev. 06.18.15) gives no effective date for the source-of-income protection. The LAD citation to N.J.S.A. 10:5-5mm appears in the document; the general LAD citation N.J.S.A. 10:5-1 et seq. is not stated in the text, so the citation uses the Law Against Discrimination name as given.",
+  "rules": [
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "screening_restrictions",
+    "title": "Source-of-lawful-income discrimination ban (NJ Law Against Discrimination)",
+    "requirement": "A landlord may not discriminate in housing based on the source of lawful income or the source of lawful rent or mortgage payment, so a lawful Section 8 voucher holder cannot be denied an apartment based solely on that income source.",
+    "key_value": "No denial based solely on lawful income source (e.g., Section 8 voucher)",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "New Jersey Law Against Discrimination (N.J.S.A. 10:5-1 et seq.)",
+    "quoted_span": "The LAD also prohibits housing discrimination  based\non the source of lawful income or source of lawful rent\nor mortgage payment a tenant or purchaser uses.",
+    "coverage_text": "Applies to the sale or rental of all property in New Jersey, residential or business, except the listed owner-occupancy and religious-organization exceptions.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Single apartment in a two-family dwelling where the other unit is owner-occupied",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "2",
+         "years_before_as_of": 0,
+         "text": "The rental of a single apartment or flat in a two-family dwelling"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "the other occupancy unit of which is occupied by the owner as his/her residence at the time of such rentals"
+        }
+       ]
+      },
+      {
+       "label": "Room rental in an owner-occupied one-family dwelling",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "1",
+         "years_before_as_of": 0,
+         "text": "a one-family dwelling"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "rental of a room or rooms by the owner or occupant of a one-family dwelling occupied by him/her as his/her residence at the time of such rental"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Exempts rental of one apartment in an owner-occupied two-family dwelling and rental of rooms in an owner-occupied one-family dwelling; also religious-organization preference for persons of the same religion (which concerns religion, not income source).",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

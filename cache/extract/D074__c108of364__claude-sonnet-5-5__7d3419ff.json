@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 108,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22447,
+ "output_tokens": 199,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:08:16+00:00",
+ "result": {
+  "document_summary": "A portion of San Diego Municipal Code Chapter 5 (public safety) covering Mission Boulevard cruising, temporary street closures for criminal activity, and spectators at illegal speed contests, with no rental housing content.",
+  "notes": "This part contains only traffic and public-safety ordinances (cruising on Mission Boulevard, temporary street closures, illegal speed contest spectators). The source URL slug refers to an algorithmic rent-pricing division, but no algorithmic rent-setting text appears in this part, so no in-scope rules were extracted.",
+  "rules": []
+ }
+}

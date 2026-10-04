@@ -1,0 +1,60 @@
+{
+ "doc_id": "D065",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 10682,
+ "output_tokens": 953,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:53:45+00:00",
+ "result": {
+  "document_summary": "New Jersey's Fair Chance in Housing Act (P.L. 2021, c.110), which restricts landlords' use of applicants' criminal records in rental screening and sets procedures and penalties.",
+  "notes": "The act was approved June 18, 2021 and takes effect on the first day of the seventh month after enactment (computed as 2022-01-01). Only the criminal-history screening regime is in scope; the drug/alcohol testing ban, advertising limits, immunity, and enforcement provisions are treated as part of or ancillary to that single regime. The act contains no application-fee cap or other fee rule beyond a refund remedy, so no application_screening_fees record is produced.",
+  "rules": [
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "screening_restrictions",
+    "title": "Fair Chance in Housing Act: limits on criminal-record screening of rental applicants",
+    "requirement": "A housing provider may not ask about or require disclosure of an applicant's criminal record before making a conditional offer. After a conditional offer, only certain convictions within set look-back periods may be considered, and a withdrawal must rest on an individualized assessment with written reasons and a chance to appeal.",
+    "key_value": "No criminal-record inquiry before conditional offer; look-back after offer: 6 years (1st-degree), 4 years (2nd/3rd-degree), 1 year (4th-degree); no limit for listed serious offenses",
+    "legal_state": "enacted",
+    "effective_date": "2022-01-01",
+    "citation": "N.J.S.A. 46:8-52 to 46:8-64 (P.L. 2021, c.110)",
+    "quoted_span": "A housing provider shall not make any oral or written inquiry regarding an applicant\\u2019s criminal record prior to making a conditional offer.",
+    "coverage_text": "Applies to housing providers offering rental dwelling units for residential purposes, except units in an owner-occupied premises of not more than four dwelling units.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Owner-occupied premises of not more than four dwelling units",
+       "all_of": [
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "owner-occupied premises"
+        },
+        {
+         "fact": "units",
+         "op": "<=",
+         "value": "4",
+         "years_before_as_of": 0,
+         "text": "not more than four dwelling units"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "A dwelling unit in an owner-occupied premises of not more than four dwelling units is not a covered rental dwelling unit.",
+    "interaction": "The act does not bar or affect any independent right or action, including under the Law Against Discrimination (P.L.1945, c.169). Court actions for violations are barred; complaints go to the Division on Civil Rights.",
+    "yields_to": [],
+    "confidence": 0.9,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

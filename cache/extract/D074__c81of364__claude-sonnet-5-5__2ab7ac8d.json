@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 81,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 20891,
+ "output_tokens": 274,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:43+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code (Chapter 3, Article 9, Division 1) covering the city minimum wage and earned sick leave provisions, sections 39.0106-39.0115, mislabeled under a URL about algorithmic rent-price fixing.",
+  "notes": "This part contains only employment provisions (earned sick leave, minimum wage, notice/posting, employer records, retaliation, remedies, enforcement). None of it concerns rent increase limits, just cause eviction, security deposits, screening fees, screening restrictions, or algorithmic rent setting, so no in-scope rules were extracted. The URL suggests a section on prohibition of algorithmic rent-setting devices (San Diego zoning/rent price-fixing division), but that text does not appear in this part.",
+  "rules": []
+ }
+}

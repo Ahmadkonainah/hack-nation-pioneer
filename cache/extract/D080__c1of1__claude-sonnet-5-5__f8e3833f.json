@@ -1,0 +1,41 @@
+{
+ "doc_id": "D080",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 4934,
+ "output_tokens": 579,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:09:36+00:00",
+ "result": {
+  "document_summary": "An SF Rent Board news announcement stating the 1.6% annual allowable rent increase for rent-controlled units for March 1, 2026 through February 28, 2027.",
+  "notes": "The page names no statute or ordinance; citation uses the SF Rent Ordinance (S.F. Admin. Code ch. 37) as the underlying law for the Rent Board's annual allowable increase. The page does not describe which units are covered beyond 'rent-controlled units', so coverage is left empty. The 1.6% figure applies to the 3/1/2026-2/28/2027 period; the prior period's 1.4% is a past figure.",
+  "rules": [
+   {
+    "jurisdiction": "San Francisco, CA",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "SF annual allowable rent increase (3/1/2026 - 2/28/2027)",
+    "requirement": "For rent-controlled units, the annual allowable rent increase effective March 1, 2026 through February 28, 2027 is 1.6% of the tenant's base rent.",
+    "key_value": "1.6% annual allowable increase",
+    "legal_state": "enacted",
+    "effective_date": "2026-03-01",
+    "date_basis": "stated",
+    "citation": "S.F. Admin. Code ch. 37",
+    "quoted_span": "For rent-controlled units, the annual allowable increase amount effective March 1, 2026 through February 28, 2027 is 1.6%.",
+    "coverage_text": "Applies to rent-controlled units in San Francisco; the page does not define which units qualify.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

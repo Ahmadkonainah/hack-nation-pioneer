@@ -1,0 +1,41 @@
+{
+ "doc_id": "D070",
+ "chunk": 3,
+ "chunks": 3,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 10539,
+ "output_tokens": 886,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:05:50+00:00",
+ "result": {
+  "document_summary": "Part 3 of 3 of the Newark, NJ rent control chapter (Chapter 19:2) from the code publisher, covering the 25% annual increase limit, rent control fees, exemption notices and the new 2026 rental inspection and habitability certificate provisions.",
+  "notes": "Only one in-scope rule appears in this part: the rent control extension and the 25% annual cap on increases (§§ 19:2-21 and 19:2-22), recorded as one instrument-level record. The remainder (application/inspection fees, exemption notices, rental inspections, certificates of habitability, penalties) is administrative, habitability, or procedural and outside the six categories. The $15-$1,000 fees are charged to landlords for rent control applications, not tenant application screening fees. The part does not state the effective date of the 25% cap or the coverage and exemptions (those appear in earlier parts, e.g. §§ 19:2-3 and 19:2-18), so coverage is left empty.",
+  "rules": [
+   {
+    "jurisdiction": "Newark, NJ",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "Newark rent control: controlled rents and 25% annual cap on increases",
+    "requirement": "Rents in dwellings covered by the chapter are controlled at the level received by the landlord as of September 4, 1985, and may be raised only as the chapter allows. The Rent Control Board may not grant increases above 25% in any one year for any tenant, counting all increases (regular, major improvements, hardship) within the prior 12 months.",
+    "key_value": "Max 25% increase in any one year, cumulative over 12 months",
+    "legal_state": "enacted",
+    "effective_date": "1985-09-04",
+    "date_basis": "stated",
+    "citation": "Newark Municipal Code ch. 19:2, §§ 19:2-21, 19:2-22",
+    "quoted_span": "the Rent Control Board shall not grant increases exceeding 25% in any one year for any tenant.",
+    "coverage_text": "Dwellings to which Newark's rent control chapter is applicable; the specific coverage tests are not in this part of the document.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "This part refers to exempted multiple dwellings (e.g. new construction under § 19:2-18.1) but does not state the exemption criteria.",
+    "interaction": "The cap aggregates increases under Sections 19:2-3 (Rent Increases), 19:2-7 (Major New Improvements) and 19:2-8 (Landlord Hardships) occurring within 12 months before the increase.",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

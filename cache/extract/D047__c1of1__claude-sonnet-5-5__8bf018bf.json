@@ -1,0 +1,16 @@
+{
+ "doc_id": "D047",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 5202,
+ "output_tokens": 215,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:53:21+00:00",
+ "result": {
+  "document_summary": "Massachusetts Legislature bill history page for Senate Bill S.2983, 'An Act prohibiting algorithmic rent setting', showing it was reported favorably by the Housing committee on 3/12/2026 and referred to Senate Ways and Means.",
+  "notes": "The page contains only the bill title, committee reporting history, and website boilerplate; the bill text itself is not included, so no substantive rule terms (prohibited conduct, coverage, exemptions, effective date, citation) can be extracted. The bill has not been enacted, so no record is output rather than inventing a pending rule without any stated requirement.",
+  "rules": []
+ }
+}

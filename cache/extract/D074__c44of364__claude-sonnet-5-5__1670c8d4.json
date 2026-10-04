@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 44,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 21939,
+ "output_tokens": 295,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:00+00:00",
+ "result": {
+  "document_summary": "A mid-document excerpt of the San Diego Municipal Code (Chapter 3, Articles 1-2) covering business tax provisions, definitions, and the uniform local sales and use tax ordinance, with no rental housing regulation content.",
+  "notes": "This part contains only business tax and sales/use tax provisions (e.g., Sec. 31.0305 business tax on residential rental property, refuse collector tax, trailer park tax, sales tax administration). None of these is a rule in the six in-scope categories: the residential rental business tax is a revenue measure, not a rent limit, eviction, deposit, fee, screening or algorithmic pricing rule. The source URL and page title suggest the Division 11 algorithmic rent-price-fixing prohibition (SDMC 98.1103), but that text does not appear in this part, so no rule is extracted from it.",
+  "rules": []
+ }
+}

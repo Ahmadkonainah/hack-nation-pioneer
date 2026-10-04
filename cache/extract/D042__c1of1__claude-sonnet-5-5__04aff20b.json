@@ -1,0 +1,48 @@
+{
+ "doc_id": "D042",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 5950,
+ "output_tokens": 925,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:53:12+00:00",
+ "result": {
+  "document_summary": "A Los Angeles Housing Department web page and calculator stating the annual allowable rent increase for units under the City's Rent Stabilization Ordinance (RSO), plus surcharge pass-throughs.",
+  "notes": "The page gives the RSO annual increase (3%, effective July 1, 2025 through June 30, 2026) and states that landlords can no longer add a utility percentage from Feb 2, 2026. It names the Rent Stabilization Ordinance but gives no municipal code section, so the page title is cited. It gives no coverage criteria (building age, unit count) or exemptions; those are only referenced via the ZIMAS lookup. The stated 3% period ended before the 2026-10-01 query date, so the current-year figure is not shown on this page. The state 30-day notice mention is about notice, not a rent cap, and is not extracted as a separate rule.",
+  "rules": [
+   {
+    "jurisdiction": "Los Angeles, CA",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "Los Angeles RSO annual allowable rent increase",
+    "requirement": "Annual rent increases for units subject to the Los Angeles Rent Stabilization Ordinance are limited to a set percentage (3% for July 1, 2025 through June 30, 2026). Beginning February 2, 2026, landlords can no longer add any extra percentage for utilities.",
+    "key_value": "3% annual allowable increase (7/1/2025\\u20136/30/2026); no additional utility percentage from 2026-02-02",
+    "legal_state": "enacted",
+    "effective_date": "2025-07-01",
+    "citation": "RSO Rent Increase Calculator \\u2013 LAHD (City of Los Angeles Rent Stabilization Ordinance)",
+    "quoted_span": "Annual rent increases for rental units subject to the City of Los Angeles Rent Stabilization Ordinance (RSO), effective\nJuly 1, 2025, through June 30, 2026\nis\n3%",
+    "coverage_text": "Rental units in Los Angeles that are subject to the Rent Stabilization Ordinance; the page directs users to ZIMAS to check whether a unit is an RSO unit.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "other",
+       "op": "is",
+       "value": "subject to the RSO",
+       "years_before_as_of": 0,
+       "text": "rental units subject to the City of Los Angeles Rent Stabilization Ordinance (RSO)"
+      }
+     ],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "The page notes that state law requires 30 days' written advance notice of rent increases of less than 10%. Non-RSO properties are directed to the Housing Department for allowable increases.",
+    "yields_to": [],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

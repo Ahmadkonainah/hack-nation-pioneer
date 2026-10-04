@@ -1,0 +1,61 @@
+{
+ "doc_id": "D067",
+ "chunk": 1,
+ "chunks": 4,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 20396,
+ "output_tokens": 868,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:09:07+00:00",
+ "result": {
+  "document_summary": "Part 1 of 4 of the New Jersey DCA's 'Truth in Renting' guide to residential landlord-tenant rights, covering leases, lease termination, right of entry, and the start of the Security Deposit Law section.",
+  "notes": "This part covers only the opening sections of the guide. The security deposit rule is extracted; the discussion of the Security Deposit Law is cut off at the end of this part, so interest, return deadlines and other details may appear in the next part. The just-cause (Anti-Eviction Act) section and the rent control section appear only in the table of contents, and the only just-cause text in this part is a brief reference under 'Renewal of a Lease Agreement' that points to the later Eviction section; those categories should be extracted from the later parts. Items like late fees, pets, entry and lease termination are out of scope.",
+  "rules": [
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "security_deposits",
+    "title": "NJ Security Deposit Law: maximum deposit of 1.5 months' rent",
+    "requirement": "A landlord may not collect a security deposit of more than one and one-half times one month's rent, and any yearly increase in the deposit may not exceed 10% of the current deposit. Prepaid rent held as security, including last month's rent, counts toward the cap, and a pet deposit cannot push the total above the cap.",
+    "key_value": "1.5 x monthly rent; annual increase max 10% of current deposit",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "N.J.S.A. 46:8-21.2",
+    "quoted_span": "The maximum-security deposit to be collected by the landlord cannot be more than one and one-half times one month’s rent ( N.J.S.A. 46:8-21.2 ).",
+    "coverage_text": "Applies to most residential rental properties in New Jersey, including mobile homes.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Owner-occupied two- or three-family dwelling",
+       "all_of": [
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "owner-occupied"
+        },
+        {
+         "fact": "units",
+         "op": "<=",
+         "value": "3",
+         "years_before_as_of": 0,
+         "text": "two- or three-family dwelling"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Owner-occupied two- or three-family dwellings are exempt, but a tenant there can make the law apply by sending the landlord a written request, effective 30 days later.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.9,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

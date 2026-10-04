@@ -1,0 +1,41 @@
+{
+ "doc_id": "D052",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 12492,
+ "output_tokens": 819,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:57+00:00",
+ "result": {
+  "document_summary": "Massachusetts General Laws c. 186 § 15B, the statute governing residential security deposits, last-month's rent, receipts, interest, and return deadlines.",
+  "notes": "One state-level security deposit record is output for the single instrument (G.L. c. 186 § 15B). The section also limits advance payments at tenancy start (first month, last month, key and lock cost); these are treated as details of the same instrument. The amendment effective August 1, 2025 (2025, 9, Secs. 54 and 55) adds agent coverage and authorizes regulations for optional fees in lieu of a deposit; the original effective date of the deposit limits is not stated in the document. Section 15B(9) exempts vacation or recreational rentals of 100 days or less.",
+  "rules": [
+   {
+    "jurisdiction": "MA",
+    "level": "state",
+    "category": "security_deposits",
+    "title": "Massachusetts residential security deposit limits, handling and return",
+    "requirement": "A lessor may not require more than first month's rent, last month's rent, a security deposit equal to one month's rent, and the cost of a key and lock at or before the start of a tenancy. The deposit must be held in a separate interest-bearing Massachusetts bank account, accrue 5% annual interest (or the lesser bank rate) after one year, and be returned with itemized deductions within 30 days after the tenancy ends.",
+    "key_value": "Security deposit capped at one month's rent; return within 30 days",
+    "legal_state": "enacted",
+    "effective_date": "2025-08-01",
+    "date_basis": "stated",
+    "citation": "G.L. c. 186 § 15B",
+    "quoted_span": "(iii) a security deposit equal to the first month's rent provided that such security deposit is deposited as required by subsection (3) and that the tenant is given the statement of condition as required by subsection (2);",
+    "coverage_text": "Applies to leases and tenancies of residential real property in Massachusetts.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "Does not apply to a lease, rental, occupancy or tenancy of 100 days or less for vacation or recreational purposes.",
+    "interaction": "Lease provisions that conflict with the section, and tenant waivers of it, are void as against public policy. A fee in lieu of a deposit may be allowed only through regulations of the executive office of housing and livable communities, in consultation with the attorney general.",
+    "yields_to": [],
+    "confidence": 0.82,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

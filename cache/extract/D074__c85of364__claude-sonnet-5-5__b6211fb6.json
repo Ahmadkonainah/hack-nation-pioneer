@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 85,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 23295,
+ "output_tokens": 293,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:47+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code, Chapter 4 (Health and Sanitation), covering communicable disease control, vermin infestation, health permit fees, and regulation of barber shops, beauty parlors, tattooing, massage and sewage businesses, served from a code-publisher page whose URL refers to a San Diego algorithmic rent-price-fixing division.",
+  "notes": "This part of the document contains only Chapter 4 (Health and Sanitation) provisions of the San Diego Municipal Code (sections 41.33-42.0301). It does not contain the text of Division 11 (§ 98.1103, use and sale of algorithmic devices) or any rule on rent increases, just-cause eviction, security deposits, application fees, screening restrictions, or algorithmic rent setting, so no in-scope rules were extracted from this part.",
+  "rules": []
+ }
+}

@@ -1,0 +1,57 @@
+{
+ "doc_id": "D071",
+ "chunk": 7,
+ "chunks": 7,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 15851,
+ "output_tokens": 1114,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:06+00:00",
+ "result": {
+  "document_summary": "Part 7 of the Newark, NJ municipal code (Chapter 2:10) covering an affordable housing deed restriction on City property sales, the Homeownership Revitalization Program, and the opening definitions of the Unconscionable Rent Increase ordinance.",
+  "notes": "Most of this part (deed restrictions on City-owned property sales, nonprofit right of first refusal, homeownership revitalization program) concerns municipal land disposition, not private rental rules, and is out of scope. The only in-scope material is the start of the Unconscionable Rent Increase section (§ 2:10-11.1 definitions), recorded as a rent_increase_limits rule; the operative prohibition, penalties and remedies are not included in this part, so confidence is reduced. No effective date is given for the section (added 6-7-2023, amended 8-2-2023), so effective_date is left empty.",
+  "rules": [
+   {
+    "jurisdiction": "Newark, NJ",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "Unconscionable rent increase ordinance (definitions)",
+    "requirement": "Newark defines an 'unconscionable rent' increase for residential rental properties as one that is exceedingly harsh or unreasonable, exceeds the increase in the landlord's expenses, and is not comparable to rents at similar properties. For properties under a redevelopment or financial agreement, rent above the approved pro-forma is per se unconscionable.",
+    "key_value": "Rent above approved pro-forma is per se unconscionable",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Newark Municipal Code § 2:10-11.1",
+    "quoted_span": "Shall mean any rental increase for residential properties including but not limited to market and unsubsidized units, whose rental increases are exceedingly harsh or unreasonable that exceed the increase in the landlord’s expenses; and is not comparable to rents charged at similar properties.",
+    "coverage_text": "Residential rental properties in Newark, including market-rate and unsubsidized units, other than statutorily exempt or HUD-controlled units.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Units statutorily exempt from rent control or governed by HUD",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "exempt from Rent Control under N.J.S.A. 2A:42-84.1-84.6 or controlled by HUD",
+         "years_before_as_of": 0,
+         "text": "residential units that are statutorily exempt from Rent Control, pursuant to N.J.S.A. 2A:42-84.1-84.6 and/or units that are controlled and governed by the United States Department of Housing and Urban Development (HUD)"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Does not apply to units statutorily exempt from rent control under N.J.S.A. 2A:42-84.1 to 84.6 or units controlled and governed by HUD.",
+    "interaction": "The definition carves out units exempt from rent control under N.J.S.A. 2A:42-84.1-84.6 and HUD-controlled units; the operative prohibition and remedies are not in this part of the document.",
+    "yields_to": [
+     "N.J.S.A. 2A:42-84.1 to 84.6",
+     "HUD-controlled units"
+    ],
+    "confidence": 0.55,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

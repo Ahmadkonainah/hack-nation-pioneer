@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 115,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 21873,
+ "output_tokens": 258,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:08:24+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code, Chapter 5 (Public Safety, Morals and Welfare), covering firearm storage, non-serialized firearms, assault weapons, procurement of firearms, and street/sidewalk obstruction rules.",
+  "notes": "The page URL refers to San Diego's Division 11 ban on anti-competitive automated rent price fixing (\"Use and Sale of Algorithmic Devices Prohibited\"), but the text in this part contains only unrelated provisions (firearm storage, ghost guns, assault weapons, firearm procurement, sidewalk sales, encroachments, work in rights-of-way). No rule in the six rental-housing categories is stated in this part, so the list is empty.",
+  "rules": []
+ }
+}

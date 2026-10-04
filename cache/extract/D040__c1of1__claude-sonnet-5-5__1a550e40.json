@@ -1,0 +1,221 @@
+{
+ "doc_id": "D040",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 8032,
+ "output_tokens": 3006,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:39+00:00",
+ "result": {
+  "document_summary": "A Los Angeles Housing Department web page explaining the City's Just Cause for Eviction Ordinance (JCO), its coverage, allowed eviction reasons, and how state law AB 1482 separately limits rent increases.",
+  "notes": "The page is an agency summary and does not give the JCO's original effective date or the LAMC section number, so effective_date is empty and the citation is the ordinance name as used on the page. The AB 1482 section describes state law (Cal. Civ. Code § 1947.12) and gives a stale rent-cap figure (8.9% for Aug 2024 to Jul 2025); the formula is recorded and the old figure is not treated as current. The AB 1482 just-cause provision (Civ. Code § 1946.2) is only mentioned in passing and is not recorded as a separate rule. The nonpayment threshold (Fair Market Rent), LAHD filing and registration requirements are treated as details of the JCO regime rather than separate records.",
+  "rules": [
+   {
+    "jurisdiction": "Los Angeles, CA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "Los Angeles Just Cause for Eviction Ordinance (JCO)",
+    "requirement": "Landlords may not terminate a covered tenancy without just cause. At-fault reasons include nonpayment, uncured lease violations, nuisance, and illegal use. No-fault reasons, such as owner or family move-in, demolition, or removal from the rental market, generally require relocation assistance to the tenant. Landlords may not evict for unpaid rent unless the amount owed exceeds the Fair Market Rent for the unit's bedroom size, and all eviction notices must be filed with LAHD within three business days of service.",
+    "key_value": "Relocation assistance for no-fault evictions; no eviction for rent owed below Fair Market Rent",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Los Angeles Just Cause for Eviction Ordinance (JCO)",
+    "quoted_span": "It prohibits terminations of tenancies without just cause and requires relocation assistance for no-fault evictions.",
+    "coverage_text": "Most residential rental properties in the City of Los Angeles that are not covered by the Rent Stabilization Ordinance (RSO), including buildings newer than October 1, 1978 and single-family dwellings, once the tenant has lived in the unit at least six months or the original lease has expired, whichever comes first.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "other",
+       "op": "is",
+       "value": "not subject to the Rent Stabilization Ordinance",
+       "years_before_as_of": 0,
+       "text": "The JCO covers most residential properties in the City of Los Angeles that are not regulated by the City's Rent Stabilization Ordinance (RSO)."
+      },
+      {
+       "fact": "other",
+       "op": "is",
+       "value": "tenant has lived in unit at least six months or original lease expired",
+       "years_before_as_of": 0,
+       "text": "The tenant either has lived in the same unit for at least six months or their original lease expired, whichever comes first."
+      }
+     ],
+     "exemptions": [
+      {
+       "label": "Transient hotels",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "transient hotel",
+         "years_before_as_of": 0,
+         "text": "transient hotels"
+        }
+       ]
+      },
+      {
+       "label": "Licensed care facilities",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "licensed care facility",
+         "years_before_as_of": 0,
+         "text": "licensed care facilities"
+        }
+       ]
+      },
+      {
+       "label": "Fraternity or sorority houses",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "fraternity or sorority house",
+         "years_before_as_of": 0,
+         "text": "fraternity or sorority houses"
+        }
+       ]
+      },
+      {
+       "label": "Owner's roommate",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "owner's roommate",
+         "years_before_as_of": 0,
+         "text": "owner's roommate"
+        }
+       ]
+      },
+      {
+       "label": "Certain cooperatives, non-profit homeless or treatment facilities, and some HACLA or government-owned properties",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "cooperative, certain non-profit facility, or HACLA/government-owned property",
+         "years_before_as_of": 0,
+         "text": "cooperatives under certain circumstances, some non-profit facilities for the homeless or short-term treatment centers for substance abuse, and some properties owned by HACLA or the government"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Exceptions include transient hotels, licensed care facilities, fraternity or sorority houses, an owner's roommate, some cooperatives, some non-profit homeless or short-term substance-abuse treatment facilities, and some HACLA or government-owned properties. Units regulated by the RSO are covered by that ordinance instead.",
+    "interaction": "The JCO applies to units not regulated by the RSO and does not regulate rent increases; state law AB 1482 may separately regulate rent amounts in buildings older than 15 years.",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "CA",
+    "level": "state",
+    "category": "rent_increase_limits",
+    "title": "California Tenant Protection Act of 2019 (AB 1482) annual rent cap",
+    "requirement": "Annual rent increases on covered units are limited to 5% plus the regional percentage change in the cost of living, or 10%, whichever is lower.",
+    "key_value": "5% + CPI, max 10%",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Cal. Civ. Code § 1947.12",
+    "quoted_span": "Annual rent increases are limited to no more than 5% plus the percentage change in the cost of living for the region in which the property is located, or 10% whichever is lower).",
+    "coverage_text": "Residential rental buildings in California that are more than 15 years old, with exceptions for deed-restricted affordable units, certain dormitories, qualifying two-unit owner-occupied properties, and qualifying single-family homes and condominiums.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "first_occupancy_date",
+       "op": "on_or_before",
+       "value": "",
+       "years_before_as_of": 15,
+       "text": "Units that were constructed within the last 15 years are not covered (rolling basis); buildings older than 15 years may be covered."
+      }
+     ],
+     "exemptions": [
+      {
+       "label": "Deed-restricted affordable housing",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "restricted by deed or regulatory document to low or moderate income households",
+         "years_before_as_of": 0,
+         "text": "Units restricted by a deed, regulatory restrictions, or other recorded document limiting the affordability to low or moderate-income households."
+        }
+       ]
+      },
+      {
+       "label": "Certain dormitories",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "certain dormitory",
+         "years_before_as_of": 0,
+         "text": "Certain dormitories."
+        }
+       ]
+      },
+      {
+       "label": "Two-unit property with owner occupying the second unit",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "2",
+         "years_before_as_of": 0,
+         "text": "A two-unit property"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "provided the second unit was occupied by an owner of the property for the entire period of the tenancy."
+        }
+       ]
+      },
+      {
+       "label": "Single-family home or condominium not owned by a trust, corporation, or LLC with a corporate member, with written notice to tenant",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "1",
+         "years_before_as_of": 0,
+         "text": "Single-family homes and condominiums"
+        },
+        {
+         "fact": "owner_type",
+         "op": "is",
+         "value": "not a real estate trust, corporation, or LLC with at least one corporate member",
+         "years_before_as_of": 0,
+         "text": "the property is not owned by a real estate trust, a corporation, or an LLC with at least one corporate member"
+        },
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "landlord gave written notice that tenancy is not subject to just cause and rent increase limits",
+         "years_before_as_of": 0,
+         "text": "The landlord notified the tenant in writing that the tenancy is not subject to the just cause and rent increase limitations."
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Exempt: units built within the last 15 years (rolling), deed-restricted affordable units, certain dormitories, a two-unit property where an owner occupied the second unit for the entire tenancy, and single-family homes or condominiums not owned by a trust, corporation, or LLC with a corporate member where the tenant received the required written notice (not available if there is another dwelling on the lot or a second unit that cannot be sold separately). Units subject to the City's RSO are also not covered.",
+    "interaction": "The page states the JCO does not regulate rent increases and that AB 1482 may regulate rent in buildings over 15 years old; units already subject to the City's RSO are not covered by AB 1482 under this page's list.",
+    "yields_to": [
+     "Los Angeles Rent Stabilization Ordinance (RSO)"
+    ],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

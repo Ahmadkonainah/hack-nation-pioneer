@@ -1,0 +1,88 @@
+{
+ "doc_id": "D006",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 9540,
+ "output_tokens": 1685,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:07:38+00:00",
+ "result": {
+  "document_summary": "Berkeley Rent Board web page summarizing the changes Measure BB (passed November 2024) made to Berkeley's Rent Ordinance, including the 5% cap on Annual General Adjustments and new just-cause eviction requirements.",
+  "notes": "Two records extracted: the rent increase cap (AGA) and the just-cause eviction regime, both under the Berkeley Rent Stabilization Ordinance as amended by Measure BB. Utilities, tenant organizing, capital improvement petitions, registration and fine provisions are outside the six categories or are details of these instruments. The page does not give an exact effective date for Measure BB (only that voters passed it in November 2024), so effective_date is left empty. The page states only a few dates for sub-provisions (tenancies on or after 2024-12-20 for the notice of tenant rights; 2024-02-06 for utilities), which are not the effective date of the rules recorded. Coverage conditions are simplified from a table of fully/partially covered unit types; the page says most units in multifamily properties built before 1980 are fully covered, and new construction and most single-family homes and condominiums are partially covered.",
+  "rules": [
+   {
+    "jurisdiction": "Berkeley, CA",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "Annual General Adjustment capped at 5% for fully covered units",
+    "requirement": "Landlords of fully covered units may raise rent each year only by the Annual General Adjustment set by the Rent Board using a CPI-based formula, and Measure BB caps the AGA at 5% even if the formula yields more. Landlords with banked AGAs may still raise rent above 5% to reach the rent ceiling.",
+    "key_value": "CPI-based AGA, max 5%",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Berkeley Rent Stabilization Ordinance (as amended by Measure BB)",
+    "quoted_span": "The maximum AGA is 5%. This means that, if the formula in the Rent Ordinance results in an AGA that is greater than 5%, the AGA approved by the Board for that year can be no more than 5%.",
+    "coverage_text": "Fully covered units: most units in multifamily properties built before 1980, certain older single-family homes with pre-1996 tenancies, single-family homes with five or more rooms rented individually, and government-subsidized units that are fully covered; rent ceilings apply to these units.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "first_occupancy_date",
+       "op": "before",
+       "value": "1980-01-01",
+       "years_before_as_of": 0,
+       "text": "Most units in multifamily properties built before 1980"
+      },
+      {
+       "fact": "units",
+       "op": ">=",
+       "value": "2",
+       "years_before_as_of": 0,
+       "text": "Multifamily properties"
+      }
+     ],
+     "exemptions": []
+    },
+    "exemptions_text": "Partially covered units (new construction with certificate of occupancy after 1980, most single-family homes and condominiums, and units whose subsidies are exempt from rent control under federal or state law) are not subject to the rent ceiling.",
+    "interaction": "The cap does not prevent landlords with banked AGAs from raising rent above 5% to reach the rent ceiling.",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "Berkeley, CA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "Just cause eviction under Berkeley Rent Ordinance as amended by Measure BB",
+    "requirement": "Tenants in fully or partially covered units cannot be evicted without just cause. Measure BB bars eviction for rental debt under one month of Fair Market Rent or for refusing to sign a new fixed-term lease, requires lease-breach evictions to show substantial actual harm and unreasonable tenant behavior, and requires notices to be filed with the Rent Board within three business days.",
+    "key_value": "Nonpayment eviction only if debt >= one month's Fair Market Rent",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Berkeley Rent Stabilization Ordinance (as amended by Measure BB)",
+    "quoted_span": "In Berkeley, tenants in units that are fully or partially covered by the Rent Ordinance cannot be evicted unless there is \"just cause” (previously called “good cause”).",
+    "coverage_text": "Units that are fully or partially covered by the Rent Ordinance, including government-owned or -subsidized units now required to register.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "other",
+       "op": "is",
+       "value": "fully or partially covered by the Rent Ordinance",
+       "years_before_as_of": 0,
+       "text": "Units fully or partially covered by the Rent Ordinance"
+      }
+     ],
+     "exemptions": []
+    },
+    "exemptions_text": "Units exempt from the Rent Ordinance, such as shared kitchen/bath units where the landlord lived on the property before the tenant, are not covered.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

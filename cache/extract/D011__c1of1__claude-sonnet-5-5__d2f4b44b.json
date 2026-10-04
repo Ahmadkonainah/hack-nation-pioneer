@@ -1,0 +1,41 @@
+{
+ "doc_id": "D011",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 5919,
+ "output_tokens": 660,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:07:46+00:00",
+ "result": {
+  "document_summary": "Massachusetts Legislature bill page for H.3744 (193rd General Court, 2023-2024), a home-rule petition authorizing the city of Boston to implement rent stabilization and tenant eviction protections, which ended in a study order.",
+  "notes": "The bill text is not included on this page; the record is based on the bill title and status only. The bill is from the 193rd (2023-2024) session, which has ended, and its history shows it was accompanied by a study order (H5035) on 9/9/2024 with no enactment, so it is recorded as failed. The title covers both rent stabilization and eviction protections, but only one record is output because the page gives no instrument-level detail; a separate just_cause_eviction record is not made since the page does not describe specific eviction rules.",
+  "rules": [
+   {
+    "jurisdiction": "Boston, MA",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "H.3744 - Boston rent stabilization and tenant eviction protections (home-rule petition)",
+    "requirement": "Bill title indicates a petition for a special law authorizing the city of Boston to implement rent stabilization and tenant eviction protections; the bill text and specific limits are not on the page.",
+    "key_value": "",
+    "legal_state": "failed",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Mass. H.3744 (193rd General Court, 2023-2024)",
+    "quoted_span": "An Act petition for a special law authorizing the city of Boston to implement rent stabilization and tenant eviction protections",
+    "coverage_text": "Coverage cannot be determined because the bill text is not included on the page.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "The bill would have been a special law authorizing Boston to adopt local rent stabilization; the page notes local approval was received but the bill was sent to a study order (H5035) and was not enacted.",
+    "yields_to": [],
+    "confidence": 0.55,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

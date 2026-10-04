@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 38,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22244,
+ "output_tokens": 251,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:52+00:00",
+ "result": {
+  "document_summary": "A mid-document portion of a code-publisher page of the San Diego Municipal Code (Chapter 2, Government) covering special event provisions (§§ 22.4034-22.4038) and the Securities Disclosure Division 41 (Disclosure Practices Working Group, §§ 22.4101-22.4111), despite the URL referencing the algorithmic rent price-fixing section.",
+  "notes": "This part contains no residential rental rules in the six in-scope categories. It covers special event permits and the City's securities disclosure working group. The URL slug refers to San Diego's prohibition of algorithmic rent-setting devices, but the text of that section (§ 98.1103) does not appear in this part, so nothing is extracted.",
+  "rules": []
+ }
+}

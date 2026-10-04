@@ -1,0 +1,16 @@
+{
+ "doc_id": "D031",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 6602,
+ "output_tokens": 208,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:17+00:00",
+ "result": {
+  "document_summary": "A City of Cambridge web page explaining the Tenants Rights and Resources Notification Ordinance (Chapter 8.71), which requires landlords to give tenants an informational guide at the start and termination of tenancies.",
+  "notes": "The page describes an information-notice requirement only. It expressly states the Ordinance does not prevent evictions and sets no eviction causes, notice periods, relocation assistance, rent limits, deposit rules, fee caps, screening limits, or algorithmic pricing rules. Nothing on the page falls within the six in-scope categories, so no rules were extracted.",
+  "rules": []
+ }
+}

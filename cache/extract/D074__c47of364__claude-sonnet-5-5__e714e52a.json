@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 47,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22233,
+ "output_tokens": 280,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:04+00:00",
+ "result": {
+  "document_summary": "A page from the San Diego Municipal Code (Chapter 3, Article 3, Police Regulated Occupations and Businesses) covering appeal procedures, exempt institutions, and promoter permits, retrieved under a URL that refers to an algorithmic rent-price-fixing division but containing none of that text.",
+  "notes": "This part (sections 33.0405 through 33.0703) concerns police-permit regulatory actions, appeal hearings, permit-fee exemptions, and promoter permits. None of it addresses rent increase limits, just-cause eviction, security deposits, screening fees, screening restrictions, or algorithmic rent setting. The URL points to a division on prohibiting algorithmic rent price fixing (§ 98.1103), but that text does not appear in this part, so no rule is extracted.",
+  "rules": []
+ }
+}

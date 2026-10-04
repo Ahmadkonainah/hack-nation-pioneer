@@ -1,0 +1,41 @@
+{
+ "doc_id": "D078",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 7012,
+ "output_tokens": 630,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:09:29+00:00",
+ "result": {
+  "document_summary": "A San Francisco Human Rights Commission agency landing page listing events, news and services, with only a one-line teaser mentioning the Fair Chance Ordinance's protections for people with criminal history in affordable housing decisions.",
+  "notes": "The page is a general agency homepage. The only in-scope content is a single teaser sentence stating that San Francisco's Fair Chance Ordinance protects residents with arrest or conviction history in affordable housing decisions. The page gives no ordinance text, citation, effective date, coverage details or specific requirements, so one low-confidence record is output based only on that sentence. The underlying law is not named with a code citation on the page; the ordinance name is used as the citation per instructions. Everything else on the page (events, news, grants, sanctuary city complaints, general discrimination resources) is out of scope.",
+  "rules": [
+   {
+    "jurisdiction": "San Francisco, CA",
+    "level": "city",
+    "category": "screening_restrictions",
+    "title": "Fair Chance Ordinance - criminal history protections in affordable housing",
+    "requirement": "San Francisco's Fair Chance Ordinance protects residents with arrest or conviction history in affordable housing decisions. The page gives no further detail on specific limits or procedures.",
+    "key_value": "",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "San Francisco Fair Chance Ordinance",
+    "quoted_span": "San Francisco's Fair Chance Ordinance protects residents with arrest or conviction history in affordable housing decisions.",
+    "coverage_text": "Per the page, applies to affordable housing decisions affecting residents with arrest or conviction history; no further coverage details are given.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.5,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

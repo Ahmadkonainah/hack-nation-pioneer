@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 107,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 24372,
+ "output_tokens": 233,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:08:16+00:00",
+ "result": {
+  "document_summary": "A mis-matched page of San Diego Municipal Code Chapter 5 text on synthetic drug prohibitions, aggressive solicitation and cruising, with no rental housing content.",
+  "notes": "The URL suggests San Diego's algorithmic rent-setting prohibition (Division 11), but this part of the document contains only unrelated Municipal Code material (a list of Schedule I and synthetic drug compounds, Division 33 synthetic drug sale/possession prohibitions, Division 40 aggressive solicitation, and the start of Division 50 cruising definitions). No rule in any of the six rental-housing categories appears in this part, so no records are extracted.",
+  "rules": []
+ }
+}

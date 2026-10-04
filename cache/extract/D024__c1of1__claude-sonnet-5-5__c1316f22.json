@@ -1,0 +1,152 @@
+{
+ "doc_id": "D024",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 10077,
+ "output_tokens": 2170,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:13+00:00",
+ "result": {
+  "document_summary": "Official text of California Civil Code § 1947.12, the statewide residential rent increase cap (5% plus CPI, max 10%) as amended by SB 567, operative April 1, 2024 and repealed January 1, 2030.",
+  "notes": "Only the rent cap in § 1947.12 is in scope; the section also cross-references just-cause (§ 1946.2) and § 1947.13, but their text is not included here. Section was added by Stats. 2023, Ch. 290 (SB 567), effective January 1, 2024 and operative April 1, 2024 by its own provisions; it is repealed as of January 1, 2030. Subdivision (h) applies the cap to rent increases on or after March 15, 2019 (Feb. 18, 2021 for mobilehome tenancies), reflecting the predecessor version of the law. Coverage exemptions for owner type, affordable housing, dormitories, and local rent control are mapped to 'other' or 'owner_type' facts, which cannot be tested with available building data.",
+  "rules": [
+   {
+    "jurisdiction": "CA",
+    "level": "state",
+    "category": "rent_increase_limits",
+    "title": "California statewide residential rent increase cap (Tenant Protection Act)",
+    "requirement": "An owner may not raise the gross rental rate over any 12-month period by more than 5 percent plus the local percentage change in the cost of living, or 10 percent, whichever is lower, and may not raise rent more than twice in 12 months for the same tenant. New tenancies (no prior tenant remaining) may start at any rate, and the cap applies only to later increases.",
+    "key_value": "5% + CPI, max 10%",
+    "legal_state": "enacted",
+    "effective_date": "2024-04-01",
+    "date_basis": "stated",
+    "citation": "Cal. Civ. Code § 1947.12",
+    "quoted_span": "an owner of residential real property shall not, over the course of any 12-month period, increase the gross rental rate for a dwelling or a unit more than 5 percent plus the percentage change in the cost of living, or 10 percent, whichever is lower",
+    "coverage_text": "Applies to residential real property (dwellings and units intended for human habitation, including units in mobilehome parks) that has had a certificate of occupancy for more than 15 years and is not otherwise exempt.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "first_occupancy_date",
+       "op": "on_or_before",
+       "value": "",
+       "years_before_as_of": 15,
+       "text": "Housing not issued a certificate of occupancy within the previous 15 years (rolling 15-year age test)"
+      }
+     ],
+     "exemptions": [
+      {
+       "label": "Deed-restricted or subsidized affordable housing",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "restricted affordable housing",
+         "years_before_as_of": 0,
+         "text": "Housing restricted by deed, regulatory agreement or other recorded document as affordable housing for very low, low or moderate income households, or subject to an agreement providing housing subsidies for such households"
+        }
+       ]
+      },
+      {
+       "label": "Dormitories",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "dormitory owned and operated by an institution of higher education or K-12 school",
+         "years_before_as_of": 0,
+         "text": "Dormitories owned and operated by an institution of higher education or a kindergarten and grades 1 to 12 school"
+        }
+       ]
+      },
+      {
+       "label": "Housing under stricter local rent or price control",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "subject to local rent control restricting annual increases below the state cap",
+         "years_before_as_of": 0,
+         "text": "Housing subject to rent or price control through a public entity's valid exercise of its police power consistent with Civ. Code ch. 2.7 that restricts annual increases to less than the amount in subdivision (a)"
+        }
+       ]
+      },
+      {
+       "label": "Separately alienable property (e.g., single-family home or condo) with non-corporate owner and written exemption notice",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "alienable separate from title to any other dwelling unit",
+         "years_before_as_of": 0,
+         "text": "Residential real property that is alienable separate from the title to any other dwelling unit, including a mobilehome"
+        },
+        {
+         "fact": "owner_type",
+         "op": "is",
+         "value": "not a REIT, corporation, LLC with a corporate member, or mobilehome park management",
+         "years_before_as_of": 0,
+         "text": "Owner is not a real estate investment trust, a corporation, an LLC in which at least one member is a corporation, or management of a mobilehome park"
+        },
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "written exemption notice provided to tenants",
+         "years_before_as_of": 0,
+         "text": "Tenants have been given the statutory written notice that the property is exempt"
+        }
+       ]
+      },
+      {
+       "label": "Owner-occupied duplex",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "2",
+         "years_before_as_of": 0,
+         "text": "Property containing two separate dwelling units within a single structure"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "Owner occupied one of the units as principal residence at the beginning of the tenancy and continues in occupancy"
+        },
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "neither unit is an ADU or JADU",
+         "years_before_as_of": 0,
+         "text": "Neither unit is an accessory dwelling unit or junior accessory dwelling unit"
+        }
+       ]
+      },
+      {
+       "label": "Mobilehome homeowners",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "homeowner of a mobilehome",
+         "years_before_as_of": 0,
+         "text": "Section does not apply to a homeowner of a mobilehome, as defined in Section 798.9"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Exempt: deed-restricted/subsidized affordable housing; school and university dormitories; housing under a stricter local rent control; housing with a certificate of occupancy within the last 15 years; separately alienable homes/condos owned by non-corporate, non-REIT owners with written exemption notice; owner-occupied duplexes; homeowners of mobilehomes.",
+    "interaction": "Does not expand or limit local governments' authority to adopt rent controls consistent with Civ. Code ch. 2.7 (§ 1954.50 et seq.), and housing under a local rent control that restricts annual increases to less than the state cap is exempt. Rent increase notice must be given under Civ. Code § 827.",
+    "yields_to": [
+     "Cal. Civ. Code § 1954.50 et seq. (local rent control restricting increases below the state cap)"
+    ],
+    "confidence": 0.95,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

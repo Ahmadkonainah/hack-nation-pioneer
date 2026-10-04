@@ -1,0 +1,41 @@
+{
+ "doc_id": "D013",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 7248,
+ "output_tokens": 662,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:07:51+00:00",
+ "result": {
+  "document_summary": "Boston.gov page describing the Housing Stability Notification Act, which requires landlords ending a tenancy to give tenants a Notice of Tenants' Rights and Resources and to notify the City.",
+  "notes": "The Act is a notice-and-reporting requirement for tenancy terminations; it does not restrict eviction causes or halt eviction. It is nonetheless the closest in-scope item (just_cause_eviction: notice requirements for ending a tenancy), so one record is output with moderate confidence. The page gives no effective date and no coverage exemptions. Rent increase, deposit, fee, screening and algorithm rules are not present.",
+  "rules": [
+   {
+    "jurisdiction": "Boston, MA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "Housing Stability Notification Act - notice of tenants' rights and City reporting on tenancy termination",
+    "requirement": "A landlord planning to end a tenancy must deliver a Notice of Tenants' Rights and Resources together with the Notice to Quit or non-renewal notice, and must submit the notice and tenant contact information to the City through its online portal. A violation does not halt the eviction process.",
+    "key_value": "Warning for 1st offense; $300 per day for 2nd and subsequent offenses",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "City of Boston Ordinances § 10-11.7 (Housing Stability Notification Act)",
+    "quoted_span": "The Housing Stability Notification Act requires\nALL LANDLORDS\nplanning to end a tenancy agreement to provide the tenant with a Notice of Tenants’ Rights and Resources.",
+    "coverage_text": "All landlords in Boston who plan to end a tenancy agreement.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

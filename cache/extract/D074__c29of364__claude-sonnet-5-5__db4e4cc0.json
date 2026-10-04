@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 29,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 21453,
+ "output_tokens": 296,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:41+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code, Chapter 2 (Government), covering city design-build public works procurement (Divisions 33 and 34), retrieved from a page whose URL suggests an algorithmic rent-price-fixing prohibition but whose text does not contain that content.",
+  "notes": "No rules in scope. This part contains only San Diego Municipal Code sections 22.3303-22.3403 on design-build public works procurement (selection methods, prequalification, task orders, progressive design-build authority, definitions). None concern rent increase limits, just-cause eviction, security deposits, screening fees, screening restrictions, or algorithmic rent setting. Despite the source URL referencing a prohibition on algorithmic rent price fixing (a San Diego zoning-code division), no text of that ordinance appears in this part, so nothing can be extracted.",
+  "rules": []
+ }
+}

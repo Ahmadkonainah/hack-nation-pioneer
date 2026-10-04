@@ -1,0 +1,16 @@
+{
+ "doc_id": "D058",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 5607,
+ "output_tokens": 219,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:58+00:00",
+ "result": {
+  "document_summary": "Massachusetts General Laws c. 186 § 31, requiring a landlord's notice to quit for nonpayment of rent to be accompanied by an informational form and preventing courts from accepting summary process filings without proof of its delivery.",
+  "notes": "This section covers only procedural notice requirements for nonpayment-of-rent notices to quit (an information form and a court filing prerequisite). It does not state allowed eviction causes, relocation assistance, or coverage tests, so it does not set out a just-cause eviction regime or any other in-scope rule. Nothing else in the document falls within the six categories, so no rules are extracted.",
+  "rules": []
+ }
+}

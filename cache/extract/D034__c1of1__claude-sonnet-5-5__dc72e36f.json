@@ -1,0 +1,86 @@
+{
+ "doc_id": "D034",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 5721,
+ "output_tokens": 1479,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:49:55+00:00",
+ "result": {
+  "document_summary": "Chapter 158 of the Hoboken, NJ city code, containing a mandatory-disclosure requirement for rent increases over 10% (Ord. B-750) and a ban on algorithmic rent fixing (Ord. B-781).",
+  "notes": "Two records extracted. Article I does not cap rent increases; it only requires disclosures for increases over 10% on renewal, but it is recorded under rent_increase_limits as the closest in-scope category (it also requires a statement on whether a rent algorithm was used). Article II is recorded under algorithmic_rent_setting. The page gives adoption dates but no separate effective dates, so effective_date is left blank.",
+  "rules": [
+   {
+    "jurisdiction": "Hoboken, NJ",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "Mandatory disclosures for rent increases over 10% on lease renewal",
+    "requirement": "Residential landlords seeking to raise rent by more than 10% year over year on renewal must give the tenant an itemization of costs, a statement on whether a rent algorithm was used, notice of the right to take legal action, and Division of Housing contact information. Failure to disclose is punishable by a fine of up to $1,000 per incident.",
+    "key_value": "Disclosures required for increases >10%; fine up to $1,000 per incident",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Hoboken City Code § 158-1 (Ord. No. B-750)",
+    "quoted_span": "All residential landlords seeking to increase rent by more than 10% upon a renewal of a lease with a current tenant year over year shall be required to make the following disclosures",
+    "coverage_text": "All residential landlords in Hoboken who raise rent by more than 10% year over year on renewal of a lease with a current tenant.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "other",
+       "op": "is",
+       "value": "rent increase over 10% year over year on lease renewal with a current tenant",
+       "years_before_as_of": 0,
+       "text": "increase rent by more than 10% upon a renewal of a lease with a current tenant year over year"
+      }
+     ],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": "The ordinance is a disclosure requirement, not a cap on rent increases; categorized under rent_increase_limits as the closest in-scope category."
+   },
+   {
+    "jurisdiction": "Hoboken, NJ",
+    "level": "city",
+    "category": "algorithmic_rent_setting",
+    "title": "Prohibition on algorithmic rent fixing",
+    "requirement": "Landlords of residential units in Hoboken may not use software, algorithms or data-sharing platforms to collect and analyze nonpublic competitor information in order to coordinate, recommend or implement rents, lease terms or occupancy levels among competing lessors. Violations are enforced in Municipal Court by the Division of Housing or an aggrieved private citizen, with penalties of up to a $2,000 fine and/or up to 90 days community service, or penalties under N.J.S.A. 40:49-5.",
+    "key_value": "Ban on algorithmic pricing using nonpublic competitor data; fine up to $2,000 or up to 90 days community service",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Hoboken City Code § 158-2 (Ord. No. B-781)",
+    "quoted_span": "Landlords who rent any residential dwelling unit (defined as any primary residence excluding medical/long-term care or detention facilities) in the City of Hoboken are prohibited from price fixing using algorithmic pricing.",
+    "coverage_text": "All landlords renting a residential dwelling unit (any primary residence) in Hoboken.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Medical/long-term care or detention facilities",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "medical/long-term care or detention facility",
+         "years_before_as_of": 0,
+         "text": "excluding medical/long-term care or detention facilities"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Medical/long-term care facilities and detention facilities are excluded from the definition of residential dwelling unit.",
+    "interaction": "Penalties may be imposed as prescribed under N.J.S.A. 40:49-5.",
+    "yields_to": [],
+    "confidence": 0.9,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

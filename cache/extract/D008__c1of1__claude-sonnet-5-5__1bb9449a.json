@@ -1,0 +1,55 @@
+{
+ "doc_id": "D008",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 4811,
+ "output_tokens": 981,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:52:18+00:00",
+ "result": {
+  "document_summary": "Berkeley Rent Stabilization Board public notice announcing the 2026 Annual General Adjustment (AGA) of 1.0%, set at 65% of Bay Area CPI under Regulation 1148.",
+  "notes": "Notice does not state building coverage or exemptions beyond the Costa-Hawkins tenancy carve-out (post-2025 tenancies with Costa-Hawkins-set rents are not adjusted). The notice gives no explicit effective date for the AGA formula itself; the 2026 Order allows increases no earlier than 2026-01-01.",
+  "rules": [
+   {
+    "jurisdiction": "Berkeley, CA",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "Berkeley 2026 Annual General Adjustment (65% of CPI)",
+    "requirement": "Eligible landlords may increase 2025 permanent rent ceilings by 1.0% for 2026, no earlier than January 1, 2026; the AGA is set at 65% of the Bay Area CPI-U increase. The AGA does not adjust rents for tenancies that began on or after January 1, 2025 and had rents set under Costa-Hawkins.",
+    "key_value": "1.0% for 2026 (65% of 1.5% Bay Area CPI)",
+    "legal_state": "enacted",
+    "effective_date": "2026-01-01",
+    "citation": "Berkeley Municipal Code § 13.76.110(A); Berkeley Rent Board Regulation 1148",
+    "quoted_span": "will allow eligible landlords to increase the 2025 permanent rent ceilings by 1.0% no earlier than January 1, 2026.",
+    "coverage_text": "Rental units subject to Berkeley rent stabilization where the landlord is eligible to take the AGA; the notice does not describe building-level coverage.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Tenancies beginning on or after 2025-01-01 with rents set under Costa-Hawkins",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "tenancy began on or after 2025-01-01 with rent set pursuant to Costa-Hawkins",
+         "years_before_as_of": 0,
+         "text": "tenancy began on or after January 1, 2025, and had rents set pursuant to the Costa-Hawkins Rental Housing Act"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "The 2026 AGA may not adjust rents of tenancies that began on or after January 1, 2025 and whose rents were set pursuant to the Costa-Hawkins Rental Housing Act.",
+    "interaction": "The notice references the Costa-Hawkins Rental Housing Act as limiting the AGA for certain new tenancies, and Regulation 1148 sets the qualifying conditions and notice requirements for the increase.",
+    "yields_to": [
+     "Costa-Hawkins Rental Housing Act"
+    ],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

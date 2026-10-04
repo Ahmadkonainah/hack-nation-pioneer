@@ -1,0 +1,89 @@
+{
+ "doc_id": "D052",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 11971,
+ "output_tokens": 1609,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:53:42+00:00",
+ "result": {
+  "document_summary": "Massachusetts General Laws c. 186 § 15B, the state statute governing advance rent, security deposits, receipts, interest, return deadlines and penalties for residential leases.",
+  "notes": "Two records extracted: the cap on upfront payments/security deposit, and the 30-day return and deduction rule. Other provisions (entry, late-fee timing, interest, receipts, transfer) are part of the deposit regime or out of scope. The section text shows two versions of subsection (1)(b) (before and from August 1, 2025); effective date of the 2025 amendment is given as August 1, 2025, and the original effective date of the deposit cap is not stated in the document. The fee-in-lieu-of-deposit option depends on regulations not yet shown in this text.",
+  "rules": [
+   {
+    "jurisdiction": "MA",
+    "level": "state",
+    "category": "security_deposits",
+    "title": "Cap on upfront payments and security deposit (first month, last month, deposit, key/lock)",
+    "requirement": "At or before the start of a tenancy a landlord may collect no more than first month's rent, last month's rent, a security deposit equal to one month's rent, and the cost of a key and lock. A fee in lieu of a deposit may be authorized by regulation, capped at one month's rent in total when combined with any deposit.",
+    "key_value": "Security deposit max one month's rent; total upfront: first + last month + 1-month deposit + key/lock cost",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "G.L. c. 186 § 15B(1)(b)",
+    "quoted_span": "a security deposit equal to the first month's rent provided that such security deposit is deposited as required by subsection (3) and that the tenant is given the statement of condition as required by subsection (2)",
+    "coverage_text": "Applies to all leases of residential real property in Massachusetts, other than short vacation or recreational rentals of 100 days or less.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Vacation or recreational rentals of 100 days or less",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "vacation or recreational tenancy of 100 days or less",
+         "years_before_as_of": 0,
+         "text": "lease, rental, occupancy or tenancy of one hundred days or less in duration which lease or rental is for a vacation or recreational purpose"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Does not apply to vacation or recreational rentals of 100 days or less.",
+    "interaction": "Lease provisions that conflict with the section, and tenant waivers, are void as against public policy. The fee in lieu of a deposit depends on regulations of the executive office of housing and livable communities.",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "MA",
+    "level": "state",
+    "category": "security_deposits",
+    "title": "Security deposit holding, interest, return within 30 days and deductions",
+    "requirement": "A deposit must be held in a separate interest-bearing Massachusetts bank account, with 5% annual interest (or the lesser bank rate) paid to the tenant for tenancies of a year or more. The landlord must return the deposit, less permitted deductions with a sworn itemized damage list, within 30 days after the tenancy ends, or forfeit the right to keep any of it and face treble damages.",
+    "key_value": "Return within 30 days; interest 5% per year (or lesser bank rate); treble damages for violations",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "G.L. c. 186 § 15B(3), (4), (6), (7)",
+    "quoted_span": "The lessor shall, within thirty days after the termination of occupancy under a tenancy-at-will or the end of the tenancy as specified in a valid written lease agreement, return to the tenant the security deposit or any balance thereof",
+    "coverage_text": "Applies to all leases of residential real property in Massachusetts, other than short vacation or recreational rentals of 100 days or less.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Vacation or recreational rentals of 100 days or less",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "vacation or recreational tenancy of 100 days or less",
+         "years_before_as_of": 0,
+         "text": "lease, rental, occupancy or tenancy of one hundred days or less in duration which lease or rental is for a vacation or recreational purpose"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Does not apply to vacation or recreational rentals of 100 days or less.",
+    "interaction": "Conflicting lease provisions and tenant waivers are void as against public policy. Deductions are limited to unpaid rent or water charges, tax escalation under section 15C, and tenant-caused damage beyond normal wear and tear.",
+    "yields_to": [],
+    "confidence": 0.88,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

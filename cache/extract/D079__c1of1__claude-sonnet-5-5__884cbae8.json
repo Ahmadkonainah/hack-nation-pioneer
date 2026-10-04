@@ -1,0 +1,48 @@
+{
+ "doc_id": "D079",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 5730,
+ "output_tokens": 1021,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:54:21+00:00",
+ "result": {
+  "document_summary": "SF Rent Board info page summarizing the just cause eviction requirements and the 17 authorized just cause reasons under the San Francisco Rent Ordinance Section 37.9(a).",
+  "notes": "Single rule extracted: San Francisco just cause eviction regime. The page gives no effective date and no explicit building-age or unit-count coverage conditions; it applies to units covered by the Rent Ordinance and states that some units exempt from rent increase limits (e.g., post-June 13, 1979 construction) remain subject to the eviction provisions. The page does not state relocation assistance or notice requirements, so none are recorded. Rent increase limits are not stated on this page, so no rent_increase_limits record is produced.",
+  "rules": [
+   {
+    "jurisdiction": "San Francisco, CA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "San Francisco Rent Ordinance just cause eviction requirement",
+    "requirement": "A landlord may evict a tenant from a unit covered by the Rent Ordinance only for one of 17 enumerated just cause reasons, which must be the dominant motive for the eviction. Expiration of a rental agreement or a change in ownership is not just cause.",
+    "key_value": "17 enumerated just causes under Ordinance Section 37.9(a)",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "S.F. Admin. Code ch. 37 § 37.9(a)",
+    "quoted_span": "In order to evict a tenant from a rental unit covered by the Rent Ordinance, a landlord must have a \"just cause\" reason that is the dominant motive for pursuing the eviction.",
+    "coverage_text": "Rental units covered by the San Francisco Rent Ordinance, including some units exempt from the Ordinance's rent increase limits (such as units first receiving a certificate of occupancy after June 13, 1979, and Costa-Hawkins-eligible tenancies), which still remain subject to the eviction provisions.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "other",
+       "op": "is",
+       "value": "unit covered by the SF Rent Ordinance eviction provisions",
+       "years_before_as_of": 0,
+       "text": "rental unit covered by the Rent Ordinance"
+      }
+     ],
+     "exemptions": []
+    },
+    "exemptions_text": "The page does not list exemptions from the eviction provisions; it notes that some tenancies exempt from rent increase limits (post-June 13, 1979 construction, Costa-Hawkins-eligible tenancies, some government-regulated rents) are still subject to just cause eviction rules.",
+    "interaction": "Tenancies exempt from the Ordinance's rent increase limitations, including newly constructed units first receiving a Certificate of Occupancy after June 13, 1979 and tenancies eligible for rent increases under the Costa-Hawkins Rental Housing Act, remain subject to the just cause eviction provisions. Withdrawal from the rental market is tied to the state Ellis Act.",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

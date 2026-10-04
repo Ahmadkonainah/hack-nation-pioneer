@@ -1,0 +1,164 @@
+{
+ "doc_id": "D077",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 13427,
+ "output_tokens": 2510,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:21:12+00:00",
+ "result": {
+  "document_summary": "A Legal Aid Society of San Diego FAQ fact sheet (updated Sept. 2023) explaining the City of San Diego Residential Tenant Protection Ordinance, which requires just cause to terminate residential tenancies and sets relocation assistance and buyout rules.",
+  "notes": "Secondary source (nonprofit fact sheet) that disclaims being current. It also mentions state rent cap law (Cal. Civ. Code 1947.12) only inside the required notice text, without stating the cap, so no separate rent_increase_limits record was created. Relocation amounts, notice rules, right of offer and buyout agreement rules are treated as details of the single just-cause instrument. Municipal code section numbers are partly given (98.0705, 98.0706); the full chapter cite comes from the required-notice text (Chapter 9, Article 8, Division 7).",
+  "rules": [
+   {
+    "jurisdiction": "San Diego, CA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "San Diego Residential Tenant Protection Ordinance (just cause, relocation assistance, buyouts)",
+    "requirement": "A landlord may terminate a covered tenancy only for enumerated at-fault or no-fault just causes, with written notice stating the cause. For no-fault terminations the landlord must pay or waive relocation assistance, and tenants have a right of offer to renew if the unit is re-rented within 5 years. Buyout agreements must meet disclosure and form rules or are void.",
+    "key_value": "Relocation assistance: 2 months' rent (3 months if tenant is senior 62+ or disabled) for no-fault terminations",
+    "legal_state": "enacted",
+    "effective_date": "2023-06-24",
+    "date_basis": "stated",
+    "citation": "San Diego Municipal Code ch. 9, art. 8, div. 7 (§§ 98.0701 et seq.)",
+    "quoted_span": "The purpose of the Ordinance is to require Just Cause for termination of residential tenancies consistent with California Civil Code section 1946.2",
+    "coverage_text": "Covers tenancies (right to occupy a residential rental property for more than 30 days) in the City of San Diego, except for the listed exempt housing types; includes housing with a certificate of occupancy older than 15 years.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Housing issued a certificate of occupancy within the previous 15 years (unless a mobilehome)",
+       "all_of": [
+        {
+         "fact": "first_occupancy_date",
+         "op": "after",
+         "value": "",
+         "years_before_as_of": 15,
+         "text": "Housing that has been issued a certificate of occupancy within the previous 15 years, unless the dwelling is a mobilehome."
+        }
+       ]
+      },
+      {
+       "label": "Single-family owner-occupied residence renting no more than two units or bedrooms",
+       "all_of": [
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "Single-family owner-occupied residencies where the Owner-occupant rents or leases no more than two (2) units or bedrooms."
+        }
+       ]
+      },
+      {
+       "label": "Owner-occupied duplex (neither unit an ADU/JADU)",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "2",
+         "years_before_as_of": 0,
+         "text": "A property containing two separate dwelling units within a single structure"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "Owner occupies one of the units as principal place of residence at the beginning of the Tenancy and continues in occupancy"
+        }
+       ]
+      },
+      {
+       "label": "Separately alienable unit (e.g., condo) owned by a non-corporate landlord with written notice of exemption",
+       "all_of": [
+        {
+         "fact": "owner_type",
+         "op": "is",
+         "value": "natural person (not REIT, corporation, or LLC with a corporate member)",
+         "years_before_as_of": 0,
+         "text": "The Landlord is NOT a REIT, a corporation, an LLC in which at least one member is a corporation, or mobilehome park management"
+        },
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "unit alienable separate from title to any other dwelling unit, with written exemption notice given to tenants",
+         "years_before_as_of": 0,
+         "text": "Unit is alienable separate from the title to any other dwelling unit and tenants were provided written notice of the exemption"
+        }
+       ]
+      },
+      {
+       "label": "Deed- or regulation-restricted affordable housing and subsidized affordable housing (Section 8 voucher tenants not excluded)",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "housing restricted as affordable by deed, regulatory agreement, or subject to an affordable housing subsidy agreement",
+         "years_before_as_of": 0,
+         "text": "Housing restricted by deed (LITHC), regulatory restriction, or recorded document as affordable housing, or subject to an agreement providing housing subsidies for affordable housing; exclusion does not apply to a tenant with a Section 8 Housing Choice Voucher"
+        }
+       ]
+      },
+      {
+       "label": "Transient/tourist hotels and stays of 30 consecutive days or less",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "transient or tourist hotel, or occupancy of 30 consecutive days or less",
+         "years_before_as_of": 0,
+         "text": "A tenant of a transient and tourist hotel; any residential occupancy for a period of 30 consecutive days or less"
+        }
+       ]
+      },
+      {
+       "label": "Institutional housing (nonprofit hospital, religious facility, care facility, nonprofit transitional housing, school dormitories)",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "institutional housing type listed in ordinance",
+         "years_before_as_of": 0,
+         "text": "Housing accommodations in nonprofit hospital, religious facility, extended care facility, licensed residential care facility for the elderly, or non-profit transitional housing; dormitories owned and operated by an institution of higher education"
+        }
+       ]
+      },
+      {
+       "label": "Tenant shares bathroom or kitchen with owner who lives there",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "tenant shares bathroom or kitchen with owner who maintains principal residence at the unit",
+         "years_before_as_of": 0,
+         "text": "Housing in which tenant shares the bathroom or kitchen facilities with the Owner who maintains their principal residence at the Residential Rental Unit."
+        }
+       ]
+      },
+      {
+       "label": "Mobilehomes subject to the Mobilehome Residency Law",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "mobilehome subject to the MRL",
+         "years_before_as_of": 0,
+         "text": "Mobilehomes subject to the MRL"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Exempt: transient/tourist hotels and stays of 30 days or less; deed-restricted or subsidized affordable housing (except Section 8 voucher tenants); MRL mobilehomes; institutional housing and school dormitories; shared-facility housing with the owner; owner-occupied single-family rentals of up to two units/bedrooms; owner-occupied duplexes; separately alienable units owned by non-corporate landlords with written notice; housing with a certificate of occupancy within the previous 15 years.",
+    "interaction": "Consistent with and built on California Civil Code section 1946.2 (state just-cause law), and requires the state rent-cap notice under Civil Code section 1947.12; buyout agreements for less than relocation assistance owed under federal, state, or local law are void. Remedies are cumulative with other laws.",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

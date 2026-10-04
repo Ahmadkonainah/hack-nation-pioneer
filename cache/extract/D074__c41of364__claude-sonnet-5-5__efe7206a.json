@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 41,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22410,
+ "output_tokens": 294,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:56+00:00",
+ "result": {
+  "document_summary": "A page from the San Diego Municipal Code (Chapter 2, Government) containing City-contracting provisions (project labor agreements, Sunshine Act online posting, Equal Pay Ordinance) that do not concern residential rental rules.",
+  "notes": "This part of the document (page labeled for the algorithmic rent-price-fixing division but showing San Diego Municipal Code Chapter 2, Article 2, Divisions 44, 45 and 48) covers project labor agreements, City records posting, and the Equal Pay Ordinance for City contractors. None of it addresses rent increase limits, just-cause eviction, security deposits, screening fees, screening restrictions, or algorithmic rent setting, so no in-scope rules were extracted. The actual algorithmic rent-setting provision (the section named in the URL) does not appear in this part of the text.",
+  "rules": []
+ }
+}

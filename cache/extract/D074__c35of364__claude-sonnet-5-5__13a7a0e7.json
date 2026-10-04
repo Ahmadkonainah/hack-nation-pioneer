@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 35,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 21679,
+ "output_tokens": 258,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:49+00:00",
+ "result": {
+  "document_summary": "A mid-document chunk of the San Diego Municipal Code (Chapter 2, Government) covering construction-manager subcontractor listing, the Responsible Banking Ordinance, and the Special Events Ordinance, with no rental housing rules.",
+  "notes": "This part contains no rules in the six rental-housing categories. The page URL points to San Diego's algorithmic rent-setting ban (Div. 11, § 98.1103), but the text in this chunk is only Chapter 2 Administrative Code material (§§ 22.3811-22.4005: subcontractor listing, false declarations, banking community reinvestment, special event permits). No algorithmic rent-setting text appears here, so no record was extracted; the relevant text may be in another part.",
+  "rules": []
+ }
+}

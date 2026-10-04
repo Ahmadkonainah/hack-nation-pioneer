@@ -1,0 +1,41 @@
+{
+ "doc_id": "D059",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 6253,
+ "output_tokens": 660,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:49:59+00:00",
+ "result": {
+  "document_summary": "A WBUR news article (June 23, 2026) reporting that the Massachusetts Supreme Judicial Court struck from the November 2026 ballot a rent control initiative petition because it included a religious exemption.",
+  "notes": "The article reports on a failed ballot initiative to limit annual residential rent increases in Massachusetts. The proposal's text is not included and no rate, formula, or effective date is stated; the citation is the proposal as named in the article since no statutory citation is given. Recorded as a single failed (struck) rent_increase_limits record at state level, with low confidence and empty coverage because the proposal's terms are not set out. No other in-scope rules appear.",
+  "rules": [
+   {
+    "jurisdiction": "MA",
+    "level": "state",
+    "category": "rent_increase_limits",
+    "title": "Statewide rent control ballot initiative (struck from 2026 ballot)",
+    "requirement": "The proposed ballot initiative would have limited annual rent increases for residences statewide, with exemptions for certain unit types including units operated solely for religious purposes. The Supreme Judicial Court ruled it cannot go on the November 2026 ballot.",
+    "key_value": "",
+    "legal_state": "failed",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Massachusetts rent control ballot initiative petition (2026)",
+    "quoted_span": "The proposal limits annual rent increases for residences, but it carved out exemptions for several types of units",
+    "coverage_text": "Residences generally, with exemptions for several unit types; the article does not give the full coverage terms.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "Exempted several types of units, including those operated solely for religious purposes; other exemptions are described only as secular and are not specified.",
+    "interaction": "The article notes supporters may try again on the 2028 ballot or via compromise legislation; no interaction with other laws is stated.",
+    "yields_to": [],
+    "confidence": 0.5,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

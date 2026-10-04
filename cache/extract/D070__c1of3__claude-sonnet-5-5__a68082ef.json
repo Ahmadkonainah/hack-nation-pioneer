@@ -1,0 +1,41 @@
+{
+ "doc_id": "D070",
+ "chunk": 1,
+ "chunks": 3,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 20508,
+ "output_tokens": 1166,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:05:37+00:00",
+ "result": {
+  "document_summary": "Part 1 of 3 of Chapter 19:2 of the Newark, NJ municipal code (Rent Control Regulations; Rent Control Board), covering policy, definitions, the CPI-based annual rent increase cap, surcharges, hardship increases and Board procedures.",
+  "notes": "Only one record was created: the rent increase cap and related allowed-increase mechanics under the rent control chapter. Surcharges, hardship increases, rebates and Board procedures are details of the same rent-control instrument and are folded into it. Newly constructed multiple dwellings and vacant dwellings are exempt per the definitions, but their exemption terms (\\u00a7\\u00a7 19:2-18.1 and 18.2) appear in a later part, so the building-age exemption cannot be modeled here. The text does not state an original effective date for the chapter; the amendments cited are dated 9-18-2024 (Ord. 6PSF-I) and 5-20-2026 (Ord. 6PSF-B, amending definitions), so no effective date is asserted. Parts 2 and 3 (registration, exemptions, procedures) are not included.",
+  "rules": [
+   {
+    "jurisdiction": "Newark, NJ",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "Newark rent control: annual increase capped at CPI change, max 4%",
+    "requirement": "At lease expiration or termination of a periodic tenancy, a landlord may not request or receive an increase greater than the CPI percentage change (CPI-U NY-NJ-Long Island, from 15 months prior to 3 months prior to the month of the proposed increase), and in no case more than 4%. Increases are barred if the dwelling is not in substantial compliance or the landlord has not registered, and require 30 days' written notice to the tenant and the Rent Regulation Officer.",
+    "key_value": "CPI-U change, max 4%",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Newark Municipal Code \\u00a7 19:2-3.1",
+    "quoted_span": "no landlord may request or receive an increase greater than the percentage increase in the Consumer Price Index (CPI) from the CPI 15 months prior to the month of the proposed rent increase to the CPI three months prior to the month of the proposed rent increase. In no case shall the allowable rent increase exceed 4%.",
+    "coverage_text": "All multiple dwellings, as defined in the chapter (any building or structure containing one or more apartments rented or offered to one or more tenants), are subject to rent control.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "Exempt dwellings include public housing, hotel/motel space rented day-to-day to transients, commercial space, newly constructed multiple dwellings and vacant dwellings (per \\u00a7\\u00a7 19:2-18.1 and 18.2, not in this part), certain rehabilitated units receiving Section 8 or Rental Rehabilitation subsidies, and units under a preemptive governmental agency rent-regulation contract.",
+    "interaction": "The base increase may be supplemented by Board-approved tax surcharges, major new improvement surcharges and hardship increases, all conditioned on substantial compliance and registration; an owner-occupied definition (four units or less with the owner residing in one) appears in the chapter, though its effect is not stated in this part.",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

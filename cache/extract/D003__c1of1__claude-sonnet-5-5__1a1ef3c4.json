@@ -1,0 +1,60 @@
+{
+ "doc_id": "D003",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 6106,
+ "output_tokens": 907,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:50:45+00:00",
+ "result": {
+  "document_summary": "Berkeley Rent Board web page summarizing the Fair Chance Access to Housing Ordinance (BMC 13.106), which restricts landlords' use of criminal history in rental housing decisions.",
+  "notes": "Single in-scope rule (screening_restrictions). The page names the ordinance as BMC 13.106 and says the Council passed it on April 14, 2020; it gives no explicit effective date, so effective_date is left blank. Penalties, complaint procedures and notice-posting duties are part of the same ordinance and are not split into separate records.",
+  "rules": [
+   {
+    "jurisdiction": "Berkeley, CA",
+    "level": "city",
+    "category": "screening_restrictions",
+    "title": "Fair Chance Access to Housing Ordinance (criminal history screening ban)",
+    "requirement": "Rental housing providers may not ask about or use criminal history or criminal background checks in advertising, applications, tenant selection, or other housing decisions. If a landlord takes action based on criminal history, they must give the applicant or tenant written notice and an opportunity to respond.",
+    "key_value": "Criminal history inquiries and use prohibited; written notice and chance to respond required; fines $1,000-$10,000 per violation",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "Berkeley Municipal Code ch. 13.106",
+    "quoted_span": "The Fair Chance Access to Housing Ordinance prohibits rental housing providers in Berkeley from asking about and using criminal history and/or criminal background checks in their rental housing advertising, applications, tenant selection process, or decision-making.",
+    "coverage_text": "Applies to rental housing providers and rental units in Berkeley generally, except for the listed exempt situations.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Owner-occupied properties with 1-3 units",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "<=",
+         "value": "3",
+         "years_before_as_of": 0,
+         "text": "Owner-occupied properties (between 1-3 units)"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "an owner of record resides in one of the units as their primary residence"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Exempt: lifetime sex offenders; limited exemptions for public housing/Section 8 properties; owner-occupied properties of 1-3 units where an owner of record lives in one unit as their primary residence; units under a rental agreement allowing owners to move back under BMC 13.76.130 A.9; units occupied by existing tenants seeking to sublet or add/replace roommates.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

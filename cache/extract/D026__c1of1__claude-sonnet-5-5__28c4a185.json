@@ -1,0 +1,43 @@
+{
+ "doc_id": "D026",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 7028,
+ "output_tokens": 758,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:14+00:00",
+ "result": {
+  "document_summary": "California Civil Code section 1950.6, the state statute governing application screening fees charged by landlords, as amended by AB 1170 effective January 1, 2026.",
+  "notes": "One instrument (Cal. Civ. Code § 1950.6) in one category. Fee cap (adjusted annually for CPI), no-fee-without-available-unit rule, first-qualified-applicant or full-refund processes, itemized receipt, and credit report copy are details of the same rule and are captured in the requirement text. The statute applies to residential rental property generally and states no coverage exemptions in this section.",
+  "rules": [
+   {
+    "jurisdiction": "CA",
+    "level": "state",
+    "category": "application_screening_fees",
+    "title": "California application screening fee limits",
+    "requirement": "A landlord may charge an application screening fee only up to actual out-of-pocket costs and the reasonable value of time spent, never more than $30 per applicant (adjustable annually with CPI since 1998), and may not charge it when no unit is or will soon be available. The landlord must either consider applications in order and approve the first qualified applicant (charging only when an application is actually considered), or refund the full fee within 7 days of selecting a tenant or 30 days of application, whichever is first; an itemized receipt is required.",
+    "key_value": "$30 per applicant, CPI-adjusted; itemized receipt required",
+    "legal_state": "enacted",
+    "effective_date": "2026-01-01",
+    "date_basis": "stated",
+    "citation": "Cal. Civ. Code § 1950.6",
+    "quoted_span": "In no case shall the amount of the application screening fee charged by the landlord or their agent be greater than thirty dollars ($30) per applicant.",
+    "coverage_text": "Applies to any landlord (owner of residential rental property) or their agent who charges an applicant a screening fee for a residential rental.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "Applies notwithstanding Civ. Code § 1950.5, and the fee is not treated as security under that section. It does not preempt rules on deposits and fees under federal or state housing assistance programs.",
+    "yields_to": [
+     "Federal or state housing assistance program provisions governing deposits and fees"
+    ],
+    "confidence": 0.95,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

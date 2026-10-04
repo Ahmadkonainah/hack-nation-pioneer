@@ -1,0 +1,16 @@
+{
+ "doc_id": "D051",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 5841,
+ "output_tokens": 247,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:54+00:00",
+ "result": {
+  "document_summary": "Massachusetts General Laws c. 186 § 12, setting notice requirements to terminate a tenancy at will, including a 14-day notice to quit for nonpayment of rent and a 10-day right to cure.",
+  "notes": "The section governs notice to terminate tenancies at will (three months' notice generally; 14-day notice for nonpayment with a one-time cure right). It does not list allowed eviction causes, relocation assistance, or a just-cause regime. It is a notice-procedure rule and falls outside the six in-scope categories on its own terms. The only arguably related content is the nonpayment notice and cure mechanics, which is a termination-notice rule, not a just-cause regime, so no records were extracted.",
+  "rules": []
+ }
+}

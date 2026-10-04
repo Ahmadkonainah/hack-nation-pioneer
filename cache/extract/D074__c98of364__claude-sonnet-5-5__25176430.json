@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 98,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 21075,
+ "output_tokens": 232,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:08:04+00:00",
+ "result": {
+  "document_summary": "A page from the San Diego Municipal Code (Chapter 4, Health and Sanitation) containing animal control, domestic animal, and rat control provisions (§§ 44.0300-44.0343), with no rental housing rules.",
+  "notes": "Although the source URL slug refers to a Division on prohibiting anti-competitive automated rent price fixing (§ 98.1103), the text in this part contains only animal control and rat control provisions of San Diego Municipal Code Chapter 4. No rule on rent increase limits, just cause eviction, security deposits, screening fees, screening restrictions, or algorithmic rent setting appears in this part, so the list is empty.",
+  "rules": []
+ }
+}

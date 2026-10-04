@@ -1,0 +1,16 @@
+{
+ "doc_id": "D039",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 5014,
+ "output_tokens": 190,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:53:02+00:00",
+ "result": {
+  "document_summary": "A September 3, 2024 Los Angeles City Council motion instructing the Housing Department to report on landlord use of algorithm-based rent-setting software and the feasibility of banning it.",
+  "notes": "The document is only a motion requesting a report and feasibility study; it enacts no rule and proposes no ban text. It mentions San Francisco's July 2024 algorithmic rent-setting ban only as background, without quoting the ordinance or giving its citation, effective date or terms, so no rule can be extracted for San Francisco from this document either.",
+  "rules": []
+ }
+}

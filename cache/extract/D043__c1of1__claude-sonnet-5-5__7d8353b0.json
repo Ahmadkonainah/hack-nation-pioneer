@@ -1,0 +1,109 @@
+{
+ "doc_id": "D043",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 16960,
+ "output_tokens": 2296,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:53:27+00:00",
+ "result": {
+  "document_summary": "Los Angeles Housing Department relocation assistance bulletins (effective July 1, 2026) describing no-fault eviction grounds, relocation payment amounts and procedures under the RSO and JCO, and enhanced relocation for demolition for new construction under the Resident Protections Ordinance.",
+  "notes": "Both bulletins concern no-fault evictions under the RSO and JCO, so the rules fall under just_cause_eviction. The bulletins do not state the RSO/JCO coverage criteria (building age, unit count) in testable terms, so coverage is left as the general tenancy condition. Two rules are recorded: the no-fault eviction/relocation regime and the RPO demolition relocation regime. The B bulletin fee chart is headed 'Effective July 1, 2025 to June 30, 2026' while the document is Rev 07.01.2026 and its A bulletin lists the same fee amounts for 2026-27; fee amounts were not extracted as separate rules since they are administrative fees paid by landlords to the city.",
+  "rules": [
+   {
+    "jurisdiction": "Los Angeles, CA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "No-fault eviction relocation assistance and filing requirements (RSO/JCO)",
+    "requirement": "Landlords evicting for a tenant-not-at-fault reason (owner/relative occupancy, demolition, removal from rental use, government order to vacate, etc.) must file a Declaration of Intent to Evict with LAHD before serving notice, file a copy of the notice within 3 days, and pay relocation assistance within 15 days of serving the notice. Amounts depend on tenant status and tenancy length, with a one-month's-rent amount for qualifying natural-person-owned single-family dwellings under the JCO.",
+    "key_value": "$11,000 / $14,400 (eligible, <3 yrs / 3+ yrs or low income); $23,150 / $27,400 (qualified); one month's rent for qualifying JCO single-family dwellings",
+    "legal_state": "enacted",
+    "effective_date": "2026-07-01",
+    "citation": "L.A.M.C. §§ 151.09, 165.03, 165.06",
+    "quoted_span": "All tenant not- at-fault evictions require payment of relocation assistance and the filing of a \nDeclaration of Intent to Evict form with the Los Angeles Housing Department (LAHD)",
+    "coverage_text": "Rental units covered by the Rent Stabilization Ordinance (RSO) or the Just Cause Ordinance (JCO) in the City of Los Angeles.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "other",
+       "op": "is",
+       "value": "unit subject to the RSO or JCO",
+       "years_before_as_of": 0,
+       "text": "units covered by the Rent Stabilization Ordinance (RSO) or the Just Cause Ordinance (JCO)"
+      }
+     ],
+     "exemptions": [
+      {
+       "label": "Resident manager replaced by another resident manager",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "evicting a resident manager to replace with another resident manager",
+         "years_before_as_of": 0,
+         "text": "Evicting a resident manager to replace him/her with another resident manager"
+        }
+       ]
+      },
+      {
+       "label": "Hazardous conditions from natural disaster",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "required to evict due to natural disaster hazard not caused by landlord negligence",
+         "years_before_as_of": 0,
+         "text": "required to evict due to hazardous conditions caused by a natural disaster, not caused by the landlord's negligence"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "No relocation assistance is owed when evicting a resident manager to replace with another resident manager, or when eviction is required by natural-disaster hazards not caused by landlord negligence; Mom and Pop owners (four or fewer units) pay reduced amounts for owner/relative occupancy evictions; accumulated rent may be offset against relocation assistance except for government-ordered vacates.",
+    "interaction": "Demolition for new construction of Protected Units is governed instead by the Resident Protections Ordinance and the state Housing Crisis Act; Ellis Act provisions (LAMC 151.22-151.28) apply to RSO units withdrawn from rental use.",
+    "yields_to": [
+     "Resident Protections Ordinance (for demolition of Protected Units for new construction)",
+     "California Housing Crisis Act (Gov. Code § 66300 et seq.)"
+    ],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "Los Angeles, CA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "Resident Protections Ordinance relocation for demolition for new construction",
+    "requirement": "Owners demolishing Protected Units for new construction must pay relocation assistance at the higher of state (Housing Crisis Act) or city amounts; lower-income households receive enhanced standardized payments, and all other tenants receive the RSO/JCO amounts. Owners choose one of three relocation options and face penalties starting at $250,000 per displaced unit for noncompliance.",
+    "key_value": "$115,480 (extremely low), $96,750 (very low), $87,450 (low income) per household; RSO/JCO Chart A amounts for households above low income",
+    "legal_state": "enacted",
+    "effective_date": "2025-02-11",
+    "citation": "L.A. Ordinance Nos. 188481 and 188482 (Resident Protections Ordinance); Cal. Gov. Code § 66300 et seq.",
+    "quoted_span": "City laws require all tenants be paid relocation assistance in the amounts required by the RSO or JCO within 15 days of serving a notice to terminate tenancy, which must be enhanced for lower income tenants if the project is subject to the Resident Protections Ordinance (RPO), effective 2/11/2025",
+    "coverage_text": "Protected Units (including all RSO units, units with affordability covenants or rent control in the past five years, units rented by lower-income households in the past five years, and units withdrawn under the Ellis Act in the past 10 years) that will be demolished for new construction.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "other",
+       "op": "is",
+       "value": "Protected Unit demolished for new construction",
+       "years_before_as_of": 0,
+       "text": "Protected Units that will be demolished for the purpose of new construction"
+      }
+     ],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "Relocation must be at the higher of state Housing Crisis Act or city law amounts; payment above the RSO/JCO amount under Option 3 is regulated by state law. If units are not Protected Units or not occupied by lower-income tenants, regular RSO/JCO relocation rules apply.",
+    "yields_to": [
+     "California Housing Crisis Act (Gov. Code § 66300 et seq.) where its amounts are higher"
+    ],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

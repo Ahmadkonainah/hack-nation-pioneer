@@ -1,0 +1,133 @@
+{
+ "tests_from": "dev\\change_tests.json",
+ "generated_at": "2026-10-04T01:35:33+00:00",
+ "tests": {
+  "T1": {
+   "title": "California AB 325 / SB 763 takes effect",
+   "type": "as_of",
+   "team_rule_ids": [
+    "r-0006"
+   ],
+   "rules": {
+    "r-0006": {
+     "title": "California common pricing algorithm ban",
+     "citation": "Cal. Bus. & Prof. Code § 16729",
+     "status": "in_force",
+     "effective_date": "2026-01-01"
+    }
+   },
+   "dates": {
+    "before": "2025-12-31",
+    "after": "2026-01-02"
+   },
+   "gaps": []
+  },
+  "T2": {
+   "title": "Hoboken vs Jersey City local algorithmic bans",
+   "type": "boundary",
+   "team_rule_ids": [
+    "r-0043",
+    "r-0046"
+   ],
+   "rules": {
+    "r-0046": {
+     "title": "Hoboken prohibition on algorithmic rent fixing",
+     "citation": "Hoboken City Code § 158-2 (Ord. No. B-781)",
+     "status": "in_force",
+     "effective_date": "2025-07"
+    },
+    "r-0043": {
+     "title": "Jersey City ban on algorithmic rent coordination",
+     "citation": "Jersey City Code § 218-12",
+     "status": "in_force",
+     "effective_date": "2025-06"
+    }
+   },
+   "applies_by_rule": {
+    "r-0046": {
+     "count": 40,
+     "cities": {
+      "Hoboken, NJ": 40
+     }
+    },
+    "r-0043": {
+     "count": 50,
+     "cities": {
+      "Jersey City, NJ": 50
+     }
+    }
+   },
+   "newark_addresses_affected": [],
+   "gaps": []
+  },
+  "T3": {
+   "title": "NJ FAIR Act: enacted, not yet effective; possible preemption",
+   "type": "as_of",
+   "team_rule_ids": [
+    "r-0013"
+   ],
+   "rules": {
+    "r-0013": {
+     "title": "NJ FAIR Act algorithmic rent-setting ban",
+     "citation": "P.L. 2026, c.43 (C.56:9-20 to 56:9-26)",
+     "status": "not_yet_effective",
+     "effective_date": "2027-07-01"
+    }
+   },
+   "dates": {
+    "before": "2026-10-01",
+    "after": "2027-07-02"
+   },
+   "gaps": []
+  },
+  "T4": {
+   "title": "Massachusetts pending bills S.2983 and H.5222",
+   "type": "pending",
+   "team_rule_ids": [
+    "r-0019",
+    "r-0020"
+   ],
+   "rules": {
+    "r-0019": {
+     "title": "H.5222 algorithmic rent fixing bill",
+     "citation": "Mass. H.5222 (194th General Court)",
+     "status": "pending",
+     "effective_date": null
+    },
+    "r-0020": {
+     "title": "S.2983 algorithmic rent setting bill",
+     "citation": "Mass. Senate Bill S.2983 (194th General Court)",
+     "status": "pending",
+     "effective_date": null
+    }
+   },
+   "gaps": []
+  },
+  "T5": {
+   "title": "Massachusetts rent-control ballot question struck",
+   "type": "negative",
+   "team_rule_ids": [
+    "r-0015"
+   ],
+   "rules": {
+    "r-0015": {
+     "title": "Statewide rent control ballot initiative",
+     "citation": "Massachusetts rent control ballot initiative petition (2026)",
+     "status": "failed",
+     "effective_date": null
+    }
+   },
+   "failed_rules": {
+    "r-0015": "Statewide rent control ballot initiative",
+    "r-0052": "H.3744 Boston rent stabilization home-rule petition"
+   },
+   "rent_category_rules_reported": {
+    "r-0014": {
+     "title": "Massachusetts prohibition on local rent control",
+     "addresses": 110
+    }
+   },
+   "gaps": []
+  }
+ }
+}

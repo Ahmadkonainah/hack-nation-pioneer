@@ -1,0 +1,169 @@
+{
+ "doc_id": "D067",
+ "chunk": 2,
+ "chunks": 4,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 20064,
+ "output_tokens": 2815,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:09:23+00:00",
+ "result": {
+  "document_summary": "Part 2 of 4 of the New Jersey Department of Community Affairs 'Truth in Renting' guide, covering security deposit handling, discrimination and screening, rent control and rent increases, and other tenant-landlord topics.",
+  "notes": "Extracted a statewide security deposit rule set (interest, notice, 30-day return, penalties), the statement that NJ has no state rent control (municipalities may adopt it), and the source-of-lawful-income discrimination protection. The maximum-deposit cap (stated in an earlier part of the guide, not in this excerpt) is not included. Credit/background check and application fee passages mention only that 'reasonable' fees may be charged, with no cap, so no application_screening_fees record was created. Eviction-for-nonpayment and Anti-Eviction Act references here concern rent increase notice only, not a full just-cause regime, so no just_cause_eviction record was created. Effective dates are not given in this part.",
+  "rules": [
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "security_deposits",
+    "title": "Security deposit holding, interest, notice and return",
+    "requirement": "Landlords must hold security deposits in trust in an interest-bearing New Jersey account, pay the interest to the tenant annually, give written notice of the account details within 30 days, and return the deposit with interest less itemized deductions within 30 days after the tenancy ends (5 business days if the tenant is displaced by fire, flood, condemnation or evacuation). A landlord who wrongly withholds a deposit can be sued for double the amount withheld plus costs and attorney's fees.",
+    "key_value": "Return within 30 days of termination; double damages for wrongful withholding",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "N.J.S.A. 46:8-19; N.J.S.A. 46:8-21.1",
+    "quoted_span": "Within 30 days after the termination of a tenancy, a landlord must return the security deposit, plus interest earned less deductions, to the tenant ( N.J.S.A. 46:8-21.1).",
+    "coverage_text": "Applies to residential rental security deposits statewide, with no coverage tests stated for building age or size; seasonal rentals of not more than 125 consecutive days are excluded from the interest-bearing account requirement.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Seasonal use or rental (interest-account section only)",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "seasonal rental of 125 consecutive days or less by a person with a permanent residence elsewhere",
+         "years_before_as_of": 0,
+         "text": "Seasonal use or rental means use or rental for a term of not more than 125 consecutive days for residential purposes by a person having a permanent place of residence elsewhere."
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "The account and interest section does not apply to seasonal use or rental (125 consecutive days or less by a person with a permanent residence elsewhere); the landlord bears the burden of proving the rental is seasonal.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "rent_increase_limits",
+    "title": "No state rent control; municipalities may adopt rent control; unconscionable increases barred",
+    "requirement": "The State of New Jersey has no laws that establish, govern or control rents, but municipalities may pass rent control or rent leveling ordinances enforced by local boards. Landlords may raise rent only by proper lease termination and written notice, the increase must not be unconscionable, and it must comply with any municipal rent control ordinance. Newly constructed multiple dwellings are exempt from local rent control for 30 years after completion of construction.",
+    "key_value": "No state cap; local rent control permitted; new multiple dwellings exempt 30 years",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "N.J.S.A. 2A:18-61.1 et seq.; N.J.S.A. 2A:42-84.5",
+    "quoted_span": "The State of New Jersey has no laws that establish, govern or control rents. Municipalities may pass an ordinance establishing rent control or rent leveling.",
+    "coverage_text": "Statewide rent increase notice and unconscionability rules apply to residential rentals generally; whether a unit is subject to a rent cap depends on the municipality's rent control ordinance.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Newly constructed multiple dwellings (exempt from local rent control)",
+       "all_of": [
+        {
+         "fact": "first_occupancy_date",
+         "op": "after",
+         "value": "",
+         "years_before_as_of": 30,
+         "text": "newly constructed multiple dwellings shall be exempt from any local rent control ordinances for a period of 30 years following completion of construction of the building"
+        }
+       ]
+      },
+      {
+       "label": "Government-subsidized rents",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "rent subsidized by governmental funding, HUD-owned/subsidized/insured housing, or NJHMFA-financed project",
+         "years_before_as_of": 0,
+         "text": "Rents that are subsidized by governmental funding may also be exempt from local rent control ordinances."
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Newly constructed multiple dwellings are exempt from local rent control for 30 years after completion; governmentally subsidized rents, HUD-owned or subsidized developments, and NJHMFA-financed projects may be exempt from local rent control ordinances.",
+    "interaction": "State law sets no rent cap and leaves rent control to municipal ordinances; rent increases must comply with any municipal ordinance, and the Newly Constructed Multiple Dwellings Law exempts new buildings from local rent control for 30 years.",
+    "yields_to": [
+     "Local municipal rent control ordinances",
+     "Newly Constructed Multiple Dwellings Law (N.J.S.A. 2A:42-84.5)"
+    ],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "screening_restrictions",
+    "title": "Source of lawful income discrimination prohibited in rental housing",
+    "requirement": "The New Jersey Law Against Discrimination requires equal treatment in renting housing regardless of listed characteristics, including source of lawful income. A landlord may still refuse to rent for insufficient income or poor credit history.",
+    "key_value": "Source of lawful income is a protected class",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "N.J.S.A. 10:5-12(g) to -(h)",
+    "quoted_span": "prohibits discrimination when selling or renting property and requires equal treatment in the sale or rental of housing regardless of race, creed, color, national origin,",
+    "coverage_text": "Applies to all landlord-tenant relationships in New Jersey except two-family owner-occupied dwellings and rooms in an owner- or resident-occupied single home (and certain sex-exclusive or age-restricted housing as it pertains to familial status).",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Two-family owner-occupied dwelling",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "2",
+         "years_before_as_of": 0,
+         "text": "two-family owner occupied dwellings"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "owner occupied"
+        }
+       ]
+      },
+      {
+       "label": "Room in an owner- or resident-occupied single home",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "1",
+         "years_before_as_of": 0,
+         "text": "rooms in an owner or resident-occupied single home"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "owner or resident-occupied"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Excludes two-family owner-occupied dwellings, rooms in an owner- or resident-occupied single home, and residences planned exclusively for and occupied by one sex or age-restricted housing as it pertains to familial status.",
+    "interaction": "A landlord may still refuse to rent for insufficient income or poor credit history under the federal provisions the guide cites (42 U.S.C.A. § 3601 to -3610).",
+    "yields_to": [],
+    "confidence": 0.75,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

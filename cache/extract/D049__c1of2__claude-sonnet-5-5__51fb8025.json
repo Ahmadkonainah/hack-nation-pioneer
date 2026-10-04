@@ -1,0 +1,41 @@
+{
+ "doc_id": "D049",
+ "chunk": 1,
+ "chunks": 2,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 17656,
+ "output_tokens": 686,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:50+00:00",
+ "result": {
+  "document_summary": "Massachusetts G.L. c. 151B § 4 (part 1 of 2), listing unlawful discriminatory practices in employment, housing, credit and related areas, including the bar on discrimination against recipients of public assistance and housing subsidies in rentals.",
+  "notes": "Most of section 4 concerns employment, credit, commercial space and protected-class housing discrimination, which are outside the six categories. Only subsection 10 is in scope: it bars discrimination against rental applicants/tenants based on public assistance or housing subsidies (source-of-income screening restriction). Subsection 9 (criminal record inquiries) is limited to employment and is not extracted. No effective date is stated in this section text.",
+  "rules": [
+   {
+    "jurisdiction": "MA",
+    "level": "state",
+    "category": "screening_restrictions",
+    "title": "Source-of-income / housing subsidy discrimination ban in rental accommodations",
+    "requirement": "It is an unlawful practice for any person furnishing rental accommodations to discriminate against an individual because the individual receives federal, state or local public assistance, or is a tenant receiving housing subsidies such as rental assistance or rental supplements, or because of any requirement of such programs.",
+    "key_value": "No discrimination against public assistance or housing subsidy recipients (including rental assistance)",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "G.L. c. 151B § 4(10)",
+    "quoted_span": "For any person furnishing credit, services or rental accommodations to discriminate against any individual who is a recipient of federal, state, or local public assistance, including medical assistance, or who is a tenant receiving federal, state, or local housing subsidies, including rental assistance or rental supplements",
+    "coverage_text": "Applies to any person furnishing rental accommodations, with no stated building-based limits in this subsection.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

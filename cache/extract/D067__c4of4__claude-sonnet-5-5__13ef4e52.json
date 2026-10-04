@@ -1,0 +1,43 @@
+{
+ "doc_id": "D067",
+ "chunk": 4,
+ "chunks": 4,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 17002,
+ "output_tokens": 911,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:09:15+00:00",
+ "result": {
+  "document_summary": "Part 4 of 4 of the NJ Department of Community Affairs Truth in Renting guide, covering remaining just-cause eviction grounds, owner-occupied 2-3 family evictions, rooming houses, penalties, reprisal, foreclosure tenant protections, and agency contact lists.",
+  "notes": "Part 4 continues the NJ Anti-Eviction Act (N.J.S.A. 2A:18-61.1) discussion with grounds (m) through (r), plus the owner-occupied two- and three-family regime under 2A:18-61.2. These are recorded as one state just-cause eviction instrument. The Truth in Renting guide gives no effective dates in this part. The foreclosure tenant notice rules are not treated as a separate in-scope category beyond the eviction regime. Contact lists and procedural court details were ignored as out of scope.",
+  "rules": [
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "just_cause_eviction",
+    "title": "NJ Anti-Eviction Act: additional good-cause grounds (employment termination, drug, assault, theft, human trafficking offenses) and owner-occupied 2-3 family regime",
+    "requirement": "A landlord may evict only for statutory good causes, including termination of a superintendent's employment, drug offenses, assault or terroristic threats, theft, and human trafficking, generally after a three-day Notice to Quit and within two years of the conviction or release. Tenants of owner-occupied two- and three-family dwellings may be removed only by court order on enumerated causes, with 1-month or 3-month notices where applicable.",
+    "key_value": "3-day Notice to Quit; 2-year filing limit for offense-based grounds",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "N.J.S.A. 2A:18-61.1; N.J.S.A. 2A:18-61.2",
+    "quoted_span": "Tenants of landlord-occupied two- and three-family dwellings can be removed only when a court issues an order for eviction.",
+    "coverage_text": "Residential rental tenancies in New Jersey subject to the Anti-Eviction Act; owner-occupied two- and three-family dwellings are covered by a separate, narrower set of causes.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "Public housing authorities must follow these State eviction laws as well as HUD regulations (24 C.F.R. 966); rooming and boarding houses must follow the same good-cause and notice requirements unless the Bureau orders otherwise.",
+    "yields_to": [
+     "24 C.F.R. 966"
+    ],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

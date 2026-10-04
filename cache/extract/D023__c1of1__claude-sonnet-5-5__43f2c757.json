@@ -1,0 +1,139 @@
+{
+ "doc_id": "D023",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 12817,
+ "output_tokens": 2098,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:12+00:00",
+ "result": {
+  "document_summary": "California Civil Code § 1946.2, the Tenant Protection Act just-cause eviction statute (as amended by AB 1529, effective Jan. 1, 2026, and repealed Jan. 1, 2030).",
+  "notes": "Only the just-cause eviction rule is in this section; the rent cap in Civ. Code § 1947.12 is referenced but not stated, so no rent_increase_limits record was extracted. Section is operative April 1, 2024, and the amending act (AB 1529) took effect January 1, 2026; the section sunsets January 1, 2030. The date used is the stated operative date. Exemption for owner-occupied and alienable-separate properties depends on owner type and written notice, which cannot be tested with building facts. The 15-year certificate-of-occupancy exemption is modeled as a rolling test.",
+  "rules": [
+   {
+    "jurisdiction": "CA",
+    "level": "state",
+    "category": "just_cause_eviction",
+    "title": "California Tenant Protection Act just-cause eviction",
+    "requirement": "After a tenant has continuously and lawfully occupied a unit for 12 months, the owner may terminate the tenancy only for stated at-fault or no-fault just cause. For no-fault terminations the owner must pay one month's rent as relocation assistance within 15 days of notice or waive the final month's rent.",
+    "key_value": "Just cause after 12 months' occupancy; no-fault relocation = one month's rent",
+    "legal_state": "enacted",
+    "effective_date": "2024-04-01",
+    "date_basis": "stated",
+    "citation": "Cal. Civ. Code § 1946.2",
+    "quoted_span": "after a tenant has continuously and lawfully occupied a residential real property for 12 months, the owner of the residential real property shall not terminate a tenancy without just cause, which shall be stated in the written notice to terminate tenancy.",
+    "coverage_text": "Residential rental dwellings in California where the tenant has occupied the unit continuously and lawfully for 12 months (or 24 months if adult tenants were added), unless exempt or covered by a local just-cause ordinance.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "other",
+       "op": "is",
+       "value": "tenant has continuously and lawfully occupied for 12 months",
+       "years_before_as_of": 0,
+       "text": "after a tenant has continuously and lawfully occupied a residential real property for 12 months"
+      }
+     ],
+     "exemptions": [
+      {
+       "label": "Housing issued a certificate of occupancy within the previous 15 years (not mobilehome)",
+       "all_of": [
+        {
+         "fact": "first_occupancy_date",
+         "op": "after",
+         "value": "",
+         "years_before_as_of": 15,
+         "text": "Housing that has been issued a certificate of occupancy within the previous 15 years, unless the housing is a mobilehome"
+        }
+       ]
+      },
+      {
+       "label": "Single-family owner-occupied residence renting no more than two units or bedrooms",
+       "all_of": [
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "Single-family owner-occupied residences, including a residence in which the owner-occupant rents or leases no more than two units or bedrooms"
+        }
+       ]
+      },
+      {
+       "label": "Duplex where owner occupied one unit as principal residence at start of tenancy",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "2",
+         "years_before_as_of": 0,
+         "text": "A property containing two separate dwelling units within a single structure"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "the owner occupied one of the units as the owner's principal place of residence at the beginning of the tenancy, so long as the owner continues in occupancy"
+        }
+       ]
+      },
+      {
+       "label": "Separately alienable property (e.g., single-family home or condo) owned by a non-corporate, non-REIT owner with written exemption notice",
+       "all_of": [
+        {
+         "fact": "owner_type",
+         "op": "is",
+         "value": "natural person (not REIT, corporation, or LLC with a corporate member)",
+         "years_before_as_of": 0,
+         "text": "Residential real property alienable separate from the title to any other dwelling unit, where the owner is not a REIT, a corporation, or an LLC in which at least one member is a corporation"
+        },
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "tenants given written exemption notice in the rental agreement",
+         "years_before_as_of": 0,
+         "text": "tenants have been provided written notice that the residential property is exempt from this section"
+        }
+       ]
+      },
+      {
+       "label": "Deed-restricted or subsidized affordable housing",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "restricted or subsidized affordable housing for very low, low, or moderate income",
+         "years_before_as_of": 0,
+         "text": "Housing restricted by deed, regulatory restriction, or other recorded document as affordable housing for very low, low, or moderate income persons, or subject to an agreement providing housing subsidies"
+        }
+       ]
+      },
+      {
+       "label": "Property subject to a local just-cause ordinance adopted on or before Sept. 1, 2019, or a more protective local ordinance",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "subject to qualifying local just-cause ordinance",
+         "years_before_as_of": 0,
+         "text": "Residential real property subject to a local ordinance requiring just cause for termination of a residential tenancy adopted on or before September 1, 2019, or adopted or amended later that is more protective than this section"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Exempts transient/hotel occupancy, certain institutional housing and dormitories, shared-facility owner residences, single-family owner-occupied residences (renting up to two units or bedrooms), owner-occupied duplexes, housing with a certificate of occupancy within the previous 15 years, separately alienable property with a non-corporate owner and written exemption notice, deed-restricted or subsidized affordable housing, and property covered by a qualifying local just-cause ordinance.",
+    "interaction": "Does not apply where a local just-cause ordinance adopted on or before September 1, 2019, or a more protective local ordinance, governs the property; a property cannot be subject to both. Relocation assistance is credited against any other relocation assistance required by other law.",
+    "yields_to": [
+     "Local just-cause ordinances adopted on or before September 1, 2019",
+     "More protective local just-cause ordinances adopted or amended after September 1, 2019"
+    ],
+    "confidence": 0.95,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

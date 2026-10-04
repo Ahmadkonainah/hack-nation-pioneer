@@ -1,0 +1,40 @@
+{
+ "doc_id": "D004",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 4909,
+ "output_tokens": 793,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:52:10+00:00",
+ "result": {
+  "document_summary": "A Berkeley Rent Board news notice announcing the January 1, 2026 inflation adjustments to relocation assistance payments for owner move-in and Ellis Act evictions.",
+  "notes": "The page announces adjusted relocation payment amounts under the Rent Stabilization and Good Cause for Eviction Ordinance and the Ellis Implementation Ordinance. It does not give the ordinance's municipal code chapter number, so the citation names the ordinances as the page does. Coverage and exemptions are not described on this page. The $19,413 and $6,471 amounts are stated as taking effect January 1, 2026, so they are the amounts the page gives as current as of the query date.",
+  "rules": [
+   {
+    "jurisdiction": "Berkeley, CA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "Relocation assistance for owner move-in and Ellis Act evictions (2026 adjusted amounts)",
+    "requirement": "Owners must pay tenants relocation assistance when evicting for an owner move-in or to remove the property from the rental market under the Ellis Act. The amounts are indexed to inflation and adjusted each year; for 2026 the standard payment is $19,413, with an additional $6,471 for qualifying households.",
+    "key_value": "$19,413 standard payment; $6,471 additional for qualifying households (effective 2026-01-01)",
+    "legal_state": "enacted",
+    "effective_date": "2026-01-01",
+    "citation": "Berkeley Rent Stabilization and Good Cause for Eviction Ordinance; Berkeley Ellis Implementation Ordinance",
+    "quoted_span": "The standard relocation assistance payment will increase to\n$19,413\n.\nThe additional relocation assistance payment for qualifying households will increase to\n$6,471\n.",
+    "coverage_text": "Tenants evicted for an owner move-in or Ellis Act withdrawal of the property from the rental market; the page does not describe which buildings are covered.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "The amounts are required to be adjusted annually under the terms of both the Rent Ordinance and the Ellis Implementation Ordinance, with the Rent Board publishing the yearly inflationary increase.",
+    "yields_to": [],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

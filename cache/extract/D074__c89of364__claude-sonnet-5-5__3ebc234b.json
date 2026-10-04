@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 89,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 21706,
+ "output_tokens": 287,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:54+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code, Chapter 4 (Health and Sanitation), covering permit fees and hazardous materials disclosure requirements (Art. 2, Divs. 8-9), served from a page whose URL refers to a San Diego algorithmic rent-price-fixing division.",
+  "notes": "This part of the document contains only San Diego Municipal Code health and sanitation provisions (§§ 42.0807 to 42.0912: health permit fees, hazardous materials disclosure, trade secret confidentiality). None of it addresses rent increase limits, just-cause eviction, security deposits, screening fees, screening restrictions, or algorithmic rent setting. The algorithmic rent-setting text (§ 98.1103) suggested by the page URL does not appear in this part, so no rule is extracted.",
+  "rules": []
+ }
+}

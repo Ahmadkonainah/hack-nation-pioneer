@@ -1,0 +1,161 @@
+{
+ "doc_id": "D037",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 9450,
+ "output_tokens": 2695,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:05:43+00:00",
+ "result": {
+  "document_summary": "A Morgan Lewis LawFlash (Aug. 21, 2026) describing new state and local algorithmic rent-pricing laws and the follow-on litigation they have spawned, with a table summarizing ordinances in several cities.",
+  "notes": "Secondary law-firm summary. Records are limited to in-scope manifest jurisdictions (San Francisco, San Diego, Berkeley, Santa Ana, Jersey City, Hoboken); other cities (Seattle, Philadelphia, Providence, Minneapolis, Portland, Spokane, Rockville, King County) were skipped as outside the allowed jurisdiction list. The page gives only month-level effective dates for most ordinances, so those are recorded at YYYY-MM precision. It does not set out coverage or exemptions, so coverage is left empty. The Hoboken citation is as given on the page (\"ch. 158-2\") and may be imprecise. Berkeley's ordinance is noted as previously challenged in RealPage v. City of Berkeley, voluntarily dismissed with prejudice Jan. 14, 2026; it is recorded as enacted.",
+  "rules": [
+   {
+    "jurisdiction": "San Francisco, CA",
+    "level": "city",
+    "category": "algorithmic_rent_setting",
+    "title": "San Francisco ban on algorithmic devices using nonpublic competitor data",
+    "requirement": "Landlords may not use qualifying algorithmic devices that calculate nonpublic competitor information to advise on rent or occupancy. Each month of use per affected unit may be a separate violation; tenants may seek damages, injunctive relief, and civil penalties of up to $1,000 per violation.",
+    "key_value": "Up to $1,000 per violation; each unit-month may be a separate violation",
+    "legal_state": "enacted",
+    "effective_date": "2024-10",
+    "date_basis": "stated",
+    "citation": "S.F. Admin. Code § 37.10C",
+    "quoted_span": "The ordinance prohibits landlords from using qualifying algorithmic devices that calculate nonpublic competitor information to advise on rent or occupancy.",
+    "coverage_text": "Landlords using qualifying algorithmic devices in San Francisco; the page does not state further coverage conditions.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "San Diego, CA",
+    "level": "city",
+    "category": "algorithmic_rent_setting",
+    "title": "San Diego prohibition on algorithmic rent-setting devices",
+    "requirement": "San Diego bars use of algorithmic devices relying on competitor data to set rents and authorizes tenant suits for damages, injunctive relief and penalties of up to $1,000 per violation. Each month and each affected rental property may be a separate violation.",
+    "key_value": "Up to $1,000 per violation; each month and property may be a separate violation",
+    "legal_state": "enacted",
+    "effective_date": "2025-06",
+    "date_basis": "stated",
+    "citation": "San Diego Mun. Code §§ 98.1101–98.1104",
+    "quoted_span": "San Diego similarly authorizes tenant suits for damages, injunctive relief and penalties of up to $1,000 per violation",
+    "coverage_text": "Landlords using algorithmic rent-setting devices in San Diego; the page does not state further coverage conditions.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.75,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "Berkeley, CA",
+    "level": "city",
+    "category": "algorithmic_rent_setting",
+    "title": "Berkeley prohibition on coordinated pricing algorithms",
+    "requirement": "Berkeley prohibits coordinated rent-pricing algorithms, with recurring unit/month violations and private remedies. The city's ordinance was previously challenged in RealPage, Inc. v. City of Berkeley, which was voluntarily dismissed with prejudice on Jan. 14, 2026.",
+    "key_value": "",
+    "legal_state": "enacted",
+    "effective_date": "2026-01",
+    "date_basis": "stated",
+    "citation": "Berkeley Municipal Code ch. 13.63",
+    "quoted_span": "Prohibits coordinated pricing algorithms; recurring unit/month violations and private remedies",
+    "coverage_text": "Landlords using coordinated pricing algorithms in Berkeley; the page does not state further coverage conditions.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "Santa Ana, CA",
+    "level": "city",
+    "category": "algorithmic_rent_setting",
+    "title": "Santa Ana ban on automated rent price-fixing",
+    "requirement": "Ordinance NS-3090 prohibits specified anticompetitive automated rent price-fixing. Tenants may bring private claims for up to $1,000 per violation and per month.",
+    "key_value": "Up to $1,000 per violation and per month",
+    "legal_state": "enacted",
+    "effective_date": "2026-04-02",
+    "date_basis": "stated",
+    "citation": "Santa Ana Ordinance No. NS-3090",
+    "quoted_span": "Ordinance NS-3090 prohibits specified anticompetitive automated rent price-fixing; private tenant claims and up to $1,000 per violation and per month.",
+    "coverage_text": "Landlords engaging in automated rent price-fixing in Santa Ana; the page does not state further coverage conditions.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.75,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "Jersey City, NJ",
+    "level": "city",
+    "category": "algorithmic_rent_setting",
+    "title": "Jersey City ban on algorithmic rent coordination services",
+    "requirement": "Landlords may not use algorithmic rent coordination services. The ordinance is enforceable both publicly and privately, with fines of up to $2,000 per day.",
+    "key_value": "Fines up to $2,000 per day",
+    "legal_state": "enacted",
+    "effective_date": "2025-06",
+    "date_basis": "stated",
+    "citation": "Jersey City Code § 218-12",
+    "quoted_span": "Prohibits a landlord’s use of algorithmic rent coordination services; includes public and private enforcement; fines up to $2,000 per day.",
+    "coverage_text": "Landlords using algorithmic rent coordination services in Jersey City; the page does not state further coverage conditions.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.75,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "Hoboken, NJ",
+    "level": "city",
+    "category": "algorithmic_rent_setting",
+    "title": "Hoboken ban on software used to coordinate rents",
+    "requirement": "Landlords are prohibited from using software, algorithms or data-sharing platforms to coordinate or recommend rents, lease terms, or occupancy.",
+    "key_value": "",
+    "legal_state": "enacted",
+    "effective_date": "2025-07",
+    "date_basis": "stated",
+    "citation": "Hoboken City Code ch. 158-2",
+    "quoted_span": "Prohibits landlords from using software, algorithms or data-sharing platforms to coordinate or recommend rents, lease terms, or occupancy.",
+    "coverage_text": "Landlords using software, algorithms or data-sharing platforms to coordinate or recommend rents in Hoboken; the page does not state further coverage conditions.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

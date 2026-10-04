@@ -1,0 +1,61 @@
+{
+ "doc_id": "D065",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 11203,
+ "output_tokens": 970,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:09:05+00:00",
+ "result": {
+  "document_summary": "New Jersey's Fair Chance in Housing Act (P.L. 2021, c.110), which restricts when and how landlords may consider applicants' criminal records and bars drug/alcohol testing of applicants.",
+  "notes": "Single enacted statute. Approved June 18, 2021; section 14 makes it effective the first day of the seventh month next following enactment, computed as January 1, 2022. The Act's drug/alcohol-test ban, advertising limits and enforcement provisions are details of the same instrument and are folded into one screening_restrictions record. The Act does not state its own application-fee rules beyond a disclosure and refund remedy, so no application_screening_fees record is output.",
+  "rules": [
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "screening_restrictions",
+    "title": "Fair Chance in Housing Act: criminal-record screening limits",
+    "requirement": "Housing providers may not ask about or consider an applicant's criminal record before making a conditional offer. After a conditional offer, only certain convictions within set look-back periods may be considered, subject to an individualized assessment, written notice of withdrawal, and an appeal opportunity. Providers also may not require drug or alcohol tests of applicants.",
+    "key_value": "No criminal-record inquiry before conditional offer; look-back 6 years (1st degree), 4 years (2nd/3rd degree), 1 year (4th degree); serious listed offenses and lifetime sex-offender registration have no look-back limit",
+    "legal_state": "enacted",
+    "effective_date": "2022-01-01",
+    "date_basis": "computed",
+    "citation": "N.J.S.A. 46:8-52 et seq. (P.L. 2021, c.110)",
+    "quoted_span": "A housing provider shall not make any oral or written inquiry regarding an applicant’s criminal record prior to making a conditional offer.",
+    "coverage_text": "Covers rental dwelling units offered for rent by housing providers, other than units in owner-occupied premises of not more than four dwelling units.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Owner-occupied premises of not more than four dwelling units",
+       "all_of": [
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "owner-occupied premises"
+        },
+        {
+         "fact": "units",
+         "op": "<=",
+         "value": "4",
+         "years_before_as_of": 0,
+         "text": "premises of not more than four dwelling units"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "A dwelling unit in an owner-occupied premises of not more than four dwelling units is not a covered rental dwelling unit.",
+    "interaction": "Does not bar or affect independent rights or actions, including under the Law Against Discrimination (P.L.1945, c.169). Enforcement is through the Division on Civil Rights rather than court actions.",
+    "yields_to": [],
+    "confidence": 0.95,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 49,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22430,
+ "output_tokens": 246,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:04+00:00",
+ "result": {
+  "document_summary": "A mid-document fragment of the San Diego Municipal Code, Chapter 3 Article 3 (after-hours permits, auto dismantlers, sales advertising, secondhand dealers and pawnbrokers), mis-labelled with a URL for the algorithmic rent price-fixing section.",
+  "notes": "No rule in the six in-scope residential rental categories appears in this part. The text covers business regulation: after-hours permits, auto dismantlers, merchandise sales and advertising, and secondhand dealer and pawnbroker records. The source URL names San Diego Municipal Code section 98.1103 (algorithmic devices), but that text is not in this part of the document, so nothing was extracted from it.",
+  "rules": []
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "doc_id": "D045",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 4988,
+ "output_tokens": 231,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:53:16+00:00",
+ "result": {
+  "document_summary": "A Massachusetts Legislature bill-tracking page for H.5222, a pending bill titled 'An Act relative to preventing algorithmic rent fixing in the rental housing market', showing only title, status and history without the bill text.",
+  "notes": "The page gives only the bill title, sponsor, status (reported favorably by the Housing Committee on 3/12/2026 and referred to House Ways and Means) and history. The bill's operative text is not included, so no requirement, coverage, key value, citation or effective date can be extracted. No rule is output because the document does not state any rule content, only the existence of a pending bill whose title suggests the algorithmic_rent_setting category.",
+  "rules": []
+ }
+}

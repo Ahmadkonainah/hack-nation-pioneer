@@ -1,0 +1,28 @@
+{
+ "model": "claude-sonnet-5-5",
+ "called_at": "2026-10-04T01:30:48+00:00",
+ "input_tokens": 4744,
+ "output_tokens": 411,
+ "result": {
+  "rules": [
+   {
+    "id": "r-0026",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "first_occupancy_date",
+      "op": "on_or_before",
+      "value": "1979-06-13",
+      "years_before_as_of": 0,
+      "text": "units first receiving a Certificate of Occupancy after June 13, 1979 are exempt from the rent increase limits (r-0027)"
+     }
+    ],
+    "exemptions": [],
+    "support": "r-0027 coverage text: units first receiving a Certificate of Occupancy after June 13, 1979 are exempt from the Rent Ordinance's rent increase limits; r-0026 applies to rent-controlled units.",
+    "reasoning": "r-0026 covers rent-controlled units, and r-0027 says post-June 13, 1979 units are exempt from the rent increase limits, so coverage is units first occupied on or before that date.",
+    "plain_en": "For rent-controlled units, the most a landlord can raise rent from March 2026 to February 2027 is 1.6% of base rent."
+   }
+  ],
+  "notes": "The Costa-Hawkins-eligible tenancy and government-regulated rent exemptions in r-0027 were not added as conditions because they cannot be tested from parcel data and are not stated as exemptions to r-0026 itself."
+ }
+}

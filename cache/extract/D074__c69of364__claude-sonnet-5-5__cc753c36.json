@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 69,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22731,
+ "output_tokens": 284,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:29+00:00",
+ "result": {
+  "document_summary": "A mid-document chunk of the San Diego Municipal Code (Chapter 3, Articles 3-4) covering pedicab regulations and the Cannabis Business Tax, hosted on a code-publisher page labelled as the algorithmic rent-setting division but containing no such text.",
+  "notes": "This part contains only pedicab decal, equipment, insurance, impound and enforcement provisions (Div. 46) and the start of the Cannabis Business Tax ordinance (Art. 4). None of it concerns rent increase limits, just-cause eviction, security deposits, screening fees, screening restrictions or algorithmic rent setting, so no rules are extracted. The page URL refers to Division 11 (Prohibition of Anti-Competitive Automated Rent Price Fixing), but that text does not appear in this part.",
+  "rules": []
+ }
+}

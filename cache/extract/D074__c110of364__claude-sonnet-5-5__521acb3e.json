@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 110,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 23119,
+ "output_tokens": 291,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:08:19+00:00",
+ "result": {
+  "document_summary": "A portion of San Diego Municipal Code Chapter 5 (Public Safety) covering vehicle forfeiture sale procedures, unmanned aircraft systems rules, and zoo trespass provisions, with no rental housing content despite the source URL naming a Division 11 algorithmic rent-pricing section.",
+  "notes": "No rules in the six in-scope rental housing categories appear in this part. The text covers vehicle forfeiture and sale (Municipal Code §§ 52.5314-52.5324), Unmanned Aircraft Systems (Div. 54), and Zoo trespass (Div. 60 beginning). The URL references San Diego's algorithmic rent price-fixing prohibition (section 98.1103), but the retrieved text does not contain that provision, so nothing is extracted and no rule is inferred from the URL.",
+  "rules": []
+ }
+}

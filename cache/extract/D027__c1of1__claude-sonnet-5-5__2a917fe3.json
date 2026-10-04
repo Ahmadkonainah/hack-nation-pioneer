@@ -1,0 +1,71 @@
+{
+ "doc_id": "D027",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 7650,
+ "output_tokens": 1150,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:52:59+00:00",
+ "result": {
+  "document_summary": "California Government Code § 12955 (Fair Employment and Housing Act), which makes housing discrimination unlawful, including discrimination based on source of income, and sets rules on income standards and credit history for subsidized rentals.",
+  "notes": "Only the source-of-income provisions fall within the in-scope category screening_restrictions; the remainder of § 12955 (race, sex, disability, appraisals, land use and similar discrimination) is outside the six categories and was not extracted. The section covers all housing accommodations with no building-based coverage tests stated in this text. Effective date reflects the latest amendment (SB 267, eff. 2024-01-01).",
+  "rules": [
+   {
+    "jurisdiction": "CA",
+    "level": "state",
+    "category": "screening_restrictions",
+    "title": "Source-of-income discrimination prohibited in housing (incl. Section 8 and HUD-VASH vouchers)",
+    "requirement": "Owners may not discriminate against or harass a person because of source of income, which includes lawful, verifiable income such as public assistance and housing subsidies (Section 8 vouchers, HUD-VASH). Inquiring about the level or source of income is not itself discrimination.",
+    "key_value": "Source of income is a protected class",
+    "legal_state": "enacted",
+    "effective_date": "2024-01-01",
+    "citation": "Cal. Gov. Code § 12955(a), (p)",
+    "quoted_span": "For the owner of any housing accommodation to discriminate against or harass any person because of the race, color, religion, sex, gender, gender identity, gender expression, sexual orientation, marital status, national origin, ancestry, familial status, source of income, disability, veteran or military status, or genetic information of that person.",
+    "coverage_text": "All housing accommodations (owners of residential rental housing) in California; no further conditions are stated in this section.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "CA",
+    "level": "state",
+    "category": "screening_restrictions",
+    "title": "Income and credit screening limits for applicants with government rent subsidies",
+    "requirement": "Where a government rent subsidy applies, a landlord must assess income eligibility based on the portion of rent the tenant pays, and if using credit history must let the applicant offer alternative verifiable evidence of ability to pay, give reasonable time to respond, and reasonably consider that evidence in lieu of credit history. Landlords may still verify employment, request landlord references, and verify identity.",
+    "key_value": "Income standard based on tenant's portion of rent; alternative evidence option in lieu of credit history",
+    "legal_state": "enacted",
+    "effective_date": "2024-01-01",
+    "citation": "Cal. Gov. Code § 12955(o)",
+    "quoted_span": "Use a financial or income standard in assessing eligibility for the rental of housing that is not based on the portion of the rent to be paid by the tenant.",
+    "coverage_text": "Rental housing in California where there is a government rent subsidy for the applicant.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "other",
+       "op": "is",
+       "value": "government rent subsidy applies",
+       "years_before_as_of": 0,
+       "text": "In instances in which there is a government rent subsidy"
+      }
+     ],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

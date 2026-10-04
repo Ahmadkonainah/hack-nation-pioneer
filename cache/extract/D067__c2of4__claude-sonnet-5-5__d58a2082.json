@@ -1,0 +1,195 @@
+{
+ "doc_id": "D067",
+ "chunk": 2,
+ "chunks": 4,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 19543,
+ "output_tokens": 3045,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:54:05+00:00",
+ "result": {
+  "document_summary": "Part 2 of 4 of the New Jersey DCA's official Landlord-Tenant Information booklet, covering security deposit handling, discrimination, credit/background checks, rent increases and local rent control, and habitability topics.",
+  "notes": "Extracted four in-scope rules: the NJ security deposit handling and return rules, the state's no-rent-control position with unconscionable-increase standard, the statewide notice requirement for rent increases and lease termination, and the source-of-income antidiscrimination rule in housing. The cap on security deposit amount and the just-cause eviction list are not in this part. Credit checks and application fees are mentioned only generally ('reasonable rental application fees') with no cap, so no screening-fee rule was recorded. Habitability, window guards, locks, heat, landlord registration, tax rebates and abandoned property are out of scope.",
+  "rules": [
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "security_deposits",
+    "title": "Security deposit holding, interest, notice and 30-day return",
+    "requirement": "Landlords must hold security deposits in trust in an interest-bearing New Jersey account, pay the interest to the tenant annually, give written notice of the account within 30 days, and return the deposit with interest less itemized deductions within 30 days after the tenancy ends. A landlord who wrongfully withholds can be sued for double the amount withheld plus costs and attorney's fees.",
+    "key_value": "Return within 30 days of termination; double damages if wrongfully withheld",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "N.J.S.A. 46:8-19; N.J.S.A. 46:8-19.1; N.J.S.A. 46:8-21.1",
+    "quoted_span": "Within 30 days after the termination of a tenancy, a landlord must return the security deposit, plus interest earned less deductions, to the tenant ( N.J.S.A. 46:8-21.1).",
+    "coverage_text": "Applies to residential landlords who receive security deposits, other than seasonal rentals of up to 125 consecutive days for residents with a permanent home elsewhere (which are exempt from the account/interest section).",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Seasonal use or rental (interest-bearing account section only)",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "seasonal rental of not more than 125 consecutive days by a person with a permanent residence elsewhere",
+         "years_before_as_of": 0,
+         "text": "Seasonal use or rental means use or rental for a term of not more than 125 consecutive days for residential purposes by a person having a permanent place of residence elsewhere"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "The account and interest section does not apply to seasonal use or rental (not more than 125 consecutive days); the landlord bears the burden of proving the rental is seasonal.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "rent_increase_limits",
+    "title": "No state rent control; local rent control permitted; unconscionable increases barred",
+    "requirement": "New Jersey has no state law establishing or controlling rents, and municipalities may adopt rent control or rent leveling ordinances. Absent local control, a rent increase must still not be unconscionable and must comply with any municipal rent ordinance.",
+    "key_value": "No statewide cap; increases must not be unconscionable",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "N.J.S.A. 2A:18-61.1 et seq. (Anti-Eviction Act); N.J.S.A. 2A:42-84.5",
+    "quoted_span": "The State of New Jersey has no laws that establish, govern or control rents. Municipalities may pass an ordinance establishing rent control or rent leveling.",
+    "coverage_text": "Statewide, all residential rentals are subject to the unconscionability standard; whether a unit is capped depends on a local ordinance, and newly constructed multiple dwellings are exempt from local rent control for 30 years after completion of construction.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Newly constructed multiple dwellings (exempt from local rent control only)",
+       "all_of": [
+        {
+         "fact": "first_occupancy_date",
+         "op": "after",
+         "value": "",
+         "years_before_as_of": 30,
+         "text": "completed construction within the last 30 years (newly constructed multiple dwelling)"
+        },
+        {
+         "fact": "units",
+         "op": ">=",
+         "value": "3",
+         "years_before_as_of": 0,
+         "text": "multiple dwelling"
+        }
+       ]
+      },
+      {
+       "label": "Government-subsidized rents / HUD or NJHMFA-controlled housing (exempt from local rent control only)",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "rent subsidized by government funding, or HUD-owned/subsidized or NJHMFA-financed development",
+         "years_before_as_of": 0,
+         "text": "Rents that are subsidized by governmental funding may also be exempt from local rent control ordinances"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Newly constructed multiple dwellings are exempt from local rent control ordinances for 30 years after completion of construction; government-subsidized rents and HUD/NJHMFA-controlled housing may also be exempt from local ordinances.",
+    "interaction": "State law leaves rent control to municipalities; the unconscionability standard and notice rules apply even where no municipal ordinance exists. Rents may not be raised to cover costs resulting solely from condominium/cooperative conversion.",
+    "yields_to": [
+     "Local municipal rent control ordinances"
+    ],
+    "confidence": 0.9,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "rent_increase_limits",
+    "title": "Notice and lease-termination procedure for rent increases",
+    "requirement": "A landlord cannot raise rent mid-lease; the old lease must be terminated by proper written notice offering the tenant a new lease at the increased rent. Before evicting for nonpayment of an increased rent, the landlord must serve a valid notice to quit and notice of rent increase.",
+    "key_value": "No mid-lease increases; written notice of termination and new rent required",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "N.J.S.A. 2A:18-61.1(f)",
+    "quoted_span": "A landlord cannot raise the rent mid-lease term. The old lease must be terminated, and the new lease must have the increased rental payment.",
+    "coverage_text": "Applies to residential tenancies under the Anti-Eviction Act statewide.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "Increases must also comply with any municipal rent control ordinance and must not be unconscionable.",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "screening_restrictions",
+    "title": "Source of lawful income protected from housing discrimination",
+    "requirement": "The Law Against Discrimination prohibits refusing to rent or discriminating in rental housing based on source of lawful income (among other protected traits). A landlord may still refuse an applicant for insufficient income or poor credit history.",
+    "key_value": "Source of lawful income is a protected class",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "N.J.S.A. 10:5-12(g) to -(h)",
+    "quoted_span": "prohibits discrimination when selling or renting property and requires equal treatment in the sale or rental of housing regardless of race, creed, color, national origin,",
+    "coverage_text": "Applies to all landlord-tenant relationships except two-family owner-occupied dwellings, rooms in an owner- or resident-occupied single home, and certain single-sex or age-restricted residences (as to familial status).",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Owner-occupied two-family dwelling",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "2",
+         "years_before_as_of": 0,
+         "text": "two-family dwelling"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "owner occupied"
+        }
+       ]
+      },
+      {
+       "label": "Rooms in an owner- or resident-occupied single home",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "1",
+         "years_before_as_of": 0,
+         "text": "single home"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "owner or resident-occupied; rooms rented within"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "The law does not apply to two-family owner-occupied dwellings, rooms in an owner- or resident-occupied single home, and residences planned exclusively for one sex or age-restricted housing (as to familial status).",
+    "interaction": "A landlord may refuse to rent for insufficient income, excess family size, zoning overcrowding, or poor credit history under the cited federal law.",
+    "yields_to": [],
+    "confidence": 0.75,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

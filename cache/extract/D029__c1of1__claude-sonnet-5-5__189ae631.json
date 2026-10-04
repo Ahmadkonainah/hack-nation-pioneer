@@ -1,0 +1,61 @@
+{
+ "doc_id": "D029",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 8443,
+ "output_tokens": 980,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:20+00:00",
+ "result": {
+  "document_summary": "City of Cambridge Human Rights Commission web page describing the Commission, the Cambridge Fair Housing Ordinance, and the discrimination complaint process.",
+  "notes": "The page is mainly informational. It states that source of income (including Section 8 and public benefits) is a protected category under the Cambridge Human Rights Ordinance (ch. 2.76) and Fair Housing Ordinance (ch. 14.04), and that landlords may use reasonable, uniformly applied tenant selection standards. This is recorded as one source-of-income screening restriction under the Fair Housing Ordinance. No effective date is given on the page. Rent control, just-cause eviction, deposit, screening-fee and algorithmic pricing rules are not stated here. The page also lists a 'Tenants' Rights and Resources Notification Ordinance' only as a link title, with no content, so no rule was extracted for it. The 2-family owner-occupied exemption is stated on the page as a general exemption from the Fair Housing Ordinance.",
+  "rules": [
+   {
+    "jurisdiction": "Cambridge, MA",
+    "level": "city",
+    "category": "screening_restrictions",
+    "title": "Cambridge Fair Housing Ordinance: source-of-income protection and uniform tenant selection standards",
+    "requirement": "Source of income, including Section 8 and public benefits, is a protected category under the Cambridge Fair Housing Ordinance, so landlords cannot discriminate against applicants on that basis. Landlords and rental agents may use any reasonable tenant selection standard (such as ability to pay rent and to care for the apartment) if it is applied equally and uniformly to all applicants.",
+    "key_value": "Source of income (incl. Section 8 and public benefits) is a protected category",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Cambridge Fair Housing Ordinance, Cambridge Municipal Code ch. 14.04",
+    "quoted_span": "Under the law, landlords, sellers and rental agents may use any reasonable standard to determine which applicants are selected, as long as that standard is applied equally and uniformly to all applicants.",
+    "coverage_text": "Applies to housing transactions in Cambridge, including viewing or renting an apartment and terms and conditions of tenancy, with no building age or size tests stated.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Owner-occupied 2-family dwelling",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "2",
+         "years_before_as_of": 0,
+         "text": "2-family dwellings"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "when the owner lives there"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Exemption for 2-family dwellings when the owner lives there.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 31,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22285,
+ "output_tokens": 315,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:43+00:00",
+ "result": {
+  "document_summary": "A portion of San Diego Municipal Code Chapter 2 (Nondiscrimination in Contracting complaint procedures and the Small and Local Business Program for public contracts), scraped from a code-publisher page whose URL refers to a San Diego algorithmic rent-pricing division that is not included in this part.",
+  "notes": "This part of the document contains only San Diego Municipal Code provisions on city contracting: nondiscrimination complaints, hearings and remedies (§§ 22.3505-22.3517) and the Small and Local Business Program (§§ 22.3601-22.3604). None of it concerns residential rent increase limits, just-cause eviction, security deposits, application or screening fees, screening restrictions, or algorithmic rent setting. The page URL mentions a Division 11 on anti-competitive automated rent price fixing, but no text of that rule appears in this excerpt, so no rule is extracted.",
+  "rules": []
+ }
+}

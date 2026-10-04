@@ -1,0 +1,66 @@
+{
+ "doc_id": "D066",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 5984,
+ "output_tokens": 904,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:09:04+00:00",
+ "result": {
+  "document_summary": "New Jersey P.L. 2025, c.405, an enacted act capping residential rental application fees at $50 (CPI-adjusted annually) and setting penalties, exemptions and rulemaking.",
+  "notes": "Effective date computed: approved January 20, 2026; takes effect on the first day of the fourth month next following enactment, i.e., 2026-05-01. The annual CPI adjustment begins January 1 of the year next following enactment (2027). Section 1(c) exempts one- and two-family dwellings and real estate licensees who are not the landlord.",
+  "rules": [
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "application_screening_fees",
+    "title": "Residential rental application fee capped at $50",
+    "requirement": "A landlord or agent may not require an application or similar fee to apply to lease or sublease a residential rental property that exceeds $50, adjusted annually for CPI increases. Violators face penalties of up to $500 (first), $750 (second) and $1,000 (subsequent offenses), and the amount wrongfully charged is remitted to the applicant.",
+    "key_value": "$50 cap (CPI-adjusted annually)",
+    "legal_state": "enacted",
+    "effective_date": "2026-05-01",
+    "date_basis": "computed",
+    "citation": "N.J.S.A. 46:8-18.1",
+    "quoted_span": "A landlord, or agent thereof, shall not require an application or other similar fee to apply to lease or sublease a residential rental property for dwelling purposes, which exceeds $50.",
+    "coverage_text": "Applies to residential rental properties for dwelling purposes, except one- and two-family dwellings and non-landlord real estate licensees.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "One-family or two-family dwelling offered for rent",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "<=",
+         "value": "2",
+         "years_before_as_of": 0,
+         "text": "a dwelling unit located in a one-family or two-family dwelling that is offered for rent"
+        }
+       ]
+      },
+      {
+       "label": "Licensee of the New Jersey Real Estate Commission, unless the licensee is the landlord",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "NJ Real Estate Commission licensee who is not the landlord",
+         "years_before_as_of": 0,
+         "text": "a licensee of the New Jersey Real Estate Commission, unless the licensee is the landlord of the residential rental property"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Exempts units in one- or two-family dwellings offered for rent, and NJ Real Estate Commission licensees unless the licensee is the landlord.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.95,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

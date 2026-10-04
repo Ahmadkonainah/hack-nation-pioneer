@@ -1,0 +1,41 @@
+{
+ "doc_id": "D046",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 5711,
+ "output_tokens": 500,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:44+00:00",
+ "result": {
+  "document_summary": "Massachusetts Legislature bill page for S.2983, 'An Act prohibiting algorithmic rent setting,' reported favorably by the Senate Housing Committee on 3/12/2026 and referred to Senate Ways and Means in the current 194th session.",
+  "notes": "Bill text is not included on this page; the record is based only on the bill title, number and status. The bill is pending in the current (194th) session. Citation uses the bill number because no codified section is given. Coverage, exemptions, effective date and key terms could not be determined.",
+  "rules": [
+   {
+    "jurisdiction": "MA",
+    "level": "state",
+    "category": "algorithmic_rent_setting",
+    "title": "S.2983 - An Act prohibiting algorithmic rent setting (pending bill)",
+    "requirement": "Pending Massachusetts bill that, per its title, would prohibit algorithmic rent setting. The bill text is not on the page, so the specific prohibitions are unknown.",
+    "key_value": "",
+    "legal_state": "pending",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Mass. Senate Bill S.2983 (194th General Court)",
+    "quoted_span": "An Act prohibiting algorithmic rent setting",
+    "coverage_text": "Coverage cannot be determined because the bill text is not included on the page.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.5,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

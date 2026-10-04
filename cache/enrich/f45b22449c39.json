@@ -1,0 +1,1397 @@
+{
+ "model": "claude-sonnet-5-5",
+ "called_at": "2026-10-03T19:51:41+00:00",
+ "input_tokens": 25860,
+ "output_tokens": 10500,
+ "result": {
+  "rules": [
+   {
+    "id": "r-0001",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "first_occupancy_date",
+      "op": "on_or_before",
+      "value": "",
+      "years_before_as_of": 15,
+      "text": "certificate of occupancy for more than 15 years"
+     }
+    ],
+    "exemptions": [
+     {
+      "label": "Deed-restricted or subsidized affordable housing",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "restricted affordable housing",
+        "years_before_as_of": 0,
+        "text": "deed-restricted/subsidized affordable housing"
+       }
+      ]
+     },
+     {
+      "label": "Dormitories",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "dormitory",
+        "years_before_as_of": 0,
+        "text": "school and university dormitories"
+       }
+      ]
+     },
+     {
+      "label": "Separately alienable property with non-corporate owner and written exemption notice",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "owner filed an exemption notice (non-corporate owner, separately alienable)",
+        "years_before_as_of": 0,
+        "text": "owned by non-corporate, non-REIT owners with written exemption notice"
+       }
+      ]
+     },
+     {
+      "label": "Owner-occupied duplex",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "2",
+        "years_before_as_of": 0,
+        "text": "owner-occupied duplexes"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "owner occupied one of the units"
+       }
+      ]
+     },
+     {
+      "label": "Mobilehome homeowners",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "mobile home",
+        "years_before_as_of": 0,
+        "text": "homeowners of mobilehomes"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "Rolling 15-year age test; local rent control deference is not turned into an exemption."
+   },
+   {
+    "id": "r-0002",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "tenancy",
+      "op": "is",
+      "value": "tenant continuously and lawfully occupied 12 months",
+      "years_before_as_of": 0,
+      "text": "tenant has occupied continuously and lawfully for 12 months"
+     }
+    ],
+    "exemptions": [
+     {
+      "label": "Certificate of occupancy within previous 15 years",
+      "conditions": [
+       {
+        "fact": "first_occupancy_date",
+        "op": "after",
+        "value": "",
+        "years_before_as_of": 15,
+        "text": "certificate of occupancy within the previous 15 years"
+       }
+      ]
+     },
+     {
+      "label": "Single-family owner-occupied residence",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "1",
+        "years_before_as_of": 0,
+        "text": "single-family owner-occupied residences"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "owner-occupied"
+       }
+      ]
+     },
+     {
+      "label": "Owner-occupied duplex",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "2",
+        "years_before_as_of": 0,
+        "text": "two separate dwelling units within a single structure"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "owner occupied one of the units"
+       }
+      ]
+     },
+     {
+      "label": "Separately alienable property with non-corporate owner and written exemption notice",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "owner filed an exemption notice (non-corporate owner)",
+        "years_before_as_of": 0,
+        "text": "written notice that the property is exempt"
+       }
+      ]
+     },
+     {
+      "label": "Deed-restricted or subsidized affordable housing",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "restricted or subsidized affordable housing",
+        "years_before_as_of": 0,
+        "text": "restricted by deed or subsidized affordable housing"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "Tenancy-length is a tenancy test; local just-cause deference left out."
+   },
+   {
+    "id": "r-0003",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Applies to any residential rental agreement in California with no building test."
+   },
+   {
+    "id": "r-0004",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Applies to residential rental units in California with no further tests."
+   },
+   {
+    "id": "r-0005",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Applies to most California rental housing; exclusions described relate to other characteristics and are not building tests."
+   },
+   {
+    "id": "r-0006",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Applies to owners of any housing accommodation with no limits."
+   },
+   {
+    "id": "r-0007",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Statewide ban with no building-based test."
+   },
+   {
+    "id": "r-0008",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "rule_coverage",
+      "op": "is",
+      "value": "local rent control ordinance (not in list)",
+      "years_before_as_of": 0,
+      "text": "whether a unit is subject to a rent cap depends on the municipality's rent control ordinance"
+     }
+    ],
+    "exemptions": [
+     {
+      "label": "Newly constructed multiple dwellings",
+      "conditions": [
+       {
+        "fact": "first_occupancy_date",
+        "op": "after",
+        "value": "",
+        "years_before_as_of": 30,
+        "text": "exempt for 30 years following completion of construction"
+       }
+      ]
+     },
+     {
+      "label": "Government-subsidized rents",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "government subsidized or HUD/NJHMFA housing",
+        "years_before_as_of": 0,
+        "text": "governmentally subsidized rents, HUD-owned or subsidized, NJHMFA-financed"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "State sets no cap; coverage depends on local ordinance, with the stated 30-year new-construction and subsidy exemptions."
+   },
+   {
+    "id": "r-0009",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Owner-occupied premises with two or fewer rental units",
+      "conditions": [
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "two- or three-unit owner-occupied premises"
+       },
+       {
+        "fact": "units",
+        "op": "<=",
+        "value": "3",
+        "years_before_as_of": 0,
+        "text": "two- or three-unit premises"
+       }
+      ]
+     },
+     {
+      "label": "Hotel, motel or guest house transient or seasonal",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "hotel/motel/guest house",
+        "years_before_as_of": 0,
+        "text": "hotel/motel/guest-house transient or seasonal guests"
+       }
+      ]
+     },
+     {
+      "label": "Unit held in trust for developmentally disabled family member",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "held in trust for developmentally disabled family member",
+        "years_before_as_of": 0,
+        "text": "unit held in trust for a developmentally disabled immediate family member"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "Applies to most rentals with listed exemptions."
+   },
+   {
+    "id": "r-0010",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Owner-occupied two- or three-family dwelling",
+      "conditions": [
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "owner-occupied"
+       },
+       {
+        "fact": "units",
+        "op": "<=",
+        "value": "3",
+        "years_before_as_of": 0,
+        "text": "two- or three-family dwellings"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "Applies to most NJ rentals except owner-occupied 2-3 family dwellings."
+   },
+   {
+    "id": "r-0011",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "One- or two-family dwelling",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "<=",
+        "value": "2",
+        "years_before_as_of": 0,
+        "text": "one- and two-family dwellings"
+       }
+      ]
+     },
+     {
+      "label": "Non-landlord real estate licensee",
+      "conditions": [
+       {
+        "fact": "tenancy",
+        "op": "is",
+        "value": "non-landlord NJ Real Estate Commission licensee",
+        "years_before_as_of": 0,
+        "text": "licensees unless the licensee is the landlord"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "Applies to rentals generally except 1-2 family dwellings and non-landlord licensees."
+   },
+   {
+    "id": "r-0012",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Owner-occupied premises of not more than four units",
+      "conditions": [
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "owner-occupied premises"
+       },
+       {
+        "fact": "units",
+        "op": "<=",
+        "value": "4",
+        "years_before_as_of": 0,
+        "text": "not more than four dwelling units"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "All rental units except owner-occupied premises of up to four units."
+   },
+   {
+    "id": "r-0013",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Apartment in owner-occupied two-family dwelling",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "2",
+        "years_before_as_of": 0,
+        "text": "two-family dwelling"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "owner occupies other unit"
+       }
+      ]
+     },
+     {
+      "label": "Rooms in owner-occupied one-family dwelling",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "1",
+        "years_before_as_of": 0,
+        "text": "one-family dwelling"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "occupied by owner"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "Applies to all property except listed owner-occupancy exceptions."
+   },
+   {
+    "id": "r-0014",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Medical, long-term care or detention facilities",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "inpatient medical, long-term care or detention facility",
+        "years_before_as_of": 0,
+        "text": "exclude inpatient medical care, licensed long-term care, and detention or correctional facilities"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "Applies to any residential rental owner in NJ with facility-type exclusions."
+   },
+   {
+    "id": "r-0015",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Statewide prohibition on local rent control applies to all Massachusetts cities and towns."
+   },
+   {
+    "id": "r-0016",
+    "scope": "undefined",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Failed ballot measure; full coverage terms not given."
+   },
+   {
+    "id": "r-0017",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Vacation or recreational tenancy of 100 days or less",
+      "conditions": [
+       {
+        "fact": "tenancy",
+        "op": "is",
+        "value": "100 days or less vacation or recreational",
+        "years_before_as_of": 0,
+        "text": "tenancy of 100 days or less for vacation or recreational purposes"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "Applies to all residential leases with a short-term vacation exemption."
+   },
+   {
+    "id": "r-0018",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "No building-based limits stated."
+   },
+   {
+    "id": "r-0019",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "No building-based limits stated."
+   },
+   {
+    "id": "r-0020",
+    "scope": "undefined",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Pending bill; coverage not stated."
+   },
+   {
+    "id": "r-0021",
+    "scope": "undefined",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Pending bill; coverage not stated."
+   },
+   {
+    "id": "r-0022",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "first_occupancy_date",
+      "op": "on_or_before",
+      "value": "1978-10-01",
+      "years_before_as_of": 0,
+      "text": "first built on or before October 1, 1978"
+     }
+    ],
+    "exemptions": [
+     {
+      "label": "Condominium/townhome tenancy commenced after 1995-12-31",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "condominium or townhome",
+        "years_before_as_of": 0,
+        "text": "condominium and townhome tenancies that commenced after December 31, 1995"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "Covers pre-Oct 1978 buildings; condo/townhome exemption added; luxury exemption depends on rent data not in parcel data."
+   },
+   {
+    "id": "r-0023",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "rule_coverage",
+      "op": "is_not",
+      "value": "r-0022",
+      "years_before_as_of": 0,
+      "text": "not covered by the Rent Stabilization Ordinance"
+     },
+     {
+      "fact": "tenancy",
+      "op": "is",
+      "value": "six months or lease expired",
+      "years_before_as_of": 0,
+      "text": "lived in unit at least six months or original lease expired"
+     }
+    ],
+    "exemptions": [
+     {
+      "label": "Transient hotels",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "transient hotel",
+        "years_before_as_of": 0,
+        "text": "transient hotels"
+       }
+      ]
+     },
+     {
+      "label": "Licensed care facilities",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "licensed care facility",
+        "years_before_as_of": 0,
+        "text": "licensed care facilities"
+       }
+      ]
+     },
+     {
+      "label": "Fraternity or sorority houses",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "fraternity or sorority house",
+        "years_before_as_of": 0,
+        "text": "fraternity or sorority houses"
+       }
+      ]
+     },
+     {
+      "label": "Cooperatives, nonprofit facilities, HACLA or government-owned",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "cooperative, nonprofit facility, or HACLA/government-owned",
+        "years_before_as_of": 0,
+        "text": "some cooperatives, non-profit facilities, HACLA or government-owned properties"
+       }
+      ]
+     }
+    ],
+    "support": "own text; r-0022 coverage (RSO)",
+    "reasoning": "Covers units not covered by the RSO (r-0022)."
+   },
+   {
+    "id": "r-0024",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "first_occupancy_date",
+      "op": "on_or_before",
+      "value": "1978-10-01",
+      "years_before_as_of": 0,
+      "text": "generally buildings first built on or before October 1, 1978"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text; r-0022 coverage text",
+    "reasoning": "Covers units subject to the RSO, i.e., pre-Oct 1978 buildings."
+   },
+   {
+    "id": "r-0025",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "status_not_in_data",
+      "op": "is",
+      "value": "Protected Unit to be demolished for new construction",
+      "years_before_as_of": 0,
+      "text": "Protected Units that will be demolished for the purpose of new construction"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Applies only to protected units being demolished, a status not in parcel data."
+   },
+   {
+    "id": "r-0026",
+    "scope": "undefined",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Pending motion requesting a study; no coverage defined."
+   },
+   {
+    "id": "r-0027",
+    "scope": "undefined",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Page does not define which units are rent-controlled; no sibling record supplies it (r-0028 gives only a 1979 date for exempt units from rent limits, not an explicit coverage rule)."
+   },
+   {
+    "id": "r-0028",
+    "scope": "undefined",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Covers units under the SF Rent Ordinance but no complete coverage definition is given."
+   },
+   {
+    "id": "r-0029",
+    "scope": "undefined",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Only says it applies to affordable housing decisions; no building test defined."
+   },
+   {
+    "id": "r-0030",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Applies to residential units in San Francisco with no building test."
+   },
+   {
+    "id": "r-0031",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "tenancy",
+      "op": "is",
+      "value": "tenancy longer than 30 days",
+      "years_before_as_of": 0,
+      "text": "residential rental tenancies of more than 30 days"
+     }
+    ],
+    "exemptions": [
+     {
+      "label": "Certificate of occupancy within previous 15 years",
+      "conditions": [
+       {
+        "fact": "first_occupancy_date",
+        "op": "after",
+        "value": "",
+        "years_before_as_of": 15,
+        "text": "certificate of occupancy issued within the previous 15 years"
+       }
+      ]
+     },
+     {
+      "label": "Owner-occupied single-family home",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "1",
+        "years_before_as_of": 0,
+        "text": "owner-occupied single-family homes"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "owner-occupied"
+       }
+      ]
+     },
+     {
+      "label": "Owner-occupied duplex",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "2",
+        "years_before_as_of": 0,
+        "text": "owner-occupied duplexes"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "owner-occupied"
+       }
+      ]
+     },
+     {
+      "label": "Separately alienable property with non-corporate landlord and exemption notice",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "owner filed an exemption notice (non-corporate landlord)",
+        "years_before_as_of": 0,
+        "text": "written exemption notice"
+       }
+      ]
+     },
+     {
+      "label": "Deed-restricted or subsidized affordable housing",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "deed-restricted or subsidized affordable housing",
+        "years_before_as_of": 0,
+        "text": "deed-restricted or subsidized affordable housing"
+       }
+      ]
+     },
+     {
+      "label": "Hotels, short-term rentals",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "hotel or short-term rental",
+        "years_before_as_of": 0,
+        "text": "hotels, short-term rentals"
+       }
+      ]
+     },
+     {
+      "label": "Mobilehomes",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "mobile home",
+        "years_before_as_of": 0,
+        "text": "mobilehomes"
+       }
+      ]
+     },
+     {
+      "label": "Dormitories and institutional housing",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "dormitory or institutional housing",
+        "years_before_as_of": 0,
+        "text": "institutional housing, dormitories"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "Covers tenancies over 30 days except the listed exempt housing."
+   },
+   {
+    "id": "r-0032",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Pending proposal applying to all residential rental property in San Diego; exclusions concern software, not buildings."
+   },
+   {
+    "id": "r-0033",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "first_occupancy_date",
+      "op": "before",
+      "value": "1980-01-01",
+      "years_before_as_of": 0,
+      "text": "multifamily units built before 1980"
+     }
+    ],
+    "exemptions": [
+     {
+      "label": "Golden Duplex",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "2",
+        "years_before_as_of": 0,
+        "text": "Golden Duplex"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "owner-occupied"
+       }
+      ]
+     },
+     {
+      "label": "University units",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "university rental unit or dormitory",
+        "years_before_as_of": 0,
+        "text": "university units"
+       }
+      ]
+     },
+     {
+      "label": "Nonprofit cooperatives",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "nonprofit cooperative",
+        "years_before_as_of": 0,
+        "text": "nonprofit cooperatives"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "Rent control covers pre-1980 multifamily buildings, with exemptions."
+   },
+   {
+    "id": "r-0034",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "tenancy",
+      "op": "is",
+      "value": "evicted for owner move-in or Ellis Act withdrawal",
+      "years_before_as_of": 0,
+      "text": "tenants evicted for an owner move-in or Ellis Act removal"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Applies to tenancies ended for owner move-in or Ellis withdrawals; tenancy-level test."
+   },
+   {
+    "id": "r-0035",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "rule_coverage",
+      "op": "is",
+      "value": "r-0033",
+      "years_before_as_of": 0,
+      "text": "fully or partially covered by the Rent Ordinance"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text; r-0033 coverage text",
+    "reasoning": "Covers units covered by the Berkeley Rent Ordinance; r-0033 supplies the pre-1980 test but partial coverage extends beyond it."
+   },
+   {
+    "id": "r-0036",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "rule_coverage",
+      "op": "is",
+      "value": "r-0033",
+      "years_before_as_of": 0,
+      "text": "fully or partially covered by Berkeley's Rent Ordinance"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text; r-0033 coverage text",
+    "reasoning": "Applies to units covered by the Rent Ordinance."
+   },
+   {
+    "id": "r-0037",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Applies to all residential rental agreements in Berkeley."
+   },
+   {
+    "id": "r-0038",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Owner-occupied 1-3 unit property",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "<=",
+        "value": "3",
+        "years_before_as_of": 0,
+        "text": "between 1-3 units"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "owner of record resides in one unit"
+       }
+      ]
+     },
+     {
+      "label": "Lifetime sex offenders",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "lifetime sex offender",
+        "years_before_as_of": 0,
+        "text": "lifetime sex offenders"
+       }
+      ]
+     },
+     {
+      "label": "Public housing/Section 8",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "public housing or Section 8",
+        "years_before_as_of": 0,
+        "text": "public housing/Section 8 properties"
+       }
+      ]
+     },
+     {
+      "label": "Owner move-back rental agreement",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "owner move-back rental agreement",
+        "years_before_as_of": 0,
+        "text": "BMC 13.76.130 A.9"
+       }
+      ]
+     },
+     {
+      "label": "Existing tenants subletting or changing roommates",
+      "conditions": [
+       {
+        "fact": "tenancy",
+        "op": "is",
+        "value": "existing tenant sublet or roommate change",
+        "years_before_as_of": 0,
+        "text": "existing tenants subletting or adding roommates"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "Applies to all rental housing providers except listed exemptions."
+   },
+   {
+    "id": "r-0039",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "All landlords of residential units; exclusions concern software, not buildings."
+   },
+   {
+    "id": "r-0040",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "first_occupancy_date",
+      "op": "on_or_before",
+      "value": "1995-02-01",
+      "years_before_as_of": 0,
+      "text": "constructed on or before February 1, 1995"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Covers buildings constructed on or before Feb 1, 1995; mobile home space date test not applicable to building data."
+   },
+   {
+    "id": "r-0041",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Housing produced in the last 15 years",
+      "conditions": [
+       {
+        "fact": "first_occupancy_date",
+        "op": "after",
+        "value": "",
+        "years_before_as_of": 15,
+        "text": "housing produced in the last 15 years"
+       }
+      ]
+     },
+     {
+      "label": "Deed-restricted affordable housing",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "deed-restricted affordable housing",
+        "years_before_as_of": 0,
+        "text": "deed-restricted affordable housing"
+       }
+      ]
+     },
+     {
+      "label": "Hotel and transient occupancy",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "hotel or transient occupancy",
+        "years_before_as_of": 0,
+        "text": "hotel and transient occupancy"
+       }
+      ]
+     },
+     {
+      "label": "Hospital and care facilities",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "hospital or care facility",
+        "years_before_as_of": 0,
+        "text": "hospital and care facilities"
+       }
+      ]
+     },
+     {
+      "label": "Dormitories and shared living quarters",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "dormitory or shared living quarters",
+        "years_before_as_of": 0,
+        "text": "dormitories; and other shared living quarters"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "Applies to Santa Ana rentals except the listed exempt types."
+   },
+   {
+    "id": "r-0042",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "No building-type limits stated."
+   },
+   {
+    "id": "r-0043",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "units",
+      "op": ">=",
+      "value": "5",
+      "years_before_as_of": 0,
+      "text": "rental properties with five or more units"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Covers 5+ unit properties; 1-4 unit properties exempt."
+   },
+   {
+    "id": "r-0044",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Ban on landlords' algorithm use; real-estate-agent exclusion is not a building test."
+   },
+   {
+    "id": "r-0045",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Motels and hotels",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "motel or hotel",
+        "years_before_as_of": 0,
+        "text": "motels and hotels"
+       }
+      ]
+     },
+     {
+      "label": "Newly constructed dwellings on first rental",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "newly constructed dwelling, first rental only",
+        "years_before_as_of": 0,
+        "text": "newly constructed dwellings rented for the first time"
+       }
+      ]
+     },
+     {
+      "label": "Industrial or commercial property",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "industrial or commercial",
+        "years_before_as_of": 0,
+        "text": "industrial and commercial property"
+       }
+      ]
+     },
+     {
+      "label": "Student housing owned by a school",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "school-controlled student housing",
+        "years_before_as_of": 0,
+        "text": "school-controlled student housing"
+       }
+      ]
+     },
+     {
+      "label": "Government-owned housing",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "government-owned housing",
+        "years_before_as_of": 0,
+        "text": "government-owned housing"
+       }
+      ]
+     },
+     {
+      "label": "Building vacant since 1984",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "building vacant since 1984, first rental only",
+        "years_before_as_of": 0,
+        "text": "buildings vacant since 1/1/1984"
+       }
+      ]
+     },
+     {
+      "label": "Multiple dwellings built after June 25, 1987",
+      "conditions": [
+       {
+        "fact": "first_occupancy_date",
+        "op": "after",
+        "value": "1987-06-25",
+        "years_before_as_of": 0,
+        "text": "multiple dwellings constructed after June 25, 1987"
+       }
+      ]
+     },
+     {
+      "label": "Housing under preempting agency rent regulation",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "governmental agency rent regulation",
+        "years_before_as_of": 0,
+        "text": "preempting government-agency rent regulation"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "Applies to all dwelling units with the listed exemptions; the post-1987 exemption is time-limited but approximated with the fixed date."
+   },
+   {
+    "id": "r-0046",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Applies to all residential landlords; the 10% renewal increase is a tenancy trigger, not a building test."
+   },
+   {
+    "id": "r-0047",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Medical, long-term care or detention facilities",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "medical/long-term care or detention facility",
+        "years_before_as_of": 0,
+        "text": "excluding medical/long-term care or detention facilities"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "All landlords of residential units except facility types."
+   },
+   {
+    "id": "r-0048",
+    "scope": "undefined",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Failed bill; coverage not determinable."
+   },
+   {
+    "id": "r-0049",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Hospital, skilled nursing or health facility",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "hospital, skilled nursing or health facility",
+        "years_before_as_of": 0,
+        "text": "residences in any hospital, skilled nursing facility or health facility"
+       }
+      ]
+     },
+     {
+      "label": "Non-profit short-term substance abuse treatment facility",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "non-profit substance abuse treatment facility",
+        "years_before_as_of": 0,
+        "text": "non-profit facility providing short-term substance abuse treatment"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "Applies to all Boston tenancies except the listed facilities."
+   },
+   {
+    "id": "r-0050",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "status_not_in_data",
+      "op": "is",
+      "value": "receives DND funding/land or has BPDA IDP income-restricted units",
+      "years_before_as_of": 0,
+      "text": "housing providers receiving DND funding and/or land, or with BPDA income-restricted units"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Applies only to publicly funded or inclusionary housing, a status not in parcel data."
+   },
+   {
+    "id": "r-0051",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Applies to any housing in Boston with no further tests."
+   },
+   {
+    "id": "r-0052",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Owner-occupied 2-family dwelling",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "2",
+        "years_before_as_of": 0,
+        "text": "2-family dwellings"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "when the owner lives there"
+       }
+      ]
+     }
+    ],
+    "support": "own text",
+    "reasoning": "Applies to Cambridge housing transactions except owner-occupied two-family dwellings."
+   }
+  ],
+  "notes": "Local-law yielding (e.g., stricter local rent control, local just-cause ordinances, preemption) was deliberately omitted per instructions. Rules whose coverage depends on special statuses use status_not_in_data."
+ }
+}

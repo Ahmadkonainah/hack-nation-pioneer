@@ -1,0 +1,16 @@
+{
+ "doc_id": "D053",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 5898,
+ "output_tokens": 248,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:54+00:00",
+ "result": {
+  "document_summary": "Massachusetts G.L. c. 186 § 18, which prohibits landlord reprisals against tenants who report code violations, enforce housing laws, or organize tenants' unions, and creates a presumption of reprisal for terminations or rent increases within six months.",
+  "notes": "The section is an anti-retaliation statute. It does not set rent caps, a just-cause eviction regime, deposit limits, screening fee limits, screening restrictions, or algorithmic pricing rules. Its only partial overlap with the scoped categories is the rebuttable presumption against terminations of tenancy and rent increases within six months of protected activity, which does not establish just-cause eviction requirements or rent increase limits, so no records are output.",
+  "rules": []
+ }
+}

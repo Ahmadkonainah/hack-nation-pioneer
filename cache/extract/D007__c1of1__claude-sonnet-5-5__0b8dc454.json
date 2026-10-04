@@ -1,0 +1,94 @@
+{
+ "doc_id": "D007",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 5614,
+ "output_tokens": 1811,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:52:17+00:00",
+ "result": {
+  "document_summary": "Berkeley Rent Board web page summarizing California state security deposit limits, deductions and return rules, plus the Berkeley Rent Ordinance security deposit interest requirement.",
+  "notes": "The page attributes the deposit cap, return deadline and itemization rules to California state law (AB 12 and related Civil Code provisions); these are recorded as California state rules. The Berkeley-specific interest requirement is recorded separately. The page names no Civil Code section numbers except by reference to Assembly Bill 12, so citations for the state rules are given as AB 12 / Cal. Civ. Code § 1950.5 only where supported; where the page names no section, the AB 12 reference is used. The Berkeley interest rule cites the Rent Ordinance generically because no section number appears.",
+  "rules": [
+   {
+    "jurisdiction": "CA",
+    "level": "state",
+    "category": "security_deposits",
+    "title": "Security deposit cap (AB 12)",
+    "requirement": "Starting July 1, 2024, landlords may generally charge no more than one month's rent as a security deposit for furnished and unfurnished units. Small landlords owning only two rental properties with no more than four units total may charge up to two months' rent if ownership is held by a natural person, family trust, or an LLC whose members are all natural persons.",
+    "key_value": "one month's rent (two months for small landlords)",
+    "legal_state": "enacted",
+    "effective_date": "2024-07-01",
+    "citation": "Assembly Bill 12 (2023), Cal. Civ. Code § 1950.5",
+    "quoted_span": "Starting July 1, 2024, many landlords may only charge one month's rent for unfurnished and furnished units",
+    "coverage_text": "Applies to residential rental tenancies in California; the higher two-month cap is available only to small landlords owning two properties with no more than four units total held by natural persons, family trusts, or all-natural-person LLCs.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "Small-landlord exception allows up to two months' rent (not a full exemption from the cap).",
+    "interaction": "The page states the Rent Board cannot determine whether a landlord may charge one or two months' rent for a new tenancy. Last month's rent counts as part of the security deposit; first month's rent does not.",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "CA",
+    "level": "state",
+    "category": "security_deposits",
+    "title": "Security deposit deductions, itemization, photographs and 21-day return",
+    "requirement": "Landlords must return the deposit, or an itemized statement of deductions with supporting documents and photographs, within 21 days after the tenant vacates. Deductions are limited to rent default, damage beyond normal wear and tear, cleaning to the move-in level, and (if the lease allows) replacing personal property or keys.",
+    "key_value": "21 days",
+    "legal_state": "enacted",
+    "effective_date": "2025-04-01",
+    "citation": "Cal. Civ. Code § 1950.5",
+    "quoted_span": "All or any remaining portion of a security deposit must be returned\nwithin 21 days\nafter the tenant/s leave the unit vacant.",
+    "coverage_text": "Applies to residential rental tenancies in California.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "The page describes phased requirements: proof of completed repairs from January 1, 2025; post-possession photographs from April 1, 2025; move-in photographs for tenancies beginning on or after July 1, 2025; and a move-out walk-through inspection offer during the last two weeks of a tenancy.",
+    "yields_to": [],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": "Effective date reflects the latest phase-in date mentioned on the page; the 21-day return rule itself and other phases have different dates (2025-01-01 repair proof, 2025-07-01 move-in photos)."
+   },
+   {
+    "jurisdiction": "Berkeley, CA",
+    "level": "city",
+    "category": "security_deposits",
+    "title": "Security deposit interest under the Berkeley Rent Ordinance",
+    "requirement": "For tenancies in units fully or partially covered by the Berkeley Rent Ordinance, landlords must pay tenants interest on the security deposit at the end of each year and a prorated amount if the tenant moves out before year end.",
+    "key_value": "annual interest payment on deposit",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "Berkeley Rent Ordinance (Berkeley Municipal Code ch. 13.76)",
+    "quoted_span": "For tenancies in units fully or partially covered by Berkeley's Rent Ordinance, landlords must pay tenants interest on their security deposit at the end of each year",
+    "coverage_text": "Applies to rental units fully or partially covered by the Berkeley Rent Ordinance.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "other",
+       "op": "is",
+       "value": "covered by Berkeley Rent Ordinance (fully or partially)",
+       "years_before_as_of": 0,
+       "text": "units fully or partially covered by Berkeley's Rent Ordinance"
+      }
+     ],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "The page directs readers to the Security Deposit Interest & Calculator page for rate details; the interest rate is not stated here.",
+    "yields_to": [],
+    "confidence": 0.6,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

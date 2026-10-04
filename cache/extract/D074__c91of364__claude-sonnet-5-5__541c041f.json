@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 91,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22121,
+ "output_tokens": 280,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:55+00:00",
+ "result": {
+  "document_summary": "A middle fragment of San Diego Municipal Code Chapter 4 (health and sanitation): wholesale food warehouse regulations and cannabis outlet permit provisions, with no rental housing content despite the source URL naming an algorithmic rent-setting section.",
+  "notes": "This part contains only San Diego Municipal Code Chapter 4, Article 2 provisions on wholesale food warehouses (Division 14) and cannabis outlets and production facilities (Division 15). None of it addresses rent increase limits, just cause eviction, security deposits, application or screening fees, screening restrictions, or algorithmic rent setting. The URL names Division 11 (anti-competitive automated rent price fixing, section 98.1103), but that text does not appear in this part, and no rule is extracted from the URL alone.",
+  "rules": []
+ }
+}

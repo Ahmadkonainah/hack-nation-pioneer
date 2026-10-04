@@ -1,0 +1,16 @@
+{
+ "doc_id": "D013",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 6727,
+ "output_tokens": 209,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:52:30+00:00",
+ "result": {
+  "document_summary": "Boston.gov page describing the Housing Stability Notification Act, which requires landlords to give tenants a Notice of Tenants' Rights and Resources and to notify the City when ending a tenancy.",
+  "notes": "The page describes only notice and reporting duties tied to ending a tenancy (notice to quit or non-renewal). It states no allowed eviction causes, relocation assistance, or other substantive just-cause standard, and no rent, deposit, fee, screening, or algorithmic pricing rule. The notice requirement is not a just-cause regime, so no in-scope rule is extracted.",
+  "rules": []
+ }
+}

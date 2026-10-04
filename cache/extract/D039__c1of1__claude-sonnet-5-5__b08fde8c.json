@@ -1,0 +1,41 @@
+{
+ "doc_id": "D039",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 5535,
+ "output_tokens": 710,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:24+00:00",
+ "result": {
+  "document_summary": "A September 3, 2024 Los Angeles City Council motion instructing the Los Angeles Housing Department to report on algorithm-based rent-setting software use and the feasibility of banning it.",
+  "notes": "This is a motion requesting a report and feasibility study, not an enacted ban or legislative text; it sets no operative rule. One record is output as a pending proposal on algorithmic rent setting (a motion, not a bill page, so confidence is low). No effective date, coverage, or exemptions are stated. The San Francisco legislation mentioned in the motion is only referenced in passing and its text is not included, so no SF record is extracted.",
+  "rules": [
+   {
+    "jurisdiction": "Los Angeles, CA",
+    "level": "city",
+    "category": "algorithmic_rent_setting",
+    "title": "Proposed report on and possible ban of algorithm-based rent-setting software",
+    "requirement": "Council is asked to instruct the Los Angeles Housing Department to report on how many ownership and management entities use algorithm-based software to set rents and on the feasibility of banning such software in the City. No ban has been adopted by this motion.",
+    "key_value": "",
+    "legal_state": "pending",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Los Angeles City Council Motion (Hutt), Sept. 3, 2024",
+    "quoted_span": "I THEREFORE MOVE that the City Council instruct the Los Angeles Housing Department to \nreport on the number of ownership and management entities that are using algorithm-based \nsoftware to establish rents and the feasibility of instituting a ban on the use of this software to set \nrents in the City.",
+    "coverage_text": "No coverage is defined; the motion only requests a study of algorithm-based rent-setting software use in the City.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "The motion notes that San Francisco approved legislation in July 2024 banning algorithm-based rent-setting tools, but does not state how any Los Angeles measure would interact with other laws.",
+    "yields_to": [],
+    "confidence": 0.5,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

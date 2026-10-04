@@ -1,0 +1,41 @@
+{
+ "doc_id": "D004",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 5430,
+ "output_tokens": 800,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:07:26+00:00",
+ "result": {
+  "document_summary": "A Berkeley Rent Board news notice announcing the January 1, 2026 inflation adjustments to relocation assistance payments required for owner move-in and Ellis Act evictions.",
+  "notes": "The page announces annual CPI adjustments to relocation payments under the Rent Stabilization and Good Cause for Eviction Ordinance and the Ellis Implementation Ordinance. It does not give the ordinances' coverage tests, exemptions, or causes in full, so coverage is left empty. The Ellis relocation payments are the same payments under a separate ordinance and are treated as details of the just-cause regime rather than a separate record. The ordinance chapter number is not stated on the page, so the citation uses the ordinance name.",
+  "rules": [
+   {
+    "jurisdiction": "Berkeley, CA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "Relocation assistance for owner move-in and Ellis Act evictions (2026 adjustment)",
+    "requirement": "Owners must pay tenants relocation assistance when evicting for an owner move-in or to withdraw a unit from the rental market under the Ellis Act. The payment amounts are indexed to inflation and adjusted each year by the Rent Board.",
+    "key_value": "Standard payment $19,413; additional payment for qualifying households $6,471 (effective 2026-01-01; 1.5% CPI adjustment)",
+    "legal_state": "enacted",
+    "effective_date": "2026-01-01",
+    "date_basis": "stated",
+    "citation": "Berkeley Rent Stabilization and Good Cause for Eviction Ordinance; Berkeley Ellis Implementation Ordinance",
+    "quoted_span": "The Rent Stabilization and Good Cause for Eviction Ordinance requires owners to pay tenants relocation assistance in the event of an owner move-in eviction.",
+    "coverage_text": "Tenants evicted for an owner move-in or for removal of the property from the rental market under the Ellis Act; the page does not state further coverage tests.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "The Ellis Implementation Ordinance requires the same relocation payments as the Rent Stabilization and Good Cause for Eviction Ordinance; both index the amounts to inflation.",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

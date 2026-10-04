@@ -1,0 +1,849 @@
+{
+ "model": "claude-sonnet-5-5",
+ "called_at": "2026-10-04T01:21:57+00:00",
+ "input_tokens": 30469,
+ "output_tokens": 8716,
+ "result": {
+  "groups": [
+   {
+    "primary_id": "r-0001",
+    "member_ids": [
+     "r-0001",
+     "r-0002",
+     "r-0041"
+    ],
+    "canonical_citation": "Berkeley Municipal Code ch. 13.63",
+    "canonical_title": "Berkeley ban on coordinated rent-pricing algorithms",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Same Berkeley algorithmic rent-setting ordinance described on several pages."
+   },
+   {
+    "primary_id": "r-0080",
+    "member_ids": [
+     "r-0003",
+     "r-0080"
+    ],
+    "canonical_citation": "S.F. Admin. Code § 37.10C",
+    "canonical_title": "San Francisco ban on algorithmic rent-setting devices",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Same SF ordinance section 37.10C; the 2024-10 and 2024-10-14 dates are compatible."
+   },
+   {
+    "primary_id": "r-0075",
+    "member_ids": [
+     "r-0004",
+     "r-0040",
+     "r-0075"
+    ],
+    "canonical_citation": "San Diego Municipal Code §§ 98.1101–98.1104",
+    "canonical_title": "San Diego ban on algorithmic rent-setting devices",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Same San Diego algorithmic rent ordinance (official proposed text plus secondary pages)."
+   },
+   {
+    "primary_id": "r-0005",
+    "member_ids": [
+     "r-0005",
+     "r-0089",
+     "r-0088"
+    ],
+    "canonical_citation": "Santa Ana Ordinance No. NS-3090",
+    "canonical_title": "Santa Ana ban on algorithmic rent-setting",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Same Santa Ana algorithmic rent-setting ban described on several pages."
+   },
+   {
+    "primary_id": "r-0006",
+    "member_ids": [
+     "r-0006",
+     "r-0038"
+    ],
+    "canonical_citation": "Jersey City Code § 218-12",
+    "canonical_title": "Jersey City ban on algorithmic rent coordination",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Same Jersey City ordinance."
+   },
+   {
+    "primary_id": "r-0037",
+    "member_ids": [
+     "r-0007",
+     "r-0037"
+    ],
+    "canonical_citation": "Hoboken City Code § 158-2 (Ord. No. B-781)",
+    "canonical_title": "Hoboken prohibition on algorithmic rent fixing",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Same Hoboken algorithmic ban; official code text preferred."
+   },
+   {
+    "primary_id": "r-0008",
+    "member_ids": [
+     "r-0008"
+    ],
+    "canonical_citation": "Berkeley Municipal Code ch. 13.106",
+    "canonical_title": "Berkeley Fair Chance Access to Housing Ordinance",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Single Berkeley criminal-history screening ordinance."
+   },
+   {
+    "primary_id": "r-0009",
+    "member_ids": [
+     "r-0009"
+    ],
+    "canonical_citation": "Berkeley Rent Stabilization and Good Cause for Eviction Ordinance; Berkeley Ellis Implementation Ordinance",
+    "canonical_title": "Berkeley relocation assistance for owner move-in and Ellis Act evictions",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "Ellis ordinance requires the same relocation payments as the Rent Stabilization Ordinance.",
+    "reason": "Relocation payment rules, kept separate from Measure BB just-cause causes record."
+   },
+   {
+    "primary_id": "r-0030",
+    "member_ids": [
+     "r-0010",
+     "r-0030"
+    ],
+    "canonical_citation": "Cal. Civ. Code § 1950.6",
+    "canonical_title": "California application screening fee limits",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Same state screening fee statute; official statute text preferred."
+   },
+   {
+    "primary_id": "r-0011",
+    "member_ids": [
+     "r-0011"
+    ],
+    "canonical_citation": "Berkeley Municipal Code ch. 13.78",
+    "canonical_title": "Berkeley screening fee disclosure ordinance",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "Incorporates the state fee cap; both apply, so it does not yield to the state law.",
+    "reason": "Separate local instrument."
+   },
+   {
+    "primary_id": "r-0012",
+    "member_ids": [
+     "r-0012",
+     "r-0016",
+     "r-0017"
+    ],
+    "canonical_citation": "Berkeley Rent Stabilization Ordinance (Measure BB); Berkeley Municipal Code § 13.76.110(A)",
+    "canonical_title": "Berkeley rent stabilization and annual general adjustment",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "Costa-Hawkins removes certain tenancies from the adjustment but no group for it exists.",
+    "reason": "Berkeley rent stabilization cap, annual adjustment and coverage."
+   },
+   {
+    "primary_id": "r-0013",
+    "member_ids": [
+     "r-0013",
+     "r-0018",
+     "r-0009x"
+    ],
+    "canonical_citation": "Berkeley Rent Stabilization Ordinance (as amended by Measure BB)",
+    "canonical_title": "Berkeley just cause for eviction",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Berkeley just-cause causes and coverage."
+   },
+   {
+    "primary_id": "r-0028",
+    "member_ids": [
+     "r-0028",
+     "r-0044"
+    ],
+    "canonical_citation": "Cal. Civ. Code § 1947.12",
+    "canonical_title": "California Tenant Protection Act rent cap",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [
+     "r-0012",
+     "r-0045",
+     "r-0079",
+     "r-0084",
+     "r-0033",
+     "r-0067",
+     "r-0039"
+    ],
+    "conflicts_with": [],
+    "interaction_note": "Statute exempts housing under stricter local rent control; yields to local California rent-cap ordinances.",
+    "reason": "Same state rent cap statute."
+   },
+   {
+    "primary_id": "r-0029",
+    "member_ids": [
+     "r-0014",
+     "r-0029"
+    ],
+    "canonical_citation": "Cal. Civ. Code § 1950.5",
+    "canonical_title": "California security deposit cap and return rules",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "AB 12 amended section 1950.5."
+   },
+   {
+    "primary_id": "r-0015",
+    "member_ids": [
+     "r-0015"
+    ],
+    "canonical_citation": "Berkeley Rent Stabilization Ordinance",
+    "canonical_title": "Berkeley security deposit interest requirement",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "Operates alongside state deposit rules.",
+    "reason": "Separate local instrument."
+   },
+   {
+    "primary_id": "r-0019",
+    "member_ids": [
+     "r-0019"
+    ],
+    "canonical_citation": "Boston Fair Chance Tenant Selection Policy (DND, Feb. 2017)",
+    "canonical_title": "Boston Fair Chance Tenant Selection Policy",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "Federal or state criminal-history requirements preempt the policy, but no corresponding groups exist.",
+    "reason": "Boston criminal/credit screening policy."
+   },
+   {
+    "primary_id": "r-0020",
+    "member_ids": [
+     "r-0020"
+    ],
+    "canonical_citation": "Mass. H.3744 (193rd General Court, 2023-2024)",
+    "canonical_title": "H.3744 Boston rent stabilization home-rule petition",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Failed bill."
+   },
+   {
+    "primary_id": "r-0021",
+    "member_ids": [
+     "r-0021"
+    ],
+    "canonical_citation": "Boston Fair Housing Commission fair housing regulations",
+    "canonical_title": "Boston rental assistance discrimination ban",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Boston source-of-income rule."
+   },
+   {
+    "primary_id": "r-0023",
+    "member_ids": [
+     "r-0022",
+     "r-0023"
+    ],
+    "canonical_citation": "Boston City Ordinances § 10-11.7",
+    "canonical_title": "Boston Housing Stability Notification Act",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Same ordinance."
+   },
+   {
+    "primary_id": "r-0031",
+    "member_ids": [
+     "r-0024",
+     "r-0025",
+     "r-0031"
+    ],
+    "canonical_citation": "California Fair Employment and Housing Act (FEHA); Cal. Gov. Code § 12955",
+    "canonical_title": "California FEHA housing screening limits",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "FEHA source-of-income and criminal-history limits, one state instrument."
+   },
+   {
+    "primary_id": "r-0026",
+    "member_ids": [
+     "r-0026"
+    ],
+    "canonical_citation": "Cal. Bus. & Prof. Code § 16729",
+    "canonical_title": "California common pricing algorithm ban",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "Statute does not limit antitrust laws; nothing about local rules.",
+    "reason": "State algorithm ban."
+   },
+   {
+    "primary_id": "r-0027",
+    "member_ids": [
+     "r-0027"
+    ],
+    "canonical_citation": "Cal. Civ. Code § 1946.2",
+    "canonical_title": "California Tenant Protection Act just cause",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [
+     "r-0013",
+     "r-0043",
+     "r-0046",
+     "r-0074",
+     "r-0078",
+     "r-0085"
+    ],
+    "conflicts_with": [],
+    "interaction_note": "Does not apply where local just-cause ordinances govern.",
+    "reason": "State just cause statute."
+   },
+   {
+    "primary_id": "r-0032",
+    "member_ids": [
+     "r-0032"
+    ],
+    "canonical_citation": "Cambridge Municipal Code ch. 14.04",
+    "canonical_title": "Cambridge Fair Housing Ordinance",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Cambridge instrument."
+   },
+   {
+    "primary_id": "r-0033",
+    "member_ids": [
+     "r-0033",
+     "r-0034",
+     "r-0035"
+    ],
+    "canonical_citation": "Hoboken City Code ch. 155",
+    "canonical_title": "Hoboken rent control",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Hoboken rent control chapter 155; dates are base-rent reference or different provisions."
+   },
+   {
+    "primary_id": "r-0036",
+    "member_ids": [
+     "r-0036"
+    ],
+    "canonical_citation": "Hoboken City Code § 158-1 (Ord. No. B-750)",
+    "canonical_title": "Hoboken large rent increase disclosures",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Distinct disclosure ordinance."
+   },
+   {
+    "primary_id": "r-0039",
+    "member_ids": [
+     "r-0039"
+    ],
+    "canonical_citation": "Jersey City Municipal Code ch. 260",
+    "canonical_title": "Jersey City Rent Control Ordinance",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Jersey City rent control."
+   },
+   {
+    "primary_id": "r-0042",
+    "member_ids": [
+     "r-0042"
+    ],
+    "canonical_citation": "Los Angeles City Council Motion (Hutt), Sept. 3, 2024",
+    "canonical_title": "Los Angeles proposed algorithmic rent software report",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Pending motion."
+   },
+   {
+    "primary_id": "r-0043",
+    "member_ids": [
+     "r-0043"
+    ],
+    "canonical_citation": "Los Angeles Just Cause for Eviction Ordinance (JCO)",
+    "canonical_title": "Los Angeles Just Cause for Eviction Ordinance",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "LA JCO."
+   },
+   {
+    "primary_id": "r-0045",
+    "member_ids": [
+     "r-0045",
+     "r-0047"
+    ],
+    "canonical_citation": "Los Angeles Rent Stabilization Ordinance (LAMC ch. XV, art. 1)",
+    "canonical_title": "Los Angeles Rent Stabilization Ordinance rent increases",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Same RSO rent increase rule."
+   },
+   {
+    "primary_id": "r-0046",
+    "member_ids": [
+     "r-0046",
+     "r-0048"
+    ],
+    "canonical_citation": "L.A.M.C. § 151.09; L.A.M.C. §§ 165.03, 165.06",
+    "canonical_title": "Los Angeles RSO/JCO eviction and relocation assistance",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [
+     "r-0049"
+    ],
+    "conflicts_with": [],
+    "interaction_note": "Demolition for new construction is governed instead by the Resident Protections Ordinance.",
+    "reason": "RSO just cause and relocation amounts."
+   },
+   {
+    "primary_id": "r-0049",
+    "member_ids": [
+     "r-0049"
+    ],
+    "canonical_citation": "Los Angeles Ordinance Nos. 188481 and 188482 (Resident Protections Ordinance)",
+    "canonical_title": "Los Angeles Resident Protections Ordinance",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "Codifies State Housing Crisis Act protections.",
+    "reason": "Separate instrument."
+   },
+   {
+    "primary_id": "r-0050",
+    "member_ids": [
+     "r-0050"
+    ],
+    "canonical_citation": "Mass. H.5222 (194th General Court)",
+    "canonical_title": "H.5222 algorithmic rent fixing bill",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Distinct bill."
+   },
+   {
+    "primary_id": "r-0051",
+    "member_ids": [
+     "r-0051"
+    ],
+    "canonical_citation": "Mass. Senate Bill S.2983 (194th General Court)",
+    "canonical_title": "S.2983 algorithmic rent setting bill",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Distinct bill."
+   },
+   {
+    "primary_id": "r-0052",
+    "member_ids": [
+     "r-0052"
+    ],
+    "canonical_citation": "G.L. c. 40P § 4",
+    "canonical_title": "Massachusetts prohibition on local rent control",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "Displaces local rent control in MA; no local rent-cap groups present.",
+    "reason": "State statute."
+   },
+   {
+    "primary_id": "r-0053",
+    "member_ids": [
+     "r-0053"
+    ],
+    "canonical_citation": "G.L. c. 151B § 4(10)",
+    "canonical_title": "Massachusetts source-of-income discrimination ban",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "State statute."
+   },
+   {
+    "primary_id": "r-0054",
+    "member_ids": [
+     "r-0054"
+    ],
+    "canonical_citation": "G.L. c. 186 § 15B",
+    "canonical_title": "Massachusetts security deposit law",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "State statute."
+   },
+   {
+    "primary_id": "r-0055",
+    "member_ids": [
+     "r-0055"
+    ],
+    "canonical_citation": "G.L. c. 112 § 87DDD1/2",
+    "canonical_title": "Massachusetts broker fee rule",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "State statute."
+   },
+   {
+    "primary_id": "r-0056",
+    "member_ids": [
+     "r-0056"
+    ],
+    "canonical_citation": "Massachusetts rent control ballot initiative petition (2026)",
+    "canonical_title": "Statewide rent control ballot initiative",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Failed initiative."
+   },
+   {
+    "primary_id": "r-0057",
+    "member_ids": [
+     "r-0057"
+    ],
+    "canonical_citation": "N.J.S.A. 46:8-52 et seq.",
+    "canonical_title": "NJ Fair Chance in Housing Act",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "State statute."
+   },
+   {
+    "primary_id": "r-0058",
+    "member_ids": [
+     "r-0058"
+    ],
+    "canonical_citation": "N.J.S.A. 46:8-18.1",
+    "canonical_title": "NJ rental application fee cap",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "State statute."
+   },
+   {
+    "primary_id": "r-0059",
+    "member_ids": [
+     "r-0059",
+     "r-0060"
+    ],
+    "canonical_citation": "N.J.S.A. 46:8-21.2; N.J.S.A. 46:8-19; N.J.S.A. 46:8-21.1",
+    "canonical_title": "NJ Security Deposit Law",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Deposit cap plus holding and return rules of the same law."
+   },
+   {
+    "primary_id": "r-0061",
+    "member_ids": [
+     "r-0061"
+    ],
+    "canonical_citation": "N.J.S.A. 2A:18-61.1 et seq.; N.J.S.A. 2A:42-84.5",
+    "canonical_title": "NJ no state rent control; municipalities may adopt rent control",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "State sets no cap and delegates rent control to municipalities; delegation, not yielding.",
+    "reason": "State delegation rule."
+   },
+   {
+    "primary_id": "r-0062",
+    "member_ids": [
+     "r-0062",
+     "r-0065"
+    ],
+    "canonical_citation": "N.J.S.A. 10:5-12; New Jersey Law Against Discrimination (N.J.S.A. 10:5-1 et seq.)",
+    "canonical_title": "NJ Law Against Discrimination source-of-income ban",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Same NJ LAD source-of-income rule."
+   },
+   {
+    "primary_id": "r-0063",
+    "member_ids": [
+     "r-0063",
+     "r-0064"
+    ],
+    "canonical_citation": "N.J.S.A. 2A:18-61.1 to 61.12",
+    "canonical_title": "NJ Anti-Eviction Act",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Same Anti-Eviction Act."
+   },
+   {
+    "primary_id": "r-0066",
+    "member_ids": [
+     "r-0066"
+    ],
+    "canonical_citation": "P.L. 2026, c.43 (C.56:9-20 to 56:9-26)",
+    "canonical_title": "NJ FAIR Act algorithmic rent-setting ban",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [
+     "r-0006",
+     "r-0037"
+    ],
+    "interaction_note": "Municipalities may not enact ordinances conflicting with the act, so local algorithm bans in Jersey City and Hoboken may be preempted.",
+    "reason": "State statute."
+   },
+   {
+    "primary_id": "r-0067",
+    "member_ids": [
+     "r-0067",
+     "r-0068",
+     "r-0070"
+    ],
+    "canonical_citation": "Newark Rev. Gen. Ords. ch. 19:2",
+    "canonical_title": "Newark Rent Control Ordinance",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Newark rent control chapter."
+   },
+   {
+    "primary_id": "r-0069",
+    "member_ids": [
+     "r-0069"
+    ],
+    "canonical_citation": "Newark Rev. Gen. Ords. § 19:2-14",
+    "canonical_title": "Newark retaliatory eviction prohibition",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Newark just-cause related rule."
+   },
+   {
+    "primary_id": "r-0071",
+    "member_ids": [
+     "r-0071"
+    ],
+    "canonical_citation": "Newark Municipal Code § 2:10-1.2(b)(5)",
+    "canonical_title": "Newark HOME-assisted unit maximum rents",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Separate program rule."
+   },
+   {
+    "primary_id": "r-0072",
+    "member_ids": [
+     "r-0072"
+    ],
+    "canonical_citation": "Newark Municipal Code § 2:10-11.1",
+    "canonical_title": "Newark unconscionable rent increase ordinance",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Separate ordinance."
+   },
+   {
+    "primary_id": "r-0073",
+    "member_ids": [
+     "r-0073"
+    ],
+    "canonical_citation": "Newark Municipal Code §§ 2:31-2 to 2:31-9",
+    "canonical_title": "Newark Ban the Box rental screening",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Newark ordinance."
+   },
+   {
+    "primary_id": "r-0074",
+    "member_ids": [
+     "r-0074",
+     "r-0076"
+    ],
+    "canonical_citation": "San Diego Municipal Code §§ 98.0701-98.0710",
+    "canonical_title": "San Diego Residential Tenant Protection Ordinance",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Same ordinance."
+   },
+   {
+    "primary_id": "r-0077",
+    "member_ids": [
+     "r-0077"
+    ],
+    "canonical_citation": "San Francisco Fair Chance Ordinance",
+    "canonical_title": "San Francisco Fair Chance Ordinance",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "SF ordinance."
+   },
+   {
+    "primary_id": "r-0078",
+    "member_ids": [
+     "r-0078",
+     "r-0081",
+     "r-0083"
+    ],
+    "canonical_citation": "S.F. Admin. Code ch. 37",
+    "canonical_title": "San Francisco Rent Ordinance just cause and relocation",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Just cause and relocation of the SF Rent Ordinance."
+   },
+   {
+    "primary_id": "r-0079",
+    "member_ids": [
+     "r-0079",
+     "r-0082"
+    ],
+    "canonical_citation": "S.F. Admin. Code ch. 37",
+    "canonical_title": "San Francisco annual allowable rent increase",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Same allowable increase."
+   },
+   {
+    "primary_id": "r-0086",
+    "member_ids": [
+     "r-0084",
+     "r-0086"
+    ],
+    "canonical_citation": "Santa Ana Rent Stabilization Ordinance",
+    "canonical_title": "Santa Ana rent stabilization annual cap",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Same cap."
+   },
+   {
+    "primary_id": "r-0087",
+    "member_ids": [
+     "r-0085",
+     "r-0087"
+    ],
+    "canonical_citation": "Santa Ana Just Cause Eviction Ordinance",
+    "canonical_title": "Santa Ana just cause eviction",
+    "date_conflict": false,
+    "date_conflict_note": "",
+    "yields_to": [],
+    "conflicts_with": [],
+    "interaction_note": "",
+    "reason": "Same ordinance."
+   }
+  ],
+  "notes": "Grouping by instrument, jurisdiction and category."
+ }
+}

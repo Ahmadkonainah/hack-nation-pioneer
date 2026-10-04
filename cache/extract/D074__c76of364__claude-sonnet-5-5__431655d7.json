@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 76,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 20901,
+ "output_tokens": 279,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:37+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code (Chapter 3, Articles 5-6) covering a tax's definitions and administration and sidewalk vending regulations, with no residential rental rules in this part.",
+  "notes": "This part (76 of 364) contains only tax definitions (hotel/transient occupancy-related Additional Tax, street repair, homelessness programs), tax administration, and the Sidewalk Vending Regulations (Div. 1, Art. 6). The source URL points to the algorithmic rent-setting prohibition (section 98.1103), but that text does not appear in this part, so no rule in the six in-scope categories can be extracted from it. The passing mention of rental vouchers and security deposit subsidies in the homelessness-program definition is a funding description, not a rule on deposits or rent.",
+  "rules": []
+ }
+}

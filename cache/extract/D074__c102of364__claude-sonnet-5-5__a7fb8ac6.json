@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 102,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 21989,
+ "output_tokens": 298,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:08:09+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code (Chapters 4 and 5) covering bond procedures, the Disaster Council and emergency organization, and the start of the emergency price-gouging division, with no section text on algorithmic rent-setting despite the page URL.",
+  "notes": "This part contains no rule in the six in-scope categories. The only housing-related text is the price-gouging definition of 'Housing' (§ 51.0203) and the emergency price-gouging purpose and authority sections, which concern excessive price increases during declared emergencies; the operative cap on rental increases is not included in this part, and it is not one of the six categories as a standalone rule here. The URL refers to Division 11 (anti-competitive automated rent price fixing, SDMC 98.1103), but that section's text does not appear in this part of the document, so no algorithmic_rent_setting record was created.",
+  "rules": []
+ }
+}

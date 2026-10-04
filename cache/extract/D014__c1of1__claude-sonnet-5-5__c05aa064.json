@@ -1,0 +1,65 @@
+{
+ "doc_id": "D014",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 6095,
+ "output_tokens": 1000,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:52:35+00:00",
+ "result": {
+  "document_summary": "Boston city FAQ for tenants explaining the Housing Stability Notification Act ordinance, which requires landlords to give tenants a Notice of Tenants' Rights and Resources (and copy the city) when ending a tenancy.",
+  "notes": "The HSNA is a notice-and-procedure ordinance tied to eviction/non-renewal; it does not set allowed eviction causes, so it is recorded as a procedural just-cause-eviction-category rule with moderate confidence. The document states a specific citation only as 'Sec. 10-11.7' of City of Boston Ordinances.",
+  "rules": [
+   {
+    "jurisdiction": "Boston, MA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "Housing Stability Notification Act - notice of tenants' rights and city notification",
+    "requirement": "A landlord or foreclosing owner ending a tenancy or declining to renew a lease must deliver a Notice of Tenants' Rights and Resources with the Notice to Quit and send a copy of the Notice to Quit or non-renewal, with a Certificate of Compliance/Service, to the City's Office of Housing Stability. The requirements cannot be waived, and violations are ticketed (warning, then $300 per day) but do not halt the eviction.",
+    "key_value": "Notice of Tenants' Rights and Resources delivered with the Notice to Quit; copy to Office of Housing Stability",
+    "legal_state": "enacted",
+    "effective_date": "2020-11-06",
+    "citation": "City of Boston Ordinances § 10-11.7 (Housing Stability Notification Act)",
+    "quoted_span": "The Notice of Tenants’ Rights and Resources must be delivered at the same time as the Notice to\nQuit.",
+    "coverage_text": "All landlords and foreclosing owners intending to end a tenancy or post-foreclosure occupancy of a residential unit in the City of Boston.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Hospital, skilled nursing facility or health facility residences",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "residence in a hospital, skilled nursing facility or health facility",
+         "years_before_as_of": 0,
+         "text": "residences in any hospital, skilled nursing facility or health facility"
+        }
+       ]
+      },
+      {
+       "label": "Non-profit short-term substance abuse treatment facility",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "residence in a non-profit facility providing short-term substance abuse treatment, assistance or therapy",
+         "years_before_as_of": 0,
+         "text": "residences in a non-profit facility whose primary purpose is providing short-term treatment, assistance or therapy for alcohol, drug, or other substance abuse"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Residences in hospitals, skilled nursing facilities or health facilities, and in non-profit short-term substance abuse treatment facilities.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "doc_id": "D011",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 5398,
+ "output_tokens": 240,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:52:22+00:00",
+ "result": {
+  "document_summary": "Massachusetts Legislature bill-tracking page for H.3744 (193rd General Court), a home-rule petition to let Boston implement rent stabilization and tenant eviction protections, showing only the bill title, status and history and no operative text.",
+  "notes": "No rule is extracted. The page contains only the bill title, summary line and legislative history; the bill text itself (rent cap formula, covered units, eviction causes, etc.) is not included. The bill was referred to committee and on 9/9/2024 accompanied a study order (H5035), with no enactment shown, so any rule would be pending or failed, and the document states no specific requirement, value, coverage or effective date that could be quoted as a rule.",
+  "rules": []
+ }
+}

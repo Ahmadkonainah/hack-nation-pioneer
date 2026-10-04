@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 56,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22263,
+ "output_tokens": 277,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:14+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code (Chapter 3, peep show establishment operating requirements and bingo game licensing) that appears under a Division 11 algorithmic rent-pricing URL but contains no rental housing rules.",
+  "notes": "This part contains only peep show establishment operating rules (\\u00a7\\u00a7 33.3317-33.3325) and bingo game licensing rules (\\u00a7\\u00a7 33.3401-33.3408). None of it concerns rent increase limits, just cause eviction, security deposits, screening fees, screening restrictions, or algorithmic rent setting, despite the source URL slug referring to a prohibition on algorithmic devices (Sec. 98.1103). The actual text of that section is not present in this part, so no rules are extracted.",
+  "rules": []
+ }
+}

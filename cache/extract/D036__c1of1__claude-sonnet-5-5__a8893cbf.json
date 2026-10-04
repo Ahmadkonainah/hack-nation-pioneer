@@ -1,0 +1,54 @@
+{
+ "doc_id": "D036",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 7605,
+ "output_tokens": 791,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:23+00:00",
+ "result": {
+  "document_summary": "Jersey City Office of Landlord/Tenant Relations web page that administers the city's Rent Control Ordinance (Chapter 260), noting that 1-4 unit properties are exempt and listing registration and rent-increase application forms.",
+  "notes": "The page is an administrative landing page and does not reproduce the text of Chapter 260, so no rent cap formula, effective date or full list of exemptions is stated; the only substantive coverage statement is that all 1-4 unit properties are exempt. The state liability-insurance requirement (N.J.S.A. 40A:10A-1) and landlord registration requirements are outside the six in-scope categories and were not extracted. Confidence is moderate because the page only summarizes the ordinance.",
+  "rules": [
+   {
+    "jurisdiction": "Jersey City, NJ",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "Jersey City Rent Control Ordinance (Chapter 260)",
+    "requirement": "The city administers and enforces a rent control ordinance that regulates rent increases, with landlord applications for capital improvement, vacancy and hardship increases and tenant petitions for illegal rent. Properties with 1-4 units are exempt from rent control.",
+    "key_value": "",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Jersey City Municipal Code ch. 260",
+    "quoted_span": "The Office of Landlord Tenant Relations administers and enforces the\nRent Control Ordinance, Chapter 260\nof the Jersey City Municipal Code",
+    "coverage_text": "Applies to rental properties in Jersey City with five or more units; all 1-4 unit properties are exempt, and other exemptions may be requested if criteria in the ordinance are met.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "1-4 unit properties are exempt from rent control",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "<=",
+         "value": "4",
+         "years_before_as_of": 0,
+         "text": "All 1-4 Unit Properties are exempt from rent control"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "All 1-4 unit properties are exempt; the ordinance provides other permitted exemptions that an owner may request from the Office, but the page does not list them.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 52,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22006,
+ "output_tokens": 243,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:07+00:00",
+ "result": {
+  "document_summary": "A page of San Diego Municipal Code text (Chapter 3, Article 3) covering police-regulated businesses such as amusement establishments, figure studios, rebates and merchandise coupons, with no residential rental provisions in this part.",
+  "notes": "This part (52 of 364) contains only police-regulated business provisions (commercial amusement establishments, arcades, figure studios, rebates by purveyors, ticket brokers and merchandise coupons). The URL slug mentions an algorithmic rent-price-fixing prohibition (Division 11, section 98.1103), but that text does not appear in this part, so no rule can be extracted from it. Nothing here falls within the six residential rental rule categories.",
+  "rules": []
+ }
+}

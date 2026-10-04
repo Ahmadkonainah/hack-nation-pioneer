@@ -1,0 +1,134 @@
+{
+ "doc_id": "D085",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 6258,
+ "output_tokens": 1710,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:09:55+00:00",
+ "result": {
+  "document_summary": "A City of Santa Ana news release announcing adoption of a Rent Stabilization Ordinance (3% annual cap) and a Just Cause Eviction Ordinance, both effective November 19, 2021.",
+  "notes": "The page names no ordinance numbers or municipal code chapters, so citations use the ordinance names as the page gives them. The page says the full ordinance text is published separately on the City's website. The page uses a 1995-02-01 construction cutoff for the rent cap and a rolling 15-year exemption for just cause; the 15-year exemption is encoded as a rolling building-age test. Other exemptions (deed-restricted affordable housing, hotels, hospitals and care facilities, dormitories, shared living quarters, mobile home spaces) are recorded in exemptions_text and in 'other' conditions where testable.",
+  "rules": [
+   {
+    "jurisdiction": "Santa Ana, CA",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "Santa Ana Rent Stabilization Ordinance annual cap",
+    "requirement": "Residential rent increases are limited to the lower of 3% per year or 80% of the 12-month percent change in the CPI; if the CPI is negative, no increase is permitted. Owners may petition for a higher increase by showing it is needed for a fair and reasonable return.",
+    "key_value": "lower of 3% or 80% of CPI change per year; no increase if CPI negative",
+    "legal_state": "enacted",
+    "effective_date": "2021-11-19",
+    "date_basis": "stated",
+    "citation": "Santa Ana Rent Stabilization Ordinance",
+    "quoted_span": "Increase in residential rents are limited to the lower of 3% per year, or 80% of the percent change in the Consumer Price Index over the most recent 12-month period.",
+    "coverage_text": "Residential rental buildings in Santa Ana constructed on or before February 1, 1995, plus mobile home spaces offered for rent on or before January 1, 1990.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "first_occupancy_date",
+       "op": "on_or_before",
+       "value": "1995-02-01",
+       "years_before_as_of": 0,
+       "text": "The rent cap does not apply to residential buildings constructed after February 1, 1995"
+      }
+     ],
+     "exemptions": []
+    },
+    "exemptions_text": "Residential buildings constructed after February 1, 1995 and mobile home spaces offered for rent after January 1, 1990 are not subject to the cap.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.9,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "Santa Ana, CA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "Santa Ana Just Cause Eviction Ordinance",
+    "requirement": "After 30 days of tenancy, an owner may not terminate a tenancy without just cause stated in a written notice, and must first give notice and an opportunity to cure for at-fault causes. For no-fault terminations the owner must provide 3 months of relocation assistance or waive rent for the final 3 months.",
+    "key_value": "3 months relocation assistance or 3 months rent waiver for no-fault termination",
+    "legal_state": "enacted",
+    "effective_date": "2021-11-19",
+    "date_basis": "stated",
+    "citation": "Santa Ana Just Cause Eviction Ordinance",
+    "quoted_span": "After 30 days, an owner shall not terminate a tenancy without just cause, which shall be stated in a written notice.",
+    "coverage_text": "Residential rental properties in Santa Ana, except housing produced in the last 15 years and the other excluded property types.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Housing produced in the last 15 years",
+       "all_of": [
+        {
+         "fact": "first_occupancy_date",
+         "op": "after",
+         "value": "",
+         "years_before_as_of": 15,
+         "text": "housing produced in the last 15 years"
+        }
+       ]
+      },
+      {
+       "label": "Deed-restricted affordable housing",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "deed-restricted affordable housing",
+         "years_before_as_of": 0,
+         "text": "deed-restricted affordable housing"
+        }
+       ]
+      },
+      {
+       "label": "Hotel and transient occupancy",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "hotel or transient occupancy",
+         "years_before_as_of": 0,
+         "text": "hotel and transient occupancy"
+        }
+       ]
+      },
+      {
+       "label": "Hospital and care facilities",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "hospital or care facility",
+         "years_before_as_of": 0,
+         "text": "hospital and care facilities"
+        }
+       ]
+      },
+      {
+       "label": "Dormitories and other shared living quarters",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "dormitory or shared living quarters",
+         "years_before_as_of": 0,
+         "text": "dormitories; and other shared living quarters"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Housing produced in the last 15 years; deed-restricted affordable housing; hotel and transient occupancy; hospital and care facilities; dormitories; and other shared living quarters.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.9,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

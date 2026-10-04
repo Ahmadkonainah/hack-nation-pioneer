@@ -1,0 +1,16 @@
+{
+ "doc_id": "D049",
+ "chunk": 2,
+ "chunks": 2,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 8150,
+ "output_tokens": 222,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:47+00:00",
+ "result": {
+  "document_summary": "Part 2 of 2 of M.G.L. c. 151B § 4 (Massachusetts unlawful discrimination practices), covering credit-age exceptions, employment discrimination, sexual harassment, and genetic-information provisions.",
+  "notes": "This part of c. 151B § 4 contains no rules in the six in-scope categories (rent increase limits, just-cause eviction, security deposits, application screening fees, screening restrictions, algorithmic rent setting). The only housing-related text is paragraph 18 on sexual harassment of tenants, which is outside the scope categories; the rest concerns credit and employment discrimination.",
+  "rules": []
+ }
+}

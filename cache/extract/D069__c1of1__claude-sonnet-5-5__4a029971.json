@@ -1,0 +1,40 @@
+{
+ "doc_id": "D069",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 7459,
+ "output_tokens": 952,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:54:12+00:00",
+ "result": {
+  "document_summary": "New Jersey P.L. 2026, c.43, the Forbidding the Algorithmic Inflation of Rent (FAIR) Act, which makes it an antitrust violation to use or operate algorithmic rent-setting coordination software for residential rentals.",
+  "notes": "Effective date computed from section 9: first day of the twelfth month following enactment on July 20, 2026, i.e., 2027-07-01 (inferred from the text, not stated as a date). Section 6(b) bars conflicting municipal ordinances; it is recorded in the interaction field of the single algorithmic rent-setting rule. The act contains no rent-cap, eviction, deposit, fee or screening rules.",
+  "rules": [
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "algorithmic_rent_setting",
+    "title": "FAIR Act: ban on algorithmic coordination of residential rental pricing",
+    "requirement": "It is an antitrust violation for a landlord to pay for or use a coordinator's services, for a coordinator to facilitate agreements restricting competition or to perform a coordinating function, or for anyone to engage in parallel pricing coordination or perform a coordinating function (e.g., algorithms that pool nonpublic data of multiple owners to set or recommend rents, lease terms or occupancy). Public free rent estimates, research uses, equal-terms brokerage databases and government affordability controls are excluded.",
+    "key_value": "Unlawful to use or operate algorithmic rent-setting coordination software",
+    "legal_state": "enacted",
+    "effective_date": "2027-07-01",
+    "citation": "P.L. 2026, c.43 (C.56:9-20 to 56:9-26)",
+    "quoted_span": "a rental property owner, or any agent,\nrepresentative, or subcontractor thereof, to receive, subscribe to, contract\nfor, or otherwise exchange any form of consideration in return for the use of,\nthe services of a coordinator;",
+    "coverage_text": "Applies to all rental property owners, coordinators and other persons dealing in residential dwelling units in New Jersey.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "Excludes inpatient medical care, licensed long-term care and detention or correctional facilities from 'residential dwelling units'; excludes research/testing uses, free public rent estimates, equal-terms brokerage listing databases, and government entities setting rents through affordability controls from 'coordinating function'/'coordinator'.",
+    "interaction": "Supplements and does not limit the New Jersey Antitrust Act (P.L.1970, c.73); section 6(b) prohibits municipalities from enacting ordinances that conflict with this act, except ordinances explicitly authorized or required by other law.",
+    "yields_to": [],
+    "confidence": 0.9,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

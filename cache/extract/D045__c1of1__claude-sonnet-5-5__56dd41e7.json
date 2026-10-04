@@ -1,0 +1,41 @@
+{
+ "doc_id": "D045",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 5509,
+ "output_tokens": 498,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:39+00:00",
+ "result": {
+  "document_summary": "Massachusetts legislature bill page for H.5222, a pending 194th-session bill on preventing algorithmic rent fixing, reported favorably by the Housing Committee and referred to House Ways and Means.",
+  "notes": "This is a legislative bill status page; the bill text is not included, so the substantive provisions, coverage, and effective date are unknown. The record is based solely on the bill title and status, with low confidence per the bill-page exception. The 194th session is stated as current, so the bill is pending.",
+  "rules": [
+   {
+    "jurisdiction": "MA",
+    "level": "state",
+    "category": "algorithmic_rent_setting",
+    "title": "H.5222 - An Act relative to preventing algorithmic rent fixing in the rental housing market",
+    "requirement": "Pending Massachusetts bill addressing algorithmic rent fixing (pricing algorithms in the rental housing market); its specific requirements are not stated on this page because the bill text is not included.",
+    "key_value": "",
+    "legal_state": "pending",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Mass. H.5222 (194th General Court)",
+    "quoted_span": "An Act relative to preventing algorithmic rent fixing in the rental housing market",
+    "coverage_text": "Coverage is not stated because the bill text is not on the page.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.5,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

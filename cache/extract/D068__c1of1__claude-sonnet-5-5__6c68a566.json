@@ -1,0 +1,79 @@
+{
+ "doc_id": "D068",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 6328,
+ "output_tokens": 1073,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:54:04+00:00",
+ "result": {
+  "document_summary": "A New Jersey Division on Civil Rights brochure explaining the NJ Law Against Discrimination as applied to housing, including its source-of-income protection, covered property, exceptions and complaint process.",
+  "notes": "Only one in-scope rule: the LAD's prohibition on source-of-lawful-income discrimination in rental housing (screening_restrictions). The brochure gives no effective date for this provision. Other content (protected classes, service animals, disability modifications, complaint procedures) is outside the six categories. The document cites the LAD only at N.J.S.A. 10:5-5mm for a definition; the general citation N.J.S.A. 10:5-1 et seq. is the standard form for the Law Against Discrimination and is not quoted in the document.",
+  "rules": [
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "screening_restrictions",
+    "title": "Source-of-lawful-income discrimination barred in rental housing (LAD)",
+    "requirement": "Landlords may not discriminate in housing based on the source of lawful income or the source of lawful rent payment a tenant uses, so they cannot refuse a Section 8 voucher holder solely because of that income source.",
+    "key_value": "",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "N.J.S.A. 10:5-1 et seq. (New Jersey Law Against Discrimination)",
+    "quoted_span": "The LAD also prohibits housing discrimination  based\non the source of lawful income or source of lawful rent\nor mortgage payment a tenant or purchaser uses.",
+    "coverage_text": "Applies to the sale or rental of all property, residential or business, in New Jersey, except for the listed owner-occupancy and religious-organization exceptions.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Single apartment in a two-family dwelling with the other unit owner-occupied",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "2",
+         "years_before_as_of": 0,
+         "text": "The rental of a single apartment or flat in a two-family dwelling"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "the other occupancy unit of which is occupied by the owner as his/her residence at the time of such rentals"
+        }
+       ]
+      },
+      {
+       "label": "Room rental in an owner-occupied one-family dwelling",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "1",
+         "years_before_as_of": 0,
+         "text": "a one-family dwelling"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "rental of a room or rooms by the owner or occupant of a one-family dwelling occupied by him/her as his/her residence at the time of such rental"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Exempt: rental of one apartment in a two-family dwelling whose other unit is owner-occupied; rental of a room or rooms in an owner-occupied one-family dwelling. The brochure also lists a religious-organization preference exception and an older-persons housing exception for familial status, which do not concern source of income.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

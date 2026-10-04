@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 19,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 20627,
+ "output_tokens": 270,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:28+00:00",
+ "result": {
+  "document_summary": "A mis-scraped chunk of the San Diego Municipal Code (Chapter 2, Government) covering city property sales to public agencies and SDSU and Administrative Code personnel provisions, with no section 98.1103 algorithmic-device text despite the source URL.",
+  "notes": "This part contains no rules in scope. The text is Chapter 2 (Government) of the San Diego Municipal Code: sales of City real property to public agencies and SDSU (§§ 22.0907, 22.0908) and administrative/personnel provisions (§§ 22.1001-22.1008). The URL suggests §98.1103 (use and sale of algorithmic devices prohibited), but that section's text does not appear in this part, so no algorithmic_rent_setting rule can be extracted from it.",
+  "rules": []
+ }
+}

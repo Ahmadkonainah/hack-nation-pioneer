@@ -1,0 +1,89 @@
+{
+ "doc_id": "D016",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 12025,
+ "output_tokens": 1360,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:52:40+00:00",
+ "result": {
+  "document_summary": "California Civil Rights Department web page and FAQ describing state fair housing (FEHA) protections, including source-of-income and criminal-history limits on rental applicant screening.",
+  "notes": "The page is mostly general fair housing guidance (disability accommodations, protected characteristics, complaint process), which is out of scope. Two in-scope screening_restrictions rules were extracted: source-of-income discrimination and criminal-history screening limits. The page names no statute citations or effective dates for them, so the FEHA is cited as named in the text (Gov. Code citation not stated in the document) and effective_date is left blank. Security deposit mentions appear only as examples of discriminatory terms and were not extracted as a deposit rule.",
+  "rules": [
+   {
+    "jurisdiction": "CA",
+    "level": "state",
+    "category": "screening_restrictions",
+    "title": "Source-of-income discrimination barred (incl. Section 8 vouchers)",
+    "requirement": "Housing providers may not refuse to rent to, or apply different terms to, a person because of how they will pay rent, including Section 8 vouchers, SSI, rental assistance, or job wages. Landlords must also comply with paperwork and inspection requirements of rental assistance programs and may not advertise 'No Section 8'.",
+    "key_value": "Source of income is a protected characteristic",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "California Fair Employment and Housing Act (FEHA); CRD, Housing Discrimination page",
+    "quoted_span": "California law protects tenants from discrimination based on how a tenant will be paying rent (“source of income”).",
+    "coverage_text": "Applies to most housing providers and housing accommodations in California, including landlords, property managers, and screening companies.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Owner-occupied home renting to one additional person",
+       "all_of": [
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "owner is occupying a home and is renting to one additional person"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Per the page, an owner occupying a home and renting to one additional person may exclude applicants based on protected characteristics (though discriminatory advertising remains prohibited); senior housing may be age-limited.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "CA",
+    "level": "state",
+    "category": "screening_restrictions",
+    "title": "Limits on use of criminal history in tenant screening",
+    "requirement": "Housing providers may not consider arrests that did not lead to conviction, sealed or expunged records, or juvenile justice records, and may not have blanket bans on applicants with a criminal history. A denial based on a conviction must be directly related to the applicant's ability to be a good tenant and not a threat to others' health, safety, or property.",
+    "key_value": "No blanket bans; convictions must be directly related to tenancy risk",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "California Fair Employment and Housing Act (FEHA); CRD, Housing Discrimination page",
+    "quoted_span": "Housing providers are also prohibited from having “blanket bans” of all people with a criminal history.",
+    "coverage_text": "Applies to most housing providers and tenant screening companies for housing in California.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Owner-occupied home renting to one additional person",
+       "all_of": [
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "owner is occupying a home and is renting to one additional person"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Per the page, an owner occupying a home and renting to one additional person may exclude applicants based on protected characteristics; the page does not state whether this exemption reaches the criminal-history rules specifically.",
+    "interaction": "The page notes FEHA invalidates any state law to the extent it purports to require or permit unlawful housing discrimination.",
+    "yields_to": [],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

@@ -1,0 +1,1632 @@
+{
+ "model": "claude-sonnet-5-5",
+ "called_at": "2026-10-04T01:30:44+00:00",
+ "input_tokens": 35630,
+ "output_tokens": 16060,
+ "result": {
+  "rules": [
+   {
+    "id": "r-0001",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "first_occupancy_date",
+      "op": "on_or_before",
+      "value": "",
+      "years_before_as_of": 15,
+      "text": "certificate of occupancy for more than 15 years"
+     }
+    ],
+    "exemptions": [
+     {
+      "label": "Deed-restricted or subsidized affordable housing",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "restricted affordable housing",
+        "years_before_as_of": 0,
+        "text": "Housing restricted by deed, regulatory agreement or other recorded document as affordable housing"
+       }
+      ]
+     },
+     {
+      "label": "Dormitories",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "dormitory",
+        "years_before_as_of": 0,
+        "text": "Dormitories owned and operated by an institution of higher education or K-12 school"
+       }
+      ]
+     },
+     {
+      "label": "Separately alienable property, non-corporate owner, written exemption notice",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "separately alienable home or condominium unit",
+        "years_before_as_of": 0,
+        "text": "alienable separate from the title to any other dwelling unit"
+       },
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "owner is not a REIT, corporation or LLC with a corporate member",
+        "years_before_as_of": 0,
+        "text": "Owner is not a REIT, a corporation, an LLC with a corporate member"
+       },
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "owner filed an exemption notice",
+        "years_before_as_of": 0,
+        "text": "written exemption notice provided to tenants"
+       }
+      ]
+     },
+     {
+      "label": "Owner-occupied duplex",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "2",
+        "years_before_as_of": 0,
+        "text": "two separate dwelling units within a single structure"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "Owner occupied one of the units as principal residence"
+       }
+      ]
+     },
+     {
+      "label": "Mobilehome homeowners",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "mobile home",
+        "years_before_as_of": 0,
+        "text": "does not apply to a homeowner of a mobilehome"
+       }
+      ]
+     }
+    ],
+    "support": "own text (coverage_text, exemptions_text, coverage field); local rent control exemption is deference and omitted",
+    "reasoning": "Covers dwellings with a certificate of occupancy more than 15 years ago, minus the listed exemptions.",
+    "plain_en": "Rent increases are capped at 5% plus local inflation, up to 10%, for housing older than 15 years, unless an exemption such as an owner-occupied duplex applies."
+   },
+   {
+    "id": "r-0002",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "tenancy",
+      "op": "is",
+      "value": "tenant lived there 12 months continuously and lawfully",
+      "years_before_as_of": 0,
+      "text": "after a tenant has continuously and lawfully occupied for 12 months"
+     },
+     {
+      "fact": "first_occupancy_date",
+      "op": "on_or_before",
+      "value": "",
+      "years_before_as_of": 15,
+      "text": "exempts housing with a certificate of occupancy within the previous 15 years"
+     }
+    ],
+    "exemptions": [
+     {
+      "label": "Single-family owner-occupied residence",
+      "conditions": [
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "Single-family owner-occupied residences renting no more than two units or bedrooms"
+       }
+      ]
+     },
+     {
+      "label": "Owner-occupied duplex",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "2",
+        "years_before_as_of": 0,
+        "text": "two separate dwelling units within a single structure"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "owner occupied one of the units as principal residence"
+       }
+      ]
+     },
+     {
+      "label": "Separately alienable property, non-corporate owner, written exemption notice",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "separately alienable home or condominium unit",
+        "years_before_as_of": 0,
+        "text": "alienable separate from the title to any other dwelling unit"
+       },
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "owner is not a REIT, corporation or LLC with a corporate member",
+        "years_before_as_of": 0,
+        "text": "owner is not a REIT, a corporation, or an LLC with a corporate member"
+       },
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "owner filed an exemption notice",
+        "years_before_as_of": 0,
+        "text": "written notice that the property is exempt"
+       }
+      ]
+     },
+     {
+      "label": "Deed-restricted or subsidized affordable housing",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "restricted or subsidized affordable housing",
+        "years_before_as_of": 0,
+        "text": "Housing restricted by deed or subject to an agreement providing housing subsidies"
+       }
+      ]
+     },
+     {
+      "label": "Hotel or transient occupancy",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "hotel",
+        "years_before_as_of": 0,
+        "text": "Exempts transient/hotel occupancy"
+       }
+      ]
+     },
+     {
+      "label": "Dormitories or institutional housing",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "dormitory or institutional housing",
+        "years_before_as_of": 0,
+        "text": "certain institutional housing and dormitories"
+       }
+      ]
+     }
+    ],
+    "support": "own text (coverage_text, exemptions_text, coverage field); local just-cause deference omitted",
+    "reasoning": "Covers units occupied 12+ months in buildings with certificate of occupancy over 15 years old, minus listed exemptions.",
+    "plain_en": "After a tenant has lived in a unit 12 months, the landlord needs a stated legal reason to end the tenancy, and must pay one month's rent for no-fault evictions."
+   },
+   {
+    "id": "r-0003",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "Applies to security for any residential rental in California with no building test.",
+    "plain_en": "Landlords generally cannot take more than one month's rent as a deposit (two for small landlords) and must return it with an itemized list within 21 days."
+   },
+   {
+    "id": "r-0004",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "Applies to any landlord charging a screening fee for a residential rental.",
+    "plain_en": "Landlords can charge only actual screening costs, never over $30 (adjusted for inflation), and must give an itemized receipt."
+   },
+   {
+    "id": "r-0005",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "Applies to owners of any housing accommodation in California with no limits.",
+    "plain_en": "Landlords cannot discriminate against applicants or tenants because of their income source, including housing vouchers."
+   },
+   {
+    "id": "r-0006",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "The text applies to any person in California and sets no building tests.",
+    "plain_en": "It is illegal to use or sell shared pricing software built on competitors' data to coordinate prices or force others to follow its prices."
+   },
+   {
+    "id": "r-0007",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text requirement and coverage_text; new-building exemption applies to local rent control, not this rule",
+    "reasoning": "The record states the state has no rent control and applies to rentals generally, so universal with no exemptions.",
+    "plain_en": "New Jersey has no statewide rent control, but towns may adopt their own, and rent increases need proper written notice and cannot be unconscionable."
+   },
+   {
+    "id": "r-0008",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Owner-occupied premises with two or fewer rental units",
+      "conditions": [
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "two- or three-unit owner-occupied premises"
+       },
+       {
+        "fact": "units",
+        "op": "<=",
+        "value": "3",
+        "years_before_as_of": 0,
+        "text": "two- or three-unit premises with two or fewer rental units"
+       }
+      ]
+     },
+     {
+      "label": "Hotel, motel or guest house transient guests",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "hotel or motel",
+        "years_before_as_of": 0,
+        "text": "hotel, motel, guest-house transient or seasonal guests"
+       }
+      ]
+     },
+     {
+      "label": "Unit held in trust for developmentally disabled family member",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "unit held in trust for developmentally disabled family member",
+        "years_before_as_of": 0,
+        "text": "a unit held in trust for a developmentally disabled immediate family member who permanently occupies it"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text and exemptions_text",
+    "reasoning": "Covers most residential rentals statewide with listed exemptions.",
+    "plain_en": "Landlords can evict or refuse to renew a lease only for specific legal reasons and with a court order, after giving the required written notice."
+   },
+   {
+    "id": "r-0009",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Owner-occupied two- or three-family dwelling",
+      "conditions": [
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "Owner-occupied"
+       },
+       {
+        "fact": "units",
+        "op": "<=",
+        "value": "3",
+        "years_before_as_of": 0,
+        "text": "two- or three-family dwellings"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text and exemptions_text",
+    "reasoning": "Applies to most NJ residential rentals except owner-occupied two- or three-family dwellings.",
+    "plain_en": "Landlords cannot collect a security deposit above one and a half months' rent, and yearly increases to the deposit are capped at 10%."
+   },
+   {
+    "id": "r-0010",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "One- or two-family dwelling",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "<=",
+        "value": "2",
+        "years_before_as_of": 0,
+        "text": "a dwelling unit in a one-family or two-family dwelling"
+       }
+      ]
+     },
+     {
+      "label": "Real estate licensee who is not the landlord",
+      "conditions": [
+       {
+        "fact": "tenancy",
+        "op": "is",
+        "value": "real estate licensee who is not the landlord",
+        "years_before_as_of": 0,
+        "text": "NJ Real Estate Commission licensee unless the licensee is the landlord"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text and exemptions_text",
+    "reasoning": "Applies to residential rentals except one- and two-family dwellings and non-landlord licensees.",
+    "plain_en": "Landlords cannot charge more than $50 (adjusted for inflation) to apply for a rental, except in one- or two-family homes."
+   },
+   {
+    "id": "r-0011",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Owner-occupied premises of not more than four units",
+      "conditions": [
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "owner-occupied premises"
+       },
+       {
+        "fact": "units",
+        "op": "<=",
+        "value": "4",
+        "years_before_as_of": 0,
+        "text": "not more than four dwelling units"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text and exemptions_text",
+    "reasoning": "Covers rental units except those in owner-occupied premises of four units or fewer.",
+    "plain_en": "Landlords cannot ask about or use an applicant's criminal record until after a conditional offer, and then only limited convictions with an individual review."
+   },
+   {
+    "id": "r-0012",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Two-family owner-occupied dwelling",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "2",
+        "years_before_as_of": 0,
+        "text": "two-family owner occupied dwellings"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "owner occupied"
+       }
+      ]
+     },
+     {
+      "label": "Room in owner- or resident-occupied single home",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "1",
+        "years_before_as_of": 0,
+        "text": "rooms in an owner or resident-occupied single home"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "owner or resident-occupied"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text and exemptions_text",
+    "reasoning": "Applies to all landlord-tenant relationships except the listed small owner-occupied cases.",
+    "plain_en": "Landlords cannot refuse to rent because of an applicant's lawful income source, but may still turn down applicants for too little income or bad credit."
+   },
+   {
+    "id": "r-0013",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text coverage_text; exclusions concern facility types and tools, not tested here",
+    "reasoning": "Applies to rental property owners, agents and coordinators statewide with no building test.",
+    "plain_en": "Rental owners and software coordinators cannot use algorithms that pool competitors' data to coordinate rent prices, and breaking this counts as an antitrust violation."
+   },
+   {
+    "id": "r-0014",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "Applies to all Massachusetts cities and towns and thus rentals statewide.",
+    "plain_en": "Massachusetts cities and towns cannot adopt rent control, apart from a narrow voluntary and compensated form."
+   },
+   {
+    "id": "r-0015",
+    "scope": "undefined",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "A failed ballot measure with no defined coverage.",
+    "plain_en": "A ballot question that was struck down and never became law, which would have capped yearly rent increases statewide."
+   },
+   {
+    "id": "r-0016",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Vacation or recreational tenancy of 100 days or less",
+      "conditions": [
+       {
+        "fact": "tenancy",
+        "op": "is",
+        "value": "tenancy of 100 days or less for vacation or recreation",
+        "years_before_as_of": 0,
+        "text": "lease, rental, occupancy or tenancy of 100 days or less for vacation or recreational purposes"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text and exemptions_text",
+    "reasoning": "Applies to residential leases in Massachusetts except short vacation stays.",
+    "plain_en": "Landlords can ask for no more than first and last month's rent, a one-month deposit and a key and lock cost, and must return the deposit within 30 days."
+   },
+   {
+    "id": "r-0017",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "Applies to anyone finding rentals for a fee in Massachusetts with no building limits.",
+    "plain_en": "A rental broker can work for the tenant or the landlord but not both, and only the party who hired the broker pays the fee."
+   },
+   {
+    "id": "r-0018",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "Applies to any person furnishing rental accommodations with no stated limits.",
+    "plain_en": "Landlords cannot discriminate against tenants who receive public assistance or housing subsidies such as rental assistance."
+   },
+   {
+    "id": "r-0019",
+    "scope": "undefined",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Pending bill whose text is not provided.",
+    "plain_en": "A proposed bill on algorithmic rent fixing; its details are not stated and it is not law."
+   },
+   {
+    "id": "r-0020",
+    "scope": "undefined",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "Pending bill whose text is not provided.",
+    "plain_en": "A proposed bill that would ban algorithmic rent setting; it is not yet law."
+   },
+   {
+    "id": "r-0021",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "first_occupancy_date",
+      "op": "on_or_before",
+      "value": "1978-10-01",
+      "years_before_as_of": 0,
+      "text": "first built on or before October 1, 1978"
+     }
+    ],
+    "exemptions": [
+     {
+      "label": "Condominium or townhome tenancy commenced after 1995-12-31",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "condominium or townhome",
+        "years_before_as_of": 0,
+        "text": "Condominium/Townhome rent not regulated for tenancies commenced after December 31, 1995"
+       },
+       {
+        "fact": "tenancy",
+        "op": "is",
+        "value": "tenancy commenced after 1995-12-31",
+        "years_before_as_of": 0,
+        "text": "tenancies that commenced after December 31, 1995"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text and exemptions_text",
+    "reasoning": "Covers buildings first built on or before 1978-10-01 except post-1995 condo or townhome tenancies.",
+    "plain_en": "Landlords of older Los Angeles rent-stabilized units can raise rent only once every 12 months, by the percentage the city publishes."
+   },
+   {
+    "id": "r-0022",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "rule_coverage",
+      "op": "is_not",
+      "value": "r-0021",
+      "years_before_as_of": 0,
+      "text": "not covered by the Rent Stabilization Ordinance"
+     },
+     {
+      "fact": "tenancy",
+      "op": "is",
+      "value": "tenant lived there six months or original lease expired",
+      "years_before_as_of": 0,
+      "text": "lived in the unit at least six months or the original lease has expired"
+     }
+    ],
+    "exemptions": [
+     {
+      "label": "Transient hotels",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "transient hotel",
+        "years_before_as_of": 0,
+        "text": "transient hotels"
+       }
+      ]
+     },
+     {
+      "label": "Licensed care facilities",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "licensed care facility",
+        "years_before_as_of": 0,
+        "text": "licensed care facilities"
+       }
+      ]
+     },
+     {
+      "label": "Fraternity or sorority houses",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "fraternity or sorority house",
+        "years_before_as_of": 0,
+        "text": "fraternity or sorority houses"
+       }
+      ]
+     },
+     {
+      "label": "Owner's roommate",
+      "conditions": [
+       {
+        "fact": "tenancy",
+        "op": "is",
+        "value": "owner's roommate",
+        "years_before_as_of": 0,
+        "text": "an owner's roommate"
+       }
+      ]
+     },
+     {
+      "label": "Cooperatives, certain non-profit facilities, HACLA or government-owned",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "cooperative, certain non-profit facility, or HACLA/government-owned property",
+        "years_before_as_of": 0,
+        "text": "some cooperatives, non-profit facilities, and HACLA or government-owned properties"
+       }
+      ]
+     }
+    ],
+    "support": "own text; r-0021 for RSO coverage",
+    "reasoning": "Covers rentals not covered by the RSO, once the tenant has met the six-month test, minus listed exemptions.",
+    "plain_en": "In Los Angeles, landlords of units outside rent stabilization need a legal reason to evict and must pay relocation help for no-fault evictions."
+   },
+   {
+    "id": "r-0023",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "first_occupancy_date",
+      "op": "on_or_before",
+      "value": "1978-10-01",
+      "years_before_as_of": 0,
+      "text": "generally buildings first built on or before October 1, 1978"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text coverage_text; r-0021 coverage text",
+    "reasoning": "Covers RSO units, i.e. buildings first built on or before 1978-10-01.",
+    "plain_en": "Landlords of Los Angeles rent-stabilized units can evict only for listed reasons, and no-fault evictions require filings with the city, notices and relocation payments."
+   },
+   {
+    "id": "r-0024",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "status_not_in_data",
+      "op": "is",
+      "value": "Protected Unit being demolished for new construction",
+      "years_before_as_of": 0,
+      "text": "Protected Units that will be demolished for new construction"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "Covers only protected units slated for demolition for new construction, a status the parcel data cannot show.",
+    "plain_en": "When Los Angeles rent-stabilized or lower-income units are torn down for new construction, owners must pay higher relocation and give rights to return."
+   },
+   {
+    "id": "r-0025",
+    "scope": "undefined",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "A motion requesting a study; no coverage defined.",
+    "plain_en": "A pending City Council request for a report on rent-setting software and whether to ban it; no ban has been adopted."
+   },
+   {
+    "id": "r-0026",
+    "scope": "undefined",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text coverage_text says the page does not define which units qualify",
+    "reasoning": "The record does not define which units are rent-controlled and no sibling record supplies it.",
+    "plain_en": "Rent-controlled San Francisco units can raise rent by 1.6% of base rent from March 2026 to February 2027."
+   },
+   {
+    "id": "r-0027",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "status_not_in_data",
+      "op": "is",
+      "value": "unit covered by San Francisco Rent Ordinance",
+      "years_before_as_of": 0,
+      "text": "Rental units covered by the San Francisco Rent Ordinance"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text coverage_text and exemptions_text",
+    "reasoning": "Covers units under the Rent Ordinance, which the records do not define by testable building facts.",
+    "plain_en": "San Francisco landlords can evict tenants in covered units only for one of 17 listed reasons, and ending a lease or selling the building is not enough."
+   },
+   {
+    "id": "r-0028",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "status_not_in_data",
+      "op": "is",
+      "value": "affordable housing",
+      "years_before_as_of": 0,
+      "text": "applies to affordable housing decisions"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "Applies only to affordable housing decisions, a status parcel data cannot show.",
+    "plain_en": "San Francisco protects residents with arrest or conviction history in affordable housing decisions."
+   },
+   {
+    "id": "r-0029",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "Applies to the sale or use of algorithmic devices for residential units in San Francisco with no building test.",
+    "plain_en": "In San Francisco it is illegal to sell or use software that uses competitors' private data to set rents for residential units."
+   },
+   {
+    "id": "r-0030",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "tenancy",
+      "op": "is",
+      "value": "residential tenancy longer than 30 days",
+      "years_before_as_of": 0,
+      "text": "residential rental tenancies of more than 30 days"
+     },
+     {
+      "fact": "first_occupancy_date",
+      "op": "on_or_before",
+      "value": "",
+      "years_before_as_of": 15,
+      "text": "except housing issued a certificate of occupancy within the previous 15 years"
+     }
+    ],
+    "exemptions": [
+     {
+      "label": "Owner-occupied single-family home",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "1",
+        "years_before_as_of": 0,
+        "text": "single-family residence occupied by the landlord"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "occupied by the landlord as principal residence"
+       }
+      ]
+     },
+     {
+      "label": "Owner-occupied duplex",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "2",
+        "years_before_as_of": 0,
+        "text": "two separate dwelling units within a single structure"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "landlord occupies one unit as principal residence"
+       }
+      ]
+     },
+     {
+      "label": "Separately alienable property with non-corporate landlord and exemption notice",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "separately alienable home or condominium unit",
+        "years_before_as_of": 0,
+        "text": "alienable separate from the title to any other dwelling unit"
+       },
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "owner is not a REIT, corporation or LLC with a corporate member",
+        "years_before_as_of": 0,
+        "text": "landlord is not a REIT, corporation, LLC with a corporate member"
+       },
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "owner filed an exemption notice",
+        "years_before_as_of": 0,
+        "text": "written exemption notice in the lease"
+       }
+      ]
+     },
+     {
+      "label": "Deed-restricted or subsidized affordable housing",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "deed-restricted or subsidized affordable housing",
+        "years_before_as_of": 0,
+        "text": "housing restricted by deed or subject to a housing subsidy agreement"
+       }
+      ]
+     },
+     {
+      "label": "Hotels, short-term rentals, institutional housing, dormitories, shared-facility resident landlord",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "hotel, short-term rental, institutional housing, dormitory or shared-facility rental",
+        "years_before_as_of": 0,
+        "text": "hotels, short-term rentals, institutional housing, dormitories, shared-facility rentals with a resident landlord"
+       }
+      ]
+     },
+     {
+      "label": "Mobilehomes",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "mobile home",
+        "years_before_as_of": 0,
+        "text": "mobilehomes"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text, exemptions_text and coverage field",
+    "reasoning": "Covers tenancies over 30 days in buildings older than 15 years, minus the listed exemptions.",
+    "plain_en": "San Diego landlords need a legal reason to end most tenancies and must pay two months' rent (three for seniors or disabled tenants) for no-fault evictions."
+   },
+   {
+    "id": "r-0031",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text coverage_text; the exemptions concern software types, not buildings",
+    "reasoning": "Applies to sellers and landlords for residential rental property in San Diego with no building test.",
+    "plain_en": "In San Diego, landlords cannot use software that uses competitors' private data to set rents, with tenant lawsuits and up to $1,000 per violation."
+   },
+   {
+    "id": "r-0032",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "first_occupancy_date",
+      "op": "before",
+      "value": "1980-01-01",
+      "years_before_as_of": 0,
+      "text": "most units in multifamily properties built before 1980"
+     },
+     {
+      "fact": "units",
+      "op": ">=",
+      "value": "2",
+      "years_before_as_of": 0,
+      "text": "multifamily properties"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text coverage_text; the partially covered list is a non-coverage list consistent with the conditions",
+    "reasoning": "Fully covered units are mainly multifamily buildings built before 1980.",
+    "plain_en": "Berkeley landlords of covered older units can raise rent each year only by the Rent Board's inflation-based adjustment, capped at 5%."
+   },
+   {
+    "id": "r-0033",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "tenancy",
+      "op": "is",
+      "value": "evicted for owner move-in or Ellis Act withdrawal",
+      "years_before_as_of": 0,
+      "text": "Tenants evicted for an owner move-in or for removal under the Ellis Act"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "Covers only tenants evicted for owner move-in or Ellis Act withdrawal, a tenancy-level test.",
+    "plain_en": "Berkeley owners must pay tenants relocation money when evicting for owner move-in or to take a unit off the rental market; amounts update each year."
+   },
+   {
+    "id": "r-0034",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "status_not_in_data",
+      "op": "is",
+      "value": "fully or partially covered by the Rent Ordinance",
+      "years_before_as_of": 0,
+      "text": "Units that are fully or partially covered by the Rent Ordinance"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text coverage_text; r-0032 defines only fully covered units, so partial coverage is not testable",
+    "reasoning": "Covers units fully or partially covered by the Rent Ordinance, which includes partial coverage the records do not define by building facts.",
+    "plain_en": "Berkeley tenants in covered units can be evicted only for just cause, and owners cannot evict over small rental debts or for refusing a new fixed-term lease."
+   },
+   {
+    "id": "r-0035",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "status_not_in_data",
+      "op": "is",
+      "value": "fully or partially covered by Berkeley Rent Ordinance",
+      "years_before_as_of": 0,
+      "text": "units fully or partially covered by Berkeley's Rent Ordinance"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "Covers units fully or partially covered by the Rent Ordinance, which is not fully testable from parcel data.",
+    "plain_en": "Berkeley landlords of covered units must pay tenants interest on security deposits each year, prorated if the tenant moves out early."
+   },
+   {
+    "id": "r-0036",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "Applies to all residential rental agreements in Berkeley.",
+    "plain_en": "Berkeley landlords must disclose tenant screening fee rights and the state fee cap, and cannot charge non-refundable renewal or roommate-change fees."
+   },
+   {
+    "id": "r-0037",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Owner-occupied 1-3 unit property",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "<=",
+        "value": "3",
+        "years_before_as_of": 0,
+        "text": "between 1-3 units"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "an owner of record resides in one of the units"
+       }
+      ]
+     },
+     {
+      "label": "Lifetime sex offenders",
+      "conditions": [
+       {
+        "fact": "tenancy",
+        "op": "is",
+        "value": "lifetime sex offender",
+        "years_before_as_of": 0,
+        "text": "Lifetime sex offenders"
+       }
+      ]
+     },
+     {
+      "label": "Public housing or Section 8 (limited)",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "public housing or Section 8 property",
+        "years_before_as_of": 0,
+        "text": "public housing/Section 8 properties"
+       }
+      ]
+     },
+     {
+      "label": "Owner move-back rental agreement",
+      "conditions": [
+       {
+        "fact": "tenancy",
+        "op": "is",
+        "value": "owner move-back rental agreement",
+        "years_before_as_of": 0,
+        "text": "units under a rental agreement allowing owners to move back"
+       }
+      ]
+     },
+     {
+      "label": "Existing tenant sublet or roommate change",
+      "conditions": [
+       {
+        "fact": "tenancy",
+        "op": "is",
+        "value": "existing tenant sublet or roommate change",
+        "years_before_as_of": 0,
+        "text": "existing tenants subletting or adding/replacing roommates"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text and exemptions_text",
+    "reasoning": "Applies to rental housing providers in Berkeley, minus the listed exemptions.",
+    "plain_en": "Berkeley landlords cannot ask about or use criminal history in choosing or managing tenants, and must give written notice and a chance to respond first."
+   },
+   {
+    "id": "r-0038",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text coverage_text; exclusions concern software types, not buildings",
+    "reasoning": "Applies to all landlords of residential units in Berkeley and the vendors selling to them.",
+    "plain_en": "In Berkeley, landlords cannot use pricing software that relies on competitors' private data to set rents, with fines up to $1,000 per violation."
+   },
+   {
+    "id": "r-0039",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "first_occupancy_date",
+      "op": "on_or_before",
+      "value": "1995-02-01",
+      "years_before_as_of": 0,
+      "text": "residential rental buildings constructed on or before February 1, 1995"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text coverage_text and coverage field; mobile home spaces are not tested by building facts",
+    "reasoning": "Covers residential buildings built on or before 1995-02-01.",
+    "plain_en": "In Santa Ana, rent in older buildings can go up each year by the lower of 3% or 80% of inflation."
+   },
+   {
+    "id": "r-0040",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Housing produced in the last 15 years",
+      "conditions": [
+       {
+        "fact": "first_occupancy_date",
+        "op": "after",
+        "value": "",
+        "years_before_as_of": 15,
+        "text": "housing produced in the last 15 years"
+       }
+      ]
+     },
+     {
+      "label": "Deed-restricted affordable housing",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "deed-restricted affordable housing",
+        "years_before_as_of": 0,
+        "text": "deed-restricted affordable housing"
+       }
+      ]
+     },
+     {
+      "label": "Hotel and transient occupancy",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "hotel",
+        "years_before_as_of": 0,
+        "text": "hotel and transient occupancy"
+       }
+      ]
+     },
+     {
+      "label": "Hospital and care facilities",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "hospital or care facility",
+        "years_before_as_of": 0,
+        "text": "hospital and care facilities"
+       }
+      ]
+     },
+     {
+      "label": "Dormitories and shared living quarters",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "dormitory or shared living quarters",
+        "years_before_as_of": 0,
+        "text": "dormitories; and other shared living quarters"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text and exemptions_text",
+    "reasoning": "Covers residential rentals in Santa Ana except the listed exempt types.",
+    "plain_en": "In Santa Ana, after 30 days of tenancy, landlords need a stated just cause to end a tenancy and must give three months of relocation help for no-fault ends."
+   },
+   {
+    "id": "r-0041",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "Applies to landlords using prohibited automated rent-setting in Santa Ana with no building test.",
+    "plain_en": "Santa Ana bans anticompetitive automated rent price-fixing, with tenant lawsuits and penalties up to $1,000 per violation per month."
+   },
+   {
+    "id": "r-0042",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "units",
+      "op": ">=",
+      "value": "5",
+      "years_before_as_of": 0,
+      "text": "rental properties in Jersey City with five or more units"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text coverage_text and exemptions_text; 1-4 unit properties are exempt",
+    "reasoning": "Covers properties with five or more units.",
+    "plain_en": "Jersey City regulates rent increases in buildings with five or more units; buildings with one to four units are exempt."
+   },
+   {
+    "id": "r-0043",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "Applies to landlords using algorithmic rent coordination services in Jersey City with no building test.",
+    "plain_en": "Jersey City bans landlords from using algorithmic rent coordination services, with fines up to $2,000 per day."
+   },
+   {
+    "id": "r-0044",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Motels and hotels",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "motel or hotel",
+        "years_before_as_of": 0,
+        "text": "Motels and hotels"
+       }
+      ]
+     },
+     {
+      "label": "Newly constructed dwellings on first rental",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "newly constructed dwelling on first rental",
+        "years_before_as_of": 0,
+        "text": "newly constructed dwellings rented for the first time"
+       }
+      ]
+     },
+     {
+      "label": "Industrial or commercial property",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "industrial or commercial",
+        "years_before_as_of": 0,
+        "text": "industrial and commercial property"
+       }
+      ]
+     },
+     {
+      "label": "School-controlled student housing",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "student housing owned or controlled by a school",
+        "years_before_as_of": 0,
+        "text": "housing provided for students by a school that owns or controls it"
+       }
+      ]
+     },
+     {
+      "label": "Government-owned housing",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "government-owned housing",
+        "years_before_as_of": 0,
+        "text": "housing owned and operated by government agencies"
+       }
+      ]
+     },
+     {
+      "label": "Building vacant since 1984 (first rental only)",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "building vacant since January 1, 1984, first rental only",
+        "years_before_as_of": 0,
+        "text": "building completely vacant on or before and since January 1, 1984"
+       }
+      ]
+     },
+     {
+      "label": "Multiple dwellings built after June 25, 1987",
+      "conditions": [
+       {
+        "fact": "first_occupancy_date",
+        "op": "after",
+        "value": "1987-06-25",
+        "years_before_as_of": 0,
+        "text": "multiple dwellings constructed after June 25, 1987"
+       },
+       {
+        "fact": "units",
+        "op": ">=",
+        "value": "3",
+        "years_before_as_of": 0,
+        "text": "multiple dwellings"
+       }
+      ]
+     },
+     {
+      "label": "Housing under preempting government rent regulation",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "preempting government agency rent regulation",
+        "years_before_as_of": 0,
+        "text": "landlord contract with a governmental agency that regulates rent"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text and exemptions_text; the post-1987 exemption is limited in time and the 3+ units for 'multiple dwelling' is an assumption from the term",
+    "reasoning": "Covers all Hoboken dwelling units other than the listed exemptions.",
+    "plain_en": "Hoboken rent control caps increases at the lesser of 5% or inflation, one increase per 12 months, with 30 days' written notice."
+   },
+   {
+    "id": "r-0045",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "tenancy",
+      "op": "is",
+      "value": "rent increase over 10% on renewal with a current tenant",
+      "years_before_as_of": 0,
+      "text": "raise rent by more than 10% upon a renewal of a lease with a current tenant"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "Applies only to renewal increases over 10%, a tenancy-level test.",
+    "plain_en": "Hoboken landlords raising rent more than 10% on a renewal must give an itemized cost list, say whether a rent algorithm was used, and give tenant rights information."
+   },
+   {
+    "id": "r-0046",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Medical, long-term care or detention facilities",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "medical, long-term care or detention facility",
+        "years_before_as_of": 0,
+        "text": "excluding medical/long-term care or detention facilities"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text and exemptions_text",
+    "reasoning": "Applies to all landlords of residential units in Hoboken except care and detention facilities.",
+    "plain_en": "Hoboken landlords cannot use software that analyzes competitors' private data to coordinate rents; violations can bring up to $2,000 in fines or community service."
+   },
+   {
+    "id": "r-0047",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Public housing",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "public housing",
+        "years_before_as_of": 0,
+        "text": "public housing"
+       }
+      ]
+     },
+     {
+      "label": "Hotel or motel space rented to transients",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "hotel or motel",
+        "years_before_as_of": 0,
+        "text": "hotel/motel space rented day-to-day to transients"
+       }
+      ]
+     },
+     {
+      "label": "Commercial space",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "commercial",
+        "years_before_as_of": 0,
+        "text": "commercial space"
+       }
+      ]
+     },
+     {
+      "label": "Certain subsidized rehabilitated units or preempting agency contract",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "Section 8 or rehabilitation subsidy, or preempting government rent regulation",
+        "years_before_as_of": 0,
+        "text": "rehabilitated units receiving Section 8 or Rental Rehabilitation subsidies, and units under a preemptive governmental agency contract"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text and exemptions_text; newly constructed and vacant dwellings are cited to other sections and not tested",
+    "reasoning": "Covers all multiple dwellings in Newark with the stated exemptions.",
+    "plain_en": "Newark rent increases at lease renewal are limited to the inflation change and never more than 4%, with 30 days' written notice."
+   },
+   {
+    "id": "r-0048",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "status_not_in_data",
+      "op": "is",
+      "value": "HOME-assisted unit in Neighborhood Rehabilitation Program",
+      "years_before_as_of": 0,
+      "text": "rental units assisted with HOME funds through the Neighborhood Rehabilitation Program"
+     },
+     {
+      "fact": "units",
+      "op": "<=",
+      "value": "3",
+      "years_before_as_of": 0,
+      "text": "owner-occupied structures of one to three dwelling units"
+     },
+     {
+      "fact": "owner_occupied",
+      "op": "is",
+      "value": "true",
+      "years_before_as_of": 0,
+      "text": "owner-occupied structures"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text coverage_text and coverage field",
+    "reasoning": "Covers only HOME-assisted units in owner-occupied structures of one to three units.",
+    "plain_en": "Newark rents for HOME-assisted units cannot exceed set HUD-based limits, and owners must give 30 days' written notice of increases."
+   },
+   {
+    "id": "r-0049",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Units exempt from rent control or governed by HUD",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "exempt from rent control under N.J.S.A. 2A:42-84.1-84.6 or HUD-controlled",
+        "years_before_as_of": 0,
+        "text": "statutorily exempt from Rent Control or controlled and governed by HUD"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text and exemptions_text",
+    "reasoning": "Applies to residential rentals in Newark except statutorily exempt or HUD-controlled units.",
+    "plain_en": "Newark defines an unconscionable rent increase as unreasonably harsh, above the landlord's cost increase, and out of line with similar rents."
+   },
+   {
+    "id": "r-0050",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "rule_coverage",
+      "op": "is",
+      "value": "r-0047",
+      "years_before_as_of": 0,
+      "text": "dwelling units subject to the Newark rent control chapter"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text coverage_text; r-0047 covers dwellings under Newark rent control",
+    "reasoning": "Applies to dwelling units subject to the Newark rent control chapter.",
+    "plain_en": "Newark landlords cannot try to evict a tenant as payback for the tenant using rights under the rent control law."
+   },
+   {
+    "id": "r-0051",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Apartment in an owner-occupied two-family dwelling",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "2",
+        "years_before_as_of": 0,
+        "text": "a single apartment in a two family dwelling"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "the other unit occupied by the owner"
+       }
+      ]
+     },
+     {
+      "label": "Room rental in an owner-occupied one-family dwelling",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "1",
+        "years_before_as_of": 0,
+        "text": "a room rental in a one-family dwelling"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "owner-occupied one-family dwelling"
+       }
+      ]
+     },
+     {
+      "label": "Government programs housing people with criminal histories",
+      "conditions": [
+       {
+        "fact": "status_not_in_data",
+        "op": "is",
+        "value": "government program housing for people with criminal histories",
+        "years_before_as_of": 0,
+        "text": "property in government programs encouraging housing for people with criminal histories"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text, exemptions_text and coverage field",
+    "reasoning": "Applies to rentals in Newark except small owner-occupied cases and special programs.",
+    "plain_en": "Newark landlords may check criminal history only after a formal application and consent, with limited look-back periods, and must give written reasons if denying."
+   },
+   {
+    "id": "r-0052",
+    "scope": "undefined",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text",
+    "reasoning": "A failed bill with no stated coverage.",
+    "plain_en": "A proposed bill that would have let Boston adopt rent stabilization and eviction protections; it was sent to study and never became law."
+   },
+   {
+    "id": "r-0053",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Hospital, skilled nursing or health facility residences",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "hospital, skilled nursing or health facility",
+        "years_before_as_of": 0,
+        "text": "residences in any hospital, skilled nursing facility or health facility"
+       }
+      ]
+     },
+     {
+      "label": "Non-profit short-term substance abuse treatment facility",
+      "conditions": [
+       {
+        "fact": "use_type",
+        "op": "is",
+        "value": "short-term substance abuse treatment facility",
+        "years_before_as_of": 0,
+        "text": "non-profit facility providing short-term substance abuse treatment"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text and exemptions_text",
+    "reasoning": "Applies to all Boston landlords ending a tenancy except the listed facilities.",
+    "plain_en": "Boston landlords ending a tenancy must give the tenant a rights and resources notice with the eviction notice and send a copy to the city."
+   },
+   {
+    "id": "r-0054",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "status_not_in_data",
+      "op": "is",
+      "value": "receives city DND funding or land, or has BPDA inclusionary income-restricted units",
+      "years_before_as_of": 0,
+      "text": "housing providers receiving DND funding and/or land, or with BPDA Inclusionary Development Policy units"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text coverage_text and coverage field",
+    "reasoning": "Covers only providers with city funding or inclusionary income-restricted units, a status parcel data cannot show.",
+    "plain_en": "Boston housing providers with city funding or income-restricted units cannot impose blanket criminal bans, use old or non-conviction records, or use credit scores to deny applicants."
+   },
+   {
+    "id": "r-0055",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own text coverage_text",
+    "reasoning": "Applies to all housing in Boston with no stated tests.",
+    "plain_en": "Boston landlords cannot discriminate against tenants or applicants who use rental assistance such as Section 8 vouchers."
+   },
+   {
+    "id": "r-0056",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [
+     {
+      "label": "Owner-occupied 2-family dwelling",
+      "conditions": [
+       {
+        "fact": "units",
+        "op": "==",
+        "value": "2",
+        "years_before_as_of": 0,
+        "text": "2-family dwellings"
+       },
+       {
+        "fact": "owner_occupied",
+        "op": "is",
+        "value": "true",
+        "years_before_as_of": 0,
+        "text": "when the owner lives there"
+       }
+      ]
+     }
+    ],
+    "support": "own text coverage_text, exemptions_text and coverage field",
+    "reasoning": "Applies to housing transactions in Cambridge except owner-occupied two-family dwellings.",
+    "plain_en": "Cambridge landlords cannot discriminate based on source of income, including Section 8, and must apply tenant selection standards equally to everyone."
+   }
+  ],
+  "notes": "Rules r-0034, r-0035 and r-0027 cover units whose coverage status (fully or partially covered by Rent Ordinance) cannot be tested from parcel data, so a status_not_in_data condition is used. Local-law deference (state rules yielding to stricter local ordinances) was left out as instructed."
+ }
+}

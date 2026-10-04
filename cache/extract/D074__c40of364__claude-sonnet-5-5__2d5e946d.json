@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 40,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22293,
+ "output_tokens": 250,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:53+00:00",
+ "result": {
+  "document_summary": "A slice of the San Diego Municipal Code, Chapter 2 (Administrative Code) covering the Living Wage Ordinance's administration, the Equal Benefits Ordinance for City contractors, and the Fair and Open Competition in Construction Ordinance.",
+  "notes": "Although the source URL references the algorithmic rent-pricing prohibition (section 98.1103), this part of the document contains only City contracting and employment provisions (Living Wage enforcement, Equal Benefits for contractors, project labor agreements). None of it concerns rent increase limits, just-cause eviction, security deposits, screening fees, screening restrictions, or algorithmic rent setting, so no in-scope rules were extracted.",
+  "rules": []
+ }
+}

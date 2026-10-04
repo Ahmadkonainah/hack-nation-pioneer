@@ -1,0 +1,203 @@
+{
+ "generated_at": "2026-10-04T01:35:33+00:00",
+ "pass": 39,
+ "warn": 0,
+ "fail": 0,
+ "checks": [
+  {
+   "status": "PASS",
+   "section": "1. rules.json",
+   "check": "56 rules, ids unique"
+  },
+  {
+   "status": "PASS",
+   "section": "1. rules.json",
+   "check": "every rule has all required fields"
+  },
+  {
+   "status": "PASS",
+   "section": "1. rules.json",
+   "check": "allowed values for level, category and status"
+  },
+  {
+   "status": "PASS",
+   "section": "1. rules.json",
+   "check": "quoted_span has at least 20 characters"
+  },
+  {
+   "status": "PASS",
+   "section": "1. rules.json",
+   "check": "effective_date format"
+  },
+  {
+   "status": "PASS",
+   "section": "1. rules.json",
+   "check": "jurisdictions are in scope"
+  },
+  {
+   "status": "PASS",
+   "section": "1. rules.json",
+   "check": "every quoted span is found in its source document"
+  },
+  {
+   "status": "PASS",
+   "section": "1. rules.json",
+   "check": "every overrides id points at a rule"
+  },
+  {
+   "status": "PASS",
+   "section": "1. rules.json",
+   "check": "the failed Massachusetts ballot question is recorded as failed (T5)"
+  },
+  {
+   "status": "PASS",
+   "section": "1. rules.json",
+   "check": "pending bills recorded (T4)"
+  },
+  {
+   "status": "PASS",
+   "section": "2. lookups.json",
+   "check": "all 500 addresses answered"
+  },
+  {
+   "status": "PASS",
+   "section": "2. lookups.json",
+   "check": "result values are allowed"
+  },
+  {
+   "status": "PASS",
+   "section": "2. lookups.json",
+   "check": "every lookup points at a rule in rules.json"
+  },
+  {
+   "status": "PASS",
+   "section": "2. lookups.json",
+   "check": "every entry has an explanation and a boolean conflict_flag"
+  },
+  {
+   "status": "PASS",
+   "section": "2. lookups.json",
+   "check": "no rule listed twice for one address"
+  },
+  {
+   "status": "PASS",
+   "section": "2. lookups.json",
+   "check": "every address has at least one answer"
+  },
+  {
+   "status": "PASS",
+   "section": "2. lookups.json",
+   "check": "no address gets a rule from another state or city"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "all 5 tests present"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T1: address ids exist"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T1: notes present"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T1: affected = every CA address (250)"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T2: address ids exist"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T2: notes present"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T2: no Newark address is affected"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T2: affected addresses are only in Hoboken and Jersey City (90)"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T2: both the Hoboken ban and the Jersey City ban apply inside their own city"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T3: address ids exist"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T3: notes present"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T3: affected = every NJ address (140)"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T3: conflict flags on exactly the Hoboken and Jersey City addresses (90)"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T4: address ids exist"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T4: notes present"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T4: affected = every Massachusetts address (110)"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T5: address ids exist"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T5: notes present"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T5: affected set is empty"
+  },
+  {
+   "status": "PASS",
+   "section": "3. changes.json",
+   "check": "T5: no local rent cap is reported for any Massachusetts address"
+  },
+  {
+   "status": "PASS",
+   "section": "4. coverage of the rule set",
+   "check": "every jurisdiction has at least one rule"
+  },
+  {
+   "status": "PASS",
+   "section": "4. coverage of the rule set",
+   "check": "app labels itself 'not legal advice'"
+  }
+ ]
+}

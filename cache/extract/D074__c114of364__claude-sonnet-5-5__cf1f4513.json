@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 114,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22688,
+ "output_tokens": 258,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:08:23+00:00",
+ "result": {
+  "document_summary": "A mid-document chunk of the San Diego Municipal Code, Chapter 5 (Public Safety), covering the end of an anti-discrimination Division, a hate crimes training Division, and firearms provisions; the source URL suggests a different section (anti-algorithmic rent price fixing) but that text is not in this part.",
+  "notes": "No rule in the six in-scope categories appears in this chunk. The text covers educational-institution discrimination enforcement (San Diego Municipal Code Div. 96), hate crimes training and reporting (Div. 97), and firearms regulation (Art. 3). The algorithmic rent-setting provision named in the source URL (Division 11, section 98.1103) is not included in this part, so nothing was extracted.",
+  "rules": []
+ }
+}

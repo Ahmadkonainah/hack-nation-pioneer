@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 54,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22766,
+ "output_tokens": 264,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:11+00:00",
+ "result": {
+  "document_summary": "A mid-document excerpt of the San Diego Municipal Code, Chapter 3, Article 3 (police-regulated businesses: outcall nude entertainment, street patrol, near beer, swap meets, peep shows), with no residential rental rules.",
+  "notes": "The source URL slug suggests the page concerns San Diego's ban on algorithmic rent-price fixing, but this part (54 of 364) contains only unrelated code sections (§§ 33.2810-33.3301: outcall nude entertainment, private street patrol, near-beer sales, swap meets, peep show establishments). No text in this part states a rule in any of the six rental-housing categories, so no records were extracted; the algorithmic rent-setting provisions, if on the page, are not in this part.",
+  "rules": []
+ }
+}

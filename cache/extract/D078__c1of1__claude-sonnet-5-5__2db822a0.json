@@ -1,0 +1,16 @@
+{
+ "doc_id": "D078",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 6491,
+ "output_tokens": 222,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:54:15+00:00",
+ "result": {
+  "document_summary": "A San Francisco Human Rights Commission agency landing page (events, news, services, resources) that only mentions the Fair Chance Ordinance in a link blurb without stating its substantive rules.",
+  "notes": "The page's only in-scope content is a one-line link description: \"San Francisco's Fair Chance Ordinance protects residents with arrest or conviction history in affordable housing decisions.\" It does not state any requirement, coverage, effective date, or citation, so no reliable rule record can be extracted without adding law from outside the document. Everything else (family summits, press releases, sanctuary city complaints, bylaws) is out of scope.",
+  "rules": []
+ }
+}

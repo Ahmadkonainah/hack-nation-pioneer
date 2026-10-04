@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 15,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22292,
+ "output_tokens": 288,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:24+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code, Chapter 2 (Government), Article 2 (Administrative Code) covering city budget, City Attorney, Personnel Director and Purchasing Agent provisions, retrieved from a page URL about the algorithmic rent-pricing prohibition.",
+  "notes": "This part contains only San Diego administrative code provisions (budget preparation, library appropriations, City Attorney, Civil Service, purchasing and recycled-products policy). None address rent increase limits, just cause eviction, security deposits, screening fees, screening restrictions or algorithmic rent setting. The algorithmic rent-pricing text (Division 11, \"Prohibition of Anti-Competitive Automated Rent Price Fixing\") named in the source URL does not appear in this part, so no rules were extracted.",
+  "rules": []
+ }
+}

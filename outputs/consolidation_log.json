@@ -1,0 +1,626 @@
+{
+ "model_notes": "Grouping by instrument, jurisdiction and category.",
+ "repairs": [
+  "dropped unknown or repeated id 'r-0009x' from a group"
+ ],
+ "groups": [
+  {
+   "new_id": "r-0001",
+   "primary": "r-0028",
+   "members": [
+    "r-0028",
+    "r-0044"
+   ],
+   "citation": "Cal. Civ. Code § 1947.12",
+   "reason": "Same state rent cap statute.",
+   "adjustments": [
+    "dropped links to rules of another state or city: r-0044 (Hoboken, NJ), r-0047 (Newark, NJ), r-0042 (Jersey City, NJ)"
+   ]
+  },
+  {
+   "new_id": "r-0002",
+   "primary": "r-0027",
+   "members": [
+    "r-0027"
+   ],
+   "citation": "Cal. Civ. Code § 1946.2",
+   "reason": "State just cause statute.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0003",
+   "primary": "r-0029",
+   "members": [
+    "r-0014",
+    "r-0029"
+   ],
+   "citation": "Cal. Civ. Code § 1950.5",
+   "reason": "AB 12 amended section 1950.5.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0004",
+   "primary": "r-0030",
+   "members": [
+    "r-0010",
+    "r-0030"
+   ],
+   "citation": "Cal. Civ. Code § 1950.6",
+   "reason": "Same state screening fee statute; official statute text preferred.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0005",
+   "primary": "r-0031",
+   "members": [
+    "r-0024",
+    "r-0025",
+    "r-0031"
+   ],
+   "citation": "California Fair Employment and Housing Act (FEHA); Cal. Gov. Code § 12955",
+   "reason": "FEHA source-of-income and criminal-history limits, one state instrument.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0006",
+   "primary": "r-0026",
+   "members": [
+    "r-0026"
+   ],
+   "citation": "Cal. Bus. & Prof. Code § 16729",
+   "reason": "State algorithm ban.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0007",
+   "primary": "r-0061",
+   "members": [
+    "r-0061"
+   ],
+   "citation": "N.J.S.A. 2A:18-61.1 et seq.; N.J.S.A. 2A:42-84.5",
+   "reason": "State delegation rule.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0008",
+   "primary": "r-0063",
+   "members": [
+    "r-0063",
+    "r-0064"
+   ],
+   "citation": "N.J.S.A. 2A:18-61.1 to 61.12",
+   "reason": "Same Anti-Eviction Act.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0009",
+   "primary": "r-0059",
+   "members": [
+    "r-0059",
+    "r-0060"
+   ],
+   "citation": "N.J.S.A. 46:8-21.2; N.J.S.A. 46:8-19; N.J.S.A. 46:8-21.1",
+   "reason": "Deposit cap plus holding and return rules of the same law.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0010",
+   "primary": "r-0058",
+   "members": [
+    "r-0058"
+   ],
+   "citation": "N.J.S.A. 46:8-18.1",
+   "reason": "State statute.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0011",
+   "primary": "r-0057",
+   "members": [
+    "r-0057"
+   ],
+   "citation": "N.J.S.A. 46:8-52 et seq.",
+   "reason": "State statute.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0012",
+   "primary": "r-0062",
+   "members": [
+    "r-0062",
+    "r-0065"
+   ],
+   "citation": "N.J.S.A. 10:5-12; New Jersey Law Against Discrimination (N.J.S.A. 10:5-1 et seq.)",
+   "reason": "Same NJ LAD source-of-income rule.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0013",
+   "primary": "r-0066",
+   "members": [
+    "r-0066"
+   ],
+   "citation": "P.L. 2026, c.43 (C.56:9-20 to 56:9-26)",
+   "reason": "State statute.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0014",
+   "primary": "r-0052",
+   "members": [
+    "r-0052"
+   ],
+   "citation": "G.L. c. 40P § 4",
+   "reason": "State statute.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0015",
+   "primary": "r-0056",
+   "members": [
+    "r-0056"
+   ],
+   "citation": "Massachusetts rent control ballot initiative petition (2026)",
+   "reason": "Failed initiative.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0016",
+   "primary": "r-0054",
+   "members": [
+    "r-0054"
+   ],
+   "citation": "G.L. c. 186 § 15B",
+   "reason": "State statute.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0017",
+   "primary": "r-0055",
+   "members": [
+    "r-0055"
+   ],
+   "citation": "G.L. c. 112 § 87DDD1/2",
+   "reason": "State statute.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0018",
+   "primary": "r-0053",
+   "members": [
+    "r-0053"
+   ],
+   "citation": "G.L. c. 151B § 4(10)",
+   "reason": "State statute.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0019",
+   "primary": "r-0050",
+   "members": [
+    "r-0050"
+   ],
+   "citation": "Mass. H.5222 (194th General Court)",
+   "reason": "Distinct bill.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0020",
+   "primary": "r-0051",
+   "members": [
+    "r-0051"
+   ],
+   "citation": "Mass. Senate Bill S.2983 (194th General Court)",
+   "reason": "Distinct bill.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0021",
+   "primary": "r-0045",
+   "members": [
+    "r-0045",
+    "r-0047"
+   ],
+   "citation": "Los Angeles Rent Stabilization Ordinance (LAMC ch. XV, art. 1)",
+   "reason": "Same RSO rent increase rule.",
+   "adjustments": [
+    "effective date taken from D042"
+   ]
+  },
+  {
+   "new_id": "r-0022",
+   "primary": "r-0043",
+   "members": [
+    "r-0043"
+   ],
+   "citation": "Los Angeles Just Cause for Eviction Ordinance (JCO)",
+   "reason": "LA JCO.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0023",
+   "primary": "r-0046",
+   "members": [
+    "r-0046",
+    "r-0048"
+   ],
+   "citation": "L.A.M.C. § 151.09; L.A.M.C. §§ 165.03, 165.06",
+   "reason": "RSO just cause and relocation amounts.",
+   "adjustments": [
+    "effective date taken from D043"
+   ]
+  },
+  {
+   "new_id": "r-0024",
+   "primary": "r-0049",
+   "members": [
+    "r-0049"
+   ],
+   "citation": "Los Angeles Ordinance Nos. 188481 and 188482 (Resident Protections Ordinance)",
+   "reason": "Separate instrument.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0025",
+   "primary": "r-0042",
+   "members": [
+    "r-0042"
+   ],
+   "citation": "Los Angeles City Council Motion (Hutt), Sept. 3, 2024",
+   "reason": "Pending motion.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0026",
+   "primary": "r-0079",
+   "members": [
+    "r-0079",
+    "r-0082"
+   ],
+   "citation": "S.F. Admin. Code ch. 37",
+   "reason": "Same allowable increase.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0027",
+   "primary": "r-0078",
+   "members": [
+    "r-0078",
+    "r-0081",
+    "r-0083"
+   ],
+   "citation": "S.F. Admin. Code ch. 37",
+   "reason": "Just cause and relocation of the SF Rent Ordinance.",
+   "adjustments": [
+    "effective date taken from D082"
+   ]
+  },
+  {
+   "new_id": "r-0028",
+   "primary": "r-0077",
+   "members": [
+    "r-0077"
+   ],
+   "citation": "San Francisco Fair Chance Ordinance",
+   "reason": "SF ordinance.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0029",
+   "primary": "r-0080",
+   "members": [
+    "r-0003",
+    "r-0080"
+   ],
+   "citation": "S.F. Admin. Code § 37.10C",
+   "reason": "Same SF ordinance section 37.10C; the 2024-10 and 2024-10-14 dates are compatible.",
+   "adjustments": [
+    "members have different effective dates (2024-10, 2024-10-14); the model judged them separate provisions"
+   ]
+  },
+  {
+   "new_id": "r-0030",
+   "primary": "r-0074",
+   "members": [
+    "r-0074",
+    "r-0076"
+   ],
+   "citation": "San Diego Municipal Code §§ 98.0701-98.0710",
+   "reason": "Same ordinance.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0031",
+   "primary": "r-0075",
+   "members": [
+    "r-0004",
+    "r-0040",
+    "r-0075"
+   ],
+   "citation": "San Diego Municipal Code §§ 98.1101–98.1104",
+   "reason": "Same San Diego algorithmic rent ordinance (official proposed text plus secondary pages).",
+   "adjustments": [
+    "effective date taken from D002",
+    "status taken as enacted from D002, D037; D076 describes the proposal stage"
+   ]
+  },
+  {
+   "new_id": "r-0032",
+   "primary": "r-0012",
+   "members": [
+    "r-0012",
+    "r-0016",
+    "r-0017"
+   ],
+   "citation": "Berkeley Rent Stabilization Ordinance (Measure BB); Berkeley Municipal Code § 13.76.110(A)",
+   "reason": "Berkeley rent stabilization cap, annual adjustment and coverage.",
+   "adjustments": [
+    "effective date taken from D008"
+   ]
+  },
+  {
+   "new_id": "r-0033",
+   "primary": "r-0009",
+   "members": [
+    "r-0009"
+   ],
+   "citation": "Berkeley Rent Stabilization and Good Cause for Eviction Ordinance; Berkeley Ellis Implementation Ordinance",
+   "reason": "Relocation payment rules, kept separate from Measure BB just-cause causes record.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0034",
+   "primary": "r-0013",
+   "members": [
+    "r-0013",
+    "r-0018"
+   ],
+   "citation": "Berkeley Rent Stabilization Ordinance (as amended by Measure BB)",
+   "reason": "Berkeley just-cause causes and coverage.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0035",
+   "primary": "r-0015",
+   "members": [
+    "r-0015"
+   ],
+   "citation": "Berkeley Rent Stabilization Ordinance",
+   "reason": "Separate local instrument.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0036",
+   "primary": "r-0011",
+   "members": [
+    "r-0011"
+   ],
+   "citation": "Berkeley Municipal Code ch. 13.78",
+   "reason": "Separate local instrument.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0037",
+   "primary": "r-0008",
+   "members": [
+    "r-0008"
+   ],
+   "citation": "Berkeley Municipal Code ch. 13.106",
+   "reason": "Single Berkeley criminal-history screening ordinance.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0038",
+   "primary": "r-0001",
+   "members": [
+    "r-0001",
+    "r-0002",
+    "r-0041"
+   ],
+   "citation": "Berkeley Municipal Code ch. 13.63",
+   "reason": "Same Berkeley algorithmic rent-setting ordinance described on several pages.",
+   "adjustments": [
+    "effective date taken from D002"
+   ]
+  },
+  {
+   "new_id": "r-0039",
+   "primary": "r-0086",
+   "members": [
+    "r-0084",
+    "r-0086"
+   ],
+   "citation": "Santa Ana Rent Stabilization Ordinance",
+   "reason": "Same cap.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0040",
+   "primary": "r-0087",
+   "members": [
+    "r-0085",
+    "r-0087"
+   ],
+   "citation": "Santa Ana Just Cause Eviction Ordinance",
+   "reason": "Same ordinance.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0041",
+   "primary": "r-0005",
+   "members": [
+    "r-0005",
+    "r-0089",
+    "r-0088"
+   ],
+   "citation": "Santa Ana Ordinance No. NS-3090",
+   "reason": "Same Santa Ana algorithmic rent-setting ban described on several pages.",
+   "adjustments": [
+    "status taken as enacted from D002, D086; D087 describes the proposal stage"
+   ]
+  },
+  {
+   "new_id": "r-0042",
+   "primary": "r-0039",
+   "members": [
+    "r-0039"
+   ],
+   "citation": "Jersey City Municipal Code ch. 260",
+   "reason": "Jersey City rent control.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0043",
+   "primary": "r-0006",
+   "members": [
+    "r-0006",
+    "r-0038"
+   ],
+   "citation": "Jersey City Code § 218-12",
+   "reason": "Same Jersey City ordinance.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0044",
+   "primary": "r-0033",
+   "members": [
+    "r-0033",
+    "r-0034",
+    "r-0035"
+   ],
+   "citation": "Hoboken City Code ch. 155",
+   "reason": "Hoboken rent control chapter 155; dates are base-rent reference or different provisions.",
+   "adjustments": [
+    "members have different effective dates (1985-10-01, 2023-02-01); the model judged them separate provisions"
+   ]
+  },
+  {
+   "new_id": "r-0045",
+   "primary": "r-0036",
+   "members": [
+    "r-0036"
+   ],
+   "citation": "Hoboken City Code § 158-1 (Ord. No. B-750)",
+   "reason": "Distinct disclosure ordinance.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0046",
+   "primary": "r-0037",
+   "members": [
+    "r-0007",
+    "r-0037"
+   ],
+   "citation": "Hoboken City Code § 158-2 (Ord. No. B-781)",
+   "reason": "Same Hoboken algorithmic ban; official code text preferred.",
+   "adjustments": [
+    "effective date taken from D002"
+   ]
+  },
+  {
+   "new_id": "r-0047",
+   "primary": "r-0067",
+   "members": [
+    "r-0067",
+    "r-0068",
+    "r-0070"
+   ],
+   "citation": "Newark Rev. Gen. Ords. ch. 19:2",
+   "reason": "Newark rent control chapter.",
+   "adjustments": [
+    "effective date taken from D070"
+   ]
+  },
+  {
+   "new_id": "r-0048",
+   "primary": "r-0071",
+   "members": [
+    "r-0071"
+   ],
+   "citation": "Newark Municipal Code § 2:10-1.2(b)(5)",
+   "reason": "Separate program rule.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0049",
+   "primary": "r-0072",
+   "members": [
+    "r-0072"
+   ],
+   "citation": "Newark Municipal Code § 2:10-11.1",
+   "reason": "Separate ordinance.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0050",
+   "primary": "r-0069",
+   "members": [
+    "r-0069"
+   ],
+   "citation": "Newark Rev. Gen. Ords. § 19:2-14",
+   "reason": "Newark just-cause related rule.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0051",
+   "primary": "r-0073",
+   "members": [
+    "r-0073"
+   ],
+   "citation": "Newark Municipal Code §§ 2:31-2 to 2:31-9",
+   "reason": "Newark ordinance.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0052",
+   "primary": "r-0020",
+   "members": [
+    "r-0020"
+   ],
+   "citation": "Mass. H.3744 (193rd General Court, 2023-2024)",
+   "reason": "Failed bill.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0053",
+   "primary": "r-0023",
+   "members": [
+    "r-0022",
+    "r-0023"
+   ],
+   "citation": "Boston City Ordinances § 10-11.7",
+   "reason": "Same ordinance.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0054",
+   "primary": "r-0019",
+   "members": [
+    "r-0019"
+   ],
+   "citation": "Boston Fair Chance Tenant Selection Policy (DND, Feb. 2017)",
+   "reason": "Boston criminal/credit screening policy.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0055",
+   "primary": "r-0021",
+   "members": [
+    "r-0021"
+   ],
+   "citation": "Boston Fair Housing Commission fair housing regulations",
+   "reason": "Boston source-of-income rule.",
+   "adjustments": []
+  },
+  {
+   "new_id": "r-0056",
+   "primary": "r-0032",
+   "members": [
+    "r-0032"
+   ],
+   "citation": "Cambridge Municipal Code ch. 14.04",
+   "reason": "Cambridge instrument.",
+   "adjustments": []
+  }
+ ]
+}

@@ -1,0 +1,41 @@
+{
+ "doc_id": "D079",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 6251,
+ "output_tokens": 826,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:09:36+00:00",
+ "result": {
+  "document_summary": "San Francisco Rent Board info page summarizing the 17 just cause reasons for eviction under the SF Rent Ordinance (Admin. Code ch. 37, § 37.9(a)) and which tenancies are covered.",
+  "notes": "The page gives no effective date for the just cause requirement, so effective_date is empty. Coverage is described only generally (units covered by the Rent Ordinance, including some units exempt from rent increase limits); the page does not state the base coverage tests, so coverage is left empty. Relocation assistance and notice requirements are not described on this page.",
+  "rules": [
+   {
+    "jurisdiction": "San Francisco, CA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "San Francisco Rent Ordinance just cause eviction requirement",
+    "requirement": "A landlord may evict a tenant from a unit covered by the Rent Ordinance only for one of 17 listed just cause reasons, which must be the dominant motive for the eviction. Expiration of a rental agreement or a change in ownership is not just cause.",
+    "key_value": "17 just cause reasons (Ordinance § 37.9(a))",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "S.F. Admin. Code § 37.9(a)",
+    "quoted_span": "In order to evict a tenant from a rental unit covered by the Rent Ordinance, a landlord must have a \"just cause\" reason that is the dominant motive for pursuing the eviction.",
+    "coverage_text": "Rental units covered by the San Francisco Rent Ordinance, including some units exempt from the rent increase limits (such as units first receiving a Certificate of Occupancy after June 13, 1979, Costa-Hawkins-eligible tenancies, and some tenancies regulated by another agency).",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "The page does not list exemptions from the eviction provisions; it states that some tenancies exempt from the rent increase limits remain subject to just cause eviction rules.",
+    "interaction": "Tenancies exempt from the Ordinance's rent increase limits (post-June 13, 1979 construction, Costa-Hawkins-eligible tenancies, some government-regulated rents) are still subject to the just cause eviction provisions. Ellis Act withdrawals are recognized as one just cause reason.",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

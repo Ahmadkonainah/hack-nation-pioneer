@@ -1,0 +1,286 @@
+{
+ "model_notes": "Rules r-0034, r-0035 and r-0027 cover units whose coverage status (fully or partially covered by Rent Ordinance) cannot be tested from parcel data, so a status_not_in_data condition is used. Local-law deference (state rules yielding to stricter local ordinances) was left out as instructed.",
+ "problems": [],
+ "per_rule": {
+  "r-0001": {
+   "scope": "conditional",
+   "support": "own text (coverage_text, exemptions_text, coverage field); local rent control exemption is deference and omitted",
+   "reasoning": "Covers dwellings with a certificate of occupancy more than 15 years ago, minus the listed exemptions."
+  },
+  "r-0002": {
+   "scope": "conditional",
+   "support": "own text (coverage_text, exemptions_text, coverage field); local just-cause deference omitted",
+   "reasoning": "Covers units occupied 12+ months in buildings with certificate of occupancy over 15 years old, minus listed exemptions."
+  },
+  "r-0003": {
+   "scope": "universal",
+   "support": "own text coverage_text",
+   "reasoning": "Applies to security for any residential rental in California with no building test."
+  },
+  "r-0004": {
+   "scope": "universal",
+   "support": "own text coverage_text",
+   "reasoning": "Applies to any landlord charging a screening fee for a residential rental."
+  },
+  "r-0005": {
+   "scope": "universal",
+   "support": "own text coverage_text",
+   "reasoning": "Applies to owners of any housing accommodation in California with no limits."
+  },
+  "r-0006": {
+   "scope": "universal",
+   "support": "own text coverage_text",
+   "reasoning": "The text applies to any person in California and sets no building tests."
+  },
+  "r-0007": {
+   "scope": "universal",
+   "support": "own text requirement and coverage_text; new-building exemption applies to local rent control, not this rule",
+   "reasoning": "The record states the state has no rent control and applies to rentals generally, so universal with no exemptions."
+  },
+  "r-0008": {
+   "scope": "universal",
+   "support": "own text coverage_text and exemptions_text",
+   "reasoning": "Covers most residential rentals statewide with listed exemptions."
+  },
+  "r-0009": {
+   "scope": "universal",
+   "support": "own text coverage_text and exemptions_text",
+   "reasoning": "Applies to most NJ residential rentals except owner-occupied two- or three-family dwellings."
+  },
+  "r-0010": {
+   "scope": "universal",
+   "support": "own text coverage_text and exemptions_text",
+   "reasoning": "Applies to residential rentals except one- and two-family dwellings and non-landlord licensees."
+  },
+  "r-0011": {
+   "scope": "universal",
+   "support": "own text coverage_text and exemptions_text",
+   "reasoning": "Covers rental units except those in owner-occupied premises of four units or fewer."
+  },
+  "r-0012": {
+   "scope": "universal",
+   "support": "own text coverage_text and exemptions_text",
+   "reasoning": "Applies to all landlord-tenant relationships except the listed small owner-occupied cases."
+  },
+  "r-0013": {
+   "scope": "universal",
+   "support": "own text coverage_text; exclusions concern facility types and tools, not tested here",
+   "reasoning": "Applies to rental property owners, agents and coordinators statewide with no building test."
+  },
+  "r-0014": {
+   "scope": "universal",
+   "support": "own text coverage_text",
+   "reasoning": "Applies to all Massachusetts cities and towns and thus rentals statewide."
+  },
+  "r-0015": {
+   "scope": "undefined",
+   "support": "own text",
+   "reasoning": "A failed ballot measure with no defined coverage."
+  },
+  "r-0016": {
+   "scope": "universal",
+   "support": "own text coverage_text and exemptions_text",
+   "reasoning": "Applies to residential leases in Massachusetts except short vacation stays."
+  },
+  "r-0017": {
+   "scope": "universal",
+   "support": "own text coverage_text",
+   "reasoning": "Applies to anyone finding rentals for a fee in Massachusetts with no building limits."
+  },
+  "r-0018": {
+   "scope": "universal",
+   "support": "own text coverage_text",
+   "reasoning": "Applies to any person furnishing rental accommodations with no stated limits."
+  },
+  "r-0019": {
+   "scope": "undefined",
+   "support": "own text",
+   "reasoning": "Pending bill whose text is not provided."
+  },
+  "r-0020": {
+   "scope": "undefined",
+   "support": "own text",
+   "reasoning": "Pending bill whose text is not provided."
+  },
+  "r-0021": {
+   "scope": "conditional",
+   "support": "own text coverage_text and exemptions_text",
+   "reasoning": "Covers buildings first built on or before 1978-10-01 except post-1995 condo or townhome tenancies."
+  },
+  "r-0022": {
+   "scope": "conditional",
+   "support": "own text; r-0021 for RSO coverage",
+   "reasoning": "Covers rentals not covered by the RSO, once the tenant has met the six-month test, minus listed exemptions."
+  },
+  "r-0023": {
+   "scope": "conditional",
+   "support": "own text coverage_text; r-0021 coverage text",
+   "reasoning": "Covers RSO units, i.e. buildings first built on or before 1978-10-01."
+  },
+  "r-0024": {
+   "scope": "conditional",
+   "support": "own text coverage_text",
+   "reasoning": "Covers only protected units slated for demolition for new construction, a status the parcel data cannot show."
+  },
+  "r-0025": {
+   "scope": "undefined",
+   "support": "own text",
+   "reasoning": "A motion requesting a study; no coverage defined."
+  },
+  "r-0026": {
+   "scope": "conditional",
+   "support": "r-0027 coverage text (units first receiving a Certificate of Occupancy after June 13, 1979 are exempt from the Rent Ordinance's rent increase limits); own text applies to rent-controlled units",
+   "reasoning": "The rent increase cap covers rent-controlled units, and the sibling record sets the cut-off at first occupancy on or before June 13, 1979."
+  },
+  "r-0027": {
+   "scope": "universal",
+   "support": "own coverage_text (covers units exempt from the rent increase limits as well as covered units)",
+   "reasoning": "The record says just cause covers Rent Ordinance units and also units exempt from the rent limits, so it reaches rentals generally."
+  },
+  "r-0028": {
+   "scope": "conditional",
+   "support": "own text coverage_text",
+   "reasoning": "Applies only to affordable housing decisions, a status parcel data cannot show."
+  },
+  "r-0029": {
+   "scope": "universal",
+   "support": "own text coverage_text",
+   "reasoning": "Applies to the sale or use of algorithmic devices for residential units in San Francisco with no building test."
+  },
+  "r-0030": {
+   "scope": "conditional",
+   "support": "own text coverage_text, exemptions_text and coverage field",
+   "reasoning": "Covers tenancies over 30 days in buildings older than 15 years, minus the listed exemptions."
+  },
+  "r-0031": {
+   "scope": "universal",
+   "support": "own text coverage_text; the exemptions concern software types, not buildings",
+   "reasoning": "Applies to sellers and landlords for residential rental property in San Diego with no building test."
+  },
+  "r-0032": {
+   "scope": "conditional",
+   "support": "own text coverage_text; the partially covered list is a non-coverage list consistent with the conditions",
+   "reasoning": "Fully covered units are mainly multifamily buildings built before 1980."
+  },
+  "r-0033": {
+   "scope": "conditional",
+   "support": "own text coverage_text",
+   "reasoning": "Covers only tenants evicted for owner move-in or Ellis Act withdrawal, a tenancy-level test."
+  },
+  "r-0034": {
+   "scope": "conditional",
+   "support": "own coverage_text; r-0032 coverage text (fully covered units are older multifamily buildings; partially covered units are new construction after 1980, single-family homes and condominiums)",
+   "reasoning": "The rule covers fully and partially covered Rent Ordinance units, which together span older buildings and newer ones, so no building test limits it."
+  },
+  "r-0035": {
+   "scope": "conditional",
+   "support": "own text coverage_text",
+   "reasoning": "Covers units fully or partially covered by the Rent Ordinance, which is not fully testable from parcel data."
+  },
+  "r-0036": {
+   "scope": "universal",
+   "support": "own text coverage_text",
+   "reasoning": "Applies to all residential rental agreements in Berkeley."
+  },
+  "r-0037": {
+   "scope": "universal",
+   "support": "own text coverage_text and exemptions_text",
+   "reasoning": "Applies to rental housing providers in Berkeley, minus the listed exemptions."
+  },
+  "r-0038": {
+   "scope": "universal",
+   "support": "own text coverage_text; exclusions concern software types, not buildings",
+   "reasoning": "Applies to all landlords of residential units in Berkeley and the vendors selling to them."
+  },
+  "r-0039": {
+   "scope": "conditional",
+   "support": "own text coverage_text and coverage field; mobile home spaces are not tested by building facts",
+   "reasoning": "Covers residential buildings built on or before 1995-02-01."
+  },
+  "r-0040": {
+   "scope": "universal",
+   "support": "own text coverage_text and exemptions_text",
+   "reasoning": "Covers residential rentals in Santa Ana except the listed exempt types."
+  },
+  "r-0041": {
+   "scope": "universal",
+   "support": "own text coverage_text",
+   "reasoning": "Applies to landlords using prohibited automated rent-setting in Santa Ana with no building test."
+  },
+  "r-0042": {
+   "scope": "conditional",
+   "support": "own text coverage_text and exemptions_text; 1-4 unit properties are exempt",
+   "reasoning": "Covers properties with five or more units."
+  },
+  "r-0043": {
+   "scope": "universal",
+   "support": "own text coverage_text",
+   "reasoning": "Applies to landlords using algorithmic rent coordination services in Jersey City with no building test."
+  },
+  "r-0044": {
+   "scope": "universal",
+   "support": "own text coverage_text and exemptions_text; the post-1987 exemption is limited in time and the 3+ units for 'multiple dwelling' is an assumption from the term",
+   "reasoning": "Covers all Hoboken dwelling units other than the listed exemptions."
+  },
+  "r-0045": {
+   "scope": "conditional",
+   "support": "own text coverage_text",
+   "reasoning": "Applies only to renewal increases over 10%, a tenancy-level test."
+  },
+  "r-0046": {
+   "scope": "universal",
+   "support": "own text coverage_text and exemptions_text",
+   "reasoning": "Applies to all landlords of residential units in Hoboken except care and detention facilities."
+  },
+  "r-0047": {
+   "scope": "universal",
+   "support": "own text coverage_text and exemptions_text; newly constructed and vacant dwellings are cited to other sections and not tested",
+   "reasoning": "Covers all multiple dwellings in Newark with the stated exemptions."
+  },
+  "r-0048": {
+   "scope": "conditional",
+   "support": "own text coverage_text and coverage field",
+   "reasoning": "Covers only HOME-assisted units in owner-occupied structures of one to three units."
+  },
+  "r-0049": {
+   "scope": "universal",
+   "support": "own text coverage_text and exemptions_text",
+   "reasoning": "Applies to residential rentals in Newark except statutorily exempt or HUD-controlled units."
+  },
+  "r-0050": {
+   "scope": "conditional",
+   "support": "own text coverage_text; r-0047 covers dwellings under Newark rent control",
+   "reasoning": "Applies to dwelling units subject to the Newark rent control chapter."
+  },
+  "r-0051": {
+   "scope": "universal",
+   "support": "own text coverage_text, exemptions_text and coverage field",
+   "reasoning": "Applies to rentals in Newark except small owner-occupied cases and special programs."
+  },
+  "r-0052": {
+   "scope": "undefined",
+   "support": "own text",
+   "reasoning": "A failed bill with no stated coverage."
+  },
+  "r-0053": {
+   "scope": "universal",
+   "support": "own text coverage_text and exemptions_text",
+   "reasoning": "Applies to all Boston landlords ending a tenancy except the listed facilities."
+  },
+  "r-0054": {
+   "scope": "conditional",
+   "support": "own text coverage_text and coverage field",
+   "reasoning": "Covers only providers with city funding or inclusionary income-restricted units, a status parcel data cannot show."
+  },
+  "r-0055": {
+   "scope": "universal",
+   "support": "own text coverage_text",
+   "reasoning": "Applies to all housing in Boston with no stated tests."
+  },
+  "r-0056": {
+   "scope": "universal",
+   "support": "own text coverage_text, exemptions_text and coverage field",
+   "reasoning": "Applies to housing transactions in Cambridge except owner-occupied two-family dwellings."
+  }
+ }
+}

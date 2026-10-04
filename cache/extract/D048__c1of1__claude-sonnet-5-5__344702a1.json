@@ -1,0 +1,40 @@
+{
+ "doc_id": "D048",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 4938,
+ "output_tokens": 714,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:53:28+00:00",
+ "result": {
+  "document_summary": "Massachusetts General Laws c. 40P § 4, the statewide prohibition on municipal rent control with a narrow exception for cities or towns that accept the chapter.",
+  "notes": "The document gives no effective date, so effective_date is left empty. The statute is a state-level bar on local rent control and is recorded as a rent_increase_limits rule of MA. The exception depends on a city or town accepting chapter 40P, which the document does not say any city has done.",
+  "rules": [
+   {
+    "jurisdiction": "MA",
+    "level": "state",
+    "category": "rent_increase_limits",
+    "title": "State prohibition on municipal rent control (with narrow voluntary-compliance exception)",
+    "requirement": "No Massachusetts city or town may enact, maintain or enforce rent control of any kind. A municipality that accepts chapter 40P may adopt only a voluntary, compensated program that cannot cover units owned by persons or entities owning fewer than ten rental units or units with a fair market rent over $400.",
+    "key_value": "Rent control banned; exception only for voluntary, municipally compensated program",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "G.L. c. 40P § 4",
+    "quoted_span": "No city or town may enact, maintain or enforce rent control of any kind, except that any city or town that accepts this chapter may adopt rent control regulation that provides:",
+    "coverage_text": "Applies to every city and town in Massachusetts, barring local rent control of residential rental units.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "A city or town that accepts chapter 40P may adopt voluntary rent control regulation meeting conditions (a)-(c); such regulation may not apply to units owned by a person or entity owning fewer than ten rental units or to units with a fair market rent exceeding $400.",
+    "interaction": "This state law preempts local rent control by Massachusetts municipalities, including Boston and Cambridge, unless a municipality accepts chapter 40P and adopts only the voluntary, compensated regulation it describes.",
+    "yields_to": [],
+    "confidence": 0.9,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

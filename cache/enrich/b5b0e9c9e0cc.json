@@ -1,0 +1,105 @@
+{
+ "model": "claude-sonnet-5-5",
+ "called_at": "2026-10-04T01:35:30+00:00",
+ "input_tokens": 17390,
+ "output_tokens": 1412,
+ "result": {
+  "rules": [
+   {
+    "id": "r-0024",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "status_not_in_data",
+      "op": "is",
+      "value": "Protected Unit being demolished for new construction",
+      "years_before_as_of": 0,
+      "text": "Protected Units that will be demolished for new construction"
+     }
+    ],
+    "exemptions": [],
+    "support": "own coverage_text",
+    "reasoning": "The rule covers only Protected Units slated for demolition for new construction, a status parcel data cannot show.",
+    "plain_en": "When a protected rental unit is torn down for new construction, the owner must pay tenants relocation money, with higher set payments for lower-income households."
+   },
+   {
+    "id": "r-0026",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "first_occupancy_date",
+      "op": "on_or_before",
+      "value": "1979-06-13",
+      "years_before_as_of": 0,
+      "text": "units first receiving a Certificate of Occupancy after June 13, 1979 (exempt from rent increase limits, per r-0027)"
+     }
+    ],
+    "exemptions": [],
+    "support": "r-0027 coverage text (units first receiving a Certificate of Occupancy after June 13, 1979 are exempt from the Rent Ordinance's rent increase limits); own text applies to rent-controlled units",
+    "reasoning": "The rent increase cap covers rent-controlled units, and the sibling record sets the cut-off at first occupancy on or before June 13, 1979.",
+    "plain_en": "For rent-controlled San Francisco units, landlords can raise rent by no more than 1.6% a year from March 2026 to February 2027."
+   },
+   {
+    "id": "r-0027",
+    "scope": "universal",
+    "conditions": [],
+    "exemptions": [],
+    "support": "own coverage_text (covers units exempt from the rent increase limits as well as covered units)",
+    "reasoning": "The record says just cause covers Rent Ordinance units and also units exempt from the rent limits, so it reaches rentals generally.",
+    "plain_en": "San Francisco landlords can evict only for one of 17 listed just causes; a lease ending or a change in ownership is not enough."
+   },
+   {
+    "id": "r-0028",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "status_not_in_data",
+      "op": "is",
+      "value": "affordable housing",
+      "years_before_as_of": 0,
+      "text": "applies to affordable housing decisions"
+     }
+    ],
+    "exemptions": [],
+    "support": "own coverage_text",
+    "reasoning": "The rule covers only affordable housing decisions, a status parcel data cannot show.",
+    "plain_en": "San Francisco's Fair Chance Ordinance protects people with arrest or conviction histories when affordable housing decisions are made about them."
+   },
+   {
+    "id": "r-0033",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "tenancy",
+      "op": "is",
+      "value": "evicted for owner move-in or Ellis Act withdrawal",
+      "years_before_as_of": 0,
+      "text": "Tenants evicted for an owner move-in or for removal under the Ellis Act"
+     }
+    ],
+    "exemptions": [],
+    "support": "own coverage_text",
+    "reasoning": "The rule covers only tenancies ended by owner move-in or Ellis Act withdrawal.",
+    "plain_en": "In Berkeley, landlords must pay tenants relocation money when evicting for an owner move-in or to take a unit off the rental market."
+   },
+   {
+    "id": "r-0034",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "first_occupancy_date",
+      "op": "before",
+      "value": "1980-01-01",
+      "years_before_as_of": 0,
+      "text": "fully covered units: most multifamily properties built before 1980"
+     }
+    ],
+    "exemptions": [],
+    "support": "own coverage_text; r-0032 coverage text (fully covered units are older multifamily buildings; partially covered units are new construction after 1980, single-family homes and condominiums)",
+    "reasoning": "The rule covers fully and partially covered Rent Ordinance units, which together span older buildings and newer ones, so no building test limits it.",
+    "plain_en": "Berkeley tenants in covered units cannot be evicted without just cause, and landlords cannot evict over small rent debts under one month of Fair Market Rent."
+   }
+  ],
+  "notes": "Second look: r-0026 gets a first_occupancy_date cut-off from r-0027; r-0027 is universal because it also covers units exempt from the rent limits. The r-0034 entry needs correction below."
+ }
+}

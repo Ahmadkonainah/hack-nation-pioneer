@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 6,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22781,
+ "output_tokens": 243,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:13+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code, Chapter 1 (code enforcement), covering administrative enforcement hearings, appeals, and administrative abatement procedures (§§ 12.0402-12.0603).",
+  "notes": "This part contains only general code-enforcement hearing, appeal and nuisance-abatement procedures. Despite the source URL referencing San Diego's ban on algorithmic rent-setting devices (§ 98.1103), the text of that provision is not included in this part. No rule in the six in-scope categories (rent increase limits, just cause eviction, security deposits, screening fees, screening restrictions, algorithmic rent setting) is stated here, so the list is empty.",
+  "rules": []
+ }
+}

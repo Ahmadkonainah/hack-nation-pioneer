@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 30,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 21262,
+ "output_tokens": 232,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:43+00:00",
+ "result": {
+  "document_summary": "A mid-document slice of the San Diego Municipal Code (Chapter 2, Government) covering design-build procurement (Div. 34) and nondiscrimination in city contracting (Div. 35), mislabeled by its URL as the rent-price-fixing section.",
+  "notes": "No rule in the six residential-rental categories appears in this part. The text covers municipal design-build procurement agreements, prequalification and selection methods, and nondiscrimination in city contracting. Despite the source URL naming San Diego's ban on algorithmic rent-setting devices (Division 11, § 98.1103), the retrieved text does not contain that provision, so nothing was extracted.",
+  "rules": []
+ }
+}

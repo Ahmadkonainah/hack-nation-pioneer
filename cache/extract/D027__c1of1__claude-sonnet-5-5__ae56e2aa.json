@@ -1,0 +1,41 @@
+{
+ "doc_id": "D027",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 8171,
+ "output_tokens": 676,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:08:18+00:00",
+ "result": {
+  "document_summary": "California Government Code section 12955, the Fair Employment and Housing Act provision defining unlawful housing discrimination, including source-of-income discrimination and rules on income and credit standards for rentals.",
+  "notes": "Only the source-of-income provisions (subdivisions (a), (n), (o), (p)) fall within the screening_restrictions category; the remaining protected-class discrimination provisions are outside the six in-scope categories. Section text states it was amended by Stats. 2023, Ch. 776 (SB 267), effective January 1, 2024; the original effective date of the source-of-income protection is not stated in this document.",
+  "rules": [
+   {
+    "jurisdiction": "CA",
+    "level": "state",
+    "category": "screening_restrictions",
+    "title": "Source-of-income discrimination ban and income/credit screening standards",
+    "requirement": "Owners may not discriminate against or harass a person because of source of income (including Section 8 and HUD-VASH vouchers and other public assistance). Where a government rent subsidy applies, income standards must be based on the tenant's share of rent, and applicants must be allowed to offer alternative evidence of ability to pay instead of credit history; owners may still ask about the level or source of income.",
+    "key_value": "Source of income protected; subsidy-based income test uses tenant's portion of rent",
+    "legal_state": "enacted",
+    "effective_date": "2024-01-01",
+    "date_basis": "stated",
+    "citation": "Cal. Gov. Code § 12955",
+    "quoted_span": "For the owner of any housing accommodation to discriminate against or harass any person because of the race, color, religion, sex, gender, gender identity, gender expression, sexual orientation, marital status, national origin, ancestry, familial status, source of income",
+    "coverage_text": "Applies to owners of any housing accommodation in California, with no stated size, age or owner-type limits.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

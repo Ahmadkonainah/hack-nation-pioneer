@@ -1,0 +1,82 @@
+{
+ "doc_id": "D072",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 12166,
+ "output_tokens": 1269,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:07+00:00",
+ "result": {
+  "document_summary": "Newark, NJ Municipal Code Chapter 2:31 (Ban the Box), whose Article 1 restricts criminal-history screening of rental applicants by landlords and real estate brokers, and whose Article 2 covers City licensing.",
+  "notes": "Only Article 1 (Housing) is in scope; Article 2 (Licensing) concerns City licenses and was ignored. The page gives no effective date for Article 1 beyond the ordinance adoption date 4-15-2015 (Ord. 6 PSF-B), which is cited in the section history and is not stated as an effective date, so effective_date is left blank. The ordinance cites a prior 2012 ordinance as repealed in its entirety.",
+  "rules": [
+   {
+    "jurisdiction": "Newark, NJ",
+    "level": "city",
+    "category": "screening_restrictions",
+    "title": "Newark Ban the Box: criminal history screening of rental applicants",
+    "requirement": "Landlords and brokers may inquire into criminal history only after a formal application and written notice and consent, may look back only 8 years for indictable convictions and 5 years for disorderly persons/ordinance convictions (certain serious offenses at any time), may not use non-pending arrests, expunged/sealed records or juvenile adjudications, must weigh rehabilitation factors, and must give written reasons and the results within 10 business days of an adverse decision.",
+    "key_value": "Lookback: 8 years (indictable), 5 years (disorderly persons/ordinance); after formal application only",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Newark Municipal Code § 2:31-2 to § 2:31-9 (Ord. 6 PSF-B, 4-15-2015)",
+    "quoted_span": "Inquiry into and consideration of any applicant's criminal history shall take place only after the applicant has submitted a formal application.",
+    "coverage_text": "Applies to rentals, leases and subleases of real property in Newark by landlords and real estate brokers, except certain owner-occupied small dwellings.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Single apartment in a two-family dwelling where the owner occupies the other unit",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "2",
+         "years_before_as_of": 0,
+         "text": "Rental of a single apartment or flat in a two family dwelling"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "the other occupancy unit of which is occupied by the owner as his/her residence or the household of his/her family at the time of such rental"
+        }
+       ]
+      },
+      {
+       "label": "Room rental in an owner-occupied one-family dwelling",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "1",
+         "years_before_as_of": 0,
+         "text": "Rental of a room or rooms by the owner or occupant of a one-family dwelling"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "occupied by him/her as his/her residence or the household of his/her family at the time of such rental"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Does not apply to a single apartment in an owner-occupied two-family dwelling or a room rental in an owner-occupied one-family dwelling; also does not apply where federal or state law requires or permits criminal-history consideration (limited to those offenses and periods) or to property in government programs encouraging housing for people with criminal histories.",
+    "interaction": "Prohibitions do not apply where federal or state law, regulation or rule requires or permits consideration of criminal history, limited to the offenses and time periods that law allows.",
+    "yields_to": [
+     "Federal or state law, regulation or rule requiring or permitting consideration of criminal history"
+    ],
+    "confidence": 0.9,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

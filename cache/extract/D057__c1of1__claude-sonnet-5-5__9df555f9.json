@@ -1,0 +1,41 @@
+{
+ "doc_id": "D057",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 5569,
+ "output_tokens": 635,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:09:00+00:00",
+ "result": {
+  "document_summary": "Massachusetts General Laws c. 112 § 87DDD1/2, which requires a license to find dwelling accommodations for tenants for a fee and (as amended effective August 1, 2025) provides that a broker's fee is paid only by the party who engaged the broker.",
+  "notes": "One record extracted: the broker-fee allocation rule, categorized as application_screening_fees (the category covers broker fees). The pre-August 2025 text only imposes a licensing requirement and is not separately recorded. Effective date of August 1, 2025 is taken from the document's header note on the amended text (2025, 9, Sec. 43; Sec. 136). Coverage is not limited by the text, so it is left unrestricted.",
+  "rules": [
+   {
+    "jurisdiction": "MA",
+    "level": "state",
+    "category": "application_screening_fees",
+    "title": "Broker fee payable only by the party who engaged the broker",
+    "requirement": "A licensed broker or salesperson may contract solely with the prospective tenant or solely with the landlord, not both. Any broker fee may only be paid by the party (lessor or tenant) who originally engaged and contracted with the broker.",
+    "key_value": "Fee paid only by the party who hired the broker",
+    "legal_state": "enacted",
+    "effective_date": "2025-08-01",
+    "date_basis": "stated",
+    "citation": "G.L. c. 112 § 87DDD1/2",
+    "quoted_span": "Any fee shall only be paid by the party, lessor or tenant who originally engaged and entered into a contract with the licensed broker or salesperson.",
+    "coverage_text": "Applies to any person engaged in finding rental dwelling accommodations for a fee in Massachusetts; the text states no limits by building age or size.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

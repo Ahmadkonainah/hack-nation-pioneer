@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 51,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 21847,
+ "output_tokens": 234,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:08+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code, Chapter 3, Article 3, covering police-regulated entertainment permits (Division 15) and commercial amusement establishments (Division 16), not residential rental housing.",
+  "notes": "Despite the source URL mentioning a rent price-fixing division, the text in this part contains only San Diego entertainment-permit and commercial amusement establishment rules (definitions, permit exemptions, hours of operation, noise, conduct, permit conditions). No rules on rent increase limits, just cause eviction, security deposits, application or screening fees, screening restrictions, or algorithmic rent setting appear in this part, so no records are output.",
+  "rules": []
+ }
+}

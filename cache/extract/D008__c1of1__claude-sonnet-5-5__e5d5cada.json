@@ -1,0 +1,43 @@
+{
+ "doc_id": "D008",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 5332,
+ "output_tokens": 824,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:07:40+00:00",
+ "result": {
+  "document_summary": "Berkeley Rent Stabilization Board public notice announcing the 2026 Annual General Adjustment (AGA) of 1.0% to permanent rent ceilings, adopted October 16, 2025.",
+  "notes": "Notice describes the 2026 AGA order (Rent Board Regulation 1148) under Berkeley's rent stabilization program. Building-level coverage and exemptions are not stated in the notice, so coverage is left empty. The notice says the increase may be taken no earlier than January 1, 2026.",
+  "rules": [
+   {
+    "jurisdiction": "Berkeley, CA",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "Berkeley 2026 Annual General Adjustment (AGA) of permanent rent ceilings",
+    "requirement": "Eligible landlords may increase 2025 permanent rent ceilings by 1.0% no earlier than January 1, 2026, a figure set at 65% of the Bay Area CPI increase for July 1, 2024 - June 30, 2025. Tenancies that began on or after January 1, 2025 with rents set under Costa-Hawkins are not adjusted by the 2026 AGA.",
+    "key_value": "1.0% for 2026 (65% of CPI)",
+    "legal_state": "enacted",
+    "effective_date": "2026-01-01",
+    "date_basis": "stated",
+    "citation": "Berkeley Municipal Code § 13.76.110(A); Rent Board Regulation 1148",
+    "quoted_span": "will allow eligible landlords to increase the 2025 permanent rent ceilings by 1.0% no earlier than January 1, 2026.",
+    "coverage_text": "Rental units subject to Berkeley's rent stabilization program whose landlords are eligible for the annual adjustment; the notice does not give building-level coverage tests.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "The 2026 AGA may not adjust rents for tenancies that began on or after January 1, 2025 and whose rents were set pursuant to the Costa-Hawkins Rental Housing Act.",
+    "interaction": "The notice names the Costa-Hawkins Rental Housing Act as removing certain post-2024 tenancies from the adjustment, and Regulation 1148 sets the conditions and tenant notice required for the increase.",
+    "yields_to": [
+     "Costa-Hawkins Rental Housing Act"
+    ],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

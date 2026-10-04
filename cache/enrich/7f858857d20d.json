@@ -1,0 +1,69 @@
+{
+ "model": "claude-sonnet-5-5",
+ "called_at": "2026-10-04T01:23:25+00:00",
+ "input_tokens": 8306,
+ "output_tokens": 1106,
+ "result": {
+  "rules": [
+   {
+    "id": "r-0026",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "first_occupancy_date",
+      "op": "on_or_before",
+      "value": "1979-06-13",
+      "years_before_as_of": 0,
+      "text": "units first receiving a Certificate of Occupancy after June 13, 1979 are exempt from the rent increase limits (r-0027 coverage text)"
+     }
+    ],
+    "exemptions": [],
+    "support": "r-0027 coverage text: units first receiving a Certificate of Occupancy after June 13, 1979 are exempt from the Rent Ordinance's rent increase limits; own text: applies to rent-controlled units",
+    "reasoning": "The allowable increase applies to rent-controlled units, and r-0027 says units first getting a certificate of occupancy after June 13, 1979 are exempt from the rent limits, so coverage is units first occupied on or before that date.",
+    "plain_en": "Landlords of rent-controlled San Francisco units can raise rent by no more than 1.6% of base rent from March 1, 2026 through February 28, 2027."
+   },
+   {
+    "id": "r-0028",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "status_not_in_data",
+      "op": "is",
+      "value": "affordable housing",
+      "years_before_as_of": 0,
+      "text": "protects residents with arrest or conviction history in affordable housing decisions"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text: applies to affordable housing decisions affecting residents with arrest or conviction history",
+    "reasoning": "The record limits coverage to affordable housing decisions, a status that parcel data cannot show, and no sibling record adds a building test.",
+    "plain_en": "San Francisco's Fair Chance Ordinance protects people with an arrest or conviction history when affordable housing decisions are made; the record gives no further details."
+   },
+   {
+    "id": "r-0033",
+    "scope": "conditional",
+    "conditions": [
+     {
+      "fact": "tenancy",
+      "op": "is",
+      "value": "evicted for owner move-in or Ellis Act withdrawal",
+      "years_before_as_of": 0,
+      "text": "Tenants evicted for an owner move-in or for removal of the property from the rental market under the Ellis Act"
+     },
+     {
+      "fact": "rule_coverage",
+      "op": "is",
+      "value": "r-0034",
+      "years_before_as_of": 0,
+      "text": "same relocation payments as the Rent Stabilization and Good Cause for Eviction Ordinance; evictions of tenants in units covered by the ordinance (r-0034)"
+     }
+    ],
+    "exemptions": [],
+    "support": "own text and interaction (relocation payments tied to the Rent Stabilization and Good Cause for Eviction Ordinance); r-0034 coverage text (fully or partially covered units)",
+    "reasoning": "The record covers tenants evicted for owner move-in or Ellis Act withdrawal, a tenancy-specific test, and ties the payments to the Rent Ordinance, whose covered units are given by r-0034.",
+    "plain_en": "Berkeley landlords must pay relocation assistance, adjusted yearly for inflation, when they evict a tenant for an owner move-in or to take a unit off the rental market."
+   }
+  ],
+  "notes": "Second look: r-0026 uses the June 13, 1979 certificate-of-occupancy cut-off stated in r-0027. r-0028 and r-0033 are conditional because their records state who is covered, in tenancy or status terms that parcel data cannot test."
+ }
+}

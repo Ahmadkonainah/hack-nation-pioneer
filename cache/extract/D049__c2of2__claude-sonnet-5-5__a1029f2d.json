@@ -1,0 +1,16 @@
+{
+ "doc_id": "D049",
+ "chunk": 2,
+ "chunks": 2,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 7629,
+ "output_tokens": 248,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:53:30+00:00",
+ "result": {
+  "document_summary": "Part 2 of 2 of Massachusetts G.L. c. 151B § 4 (unlawful discrimination practices), covering mainly employment, credit and genetic-information provisions plus a housing sexual-harassment clause.",
+  "notes": "No rule in the six in-scope categories (rent increase limits, just cause eviction, security deposits, application screening fees, screening restrictions, algorithmic rent setting) appears in this part. Subsection 18 bars sexual harassment of tenants and prospective tenants, which is a general anti-discrimination/harassment rule and not a screening restriction or other in-scope category. The remaining text concerns employment, credit and genetic-information discrimination, which is out of scope.",
+  "rules": []
+ }
+}

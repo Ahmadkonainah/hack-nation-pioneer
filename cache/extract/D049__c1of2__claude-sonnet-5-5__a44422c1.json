@@ -1,0 +1,40 @@
+{
+ "doc_id": "D049",
+ "chunk": 1,
+ "chunks": 2,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 17135,
+ "output_tokens": 582,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:53:27+00:00",
+ "result": {
+  "document_summary": "Massachusetts G.L. c. 151B § 4 (part 1 of 2), the state anti-discrimination statute listing unlawful practices in employment, housing, credit and related areas.",
+  "notes": "One in-scope rule found: subsection 10 bars discrimination against recipients of public assistance or housing subsidies in rental accommodations, which is a source-of-income screening restriction. Employment, credit, commercial space, disability-accommodation and other discrimination provisions are outside the six categories and were ignored. Effective date is not given in this text.",
+  "rules": [
+   {
+    "jurisdiction": "MA",
+    "level": "state",
+    "category": "screening_restrictions",
+    "title": "Ban on discrimination against recipients of public assistance and housing subsidies",
+    "requirement": "It is unlawful for any person furnishing rental accommodations to discriminate against an individual because the individual receives federal, state or local public assistance or a housing subsidy (including rental assistance or supplements), or because of any requirement of such a program.",
+    "key_value": "",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "G.L. c. 151B § 4(10)",
+    "quoted_span": "For any person furnishing credit, services or rental accommodations to discriminate against any individual who is a recipient of federal, state, or local public assistance, including medical assistance, or who is a tenant receiving federal, state, or local housing subsidies",
+    "coverage_text": "Applies to any person furnishing rental accommodations in Massachusetts, with no unit-count or building-age test stated in this subsection.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

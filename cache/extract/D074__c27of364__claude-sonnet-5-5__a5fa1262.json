@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 27,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 21984,
+ "output_tokens": 232,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:39+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code, Chapter 2 (Government), covering city contract protests, contract alterations, prevailing wage compliance, electronic transactions and public works contract award rules, none of which concern residential rental rules.",
+  "notes": "The source URL and metadata suggest the page concerns San Diego's ban on algorithmic rent-setting devices (Division 11, section 98.1103), but this part of the document contains only San Diego Municipal Code Chapter 2 sections 22.3017 to 22.3109 on municipal procurement and public works contracting. No text in this part states a rule in any of the six residential rental categories, so no records were extracted.",
+  "rules": []
+ }
+}

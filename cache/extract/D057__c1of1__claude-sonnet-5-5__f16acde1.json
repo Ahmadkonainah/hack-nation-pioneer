@@ -1,0 +1,40 @@
+{
+ "doc_id": "D057",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 5048,
+ "output_tokens": 605,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:53:37+00:00",
+ "result": {
+  "document_summary": "Massachusetts General Laws c. 112, § 87DDD 1/2, which licenses persons who find rental housing for a fee and, as amended effective August 1, 2025, requires that any broker fee be paid only by the party who engaged the broker.",
+  "notes": "Only the amended text effective August 1, 2025 is extracted, as the earlier text (licensing requirement only) is superseded. The statute applies to all dwelling-accommodation brokerage in MA; no coverage tests or exemptions are stated. The 2025 amendment is cited in the document as 2025, 9, Sec. 43 with effective date per Sec. 136.",
+  "rules": [
+   {
+    "jurisdiction": "MA",
+    "level": "state",
+    "category": "application_screening_fees",
+    "title": "Broker fee payable only by the party who engaged the broker",
+    "requirement": "A licensed broker or salesperson may contract solely with either the prospective tenant or the landlord, and any broker fee may only be paid by the party (lessor or tenant) who originally engaged and contracted with the broker.",
+    "key_value": "Fee paid only by the party who hired the broker",
+    "legal_state": "enacted",
+    "effective_date": "2025-08-01",
+    "citation": "G.L. c. 112 § 87DDD 1/2",
+    "quoted_span": "Any fee shall only be paid by the party, lessor or tenant who originally engaged and entered into a contract with the licensed broker or salesperson.",
+    "coverage_text": "Applies to any person engaged in finding dwelling accommodations for prospective tenants for a fee, i.e., rental residential real property brokerage in Massachusetts.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.9,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

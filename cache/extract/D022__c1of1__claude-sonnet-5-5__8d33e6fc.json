@@ -1,0 +1,40 @@
+{
+ "doc_id": "D022",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 6303,
+ "output_tokens": 712,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:52:38+00:00",
+ "result": {
+  "document_summary": "California AB 325 (Stats. 2025, ch. 338), a chaptered act adding Business and Professions Code sections 16729 and 16756.1 to the Cartwright Act, banning use or distribution of common pricing algorithms as part of antitrust conspiracies or through coercion, and easing pleading standards.",
+  "notes": "One in-scope rule extracted (the common pricing algorithm ban, which the digest and text frame generally for all products and services, not rental housing specifically). Section 16756.1 (pleading standard) and the reimbursement clause are procedural and out of scope. Effective date is not stated in the document; the bill was approved October 6, 2025 and the digest does not state an operative date, so it is left blank.",
+  "rules": [
+   {
+    "jurisdiction": "CA",
+    "level": "state",
+    "category": "algorithmic_rent_setting",
+    "title": "Ban on common pricing algorithms used in restraint of trade or with coercion",
+    "requirement": "It is unlawful to use or distribute a common pricing algorithm (software or other methodology used by two or more persons that uses competitor data to recommend or influence prices) as part of a conspiracy or combination to restrain trade, or to coerce another person to adopt the algorithm's recommended price or commercial term.",
+    "key_value": "",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "Cal. Bus. & Prof. Code § 16729",
+    "quoted_span": "It shall be unlawful for a person to use or distribute a common pricing algorithm as part of a contract, combination in the form of a trust, or conspiracy to restrain trade or commerce in violation of this chapter.",
+    "coverage_text": "Applies to any person using or distributing a common pricing algorithm for products or services in California; the text is general and does not mention rental housing specifically.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "Section 16729(c) provides that nothing in the section impairs or limits the applicability of other antitrust laws (the Cartwright Act provisions).",
+    "yields_to": [],
+    "confidence": 0.6,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

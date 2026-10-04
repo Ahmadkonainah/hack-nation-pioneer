@@ -1,0 +1,115 @@
+{
+ "doc_id": "D067",
+ "chunk": 1,
+ "chunks": 4,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 19875,
+ "output_tokens": 1611,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:53:53+00:00",
+ "result": {
+  "document_summary": "Part 1 of 4 of the NJ Department of Community Affairs 'Truth in Renting' guide, summarizing NJ landlord-tenant law including lease renewal/just-cause non-renewal and the start of the Security Deposit Law.",
+  "notes": "Part 1 covers the lease, termination, right of entry and the beginning of security deposits. Rent control, eviction causes, and credit/background checks fall in later parts and are not extracted here. The security deposit return deadlines and interest rules continue in the next part; only the cap and exemption stated here are captured. The non-renewal good-cause statement is a brief cross-reference; detailed causes appear later in the guide.",
+  "rules": [
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "security_deposits",
+    "title": "Security deposit cap of 1.5 months' rent",
+    "requirement": "A landlord may not collect a security deposit of more than one and one-half times one month's rent, and any yearly increase in the deposit may not exceed 10% of the current deposit. Prepaid rents held as security (including last month's rent) count toward the cap, and a pet deposit cannot push the total above the cap.",
+    "key_value": "1.5x monthly rent; annual increase max 10% of current deposit",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "N.J.S.A. 46:8-21.2",
+    "quoted_span": "The maximum-security deposit to be collected by the landlord cannot be more than\none and one-half times one month’s rent ( N.J.S.A. 46:8-21.2 ). It can be less.",
+    "coverage_text": "Most residential rental properties in New Jersey, including mobile homes, except owner-occupied two- or three-family dwellings (unless the tenant elects coverage by written request).",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Owner-occupied two- or three-family dwelling",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "<=",
+         "value": "3",
+         "years_before_as_of": 0,
+         "text": "two- or three-family dwelling"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "owner-occupied"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Owner-occupied two- or three-family dwellings are exempt, though the tenant may make the law apply 30 days after sending a written request to the landlord.",
+    "interaction": "The first month's rent may be collected in addition, so no more than 2.5 times monthly rent in total at lease inception. The interest-bearing account provisions do not apply to seasonal rentals.",
+    "yields_to": [],
+    "confidence": 0.9,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "just_cause_eviction",
+    "title": "Good cause required for lease non-renewal (Anti-Eviction Act)",
+    "requirement": "Landlords of residential rental properties may not fail to renew a written or oral lease unless they have a statutory good cause, and a landlord may terminate a lease only by offering new terms the tenant rejects; the lease ending alone is not a basis for eviction. The listed good causes are detailed in the guide's Eviction section.",
+    "key_value": "Good cause required for non-renewal/eviction",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "N.J.S.A. 2A:18-61.3",
+    "quoted_span": "No landlord of residential rental properties except t hose in owner occupied two or three\nfamily dwellings, motels or hotels, transient, or seasonal units may fail to renew any lease,",
+    "coverage_text": "Residential rental properties in New Jersey other than owner-occupied two- or three-family dwellings, motels or hotels, and transient or seasonal units.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Owner-occupied two- or three-family dwelling",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "<=",
+         "value": "3",
+         "years_before_as_of": 0,
+         "text": "two or three family dwelling"
+        },
+        {
+         "fact": "owner_occupied",
+         "op": "is",
+         "value": "true",
+         "years_before_as_of": 0,
+         "text": "owner occupied"
+        }
+       ]
+      },
+      {
+       "label": "Motels, hotels, transient or seasonal units",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "hotel, motel, transient or seasonal unit",
+         "years_before_as_of": 0,
+         "text": "motels or hotels, transient, or seasonal units"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Owner-occupied two- or three-family dwellings (which have their own section), motels or hotels, and transient or seasonal units are exempt.",
+    "interaction": "Tenants of owner-occupied two- or three-family buildings are directed to the separate section on evictions for those dwellings.",
+    "yields_to": [],
+    "confidence": 0.8,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

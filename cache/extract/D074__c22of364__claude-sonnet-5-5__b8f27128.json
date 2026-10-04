@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 22,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22495,
+ "output_tokens": 261,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:32+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code, Chapter 2 (Government), Article 2 (Administrative Code), covering city department structure and administration (Transportation through Government Affairs departments), retrieved from a page labeled as the algorithmic rent price-fixing section.",
+  "notes": "This part contains only administrative code provisions about city departments, the City Treasurer, tax appeals, and similar governance topics. None of it states a rule on rent increase limits, just cause eviction, security deposits, screening fees, screening restrictions, or algorithmic rent setting. The page URL refers to a Division 11 algorithmic rent-setting prohibition (Sec. 98.1103), but that text does not appear in this part of the document, so no rules are extracted.",
+  "rules": []
+ }
+}

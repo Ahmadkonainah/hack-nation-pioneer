@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 72,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22555,
+ "output_tokens": 267,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:32+00:00",
+ "result": {
+  "document_summary": "A page fragment of the San Diego Municipal Code (Chapter 3, Articles 4 and 5) covering cannabis business tax enforcement provisions and the Transient Occupancy Tax on hotels, RV parks and campgrounds; despite the page URL, it contains no algorithmic rent-setting text.",
+  "notes": "No rules in the six in-scope categories appear in this part. The text covers criminal penalties and severability for a business tax article (Ch. 3, Art. 4) and the Transient Occupancy Tax on stays of less than one month (Ch. 3, Art. 5), which is not residential long-term rental regulation. The URL references the algorithmic rent-setting division (San Diego Municipal Code 98.1103), but its text is not included in this part.",
+  "rules": []
+ }
+}

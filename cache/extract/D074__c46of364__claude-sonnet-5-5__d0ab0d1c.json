@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 46,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22252,
+ "output_tokens": 298,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:01+00:00",
+ "result": {
+  "document_summary": "A page from the San Diego Municipal Code (Chapter 3, Article 3) covering police-regulated business and occupation permits (investigation, issuance, renewal, penalties), served under a URL for the algorithmic rent-pricing division but containing no rental housing rules in this part.",
+  "notes": "This part contains only police permit provisions (San Diego Municipal Code §§ 33.0303-33.0405: permit investigation, fingerprinting, denial grounds, fees, renewal, change of ownership, penalties). Although the source URL refers to Division 11 (Prohibition of Anti-Competitive Automated Rent Price Fixing, § 98.1103), the text of that division is not included in this part, so no rule in the six rental housing categories can be extracted. The criminal-history provisions here concern permit applicants for police-regulated businesses, not tenant screening.",
+  "rules": []
+ }
+}

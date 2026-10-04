@@ -1,0 +1,41 @@
+{
+ "doc_id": "D035",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 7149,
+ "output_tokens": 803,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:49:54+00:00",
+ "result": {
+  "document_summary": "A May 22, 2025 Hudson County View news article reporting that the Jersey City Council unanimously (9-0) approved an ordinance banning rent-setting algorithms such as RealPage, along with a separate laborer-benefits measure.",
+  "notes": "Secondary news source: it does not give the ordinance number, a codified citation, an effective date, or full coverage and exemption text. The article mentions a $2,000 daily fine (raised by a commenter), that realtors/real estate agents were excluded at the sponsor's accommodation, and that owners using algorithms without colluding were discussed as outside the ordinance's reach; none of this is verified against ordinance text. The cited ordinance name is inferred from the article's description. The laborer wage and benefits measure is out of scope and ignored.",
+  "rules": [
+   {
+    "jurisdiction": "Jersey City, NJ",
+    "level": "city",
+    "category": "algorithmic_rent_setting",
+    "title": "Jersey City ban on rent-setting algorithms (RealPage-type software)",
+    "requirement": "The City Council passed an ordinance banning the use of rent-setting algorithms such as RealPage; RealPage's statement describes it as banning use of certain nonpublic data in revenue management software. Per the article, realtors were excluded at the sponsor's accommodation.",
+    "key_value": "Ban on rent-setting algorithms; $2,000 daily fine mentioned by a commenter (unverified)",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Jersey City rent-setting algorithm ordinance (approved by City Council May 21, 2025)",
+    "quoted_span": "The Jersey City Council unanimously approved (9-0) a measure banning rent-setting algorithms such as RealPage",
+    "coverage_text": "The article does not state detailed coverage; it describes a ban on landlords' use of rent-setting algorithms such as RealPage.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "Per the article, real estate agents/realtors were excluded from the ordinance at the sponsor's accommodation; the article does not give the full exemption text.",
+    "interaction": "A speaker notes the U.S. House of Representatives is considering banning municipalities from such actions, which could affect the ordinance; the article names no other law.",
+    "yields_to": [],
+    "confidence": 0.75,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

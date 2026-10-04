@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 5,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22393,
+ "output_tokens": 305,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:12+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code, Chapter 1 (General Provisions), covering code enforcement authority, judicial remedies and administrative hearing procedures, retrieved from a page nominally about the algorithmic rent-setting prohibition.",
+  "notes": "This part of the document contains only general code enforcement provisions (Sec. 11.0402 through 12.0402): enforcement authority, notices of violation, criminal and civil penalties, abatement and hearing procedures. It contains no rule on rent increases, just-cause eviction, security deposits, screening fees, screening restrictions or algorithmic rent setting. The page URL refers to Division 11 (Prohibition of Anti-Competitive Automated Rent Price Fixing), Sec. 98.1103, but that text does not appear in this part, so no algorithmic_rent_setting rule can be extracted from it.",
+  "rules": []
+ }
+}

@@ -1,0 +1,67 @@
+{
+ "doc_id": "D083",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 6758,
+ "output_tokens": 1376,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:09:46+00:00",
+ "result": {
+  "document_summary": "San Francisco Rent Board web page listing current allowable annual rent increase, security deposit interest, and eviction relocation payment rates for March 1, 2026 – February 28, 2027.",
+  "notes": "The page is a rate table, not statutory text. Two San Francisco rules in scope are supported: the annual allowable rent increase (rent_increase_limits) and the eviction relocation payment schedule (just_cause_eviction). The 4.2% security deposit interest rate is an interest rate on tenant deposits (security_deposits), but the page states no operative rule beyond the rate itself and gives no governing citation or coverage, so it is noted in the rent/relocation records' context rather than as a separate rule. Capital improvement pass-through rates, Rent Board fees, and uncompensated labor rates are out of scope. The page does not state coverage criteria or exemptions, so coverage is left empty; the page names S.F. Admin. Code ch. 37 (Rent Ordinance Sections 37.9A and 37.9C) as the underlying law. Effective dates are the rate-period start dates stated on the page.",
+  "rules": [
+   {
+    "jurisdiction": "San Francisco, CA",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "San Francisco annual allowable rent increase",
+    "requirement": "The Rent Board sets an annual allowable rent increase for covered units; for March 1, 2026 through February 28, 2027 the allowable increase is 1.6%.",
+    "key_value": "1.6% (March 1, 2026 – February 28, 2027)",
+    "legal_state": "enacted",
+    "effective_date": "2026-03-01",
+    "date_basis": "stated",
+    "citation": "S.F. Admin. Code ch. 37",
+    "quoted_span": "Allowable Rent Increase:\n1.6% for March 1, 2026 – February 28, 2027",
+    "coverage_text": "The page does not state which units are covered; it publishes the allowable annual increase under San Francisco's rent ordinance.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "San Francisco, CA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "San Francisco eviction relocation payments",
+    "requirement": "Landlords must pay relocation to tenants evicted for owner/relative move-in, demolition/permanent removal, temporary capital improvement work, or substantial rehabilitation, with separate higher amounts for Ellis Act evictions and a daily amount for temporary displacement under 20 days. For notices served 3/01/26–2/28/27 the per-tenant amount is $8,245 (max $24,733 per unit, plus $5,497 for each elderly, disabled, or minor-child household).",
+    "key_value": "$8,245 per tenant; max $24,733 per unit; +$5,497 per elderly/disabled/minor-child household (Ellis Act: $11,110.05 per tenant, max $33,330.13)",
+    "legal_state": "enacted",
+    "effective_date": "2026-03-01",
+    "date_basis": "stated",
+    "citation": "S.F. Admin. Code ch. 37, §§ 37.9A, 37.9C",
+    "quoted_span": "Relocation Payments for Evictions based on Owner/Relative Move-in OR Demolition/Permanent Removal of Unit from Housing Use OR Temporary Capital Improvement Work* OR Substantial Rehabilitation",
+    "coverage_text": "Applies to tenants given a notice of termination of tenancy on the listed grounds; the page does not state building-level coverage tests.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "Relocation for temporary capital improvement evictions of less than 20 days is governed by California Civil Code Section 1947.9 rather than Rent Ordinance Section 37.9C.",
+    "yields_to": [
+     "Cal. Civ. Code § 1947.9"
+    ],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

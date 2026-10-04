@@ -1,0 +1,41 @@
+{
+ "doc_id": "D012",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 5870,
+ "output_tokens": 651,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:07:51+00:00",
+ "result": {
+  "document_summary": "A Boston.gov page describing the Fair Housing Commission's enforcement of local, state and federal fair housing laws, including a ban on housing discrimination based on rental assistance such as Section 8 vouchers.",
+  "notes": "The page is a general fair housing overview and cites no ordinance or statute. The only in-scope rule is the protection against source-of-income (rental assistance) discrimination, recorded under screening_restrictions. No effective date, coverage conditions or exemptions are stated. The page's list of protected classes and complaint process are outside the six categories and were not extracted.",
+  "rules": [
+   {
+    "jurisdiction": "Boston, MA",
+    "level": "city",
+    "category": "screening_restrictions",
+    "title": "Rental assistance (source-of-income) discrimination prohibited",
+    "requirement": "Landlords in Boston may not discriminate against tenants or applicants because they use rental assistance, including Section 8 vouchers, social security disability vouchers and veterans vouchers. Telling an applicant the landlord does not accept rental assistance is cited as an example of housing discrimination.",
+    "key_value": "Rental assistance is a protected class",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Boston Fair Housing Commission fair housing regulations (law not named on page)",
+    "quoted_span": "The landlord tells you they don't accept rental assistance. This includes Section\n8 vouchers, social security disability vouchers, and veterans vouchers.",
+    "coverage_text": "Applies to renting, buying, selling or securing financing for any housing in the City of Boston; no further coverage tests are stated.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "The page says the commission enforces local, state and federal fair housing laws, but it does not say how this rule interacts with any specific law.",
+    "yields_to": [],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

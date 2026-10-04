@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 77,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22520,
+ "output_tokens": 307,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:40+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code Chapter 3, Article 6 (Division 1) governing sidewalk vending (§§ 36.0105-36.0116), followed by the heading of the Documentary Transfer Tax article, retrieved from a page URL labeled as an algorithmic rent-price-fixing division.",
+  "notes": "No rules in scope were found in this part. The text covers only sidewalk vending regulation (locations, equipment, prohibited sales, penalties, impoundment, applicability, entrepreneurship zones, reporting) and the start of the Documentary Transfer Tax article. Despite the source URL referencing San Diego's prohibition on anti-competitive automated rent price fixing (Division 11, \\u00a7 98.1103), the retrieved text does not contain that ordinance, so no algorithmic_rent_setting rule can be extracted from this part.",
+  "rules": []
+ }
+}

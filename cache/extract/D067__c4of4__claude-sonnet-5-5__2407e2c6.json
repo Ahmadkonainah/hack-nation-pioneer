@@ -1,0 +1,80 @@
+{
+ "doc_id": "D067",
+ "chunk": 4,
+ "chunks": 4,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 16481,
+ "output_tokens": 1563,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:54:05+00:00",
+ "result": {
+  "document_summary": "Part 4 of 4 of the NJ Department of Community Affairs 'Truth in Renting' guide, covering remaining Anti-Eviction Act just-cause grounds, owner-occupied 2-3 family evictions, rooming houses, penalties, foreclosure tenant protections, protected tenancy for seniors/disabled, and contact directories.",
+  "notes": "Extracted the NJ Anti-Eviction Act just-cause regime as one record (this part lists the final enumerated grounds, N.J.S.A. 2A:18-61.1(m)-(r), and the owner-occupied two- and three-family regime under 2A:18-61.2). The first part of the Act's coverage and exemption text is not in this segment, so coverage is described only as stated here. Contact lists, court procedure, reprisal, foreclosure-notice and condo-conversion material are outside the six categories or are covered by the records below.",
+  "rules": [
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "just_cause_eviction",
+    "title": "Anti-Eviction Act: enumerated grounds for eviction (criminal/drug, theft, trafficking, employment termination)",
+    "requirement": "A landlord may bring an eviction suit only on the statutory grounds, including termination of employment of a tenant-employee, drug offenses on the property, assault or terrorist threats against the landlord, theft, and human trafficking. Most of these grounds require a written Notice to Quit at least three days before filing, and several bar suits brought more than two years after the conviction or release.",
+    "key_value": "3-day Notice to Quit; 2-year limit on criminal-conviction based suits",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "N.J.S.A. 2A:18-61.1",
+    "quoted_span": "A Notice to Quit must be served on the tenant at least three days prior to filing suit for eviction (N.J.S.A. 2A:18-61.1(n)).",
+    "coverage_text": "Residential tenancies generally under the Anti-Eviction Act, as referenced in this part; the exemption for owner-occupied two- and three-family dwellings is governed separately.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "Owner-occupied two- and three-family dwellings are addressed under a separate section (N.J.S.A. 2A:18-61.2); coverage text from earlier parts of the document is not available here.",
+    "interaction": "Public housing authorities must follow these State eviction laws as well as HUD regulations; rooming and boarding houses must follow the good cause and notice requirements of the Eviction Law unless otherwise ordered by the Bureau.",
+    "yields_to": [
+     "24 C.F.R. 966 et seq."
+    ],
+    "confidence": 0.6,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "NJ",
+    "level": "state",
+    "category": "just_cause_eviction",
+    "title": "Evictions in owner-occupied two- and three-family dwellings",
+    "requirement": "Tenants of landlord-occupied two- and three-family dwellings can be removed only by court order, and the landlord must prove one of the listed causes (holding over after lease expiration, nonpayment, disorderly conduct, willful damage, repeated rule violations, or violation of a lease provision reserving re-entry). Notice to quit periods are three months for at-will or year-to-year tenancies and one month for month-to-month tenancies, with a three-day written notice for disorderly, destructive or rule-violating causes.",
+    "key_value": "3-month notice (at will/year-to-year); 1-month notice (month-to-month); 3-day notice for certain causes",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "N.J.S.A. 2A:18-61.2(a)",
+    "quoted_span": "Tenants of landlord-occupied two- and three-family dwellings can be removed only \nwhen \na court issues an order for eviction.",
+    "coverage_text": "Tenants of owner-occupied two- and three-family dwellings.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "units",
+       "op": "<=",
+       "value": "3",
+       "years_before_as_of": 0,
+       "text": "two- and three-family dwellings"
+      },
+      {
+       "fact": "owner_occupied",
+       "op": "is",
+       "value": "true",
+       "years_before_as_of": 0,
+       "text": "landlord-occupied"
+      }
+     ],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "Distinct from the general Anti-Eviction Act grounds in N.J.S.A. 2A:18-61.1, which this narrower list replaces for owner-occupied two- and three-family dwellings.",
+    "yields_to": [],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

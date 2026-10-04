@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 9,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22860,
+ "output_tokens": 300,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:17+00:00",
+ "result": {
+  "document_summary": "A portion of the San Diego Municipal Code, Chapter 1 (General Provisions), Article 2, covering code-enforcement procedures (administrative enforcement orders, penalties, recordation of notices of violation, and mediation) rather than any rental housing rule.",
+  "notes": "Despite the source URL pointing to the section on prohibition of anti-competitive automated rent price-fixing (SDMC 98.1103), the text in this part contains only general code-enforcement provisions (SDMC 12.0907-12.1105: enforcement orders, penalties, recordation of notices of violation, mediation). None of it states a rent increase limit, just cause eviction, security deposit, screening fee, screening restriction, or algorithmic rent-setting rule, so no records are extracted. The algorithmic rent-setting provision itself is not in this part and may appear in another part of the document.",
+  "rules": []
+ }
+}

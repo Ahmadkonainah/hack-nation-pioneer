@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 7,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22526,
+ "output_tokens": 250,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:06:14+00:00",
+ "result": {
+  "document_summary": "A page from the San Diego Municipal Code, Chapter 1, Article 2 (code enforcement) covering public nuisance abatement procedures, abatement penalties, summary abatement and administrative civil penalties; despite the source URL, this part contains no algorithmic rent-pricing text.",
+  "notes": "This part of the document contains only general code-enforcement procedures (abatement notices, time frames, appeals, penalties, summary abatement). None of it addresses rent increase limits, just cause eviction, security deposits, screening fees, screening restrictions, or algorithmic rent setting. The URL refers to the algorithmic-device prohibition (Division 11), but that text is not present in this part, so no rule is extracted.",
+  "rules": []
+ }
+}

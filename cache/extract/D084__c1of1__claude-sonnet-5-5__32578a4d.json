@@ -1,0 +1,63 @@
+{
+ "doc_id": "D084",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 5515,
+ "output_tokens": 1039,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:54:33+00:00",
+ "result": {
+  "document_summary": "City of Santa Ana Rent Stabilization Office web page summarizing the city's rent increase cap (currently 2.87% for Sept 2026 to Aug 2027), just cause eviction protections, relocation assistance, petitions and pass-through fees.",
+  "notes": "The page is a general-information landing page and does not give the ordinance number, effective dates, or coverage/exemption details, so citation uses the page title and coverage is left open (all_of empty) with low confidence. Petition procedures and the registration-fee pass-through are procedural/other and are not recorded as separate rules. Relocation assistance is folded into the just cause eviction record because the page presents it as part of the same ordinance.",
+  "rules": [
+   {
+    "jurisdiction": "Santa Ana, CA",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "Santa Ana annual maximum rent increase",
+    "requirement": "A landlord may raise rent by no more than 3% of current rent or 80% of the CPI change, whichever is less. For September 1, 2026 through August 31, 2027 the maximum allowable increase is 2.87%.",
+    "key_value": "lesser of 3% or 80% of CPI change; 2.87% for 9/1/2026-8/31/2027",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "City of Santa Ana, Rent Stabilization and Just Cause Eviction (Rent Stabilization and Just Cause Eviction Ordinance)",
+    "quoted_span": "The increase cannot be more than 3% of your current rent or 80% of the Consumer Price Index (CPI) change, whichever is less.",
+    "coverage_text": "The page does not state which rental units are covered; it speaks generally of tenants and landlords under the Ordinance.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.6,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "Santa Ana, CA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "Santa Ana just cause eviction and relocation assistance",
+    "requirement": "A landlord must have a valid reason to evict, such as nonpayment of rent, breaking the lease, or the landlord moving into the property. For certain evictions the landlord may have to help pay the tenant's moving costs.",
+    "key_value": "",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "citation": "City of Santa Ana, Rent Stabilization and Just Cause Eviction (Rent Stabilization and Just Cause Eviction Ordinance)",
+    "quoted_span": "Your landlord must have a valid reason to evict you. This could be for not paying rent, breaking the lease, or if the landlord wants to move into the property themselves.",
+    "coverage_text": "The page does not state which rental units are covered; it speaks generally of tenants and landlords.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.55,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

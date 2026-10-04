@@ -1,0 +1,41 @@
+{
+ "doc_id": "D086",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 6852,
+ "output_tokens": 834,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:50:01+00:00",
+ "result": {
+  "document_summary": "A March 9, 2026 Orange County Business Journal news article reporting that the Santa Ana City Council gave final approval to an ordinance banning landlords from using algorithmic rent-pricing software, with a $1,000 fine.",
+  "notes": "Secondary news source; the ordinance text and municipal code citation are not given, so the citation uses the ordinance name as the article describes it. The article says the first vote was Feb. 17 and that 'Tuesday's vote was the final step to officially put the ordinance into effect' but gives no explicit effective date; the article is dated Monday March 9, 2026, so the final vote date is not reliably stated and effective_date is left blank. The article mentions bans in San Francisco, San Diego and Berkeley only in passing, without rule details, so no records were created for them. The DOJ/RealPage settlement and the reference to 'recently adopted state regulations' are not extractable rules.",
+  "rules": [
+   {
+    "jurisdiction": "Santa Ana, CA",
+    "level": "city",
+    "category": "algorithmic_rent_setting",
+    "title": "Santa Ana ban on algorithmic rent-pricing devices",
+    "requirement": "Landlords and apartment owners may not use automated algorithmic software to set rental prices; the ordinance prohibits the sale, licensing and use of Algorithmic Devices. Violations can be fined $1,000 and are enforced mostly through the existing code enforcement system.",
+    "key_value": "Ban on Algorithmic Devices; $1,000 fine",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Santa Ana ordinance prohibiting algorithmic rent-setting devices (Santa Ana Municipal Code; section not stated in source)",
+    "quoted_span": "The purpose and intent of this [ordinance] is to protect the residents of Santa Ana from artificially inflated rental rates and unfair rent increases by prohibiting the sale, licensing and use of Algorithmic Devices,",
+    "coverage_text": "Applies to apartment owners and landlords in Santa Ana who would use algorithmic software to set rents; the article states no building-type limits.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "",
+    "interaction": "A trade association quoted in the article argues recently adopted California state regulations should govern instead of a local patchwork, but the article names no preemption or conflict rule.",
+    "yields_to": [],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

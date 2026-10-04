@@ -1,0 +1,16 @@
+{
+ "doc_id": "D074",
+ "chunk": 57,
+ "chunks": 364,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 22024,
+ "output_tokens": 289,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:07:15+00:00",
+ "result": {
+  "document_summary": "A mid-document excerpt of the San Diego Municipal Code (Chapter 3, Divisions 34-35) covering bingo game regulations and massage business permitting, served from a gocodebook.com page whose URL slug refers to the algorithmic rent-price-fixing division but whose text in this part does not contain it.",
+  "notes": "No rules in the six in-scope categories appear in this part. The text covers charitable bingo regulation (Division 34) and massage business and therapist permitting (Division 35), none of which concern rent increase limits, just-cause eviction, security deposits, screening fees, screening restrictions or algorithmic rent setting. The URL names San Diego Municipal Code section 98.1103 (use and sale of algorithmic devices prohibited), but that provision's text is not included in this part; it may appear in a later part of the document.",
+  "rules": []
+ }
+}

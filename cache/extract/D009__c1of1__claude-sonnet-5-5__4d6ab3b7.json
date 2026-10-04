@@ -1,0 +1,209 @@
+{
+ "doc_id": "D009",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 5644,
+ "output_tokens": 2570,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:07:52+00:00",
+ "result": {
+  "document_summary": "A Berkeley Rent Stabilization Board guide table showing which unit and tenancy types are covered by the city's Rent Stabilization and Eviction for Just Cause Ordinance (registration, rent control, just cause, security deposit interest).",
+  "notes": "The document is a coverage guide table, not the ordinance text, and says it is only a guide. No ordinance section numbers, cap amounts, or effective dates are given, so effective_date is blank and confidence is moderate. Two records were extracted (rent control and just cause) with shared coverage. Security deposit interest coverage is mentioned but no deposit rule (amount, rate, deadline) is stated, so no security_deposits record was created. The table lists both a 'built before 1980' multifamily rule and a 'Certificate of Occupancy after June 1980' rule, which leaves a gap for units built in 1980 itself; the document does not resolve this, so the coverage cutoff of 1980-01-01 is a best reading of 'before 1980'.",
+  "rules": [
+   {
+    "jurisdiction": "Berkeley, CA",
+    "level": "city",
+    "category": "rent_increase_limits",
+    "title": "Berkeley rent control coverage under the Rent Stabilization Ordinance",
+    "requirement": "Rent control applies to most multifamily units built before 1980, single-family homes with tenancies that began before 1996, and rooming houses; newer construction, later single-family tenancies and most condominiums are only partially covered and are not subject to rent control.",
+    "key_value": "",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Berkeley Rent Stabilization Ordinance",
+    "quoted_span": "Most units in multifamily properties built before 1980** Fully Covered Yes Yes Yes Yes",
+    "coverage_text": "Most multifamily units built before 1980 are subject to rent control; single-family homes with tenancies that began before 1996 and rooming houses with five or more individually rented rooms are also fully covered.",
+    "coverage": {
+     "all_of": [
+      {
+       "fact": "first_occupancy_date",
+       "op": "before",
+       "value": "1980-01-01",
+       "years_before_as_of": 0,
+       "text": "Most units in multifamily properties built before 1980"
+      }
+     ],
+     "exemptions": [
+      {
+       "label": "Golden Duplex",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "2",
+         "years_before_as_of": 0,
+         "text": "Duplex"
+        },
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "owner-occupied on December 31, 1979 and currently has an owner living in one of the units",
+         "years_before_as_of": 0,
+         "text": "Duplex that was owner-occupied on December 31, 1979, and currently has an owner living in one of the units"
+        }
+       ]
+      },
+      {
+       "label": "Owner shares kitchen or bath",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "owner shares a kitchen or bath with the tenant and lived on the property when the tenancy started",
+         "years_before_as_of": 0,
+         "text": "Unit where the owner shares a kitchen or bath with the tenant if the owner lived on the property at the time the tenancy started"
+        }
+       ]
+      },
+      {
+       "label": "ADU with owner-occupancy",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "tenancy started after Nov 7, 2018 on property where one unit is an ADU and either unit is owner-occupied",
+         "years_before_as_of": 0,
+         "text": "Tenancies started after Nov 7, 2018, on properties where one unit is an ADU and either unit is owner-occupied"
+        }
+       ]
+      },
+      {
+       "label": "University units",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "university rental unit such as a dormitory",
+         "years_before_as_of": 0,
+         "text": "University rental units such as dormitories"
+        }
+       ]
+      },
+      {
+       "label": "Nonprofit cooperative",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "nonprofit cooperative",
+         "years_before_as_of": 0,
+         "text": "Nonprofit Cooperative"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Exempt: Golden Duplex (owner-occupied on 12/31/1979 and currently), units sharing a kitchen/bath with an owner who lived there at tenancy start, ADU properties with owner-occupancy for tenancies after Nov 7, 2018, university units, and nonprofit cooperatives. Newer construction (Certificate of Occupancy after June 1980), single-family homes with tenancies beginning on or after 1/1/1996, most condominiums and certain HUD-subsidized units are only partially covered (registration, just cause and deposit interest apply but not rent control).",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.6,
+    "conflict_flag": false,
+    "conflict_note": ""
+   },
+   {
+    "jurisdiction": "Berkeley, CA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "Berkeley just cause for eviction coverage",
+    "requirement": "Just cause for eviction protections apply to fully covered units and also to partially covered units (newer construction, post-1996 single-family tenancies, most condominiums, and certain subsidized units), but not to exempt unit types.",
+    "key_value": "",
+    "legal_state": "enacted",
+    "effective_date": "",
+    "date_basis": "none",
+    "citation": "Berkeley Rent Stabilization Ordinance",
+    "quoted_span": "New construction: units that were built and received a Certificate of Occupancy after June 1980** Partially Covered Yes No Yes Yes",
+    "coverage_text": "All residential rental units in Berkeley are covered by just cause for eviction (including newer construction, post-1996 single-family tenancies and most condominiums) except the listed exempt unit types.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": [
+      {
+       "label": "Golden Duplex",
+       "all_of": [
+        {
+         "fact": "units",
+         "op": "==",
+         "value": "2",
+         "years_before_as_of": 0,
+         "text": "Duplex"
+        },
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "owner-occupied on December 31, 1979 and currently has an owner living in one of the units",
+         "years_before_as_of": 0,
+         "text": "Duplex that was owner-occupied on December 31, 1979, and currently has an owner living in one of the units"
+        }
+       ]
+      },
+      {
+       "label": "Owner shares kitchen or bath",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "owner shares a kitchen or bath with the tenant and lived on the property when the tenancy started",
+         "years_before_as_of": 0,
+         "text": "Unit where the owner shares a kitchen or bath with the tenant if the owner lived on the property at the time the tenancy started"
+        }
+       ]
+      },
+      {
+       "label": "ADU with owner-occupancy",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "tenancy started after Nov 7, 2018 on property where one unit is an ADU and either unit is owner-occupied",
+         "years_before_as_of": 0,
+         "text": "Tenancies started after Nov 7, 2018, on properties where one unit is an ADU and either unit is owner-occupied"
+        }
+       ]
+      },
+      {
+       "label": "University units",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "university rental unit such as a dormitory",
+         "years_before_as_of": 0,
+         "text": "University rental units such as dormitories"
+        }
+       ]
+      },
+      {
+       "label": "Nonprofit cooperative",
+       "all_of": [
+        {
+         "fact": "other",
+         "op": "is",
+         "value": "nonprofit cooperative",
+         "years_before_as_of": 0,
+         "text": "Nonprofit Cooperative"
+        }
+       ]
+      }
+     ]
+    },
+    "exemptions_text": "Exempt: Golden Duplex, units where the owner shares a kitchen or bath and lived there at tenancy start, ADU properties with owner-occupancy for tenancies after Nov 7, 2018, university rental units, and nonprofit cooperatives.",
+    "interaction": "",
+    "yields_to": [],
+    "confidence": 0.6,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

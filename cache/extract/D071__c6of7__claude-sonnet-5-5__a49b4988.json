@@ -1,0 +1,16 @@
+{
+ "doc_id": "D071",
+ "chunk": 6,
+ "chunks": 7,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 19666,
+ "output_tokens": 285,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:05:58+00:00",
+ "result": {
+  "document_summary": "Part 6 of 7 of Newark's municipal code chapter on city housing programs: homeowner loan-forgiveness programs (closing costs, facade improvement), an employee ownership loan program, and the start of an affordable housing deed restriction section on City-owned property sales.",
+  "notes": "This part contains no rules in the six in-scope categories. It covers homebuyer closing-cost loans, facade improvement loans, employee ownership loans and trusts, and the opening of an affordable housing deed restriction for City-owned property sales. None of these is rent control, just-cause eviction, security deposits, screening fees, screening restrictions, or algorithmic rent setting. The affordable housing deed restriction section (2:10-9) is cut off at its definitions and in any case concerns resale of City-owned property rather than a covered rule category.",
+  "rules": []
+ }
+}

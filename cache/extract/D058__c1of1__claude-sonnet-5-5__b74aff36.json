@@ -1,0 +1,16 @@
+{
+ "doc_id": "D058",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 5086,
+ "output_tokens": 279,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:53:39+00:00",
+ "result": {
+  "document_summary": "Massachusetts G.L. c. 186 § 31, which requires a notice to quit for nonpayment of rent to be accompanied by a state-developed form with rental assistance and legal information, and bars courts from accepting summary process filings without proof of delivery of that form.",
+  "notes": "The section sets a procedural notice and filing requirement for nonpayment evictions. It does not set allowed eviction causes, notice periods, relocation assistance or coverage limits, so it was not recorded as a just_cause_eviction regime, and no other in-scope category (rent limits, deposits, fees, screening, algorithmic pricing) is addressed. Returning an empty list is a conservative choice; a reviewer may wish to treat the notice-form requirement as an eviction-procedure rule if the project scope is read more broadly.",
+  "rules": []
+ }
+}

@@ -1,0 +1,43 @@
+{
+ "doc_id": "D082",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 6579,
+ "output_tokens": 1066,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T19:09:44+00:00",
+ "result": {
+  "document_summary": "An SF Rent Board archive page listing historical and current relocation payment amounts owed to tenants in San Francisco for no-fault evictions (owner/relative move-in, demolition, capital improvement, substantial rehabilitation, and Ellis Act evictions).",
+  "notes": "The page is a rate table with no coverage or exemption text, and the statutory text is not on the page. The notice-date ranges are the only dates given, so the effective date is the start of the current rate year (3/01/26). Rent Ordinance Section 37.9C is named in a footnote and the Ellis Act is referenced only by name, so only the one just-cause instrument is recorded, with the Ellis Act rates folded into its key_value as details of the same chapter 37 regime. The citation uses the S.F. Admin. Code ch. 37 form per the instructions. The footnote states that relocation for temporary capital improvement evictions under 20 days is governed by Cal. Civ. Code § 1947.9 instead.",
+  "rules": [
+   {
+    "jurisdiction": "San Francisco, CA",
+    "level": "city",
+    "category": "just_cause_eviction",
+    "title": "Relocation payments for no-fault evictions (Rent Ordinance Sec. 37.9C)",
+    "requirement": "Landlords who evict tenants for owner/relative move-in, demolition or permanent removal of the unit from housing use, temporary capital improvement work, or substantial rehabilitation must pay relocation amounts per tenant, up to a per-unit maximum, plus an additional amount for each elderly or disabled tenant or household with minor children. Tenants evicted under the Ellis Act receive separate, higher relocation amounts.",
+    "key_value": "For notices served 3/01/26 - 2/28/27: $8,245 per tenant, max $24,733 per unit, plus $5,497 per elderly/disabled tenant or household with minor child(ren); Ellis Act: $11,110.05 per tenant, max $33,330.13 per unit, plus $7,443.90 per elderly (62+) or disabled tenant",
+    "legal_state": "enacted",
+    "effective_date": "2026-03-01",
+    "date_basis": "stated",
+    "citation": "S.F. Admin. Code ch. 37",
+    "quoted_span": "The amount of relocation payments for temporary capital improvement evictions for less than 20 days is governed by California Civil Code Section 1947.9 and not by Rent Ordinance Section 37.9C.",
+    "coverage_text": "The page does not state coverage conditions; the amounts apply to tenants served a notice of termination for the listed no-fault grounds.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "Temporary capital improvement evictions lasting less than 20 days are governed by Cal. Civ. Code § 1947.9 rather than Rent Ordinance Sec. 37.9C.",
+    "interaction": "Relocation for temporary capital improvement evictions under 20 days is governed by California Civil Code Section 1947.9 and not by Rent Ordinance Section 37.9C.",
+    "yields_to": [
+     "Cal. Civ. Code § 1947.9"
+    ],
+    "confidence": 0.7,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

@@ -1,0 +1,40 @@
+{
+ "doc_id": "D076",
+ "chunk": 1,
+ "chunks": 1,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "1cf9e273",
+ "input_tokens": 12698,
+ "output_tokens": 948,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-03T18:54:13+00:00",
+ "result": {
+  "document_summary": "City Council staff report and draft ordinance packet (O-2025-107) proposing a San Diego ban on the sale, licensing and use of algorithmic rent-setting software (new SDMC Div. 11, §§ 98.1101-98.1104); the packet shows the ordinance as proposed, with blank passage and certification dates.",
+  "notes": "The materials are a staff report, proposed ordinance, City Attorney digest and strikeout version. The date of final passage, council adoption certification and mayoral approval are all blank, so adoption is not shown in the document; legal_state is therefore 'pending'. The ordinance takes effect on the thirtieth day after final passage, so no calendar effective date can be stated. Other cities' bans (San Francisco, Philadelphia) are mentioned only as background and were not extracted as rules.",
+  "rules": [
+   {
+    "jurisdiction": "San Diego, CA",
+    "level": "city",
+    "category": "algorithmic_rent_setting",
+    "title": "Prohibition of Anti-Competitive Automated Rent Price-Fixing (proposed SDMC §§ 98.1101-98.1104)",
+    "requirement": "It would be unlawful to sell, license or otherwise provide to a landlord an algorithmic device (software using nonpublic competitor data to recommend rents or occupancy levels), and unlawful for a landlord to use one to set rental rates or occupancy levels. Each month of use at each property is a separate violation; tenants may sue for injunctive relief, damages or civil penalties of up to $1,000 per violation plus attorney's fees.",
+    "key_value": "Ban on sale/licensing/use of algorithmic rent-setting devices; civil penalties up to $1,000 per violation",
+    "legal_state": "pending",
+    "effective_date": "",
+    "citation": "San Diego Municipal Code §§ 98.1101-98.1104 (proposed Ordinance O-2025-107)",
+    "quoted_span": "(b) It is unlawful for a landlord to use an algorithmic device to set rental rates or occupancy levels for residential rental property.",
+    "coverage_text": "Applies to all residential rental property in the City of San Diego and to any person selling or providing algorithmic devices to landlords there.",
+    "coverage": {
+     "all_of": [],
+     "exemptions": []
+    },
+    "exemptions_text": "The definition of algorithmic device excludes (a) software that publishes reports from aggregated historical nonpublic competitor data more than 90 days old, or from publicly available information, without recommending rents for future leases or renewals, and (b) software used to set rents or income limits under local, state or federal affordable housing program guidelines.",
+    "interaction": "Remedies are cumulative with any other remedies in the Division or under law, statute or ordinance; the document names no preemption or conflicting law.",
+    "yields_to": [],
+    "confidence": 0.85,
+    "conflict_flag": false,
+    "conflict_note": ""
+   }
+  ]
+ }
+}

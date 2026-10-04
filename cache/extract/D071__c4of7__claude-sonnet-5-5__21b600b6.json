@@ -1,0 +1,16 @@
+{
+ "doc_id": "D071",
+ "chunk": 4,
+ "chunks": 7,
+ "model": "claude-sonnet-5-5",
+ "prompt_hash": "d31964c7",
+ "input_tokens": 19278,
+ "output_tokens": 275,
+ "stop_reason": "end_turn",
+ "called_at": "2026-10-04T01:05:58+00:00",
+ "result": {
+  "document_summary": "Part 4 of 7 of Newark, NJ Code (Dept. of Economic and Housing Development provisions) covering foreclosure-property registration, maintenance and security duties, administrative assignments, a municipal employee homebuyer grant program, and historic preservation commission provisions.",
+  "notes": "No rules in the six in-scope categories (rent increase limits, just cause eviction, security deposits, application/screening fees, screening restrictions, algorithmic rent setting) appear in this part. The only mention of rent control is an administrative assignment of the Rent Control Board to the Department of Economic and Housing Development, which states no substantive rent rule. The remaining content concerns foreclosure registry fees, vacant property maintenance, municipal grant programs and historic preservation, which are out of scope.",
+  "rules": []
+ }
+}
